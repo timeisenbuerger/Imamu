@@ -1,0 +1,2 @@
+rootProject.name='Imamu'
+include ':app'
