@@ -1,12 +1,18 @@
 package com.github.tei.imamu.view.recipe
 
+import android.app.Application
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.Toast
+import androidx.core.widget.doOnTextChanged
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.github.tei.imamu.R
+import com.github.tei.imamu.data.ImamuDatabase
+import com.github.tei.imamu.data.dao.RecipeDao
 import com.github.tei.imamu.databinding.FragmentAddRecipeBinding
 import com.github.tei.imamu.viewmodel.recipe.AddRecipeViewModel
 import com.github.tei.imamu.viewmodel.recipe.AddRecipeViewModelFactory
@@ -16,26 +22,37 @@ class AddRecipeFragment : Fragment()
     private lateinit var binding: FragmentAddRecipeBinding
     private lateinit var viewModel: AddRecipeViewModel
     private lateinit var viewModelFactory: AddRecipeViewModelFactory
-
-    override fun onCreate(savedInstanceState: Bundle?)
-    {
-        setHasOptionsMenu(true);
-        super.onCreate(savedInstanceState)
-    }
+    private lateinit var application: Application
+    private lateinit var recipeDao: RecipeDao
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_recipe, container, false)
+        init(inflater, container)
 
-        //placeholder
         binding.imageViewMeal.setImageResource(R.drawable.ic_camera)
 
-        viewModelFactory = AddRecipeViewModelFactory()
+        setHasOptionsMenu(true)
+        return binding.root
+    }
+
+    private fun init(inflater: LayoutInflater, container: ViewGroup?)
+    {
+        //init binding
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_recipe, container, false)
+
+        //init dao
+        application = requireNotNull(this.activity).application
+        recipeDao = ImamuDatabase.getInstance(application).recipeDao
+
+        //init viewModel
+        viewModelFactory = AddRecipeViewModelFactory(recipeDao, application)
         viewModel = ViewModelProvider(this, viewModelFactory).get(AddRecipeViewModel::class.java)
 
-        binding.viewModel = viewModel
+        //set lifecycle owner
+        binding.lifecycleOwner = this
 
-        return binding.root
+        //set viewModel in binding
+        binding.viewModel = viewModel
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater)
@@ -44,13 +61,20 @@ class AddRecipeFragment : Fragment()
         inflater.inflate(R.menu.menu_add_edit, menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId)
     {
-        when (item.itemId)
+        R.id.action_save_changes ->
         {
-            R.id.action_save_changes -> Toast.makeText(context, "Save", Toast.LENGTH_SHORT)
-            else                     -> Toast.makeText(context, "Back", Toast.LENGTH_SHORT)
+            viewModel.onSaveRecipe()
+            findNavController().popBackStack()
+            true
         }
-        return super.onOptionsItemSelected(item)
+        else                     ->
+        {
+            // If we got here, the user's action was not recognized.
+            // Invoke the superclass to handle it.
+            Toast.makeText(context, "Back", Toast.LENGTH_SHORT).show()
+            super.onOptionsItemSelected(item)
+        }
     }
 }
