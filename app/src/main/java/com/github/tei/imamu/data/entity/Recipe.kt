@@ -13,7 +13,7 @@ data class Recipe(
     var title: String = "",
 
     @ColumnInfo(name = "serving_number")
-    var servingsNumber: Int = 1,
+    var servingsNumber: String = "",
 
     @ColumnInfo(name = "ingredients")
     var ingredients: String = "",

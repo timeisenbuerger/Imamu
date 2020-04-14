@@ -3,28 +3,30 @@ package com.github.tei.imamu.viewmodel.recipe
 import android.app.Application
 import androidx.databinding.Bindable
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.github.tei.imamu.data.dao.RecipeDao
 import com.github.tei.imamu.data.entity.Recipe
 import kotlinx.coroutines.*
 
-class AddRecipeViewModel(val recipeDao: RecipeDao, application: Application) : AndroidViewModel(application)
+class AddRecipeViewModel(private val recipeDao: RecipeDao, application: Application) : AndroidViewModel(application)
 {
     private var viewModelJob = Job()
     private var uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    val title = MutableLiveData<String>()
-    val servingsNumber = MutableLiveData<String>()
-    val ingredients = MutableLiveData<String>()
-    val preparation = MutableLiveData<String>()
+    private val _recipe = MutableLiveData<Recipe>()
+    val recipe : LiveData<Recipe>
+        get() = _recipe
+
+    init
+    {
+        _recipe.value = Recipe()
+    }
 
     fun onSaveRecipe()
     {
         uiScope.launch {
-            val newRecipe = Recipe()
-
-            initRecipe(newRecipe)
-            insert(newRecipe)
+            insert(_recipe.value!!)
         }
     }
 
@@ -35,13 +37,6 @@ class AddRecipeViewModel(val recipeDao: RecipeDao, application: Application) : A
         }
     }
 
-    private fun initRecipe(recipe: Recipe)
-    {
-        recipe.title = title.value!!
-        recipe.servingsNumber = Integer.valueOf(servingsNumber.value!!)
-        recipe.ingredients = ingredients.value!!
-        recipe.preparation = preparation.value!!
-    }
 
     override fun onCleared()
     {
