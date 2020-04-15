@@ -1,4 +1,4 @@
-package com.github.tei.imamu.viewmodel.recipe
+package com.github.tei.imamu.viewmodel.recipe.add
 
 import android.app.Application
 import androidx.databinding.Bindable

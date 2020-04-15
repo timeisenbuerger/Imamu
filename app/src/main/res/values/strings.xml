@@ -24,10 +24,13 @@
     <string name="image_view_meal_text">Bild des Gerichts</string>
     <string name="insert_recipe_title">Rezeptname eingeben</string>
     <string name="insert_recipe_ingredients">Zutaten hinzufügen</string>
-    <string name="insert_number_servings">Portionen:</string>
+    <string name="recipe_servings_text">Portionen:</string>
     <string name="insert_recipe_tags">Tags hinzufügen</string>
     <string name="insert_recipe_preparation">Zubereitung hinzufügen</string>
     <string name="recipe_title_text">Rezeptname:</string>
     <string name="recipe_ingredients_text">Zutaten:</string>
     <string name="recipe_preparation_text">Zubereitung:</string>
+    <string name="sample_recipe_title">Beispiel Rezept</string>
+    <string name="sample_ingredients">2 Tassen Vollmilch \n1 Ei \n250 Gramm Butter \n120 Gramm brauner Zucker</string>
+    <string name="sample_instructions">1. Eier und Zucker mischen, solange bis sie cremig werden \n2. Butter hinzugeben \n4. Die Hälfte der Milch hinzugeben \n5. In einen Behälter geben und für 4 Stunden über Nacht in den Kühlschrank stellen</string>
 </resources>

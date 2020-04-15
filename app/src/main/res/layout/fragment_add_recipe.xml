@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.github.tei.imamu.viewmodel.recipe.AddRecipeViewModel" />
+            type="com.github.tei.imamu.viewmodel.recipe.add.AddRecipeViewModel" />
     </data>
 
     <LinearLayout
@@ -74,7 +74,7 @@
                         android:layout_weight="1"
                         android:labelFor="@id/edit_text_number_servings"
                         android:paddingTop="@dimen/default_recipe_padding"
-                        android:text="@string/insert_number_servings"
+                        android:text="@string/recipe_servings_text"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 

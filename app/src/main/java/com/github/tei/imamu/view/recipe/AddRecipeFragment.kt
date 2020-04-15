@@ -2,10 +2,8 @@ package com.github.tei.imamu.view.recipe
 
 import android.app.Application
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.Toast
-import androidx.core.widget.doOnTextChanged
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -14,8 +12,8 @@ import com.github.tei.imamu.R
 import com.github.tei.imamu.data.ImamuDatabase
 import com.github.tei.imamu.data.dao.RecipeDao
 import com.github.tei.imamu.databinding.FragmentAddRecipeBinding
-import com.github.tei.imamu.viewmodel.recipe.AddRecipeViewModel
-import com.github.tei.imamu.viewmodel.recipe.AddRecipeViewModelFactory
+import com.github.tei.imamu.viewmodel.recipe.add.AddRecipeViewModel
+import com.github.tei.imamu.viewmodel.recipe.add.AddRecipeViewModelFactory
 
 class AddRecipeFragment : Fragment()
 {
