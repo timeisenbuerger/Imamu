@@ -11,6 +11,7 @@ class RecipeListViewHolder private constructor(private val binding: ListItemReci
 {
     fun bind(item: Recipe, clickListener: RecipeListListener)
     {
+        binding.recipe = item
         binding.clickListener = clickListener
         binding.textViewRecipeItem.text = item.title
         binding.imageViewRecipeItem.setImageResource(R.drawable.ic_hot_tub)

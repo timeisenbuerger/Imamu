@@ -62,7 +62,7 @@ class RecipeListFragment : Fragment()
         binding.viewModel = viewModel
 
         //set adapter in recyclerview
-        listAdapter = RecipeListAdapter(RecipeListListener { id -> Toast.makeText(context, "${id}", Toast.LENGTH_SHORT).show() })
+        listAdapter = RecipeListAdapter(RecipeListListener { viewModel.onRecipeClicked(it) })
         binding.recipeList.adapter = listAdapter
 
         val manager = GridLayoutManager(activity, 2)
@@ -81,6 +81,13 @@ class RecipeListFragment : Fragment()
         viewModel.recipes.observe(viewLifecycleOwner, Observer {
             it?.let {
                 listAdapter.submitList(it)
+            }
+        })
+
+        viewModel.navigateToDetail.observe(viewLifecycleOwner, Observer { recipe ->
+            recipe?.let {
+                findNavController().navigate(RecipeListFragmentDirections.actionNavRecipeListToRecipeDetailFragment(recipe))
+                viewModel.onNavigateToDetailComplete()
             }
         })
     }

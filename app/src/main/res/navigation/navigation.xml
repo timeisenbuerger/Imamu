@@ -19,6 +19,11 @@
         <action
             android:id="@+id/action_recipeListFragment_to_addRecipeFragment"
             app:destination="@id/addRecipeFragment" />
+        <action
+            android:id="@+id/action_nav_recipe_list_to_recipeDetailFragment"
+            app:destination="@id/recipeDetailFragment"
+            app:popUpTo="@id/nav_recipe_list"
+            app:popUpToInclusive="false" />
     </fragment>
 
     <fragment
@@ -27,7 +32,16 @@
         android:label="@string/action_add_recipe"
         tools:layout="@layout/fragment_add_recipe">
         <action
-            android:id="@+id/action_addRecipeFragment_to_recipeListFragment"
-            app:destination="@id/nav_recipe_list" />
+            android:id="@+id/action_addRecipeFragment_to_recipeDetailFragment"
+            app:destination="@id/recipeDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/recipeDetailFragment"
+        android:name="com.github.tei.imamu.view.recipe.RecipeDetailFragment"
+        android:label="RecipeDetailFragment"
+        tools:layout="@layout/fragment_recipe_detail">
+        <argument
+            android:name="recipeId"
+            app:argType="long" />
     </fragment>
 </navigation>

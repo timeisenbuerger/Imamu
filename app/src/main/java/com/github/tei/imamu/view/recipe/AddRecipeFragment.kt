@@ -6,6 +6,7 @@ import android.view.*
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.github.tei.imamu.R
@@ -26,6 +27,7 @@ class AddRecipeFragment : Fragment()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
         init(inflater, container)
+        initObserver()
 
         binding.imageViewMeal.setImageResource(R.drawable.ic_camera)
 
@@ -53,6 +55,17 @@ class AddRecipeFragment : Fragment()
         binding.viewModel = viewModel
     }
 
+    private fun initObserver()
+    {
+        viewModel.navigateToRecipeDetail.observe(viewLifecycleOwner, Observer { saveRecipe ->
+            if (saveRecipe)
+            {
+                findNavController().navigate(AddRecipeFragmentDirections.actionAddRecipeFragmentToRecipeDetailFragment(viewModel.recipe.value!!.id))
+                viewModel.onNavigateToDetailComplete()
+            }
+        })
+    }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater)
     {
         super.onCreateOptionsMenu(menu, inflater)
@@ -64,7 +77,6 @@ class AddRecipeFragment : Fragment()
         R.id.action_save_changes ->
         {
             viewModel.onSaveRecipe()
-            findNavController().popBackStack()
             true
         }
         else                     ->

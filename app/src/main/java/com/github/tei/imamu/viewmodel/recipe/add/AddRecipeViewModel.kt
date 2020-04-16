@@ -18,6 +18,10 @@ class AddRecipeViewModel(private val recipeDao: RecipeDao, application: Applicat
     val recipe : LiveData<Recipe>
         get() = _recipe
 
+    private val _navigateToRecipeDetail = MutableLiveData<Boolean>()
+    val navigateToRecipeDetail : LiveData<Boolean>
+        get() = _navigateToRecipeDetail
+
     init
     {
         _recipe.value = Recipe()
@@ -28,6 +32,13 @@ class AddRecipeViewModel(private val recipeDao: RecipeDao, application: Applicat
         uiScope.launch {
             insert(_recipe.value!!)
         }
+
+        _navigateToRecipeDetail.value = true
+    }
+
+    fun onNavigateToDetailComplete()
+    {
+        _navigateToRecipeDetail.value = false
     }
 
     private suspend fun insert(recipe: Recipe)
@@ -36,7 +47,6 @@ class AddRecipeViewModel(private val recipeDao: RecipeDao, application: Applicat
             recipeDao.insert(recipe)
         }
     }
-
 
     override fun onCleared()
     {

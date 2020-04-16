@@ -5,96 +5,106 @@
     <data>
         <variable
             name="viewModel"
-            type="com.github.tei.imamu.viewmodel.detail.RecipeDetailViewModel" />
+            type="com.github.tei.imamu.viewmodel.recipe.detail.RecipeDetailViewModel" />
     </data>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <ScrollView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text_view_recipe_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_recipe_margin"
+                android:layout_marginTop="@dimen/default_recipe_margin"
+                android:layout_marginEnd="@dimen/default_recipe_margin"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:text="@{viewModel.currentRecipe.title}"
+                tools:text="@string/sample_recipe_title" />
+
+            <ImageView
+                android:id="@+id/image_recipe"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_margin="@dimen/default_recipe_margin"
+                android:layout_marginEnd="@dimen/default_recipe_margin"
+                android:adjustViewBounds="true"
+                android:cropToPadding="false"
+                tools:src="@mipmap/pancakes" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/image_recipe"
-                    android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:layout_margin="@dimen/default_recipe_margin"
-                    android:layout_marginEnd="@dimen/default_recipe_margin"
-                    android:adjustViewBounds="true"
-                    android:cropToPadding="false"
-                    tools:src="@mipmap/pancakes" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/text_title_servings"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/default_recipe_margin"
-                        android:text="@string/recipe_servings_text"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/text_servings"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/default_recipe_padding"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        tools:text="2"/>
-
-                </LinearLayout>
+                android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/text_title_ingredients"
-                    android:layout_width="match_parent"
+                    android:id="@+id/text_title_servings"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/default_recipe_margin"
-                    android:layout_marginEnd="@dimen/default_recipe_margin"
-                    android:text="@string/recipe_ingredients_text"
+                    android:text="@string/recipe_servings_text"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/text_ingredients"
+                    android:id="@+id/text_servings"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/default_recipe_margin"
-                    android:layout_marginEnd="@dimen/default_recipe_margin"
-                    tools:text="@string/sample_ingredients" />
-
-                <TextView
-                    android:id="@+id/text_title_instructions"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/default_recipe_margin"
-                    android:layout_marginTop="@dimen/default_recipe_margin"
-                    android:layout_marginEnd="@dimen/default_recipe_margin"
-                    android:text="@string/recipe_preparation_text"
+                    android:layout_marginStart="@dimen/default_recipe_padding"
+                    android:text="@{viewModel.currentRecipe.servingsNumber}"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/text_instructions"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/default_recipe_margin"
-                    android:layout_marginEnd="@dimen/default_recipe_margin"
-                    tools:text="@string/sample_instructions" />
+                    android:textStyle="bold"
+                    tools:text="2" />
 
             </LinearLayout>
-        </ScrollView>
-    </LinearLayout>
+
+            <TextView
+                android:id="@+id/text_title_ingredients"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_recipe_margin"
+                android:layout_marginEnd="@dimen/default_recipe_margin"
+                android:text="@string/recipe_ingredients_text"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/text_ingredients"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_recipe_margin"
+                android:layout_marginEnd="@dimen/default_recipe_margin"
+                android:text="@{viewModel.currentRecipe.ingredients}"
+                tools:text="@string/sample_ingredients" />
+
+            <TextView
+                android:id="@+id/text_title_instructions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_recipe_margin"
+                android:layout_marginTop="@dimen/default_recipe_margin"
+                android:layout_marginEnd="@dimen/default_recipe_margin"
+                android:text="@string/recipe_preparation_text"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/text_preparation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_recipe_margin"
+                android:layout_marginEnd="@dimen/default_recipe_margin"
+                android:text="@{viewModel.currentRecipe.preparation}"
+                tools:text="@string/sample_preparation" />
+
+        </LinearLayout>
+    </ScrollView>
 </layout>
