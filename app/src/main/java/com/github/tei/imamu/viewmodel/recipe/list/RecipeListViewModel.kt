@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.github.tei.imamu.data.dao.RecipeDao
+import com.github.tei.imamu.data.entity.Recipe
 import kotlinx.coroutines.*
 
 class RecipeListViewModel(private val recipeDao: RecipeDao, application: Application) : AndroidViewModel(application)
@@ -14,8 +15,8 @@ class RecipeListViewModel(private val recipeDao: RecipeDao, application: Applica
 
     var recipes = recipeDao.getAll()
 
-    private val _navigateToDetail = MutableLiveData<Long>()
-    val navigateToDetail: LiveData<Long>
+    private val _navigateToDetail = MutableLiveData<Recipe>()
+    val navigateToDetail: LiveData<Recipe>
         get() = _navigateToDetail
 
     init
@@ -37,9 +38,9 @@ class RecipeListViewModel(private val recipeDao: RecipeDao, application: Applica
         }
     }
 
-    fun onRecipeClicked(id: Long)
+    fun onRecipeClicked(recipe: Recipe)
     {
-        _navigateToDetail.value = id
+        _navigateToDetail.value = recipe
     }
 
     fun onNavigateToDetailComplete()

@@ -89,7 +89,7 @@ class AddRecipeFragment : Fragment()
         viewModel.navigateToRecipeDetail.observe(viewLifecycleOwner, Observer { saveRecipe ->
             if (saveRecipe)
             {
-                findNavController().navigate(AddRecipeFragmentDirections.actionAddRecipeFragmentToRecipeDetailFragment(viewModel.recipe.value!!.id))
+                findNavController().navigate(AddRecipeFragmentDirections.actionAddRecipeFragmentToRecipeDetailFragment(viewModel.recipe.value!!))
                 viewModel.onNavigateToDetailComplete()
             }
         })

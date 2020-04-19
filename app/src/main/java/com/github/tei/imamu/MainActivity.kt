@@ -34,6 +34,14 @@ class MainActivity : AppCompatActivity()
         NavigationUI.setupWithNavController(binding.navView, navController)
     }
 
+    override fun onResume()
+    {
+        super.onResume()
+
+        //TODO dreckig, anders machen!
+        PermissionUtil.grantStoragePermission(this)
+    }
+
     override fun onSupportNavigateUp(): Boolean {
         return NavigationUI.navigateUp(navController, appBarConfiguration)
     }

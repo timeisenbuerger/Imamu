@@ -42,7 +42,7 @@
         android:label="RecipeDetailFragment"
         tools:layout="@layout/fragment_recipe_detail">
         <argument
-            android:name="recipeId"
-            app:argType="long" />
+            android:name="recipe"
+            app:argType="com.github.tei.imamu.data.entity.Recipe" />
     </fragment>
 </navigation>

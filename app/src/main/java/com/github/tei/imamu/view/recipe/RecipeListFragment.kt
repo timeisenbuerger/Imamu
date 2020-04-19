@@ -97,9 +97,6 @@ class RecipeListFragment : Fragment()
     {
         super.onResume()
 
-        //TODO dreckig, anders machen!
-        PermissionUtil.grantStoragePermission(requireActivity())
-
         //TODO dreckig, evtl anpassen!
         viewModel.initRecipes()
     }

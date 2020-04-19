@@ -7,7 +7,7 @@ import com.github.tei.imamu.data.dao.RecipeDao
 import com.github.tei.imamu.data.entity.Recipe
 import kotlinx.coroutines.*
 
-class RecipeDetailViewModel(private val recipeId: Long = 0L, private val recipeDao: RecipeDao) : ViewModel()
+class RecipeDetailViewModel(recipe: Recipe, private val recipeDao: RecipeDao) : ViewModel()
 {
     private var viewModelJob = Job()
     private var uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
@@ -18,24 +18,24 @@ class RecipeDetailViewModel(private val recipeId: Long = 0L, private val recipeD
 
     init
     {
-        initRecipe()
+        _currentRecipe.value = recipe
     }
 
-    private fun initRecipe()
-    {
-        uiScope.launch {
-            _currentRecipe.value = getRecipeById()
-        }
-    }
+//    private fun initRecipe()
+//    {
+//        uiScope.launch {
+//            _currentRecipe.value = getRecipeById()
+//        }
+//    }
 
-    private suspend fun getRecipeById(): Recipe?
-    {
-        return withContext(Dispatchers.IO)
-        {
-            var recipe = recipeDao.getSingle(recipeId)
-            recipe
-        }
-    }
+//    private suspend fun getRecipeById(): Recipe?
+//    {
+//        return withContext(Dispatchers.IO)
+//        {
+//            var recipe = recipeDao.getSingle(recipeId)
+//            recipe
+//        }
+//    }
 
     override fun onCleared()
     {

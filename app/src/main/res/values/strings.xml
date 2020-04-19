@@ -47,4 +47,7 @@
     <string name="recipe_type_hint_text">z.B. Hauptspeise</string>
     <string name="recipe_kitchen_hint_text">z.B. Italienisch</string>
     <string name="recipe_mood_hint_text">z.B. Wohlfühlen</string>
+    <string name="recipe_detail_sample_preparation_time">Zubereitung: 120 min</string>
+    <string name="recipe_detail_sample_baking_time">Backzeit: 120 min</string>
+    <string name="recipe_detail_sample_rest_time">Ruhezeit: 120 min</string>
 </resources>

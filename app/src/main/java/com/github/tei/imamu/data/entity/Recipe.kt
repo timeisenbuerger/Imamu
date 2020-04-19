@@ -3,6 +3,7 @@ package com.github.tei.imamu.data.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.io.Serializable
 
 @Entity(tableName = "recipe")
 data class Recipe(
@@ -44,4 +45,4 @@ data class Recipe(
 
     @ColumnInfo(name = "image_path")
     var imagePath: String = ""
-)
+) : Serializable
