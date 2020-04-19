@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.github.tei.imamu.data.dao.RecipeDao
 import com.github.tei.imamu.data.entity.Recipe
 
-@Database(entities = [Recipe::class], version = 2, exportSchema = false)
+@Database(entities = [Recipe::class], version = 4, exportSchema = false)
 abstract class ImamuDatabase : RoomDatabase()
 {
     abstract val recipeDao: RecipeDao

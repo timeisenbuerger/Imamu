@@ -1,12 +1,14 @@
 package com.github.tei.imamu.view.recipe
 
 import android.app.Application
+import android.content.Context
+import android.net.Uri
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
 import com.github.tei.imamu.data.ImamuDatabase
 import com.github.tei.imamu.data.dao.RecipeDao
@@ -39,7 +41,7 @@ class RecipeDetailFragment : Fragment()
         recipeDao = ImamuDatabase.getInstance(application).recipeDao
 
         //init viewModel
-        viewModelFactory = RecipeDetailViewModelFactory(RecipeDetailFragmentArgs.fromBundle(arguments!!).recipeId, recipeDao)
+        viewModelFactory = RecipeDetailViewModelFactory(RecipeDetailFragmentArgs.fromBundle(requireArguments()).recipeId, recipeDao)
         viewModel = ViewModelProvider(this, viewModelFactory).get(RecipeDetailViewModel::class.java)
 
         //set lifecycle owner

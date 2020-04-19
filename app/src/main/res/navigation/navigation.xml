@@ -33,7 +33,8 @@
         tools:layout="@layout/fragment_add_recipe">
         <action
             android:id="@+id/action_addRecipeFragment_to_recipeDetailFragment"
-            app:destination="@id/recipeDetailFragment" />
+            app:destination="@id/recipeDetailFragment"
+            app:popUpTo="@id/nav_recipe_list" />
     </fragment>
     <fragment
         android:id="@+id/recipeDetailFragment"

@@ -19,5 +19,29 @@ data class Recipe(
     var ingredients: String = "",
 
     @ColumnInfo(name = "preparation")
-    var preparation: String = ""
+    var preparation: String = "",
+
+    @ColumnInfo(name = "difficulty")
+    var difficulty: String = "",
+
+    @ColumnInfo(name = "preparation_time")
+    var preparationTime: String = "",
+
+    @ColumnInfo(name = "baking_time")
+    var bakingTime: String = "",
+
+    @ColumnInfo(name = "rest_time")
+    var restTime: String = "",
+
+    @ColumnInfo(name = "type")
+    var type: String = "",
+
+    @ColumnInfo(name = "kitchen")
+    var kitchen: String = "",
+
+    @ColumnInfo(name = "mood")
+    var mood: String = "",
+
+    @ColumnInfo(name = "image_path")
+    var imagePath: String = ""
 )

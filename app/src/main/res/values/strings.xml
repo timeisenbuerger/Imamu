@@ -33,4 +33,18 @@
     <string name="sample_recipe_title">Beispiel Rezept</string>
     <string name="sample_ingredients">2 Tassen Vollmilch \n1 Ei \n250 Gramm Butter \n120 Gramm brauner Zucker</string>
     <string name="sample_preparation">1. Eier und Zucker mischen, solange bis sie cremig werden \n2. Butter hinzugeben \n4. Die Hälfte der Milch hinzugeben \n5. In einen Behälter geben und für 4 Stunden über Nacht in den Kühlschrank stellen</string>
+    <string name="recipe_difficulty_text">Schwierigkeit:</string>
+    <string name="chip_difficulty_easy">Einfach</string>
+    <string name="chip_difficulty_normal">Mittel</string>
+    <string name="chip_difficulty_hard">Schwer</string>
+    <string name="recipe_preparation_time_text">Zubereitungszeit:</string>
+    <string name="recipe_baking_time_text">Backzeit:</string>
+    <string name="recipe_rest_time_text">Ruhezeit:</string>
+    <string name="recipe_time_unit_text">min</string>
+    <string name="recipe_type_text">Rezept-Typ:</string>
+    <string name="recipe_kitchen_text">Küche:</string>
+    <string name="recipe_mood_text">Stimmung:</string>
+    <string name="recipe_type_hint_text">z.B. Hauptspeise</string>
+    <string name="recipe_kitchen_hint_text">z.B. Italienisch</string>
+    <string name="recipe_mood_hint_text">z.B. Wohlfühlen</string>
 </resources>

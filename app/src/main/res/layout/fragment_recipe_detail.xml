@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.github.tei.imamu.viewmodel.recipe.detail.RecipeDetailViewModel" />
@@ -24,10 +25,10 @@
                 android:layout_marginStart="@dimen/default_recipe_margin"
                 android:layout_marginTop="@dimen/default_recipe_margin"
                 android:layout_marginEnd="@dimen/default_recipe_margin"
+                android:text="@{viewModel.currentRecipe.title}"
                 android:textAlignment="center"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                android:text="@{viewModel.currentRecipe.title}"
                 tools:text="@string/sample_recipe_title" />
 
             <ImageView

@@ -1,7 +1,13 @@
 package com.github.tei.imamu.view.recipe
 
+import android.app.Activity
 import android.app.Application
+import android.content.Intent
+import android.database.Cursor
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
+import android.text.TextUtils
 import android.view.*
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
@@ -18,6 +24,8 @@ import com.github.tei.imamu.viewmodel.recipe.add.AddRecipeViewModelFactory
 
 class AddRecipeFragment : Fragment()
 {
+    private val GALLERY_REQUEST_CODE = 28
+
     private lateinit var binding: FragmentAddRecipeBinding
     private lateinit var viewModel: AddRecipeViewModel
     private lateinit var viewModelFactory: AddRecipeViewModelFactory
@@ -27,9 +35,9 @@ class AddRecipeFragment : Fragment()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
         init(inflater, container)
+        initComponents()
+        initListener()
         initObserver()
-
-        binding.imageViewMeal.setImageResource(R.drawable.ic_camera)
 
         setHasOptionsMenu(true)
         return binding.root
@@ -55,6 +63,27 @@ class AddRecipeFragment : Fragment()
         binding.viewModel = viewModel
     }
 
+    private fun initComponents()
+    {
+        binding.imageViewMeal.setImageResource(R.drawable.ic_hot_tub)
+    }
+
+    private fun initListener()
+    {
+        binding.chipGroupDifficulty.setOnCheckedChangeListener { _, checkedId: Int ->
+            when (checkedId)
+            {
+                R.id.chip_easy   -> viewModel.recipe.value!!.difficulty = "Einfach"
+                R.id.chip_normal -> viewModel.recipe.value!!.difficulty = "Normal"
+                R.id.chip_hard   -> viewModel.recipe.value!!.difficulty = "Schwer"
+            }
+        }
+
+        binding.imageViewMeal.setOnClickListener {
+            pickImageFromGallery()
+        }
+    }
+
     private fun initObserver()
     {
         viewModel.navigateToRecipeDetail.observe(viewLifecycleOwner, Observer { saveRecipe ->
@@ -76,15 +105,86 @@ class AddRecipeFragment : Fragment()
     {
         R.id.action_save_changes ->
         {
-            viewModel.onSaveRecipe()
+            if (isSavePossible())
+            {
+                viewModel.onSaveRecipe()
+            }
             true
         }
         else                     ->
         {
-            // If we got here, the user's action was not recognized.
-            // Invoke the superclass to handle it.
             Toast.makeText(context, "Back", Toast.LENGTH_SHORT).show()
             super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun isSavePossible(): Boolean
+    {
+        var result = true
+
+        when
+        {
+            TextUtils.isEmpty(binding.editTextRecipeTitle.text)            ->
+            {
+                binding.editTextRecipeTitle.error = "Bitte gebe einen Rezeptenamen an."
+                result = false
+            }
+            TextUtils.isEmpty(binding.editTextNumberServings.text)         ->
+            {
+                binding.editTextNumberServings.error = "Bitte gebe eine Anzahl von Portionen an."
+                result = false
+            }
+            TextUtils.isEmpty(binding.multiEditTextRecipeIngredients.text) ->
+            {
+                binding.multiEditTextRecipeIngredients.error = "Bitte gebe Zutaten an."
+                result = false
+            }
+            TextUtils.isEmpty(binding.multiEditTextRecipePreparation.text) ->
+            {
+                binding.multiEditTextRecipePreparation.error = "Bitte gebe eine Zubereitungsbeschreibung ein."
+                result = false
+            }
+        }
+
+        return result
+    }
+
+    private fun pickImageFromGallery()
+    {
+        //Create an Intent with action as ACTION_PICK
+        val intent = Intent(Intent.ACTION_PICK)
+        // Sets the type as image/*. This ensures only components of type image are selected
+        intent.type = "image/*"
+        //We pass an extra array with the accepted mime types. This will ensure only components with these MIME types as targeted.
+        val mimeTypes = arrayOf("image/jpeg", "image/png")
+        intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
+        // Launching the Intent
+        startActivityForResult(intent, GALLERY_REQUEST_CODE)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?)
+    {
+        // Result code is RESULT_OK only if the user selects an Image
+        if (resultCode == Activity.RESULT_OK) when (requestCode)
+        {
+            GALLERY_REQUEST_CODE ->
+            {
+                data?.let { uri ->
+                    val selectedImage: Uri = uri.data!!
+                    binding.imageViewMeal.setImageURI(selectedImage)
+
+                    binding.viewModel!!.recipe.value!!.imagePath = getRealPathFromURI(uri.data)!!
+                }
+            }
+        }
+    }
+
+    private fun getRealPathFromURI(contentUri: Uri?): String?
+    {
+        val proj = arrayOf(MediaStore.Images.Media.DATA)
+        val cursor: Cursor? = requireContext().contentResolver.query(contentUri!!, proj, null, null, null)
+        val columnIndex = cursor!!.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+        cursor.moveToFirst()
+        return cursor.getString(columnIndex)
     }
 }

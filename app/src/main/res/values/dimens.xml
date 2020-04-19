@@ -7,4 +7,5 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="default_recipe_padding">8dp</dimen>
     <dimen name="default_recipe_margin">14dp</dimen>
+    <dimen name="recipe_image_view_max_height">300dp</dimen>
 </resources>

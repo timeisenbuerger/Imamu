@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.github.tei.imamu.PermissionUtil
 import com.github.tei.imamu.R
 import com.github.tei.imamu.data.ImamuDatabase
 import com.github.tei.imamu.data.dao.RecipeDao
@@ -91,4 +92,17 @@ class RecipeListFragment : Fragment()
             }
         })
     }
+
+    override fun onResume()
+    {
+        super.onResume()
+
+        //TODO dreckig, anders machen!
+        PermissionUtil.grantStoragePermission(requireActivity())
+
+        //TODO dreckig, evtl anpassen!
+        viewModel.initRecipes()
+    }
+
+
 }

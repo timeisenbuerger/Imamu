@@ -31,9 +31,8 @@ class AddRecipeViewModel(private val recipeDao: RecipeDao, application: Applicat
     {
         uiScope.launch {
             insert(_recipe.value!!)
+            _navigateToRecipeDetail.value = true
         }
-
-        _navigateToRecipeDetail.value = true
     }
 
     fun onNavigateToDetailComplete()
@@ -44,7 +43,8 @@ class AddRecipeViewModel(private val recipeDao: RecipeDao, application: Applicat
     private suspend fun insert(recipe: Recipe)
     {
         withContext(Dispatchers.IO) {
-            recipeDao.insert(recipe)
+            val id = recipeDao.insert(recipe)
+            _recipe.value!!.id = id
         }
     }
 
