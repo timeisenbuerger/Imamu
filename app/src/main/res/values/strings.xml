@@ -24,6 +24,7 @@
     <string name="image_view_meal_text">Bild des Gerichts</string>
     <string name="insert_recipe_title">Rezeptname eingeben</string>
     <string name="insert_recipe_ingredients">Zutaten hinzufügen</string>
+    <string name="insert_recipe_ingredient">Zutat hinzufügen</string>
     <string name="recipe_servings_text">Portionen:</string>
     <string name="insert_recipe_tags">Tags hinzufügen</string>
     <string name="insert_recipe_preparation">Zubereitung hinzufügen</string>
@@ -50,4 +51,17 @@
     <string name="recipe_detail_sample_preparation_time">Zubereitung: 120 min</string>
     <string name="recipe_detail_sample_baking_time">Backzeit: 120 min</string>
     <string name="recipe_detail_sample_rest_time">Ruhezeit: 120 min</string>
+    <string name="recipe_ingredient_amount">Menge</string>
+    <string name="recipe_ingredient_unit">Einheit</string>
+
+    <string-array name="ingredient_units">
+        <item>g</item>
+        <item>kg</item>
+        <item>ml</item>
+        <item>l</item>
+        <item>TL</item>
+        <item>EL</item>
+        <item>Pck.</item>
+        <item>Msp.</item>
+    </string-array>
 </resources>

@@ -9,7 +9,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.text.TextUtils
 import android.view.*
-import android.widget.Toast
+import android.widget.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -18,6 +18,7 @@ import androidx.navigation.fragment.findNavController
 import com.github.tei.imamu.R
 import com.github.tei.imamu.data.ImamuDatabase
 import com.github.tei.imamu.data.dao.RecipeDao
+import com.github.tei.imamu.data.entity.RecipeIngredient
 import com.github.tei.imamu.databinding.FragmentAddRecipeBinding
 import com.github.tei.imamu.viewmodel.recipe.add.AddRecipeViewModel
 import com.github.tei.imamu.viewmodel.recipe.add.AddRecipeViewModelFactory
@@ -35,7 +36,7 @@ class AddRecipeFragment : Fragment()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
         init(inflater, container)
-        initComponents()
+        initComponents(inflater)
         initListener()
         initObserver()
 
@@ -63,7 +64,7 @@ class AddRecipeFragment : Fragment()
         binding.viewModel = viewModel
     }
 
-    private fun initComponents()
+    private fun initComponents(inflater: LayoutInflater)
     {
         binding.imageViewMeal.setImageResource(R.drawable.ic_hot_tub)
     }
@@ -82,6 +83,8 @@ class AddRecipeFragment : Fragment()
         binding.imageViewMeal.setOnClickListener {
             pickImageFromGallery()
         }
+
+        binding.buttonAddIngredient.setOnClickListener { addIngredientRow(layoutInflater) }
     }
 
     private fun initObserver()
@@ -95,6 +98,76 @@ class AddRecipeFragment : Fragment()
         })
     }
 
+    private fun pickImageFromGallery()
+    {
+        //Create an Intent with action as ACTION_PICK
+        val intent = Intent(Intent.ACTION_PICK)
+        // Sets the type as image/*. This ensures only components of type image are selected
+        intent.type = "image/*"
+        //We pass an extra array with the accepted mime types. This will ensure only components with these MIME types as targeted.
+        val mimeTypes = arrayOf("image/jpeg", "image/png")
+        intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
+        // Launching the Intent
+        startActivityForResult(intent, GALLERY_REQUEST_CODE)
+    }
+
+    private fun getRealPathFromURI(contentUri: Uri?): String?
+    {
+        val proj = arrayOf(MediaStore.Images.Media.DATA)
+        val cursor: Cursor? = requireContext().contentResolver.query(contentUri!!, proj, null, null, null)
+        val columnIndex = cursor!!.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+        cursor.moveToFirst()
+        return cursor.getString(columnIndex)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?)
+    {
+        // Result code is RESULT_OK only if the user selects an Image
+        if (resultCode == Activity.RESULT_OK) when (requestCode)
+        {
+            GALLERY_REQUEST_CODE ->
+            {
+                data?.let { uri ->
+                    val selectedImage: Uri = uri.data!!
+                    binding.imageViewMeal.setImageURI(selectedImage)
+
+                    binding.viewModel!!.recipe.value!!.imagePath = getRealPathFromURI(uri.data)!!
+                }
+            }
+        }
+    }
+
+    private fun addIngredientRow(inflater: LayoutInflater)
+    {
+        val ingredientLine = inflater.inflate(R.layout.add_ingredient_line, binding.layoutContainerIngredients)
+
+        val autoCompleteViewUnit = ingredientLine.findViewById<AutoCompleteTextView>(R.id.auto_complete_ingredient_unit)
+
+        // Get the string array
+        val units: Array<out String> = resources.getStringArray(R.array.ingredient_units)
+        // Create the adapter and set it to the AutoCompleteTextView
+        ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, units).also { adapter -> autoCompleteViewUnit.setAdapter(adapter) }
+    }
+
+    private fun updateViewModelWithIngredients()
+    {
+        for(i in 0..binding.layoutContainerIngredients.childCount step 1)
+        {
+            val child: LinearLayout = binding.layoutContainerIngredients.getChildAt(i) as LinearLayout
+
+            val editTextAmount = child.getChildAt(0) as EditText
+            val autoCompleteUnit = child.getChildAt(1) as AutoCompleteTextView
+            val editTextIngredient = child.getChildAt(2) as EditText
+
+            val recipeIngredient: RecipeIngredient = RecipeIngredient()
+            recipeIngredient.amount = editTextAmount.text.toString()
+            recipeIngredient.unit = autoCompleteUnit.text.toString()
+            recipeIngredient.name = editTextIngredient.text.toString()
+
+            viewModel.recipe.value!!.recipeIngredients.add(recipeIngredient)
+        }
+    }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater)
     {
         super.onCreateOptionsMenu(menu, inflater)
@@ -105,10 +178,11 @@ class AddRecipeFragment : Fragment()
     {
         R.id.action_save_changes ->
         {
-            if (isSavePossible())
-            {
-                viewModel.onSaveRecipe()
-            }
+            //            if (isSavePossible())
+            //            {
+            updateViewModelWithIngredients()
+            //                viewModel.onSaveRecipe()
+            //            }
             true
         }
         else                     ->
@@ -147,44 +221,5 @@ class AddRecipeFragment : Fragment()
         }
 
         return result
-    }
-
-    private fun pickImageFromGallery()
-    {
-        //Create an Intent with action as ACTION_PICK
-        val intent = Intent(Intent.ACTION_PICK)
-        // Sets the type as image/*. This ensures only components of type image are selected
-        intent.type = "image/*"
-        //We pass an extra array with the accepted mime types. This will ensure only components with these MIME types as targeted.
-        val mimeTypes = arrayOf("image/jpeg", "image/png")
-        intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
-        // Launching the Intent
-        startActivityForResult(intent, GALLERY_REQUEST_CODE)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?)
-    {
-        // Result code is RESULT_OK only if the user selects an Image
-        if (resultCode == Activity.RESULT_OK) when (requestCode)
-        {
-            GALLERY_REQUEST_CODE ->
-            {
-                data?.let { uri ->
-                    val selectedImage: Uri = uri.data!!
-                    binding.imageViewMeal.setImageURI(selectedImage)
-
-                    binding.viewModel!!.recipe.value!!.imagePath = getRealPathFromURI(uri.data)!!
-                }
-            }
-        }
-    }
-
-    private fun getRealPathFromURI(contentUri: Uri?): String?
-    {
-        val proj = arrayOf(MediaStore.Images.Media.DATA)
-        val cursor: Cursor? = requireContext().contentResolver.query(contentUri!!, proj, null, null, null)
-        val columnIndex = cursor!!.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
-        cursor.moveToFirst()
-        return cursor.getString(columnIndex)
     }
 }

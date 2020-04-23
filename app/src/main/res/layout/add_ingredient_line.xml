@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <EditText
+        android:id="@+id/edit_text_ingredient_amount"
+        android:layout_width="76dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_recipe_margin"
+        android:layout_marginTop="@dimen/default_recipe_padding"
+        android:layout_marginEnd="@dimen/default_recipe_margin"
+        android:layout_weight="1"
+        android:ems="10"
+        android:hint="@string/recipe_ingredient_amount"
+        android:inputType="numberDecimal"
+        android:textAlignment="center" />
+
+    <AutoCompleteTextView
+        android:id="@+id/auto_complete_ingredient_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_recipe_padding"
+        android:layout_marginEnd="@dimen/default_recipe_margin"
+        android:layout_weight="1"
+        android:completionThreshold="1"
+        android:hint="@string/recipe_ingredient_unit"
+        android:textAlignment="center" />
+
+    <EditText
+        android:id="@+id/edit_text_ingredient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_recipe_padding"
+        android:layout_marginEnd="@dimen/default_recipe_margin"
+        android:layout_weight="1"
+        android:ems="10"
+        android:hint="@string/insert_recipe_ingredient"
+        android:inputType="textPersonName" />
+
+</LinearLayout>
