@@ -27,12 +27,16 @@ class MainActivity : AppCompatActivity()
 
         drawerLayout = binding.drawerLayout
 
+        setSupportActionBar(binding.toolbar)
+
         navController = this.findNavController(R.id.nav_host_fragment)
         val topLevelDestinations = setOf(R.id.nav_home, R.id.nav_recipe_list, R.id.nav_cookbook, R.id.nav_shopping_list, R.id.nav_recipe_suggestion, R.id.nav_settings)
         appBarConfiguration = AppBarConfiguration.Builder(topLevelDestinations).setDrawerLayout(drawerLayout).build()
 
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration)
         NavigationUI.setupWithNavController(binding.navView, navController)
+
+        supportActionBar?.setDisplayShowTitleEnabled(true);
 
         ObjectBox.init(this)
     }

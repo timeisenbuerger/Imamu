@@ -39,7 +39,7 @@
     <fragment
         android:id="@+id/recipeDetailFragment"
         android:name="com.github.tei.imamu.view.recipe.RecipeDetailFragment"
-        android:label="RecipeDetailFragment"
+        android:label=""
         tools:layout="@layout/fragment_recipe_detail">
         <argument
             android:name="recipe"

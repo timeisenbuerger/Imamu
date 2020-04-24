@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
 import com.github.tei.imamu.data.entity.RecipeIngredient
 import com.github.tei.imamu.databinding.FragmentAddRecipeBinding
@@ -32,6 +33,8 @@ class AddRecipeFragment : Fragment()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
+        (activity as MainActivity).supportActionBar?.title = "Rezept hinzufügen"
+
         init(inflater, container)
         initComponents()
         initListener()

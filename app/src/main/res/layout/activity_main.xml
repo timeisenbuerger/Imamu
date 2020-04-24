@@ -13,25 +13,38 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-<!--            <com.google.android.material.appbar.AppBarLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="?attr/actionBarSize">-->
 
-<!--                <com.google.android.material.appbar.CollapsingToolbarLayout-->
-<!--                    android:id="@+id/collapsing_toolbar_layout"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    app:contentScrim="?attr/colorPrimary"-->
-<!--                    app:expandedTitleGravity="top"-->
-<!--                    app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">-->
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/app_bar"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                android:fitsSystemWindows="true"
+                android:theme="@style/AppTheme"
+                >
 
-<!--                    <androidx.appcompat.widget.Toolbar-->
-<!--                        android:id="@+id/toolbar"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="?attr/actionBarSize"-->
-<!--                        app:layout_collapseMode="pin"/>-->
-<!--                </com.google.android.material.appbar.CollapsingToolbarLayout>-->
-<!--            </com.google.android.material.appbar.AppBarLayout>-->
+                <com.google.android.material.appbar.CollapsingToolbarLayout
+                    android:id="@+id/toolbar_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fitsSystemWindows="true"
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                    app:toolbarId="@id/toolbar"
+                    app:contentScrim="?attr/colorPrimary"
+                    app:titleEnabled="false"
+                    >
+
+                    <androidx.appcompat.widget.Toolbar
+                        android:id="@+id/toolbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        android:background="?attr/colorPrimary"
+                        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                        app:popupTheme="@style/AppTheme"
+                        app:layout_collapseMode="pin"
+                        />
+
+                </com.google.android.material.appbar.CollapsingToolbarLayout>
+            </com.google.android.material.appbar.AppBarLayout>
 
             <fragment
                 android:id="@+id/nav_host_fragment"

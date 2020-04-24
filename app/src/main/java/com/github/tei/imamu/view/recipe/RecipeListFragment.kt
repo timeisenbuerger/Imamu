@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
 import com.github.tei.imamu.databinding.FragmentRecipeListBinding
 import com.github.tei.imamu.viewmodel.recipe.list.RecipeListAdapter
@@ -28,8 +29,7 @@ class RecipeListFragment : Fragment()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
-        // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_recipe_list, container, false)
+        (activity as MainActivity).supportActionBar?.title = "Rezeptliste"
 
         init(inflater, container)
         initListener()

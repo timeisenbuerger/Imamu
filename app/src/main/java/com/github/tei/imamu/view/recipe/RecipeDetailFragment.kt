@@ -8,6 +8,7 @@ import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
 import com.github.tei.imamu.databinding.FragmentRecipeDetailBinding
 import com.github.tei.imamu.viewmodel.recipe.detail.IngredientsListAdapter
@@ -28,6 +29,8 @@ class RecipeDetailFragment : Fragment()
     {
         init(inflater, container)
         initComponents(inflater)
+
+        (activity as MainActivity).supportActionBar?.title = viewModel.currentRecipe.value!!.title
 
         return binding.root
     }
