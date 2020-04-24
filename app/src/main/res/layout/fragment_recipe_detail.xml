@@ -6,6 +6,9 @@
     <data>
 
         <variable
+            name="recipe"
+            type="com.github.tei.imamu.data.entity.Recipe" />
+        <variable
             name="viewModel"
             type="com.github.tei.imamu.viewmodel.recipe.detail.RecipeDetailViewModel" />
     </data>
@@ -91,14 +94,13 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/text_ingredients"
+            <ListView
+                android:id="@+id/list_view_ingredients"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/default_recipe_margin"
-                android:layout_marginTop="@dimen/default_recipe_padding"
                 android:layout_marginEnd="@dimen/default_recipe_margin"
-                tools:text="@string/sample_ingredients" />
+                android:nestedScrollingEnabled="true"></ListView>
 
             <TextView
                 android:id="@+id/text_title_instructions"

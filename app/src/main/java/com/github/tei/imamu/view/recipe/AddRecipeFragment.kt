@@ -135,7 +135,7 @@ class AddRecipeFragment : Fragment()
 
     private fun addIngredientRow(inflater: LayoutInflater)
     {
-        val ingredientLine = inflater.inflate(R.layout.add_ingredient_line, binding.layoutContainerIngredients)
+        val ingredientLine = inflater.inflate(R.layout.item_add_ingredient, binding.layoutContainerIngredients)
 
         val autoCompleteViewUnit = ingredientLine.findViewById<AutoCompleteTextView>(R.id.auto_complete_ingredient_unit)
 

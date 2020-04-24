@@ -37,7 +37,8 @@
                         android:contentDescription="@string/image_view_meal_text"
                         android:maxHeight="@dimen/recipe_image_view_max_height"
                         android:padding="@dimen/default_recipe_padding"
-                        tools:src="@mipmap/pancakes" />
+                        tools:src="@mipmap/pancakes"
+                        android:foreground="?android:attr/selectableItemBackground"/>
 
                     <TextView
                         android:id="@+id/text_view_recipe_title"
@@ -110,13 +111,14 @@
                             android:textSize="18sp"
                             android:textStyle="bold" />
 
-                        <Button
+                        <ImageButton
                             android:id="@+id/button_add_ingredient"
-                            android:layout_width="54dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="end"
+                            android:layout_marginTop="@dimen/default_recipe_margin"
                             android:layout_weight="1"
-                            app:icon="@drawable/ic_add" />
+                            android:background="@color/white"
+                            app:srcCompat="@drawable/ic_add_black" />
                     </LinearLayout>
 
                     <LinearLayout

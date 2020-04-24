@@ -1,6 +1,7 @@
 package com.github.tei.imamu.view.recipe
 
 import android.app.Application
+import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.*
@@ -9,10 +10,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.github.tei.imamu.R
 import com.github.tei.imamu.databinding.FragmentRecipeDetailBinding
+import com.github.tei.imamu.viewmodel.recipe.detail.IngredientsListAdapter
 import com.github.tei.imamu.viewmodel.recipe.detail.RecipeDetailViewModel
 import com.github.tei.imamu.viewmodel.recipe.detail.RecipeDetailViewModelFactory
+import com.github.tei.imamu.viewmodel.recipe.detail.setListViewHeightBasedOnChildren
 import com.google.android.material.chip.Chip
-import com.squareup.picasso.Picasso
+import java.io.File
 
 class RecipeDetailFragment : Fragment()
 {
@@ -46,19 +49,22 @@ class RecipeDetailFragment : Fragment()
 
         //set viewModel in binding
         binding.viewModel = viewModel
+        binding.recipe = viewModel.currentRecipe.value
+
+        binding.listViewIngredients.adapter = IngredientsListAdapter(requireContext(), viewModel.currentRecipe.value!!.recipeIngredients)
     }
 
     private fun initComponents(inflater: LayoutInflater)
     {
         val recipe = binding.viewModel!!.currentRecipe.value!!
 
-        if(!TextUtils.isEmpty(recipe.imagePath))
+        if (!TextUtils.isEmpty(recipe.imagePath) && File(recipe.imagePath).exists())
         {
-            Picasso.with(requireContext()).load(recipe.imagePath).error(R.drawable.ic_hot_tub).into(binding.imageRecipe)
+            binding.imageRecipe.setImageURI(Uri.parse(recipe.imagePath))
         }
         else
         {
-            Picasso.with(requireContext()).load(R.drawable.ic_hot_tub).into(binding.imageRecipe)
+            binding.imageRecipe.setImageResource(R.drawable.ic_hot_tub)
         }
 
         if (!TextUtils.isEmpty(recipe.difficulty))
@@ -98,18 +104,7 @@ class RecipeDetailFragment : Fragment()
             binding.chipGroupFeatures.addView(chip)
         }
 
-        if (recipe.recipeIngredients.isNotEmpty())
-        {
-            var ingredients = ""
-            recipe.recipeIngredients.forEach{
-                var row = ""
-                row += it.amount + " " + it.unit + " " + it.name + "\n"
-
-                ingredients += row
-            }
-
-            binding.textIngredients.text = ingredients
-        }
+        setListViewHeightBasedOnChildren(binding.listViewIngredients)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater)
