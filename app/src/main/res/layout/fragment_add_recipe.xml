@@ -126,21 +126,6 @@
                         android:orientation="vertical"></LinearLayout>
 
 
-                    <EditText
-                        android:id="@+id/multi_edit_text_recipe_ingredients"
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        android:layout_marginStart="@dimen/default_recipe_margin"
-                        android:layout_marginEnd="@dimen/default_recipe_margin"
-                        android:autofillHints=""
-                        android:background="@drawable/edit_view_border"
-                        android:ems="10"
-                        android:gravity="start|top"
-                        android:hint="@string/insert_recipe_ingredients"
-                        android:inputType="textMultiLine"
-                        android:padding="@dimen/default_recipe_padding"
-                        android:text="@={viewModel.recipe.ingredients}" />
-
                     <TextView
                         android:id="@+id/text_view_recipe_preparation"
                         android:layout_width="match_parent"

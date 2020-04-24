@@ -16,8 +16,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.github.tei.imamu.R
-import com.github.tei.imamu.data.ImamuDatabase
-import com.github.tei.imamu.data.dao.RecipeDao
 import com.github.tei.imamu.data.entity.RecipeIngredient
 import com.github.tei.imamu.databinding.FragmentAddRecipeBinding
 import com.github.tei.imamu.viewmodel.recipe.add.AddRecipeViewModel
@@ -31,12 +29,11 @@ class AddRecipeFragment : Fragment()
     private lateinit var viewModel: AddRecipeViewModel
     private lateinit var viewModelFactory: AddRecipeViewModelFactory
     private lateinit var application: Application
-    private lateinit var recipeDao: RecipeDao
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
         init(inflater, container)
-        initComponents(inflater)
+        initComponents()
         initListener()
         initObserver()
 
@@ -49,12 +46,11 @@ class AddRecipeFragment : Fragment()
         //init binding
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_recipe, container, false)
 
-        //init dao
+        //init application
         application = requireNotNull(this.activity).application
-        recipeDao = ImamuDatabase.getInstance(application).recipeDao
 
         //init viewModel
-        viewModelFactory = AddRecipeViewModelFactory(recipeDao, application)
+        viewModelFactory = AddRecipeViewModelFactory(application)
         viewModel = ViewModelProvider(this, viewModelFactory).get(AddRecipeViewModel::class.java)
 
         //set lifecycle owner
@@ -64,7 +60,7 @@ class AddRecipeFragment : Fragment()
         binding.viewModel = viewModel
     }
 
-    private fun initComponents(inflater: LayoutInflater)
+    private fun initComponents()
     {
         binding.imageViewMeal.setImageResource(R.drawable.ic_hot_tub)
     }
@@ -151,20 +147,22 @@ class AddRecipeFragment : Fragment()
 
     private fun updateViewModelWithIngredients()
     {
-        for(i in 0..binding.layoutContainerIngredients.childCount step 1)
+        for (i in 0..binding.layoutContainerIngredients.childCount step 1)
         {
-            val child: LinearLayout = binding.layoutContainerIngredients.getChildAt(i) as LinearLayout
+            binding.layoutContainerIngredients.getChildAt(i)?.let {
+                val child = it as LinearLayout
 
-            val editTextAmount = child.getChildAt(0) as EditText
-            val autoCompleteUnit = child.getChildAt(1) as AutoCompleteTextView
-            val editTextIngredient = child.getChildAt(2) as EditText
+                val editTextAmount = child.getChildAt(0) as EditText
+                val autoCompleteUnit = child.getChildAt(1) as AutoCompleteTextView
+                val editTextIngredient = child.getChildAt(2) as EditText
 
-            val recipeIngredient: RecipeIngredient = RecipeIngredient()
-            recipeIngredient.amount = editTextAmount.text.toString()
-            recipeIngredient.unit = autoCompleteUnit.text.toString()
-            recipeIngredient.name = editTextIngredient.text.toString()
+                val recipeIngredient = RecipeIngredient()
+                recipeIngredient.amount = editTextAmount.text.toString()
+                recipeIngredient.unit = autoCompleteUnit.text.toString()
+                recipeIngredient.name = editTextIngredient.text.toString()
 
-            viewModel.recipe.value!!.recipeIngredients.add(recipeIngredient)
+                viewModel.recipe.value?.let { value -> value.recipeIngredients.add(recipeIngredient) }
+            }
         }
     }
 
@@ -178,11 +176,11 @@ class AddRecipeFragment : Fragment()
     {
         R.id.action_save_changes ->
         {
-            //            if (isSavePossible())
-            //            {
-            updateViewModelWithIngredients()
-            //                viewModel.onSaveRecipe()
-            //            }
+            if (isSavePossible())
+            {
+                updateViewModelWithIngredients()
+                viewModel.onSaveRecipe()
+            }
             true
         }
         else                     ->
@@ -206,11 +204,6 @@ class AddRecipeFragment : Fragment()
             TextUtils.isEmpty(binding.editTextNumberServings.text)         ->
             {
                 binding.editTextNumberServings.error = "Bitte gebe eine Anzahl von Portionen an."
-                result = false
-            }
-            TextUtils.isEmpty(binding.multiEditTextRecipeIngredients.text) ->
-            {
-                binding.multiEditTextRecipeIngredients.error = "Bitte gebe Zutaten an."
                 result = false
             }
             TextUtils.isEmpty(binding.multiEditTextRecipePreparation.text) ->

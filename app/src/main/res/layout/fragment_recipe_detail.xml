@@ -98,7 +98,6 @@
                 android:layout_marginStart="@dimen/default_recipe_margin"
                 android:layout_marginTop="@dimen/default_recipe_padding"
                 android:layout_marginEnd="@dimen/default_recipe_margin"
-                android:text="@{viewModel.currentRecipe.ingredients}"
                 tools:text="@string/sample_ingredients" />
 
             <TextView

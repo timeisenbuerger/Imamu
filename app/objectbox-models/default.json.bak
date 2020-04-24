@@ -1,0 +1,129 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:2548072088956869254",
+      "lastPropertyId": "13:5460335922177369091",
+      "name": "Recipe",
+      "properties": [
+        {
+          "id": "1:7547774599530730938",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:1558691213432287328",
+          "name": "title",
+          "type": 9
+        },
+        {
+          "id": "3:4045118498147945255",
+          "name": "servingsNumber",
+          "type": 9
+        },
+        {
+          "id": "4:5864946295596553103",
+          "name": "ingredients",
+          "type": 9
+        },
+        {
+          "id": "5:6627867037173460085",
+          "name": "preparation",
+          "type": 9
+        },
+        {
+          "id": "6:921567219472839415",
+          "name": "difficulty",
+          "type": 9
+        },
+        {
+          "id": "7:8721032340894778829",
+          "name": "preparationTime",
+          "type": 9
+        },
+        {
+          "id": "8:1284698595952891427",
+          "name": "bakingTime",
+          "type": 9
+        },
+        {
+          "id": "9:9093007829029111825",
+          "name": "restTime",
+          "type": 9
+        },
+        {
+          "id": "10:7076795637937031368",
+          "name": "type",
+          "type": 9
+        },
+        {
+          "id": "11:5296699260052294519",
+          "name": "kitchen",
+          "type": 9
+        },
+        {
+          "id": "12:1908275460111647085",
+          "name": "mood",
+          "type": 9
+        },
+        {
+          "id": "13:5460335922177369091",
+          "name": "imagePath",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "2:6168022746291461423",
+      "lastPropertyId": "5:5930784620653630284",
+      "name": "RecipeIngredient",
+      "properties": [
+        {
+          "id": "1:8661646893208401427",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:7449095228095221128",
+          "name": "amount",
+          "type": 9
+        },
+        {
+          "id": "3:1812179593528471203",
+          "name": "unit",
+          "type": 9
+        },
+        {
+          "id": "4:7211480856525954018",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "5:5930784620653630284",
+          "name": "recipeId",
+          "indexId": "1:1765103224388080054",
+          "type": 11,
+          "flags": 1548,
+          "relationTarget": "Recipe"
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "2:6168022746291461423",
+  "lastIndexId": "1:1765103224388080054",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [],
+  "retiredRelationUids": [],
+  "version": 1
+}

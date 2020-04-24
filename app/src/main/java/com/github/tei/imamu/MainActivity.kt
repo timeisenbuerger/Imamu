@@ -10,6 +10,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.*
+import com.github.tei.imamu.data.ObjectBox
 import com.github.tei.imamu.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity()
@@ -32,6 +33,8 @@ class MainActivity : AppCompatActivity()
 
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration)
         NavigationUI.setupWithNavController(binding.navView, navController)
+
+        ObjectBox.init(this)
     }
 
     override fun onResume()

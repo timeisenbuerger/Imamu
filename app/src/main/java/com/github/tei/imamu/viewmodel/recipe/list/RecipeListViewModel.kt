@@ -4,20 +4,23 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.github.tei.imamu.data.dao.RecipeDao
+import com.github.tei.imamu.data.ObjectBox
 import com.github.tei.imamu.data.entity.Recipe
-import kotlinx.coroutines.*
+import io.objectbox.Box
+import io.objectbox.kotlin.boxFor
+import kotlinx.coroutines.Job
 
-class RecipeListViewModel(private val recipeDao: RecipeDao, application: Application) : AndroidViewModel(application)
+class RecipeListViewModel(application: Application) : AndroidViewModel(application)
 {
     private var viewModelJob = Job()
-    private var uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    var recipes = recipeDao.getAll()
+    var recipes = MutableLiveData<List<Recipe>>()
 
     private val _navigateToDetail = MutableLiveData<Recipe>()
     val navigateToDetail: LiveData<Recipe>
         get() = _navigateToDetail
+
+    private val recipeBox: Box<Recipe> = ObjectBox.boxStore.boxFor()
 
     init
     {
@@ -26,16 +29,7 @@ class RecipeListViewModel(private val recipeDao: RecipeDao, application: Applica
 
     fun initRecipes()
     {
-        uiScope.launch {
-            getAllRecipes()
-        }
-    }
-
-    private suspend fun getAllRecipes()
-    {
-        withContext(Dispatchers.IO) {
-            recipes = recipeDao.getAll()
-        }
+        recipes.value = recipeBox.all
     }
 
     fun onRecipeClicked(recipe: Recipe)

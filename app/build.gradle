@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'androidx.navigation.safeargs'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'io.objectbox'
 
 android {
     compileSdkVersion 29
@@ -71,6 +72,11 @@ dependencies {
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
     testImplementation "androidx.room:room-testing:$room_version"
+
+
+    implementation "io.objectbox:objectbox-kotlin:$objectboxVersion"
+    implementation "io.objectbox:objectbox-android:$objectboxVersion"
+    kapt "io.objectbox:objectbox-processor:$objectboxVersion"
 
     //picasso
     implementation 'com.squareup.picasso:picasso:2.5.2'
