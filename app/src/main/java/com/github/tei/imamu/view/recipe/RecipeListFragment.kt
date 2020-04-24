@@ -15,7 +15,6 @@ import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
 import com.github.tei.imamu.databinding.FragmentRecipeListBinding
 import com.github.tei.imamu.viewmodel.recipe.list.RecipeListAdapter
-import com.github.tei.imamu.viewmodel.recipe.list.RecipeListListener
 import com.github.tei.imamu.viewmodel.recipe.list.RecipeListViewModel
 import com.github.tei.imamu.viewmodel.recipe.list.RecipeListViewModelFactory
 
@@ -57,7 +56,7 @@ class RecipeListFragment : Fragment()
         binding.viewModel = viewModel
 
         //set adapter in recyclerview
-        listAdapter = RecipeListAdapter(RecipeListListener { viewModel.onRecipeClicked(it) })
+        listAdapter = RecipeListAdapter(viewModel)
         binding.recipeList.adapter = listAdapter
 
         val manager = GridLayoutManager(activity, 2)
@@ -94,6 +93,5 @@ class RecipeListFragment : Fragment()
         //TODO dreckig, evtl anpassen!
         viewModel.initRecipes()
     }
-
 
 }

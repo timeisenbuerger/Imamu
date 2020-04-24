@@ -4,7 +4,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.github.tei.imamu.data.entity.Recipe
 
-class RecipeListAdapter(val clickListener: RecipeListListener) : ListAdapter<Recipe, RecipeListViewHolder>(RecipeDiffCallback())
+class RecipeListAdapter(val viewModel: RecipeListViewModel) : ListAdapter<Recipe, RecipeListViewHolder>(RecipeDiffCallback())
 {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeListViewHolder
     {
@@ -14,6 +14,7 @@ class RecipeListAdapter(val clickListener: RecipeListListener) : ListAdapter<Rec
     override fun onBindViewHolder(holderList: RecipeListViewHolder, position: Int)
     {
         val item = getItem(position)
-        holderList.bind(item, clickListener)
+        holderList.bind(item, viewModel, this)
     }
+
 }

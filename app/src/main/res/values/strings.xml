@@ -20,7 +20,8 @@
     <!--    Rezept hinzufügen/bearbeiten  -->
     <string name="action_add_recipe">Rezept hinzufügen</string>
     <string name="action_back">Zurück</string>
-    <string name="action_save_changes">Speichern</string>
+    <string name="action_save">Speichern</string>
+    <string name="action_delete">Löschen</string>
     <string name="image_view_meal_text">Bild des Gerichts</string>
     <string name="insert_recipe_title">Rezeptname eingeben</string>
     <string name="insert_recipe_ingredients">Zutaten hinzufügen</string>

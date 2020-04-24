@@ -32,6 +32,11 @@ class RecipeListViewModel(application: Application) : AndroidViewModel(applicati
         recipes.value = recipeBox.all
     }
 
+    fun deleteRecipes(recipes: List<Recipe>)
+    {
+        recipeBox.remove(recipes)
+    }
+
     fun onRecipeClicked(recipe: Recipe)
     {
         _navigateToDetail.value = recipe
