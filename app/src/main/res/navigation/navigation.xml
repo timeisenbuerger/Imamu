@@ -44,5 +44,22 @@
         <argument
             android:name="recipe"
             app:argType="com.github.tei.imamu.data.entity.Recipe" />
+        <action
+            android:id="@+id/action_recipeDetailFragment_to_editRecipeFragment"
+            app:destination="@id/editRecipeFragment"
+            app:popUpTo="@id/recipeDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editRecipeFragment"
+        android:name="com.github.tei.imamu.view.recipe.EditRecipeFragment"
+        android:label="EditRecipeFragment"
+        tools:layout="@layout/fragment_edit_recipe">
+        <argument
+            android:name="recipe"
+            app:argType="com.github.tei.imamu.data.entity.Recipe" />
+        <action
+            android:id="@+id/action_editRecipeFragment_to_recipeDetailFragment"
+            app:destination="@id/recipeDetailFragment"
+            app:popUpTo="@id/nav_recipe_list" />
     </fragment>
 </navigation>

@@ -8,6 +8,7 @@ import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
 import com.github.tei.imamu.databinding.FragmentRecipeDetailBinding
@@ -32,6 +33,7 @@ class RecipeDetailFragment : Fragment()
 
         (activity as MainActivity).supportActionBar?.title = viewModel.currentRecipe.value!!.title
 
+        setHasOptionsMenu(true)
         return binding.root
     }
 
@@ -113,5 +115,17 @@ class RecipeDetailFragment : Fragment()
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater)
     {
         super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_detail, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean
+    {
+        val recipe = binding.recipe
+        when(item.itemId)
+        {
+            R.id.action_edit -> recipe?.let { findNavController().navigate(RecipeDetailFragmentDirections.actionRecipeDetailFragmentToEditRecipeFragment(recipe)) }
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 }

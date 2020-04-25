@@ -17,26 +17,28 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
+import com.github.tei.imamu.data.entity.Recipe
 import com.github.tei.imamu.data.entity.RecipeIngredient
-import com.github.tei.imamu.databinding.FragmentAddRecipeBinding
-import com.github.tei.imamu.viewmodel.recipe.add.AddRecipeViewModel
-import com.github.tei.imamu.viewmodel.recipe.add.AddRecipeViewModelFactory
+import com.github.tei.imamu.databinding.FragmentEditRecipeBinding
+import com.github.tei.imamu.viewmodel.recipe.edit.EditRecipeViewModel
+import com.github.tei.imamu.viewmodel.recipe.edit.EditRecipeViewModelFactory
+import java.io.File
 
-class AddRecipeFragment : Fragment()
+class EditRecipeFragment : Fragment()
 {
     private val GALLERY_REQUEST_CODE = 28
 
-    private lateinit var binding: FragmentAddRecipeBinding
-    private lateinit var viewModel: AddRecipeViewModel
-    private lateinit var viewModelFactory: AddRecipeViewModelFactory
+    private lateinit var binding: FragmentEditRecipeBinding
+    private lateinit var viewModel: EditRecipeViewModel
+    private lateinit var viewModelFactory: EditRecipeViewModelFactory
     private lateinit var application: Application
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
-        (activity as MainActivity).supportActionBar?.title = "Rezept hinzufügen"
+        (activity as MainActivity).supportActionBar?.title = "Rezept bearbeiten"
 
         init(inflater, container)
-        initComponents()
+        initComponents(inflater)
         initListener()
         initObserver()
 
@@ -47,14 +49,17 @@ class AddRecipeFragment : Fragment()
     private fun init(inflater: LayoutInflater, container: ViewGroup?)
     {
         //init binding
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_recipe, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_edit_recipe, container, false)
+
+        //set recipe in binding
+        binding.recipe = EditRecipeFragmentArgs.fromBundle(requireArguments()).recipe
 
         //init application
         application = requireNotNull(this.activity).application
 
         //init viewModel
-        viewModelFactory = AddRecipeViewModelFactory(application)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(AddRecipeViewModel::class.java)
+        viewModelFactory = EditRecipeViewModelFactory(EditRecipeFragmentArgs.fromBundle(requireArguments()).recipe, application)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(EditRecipeViewModel::class.java)
 
         //set lifecycle owner
         binding.lifecycleOwner = this
@@ -63,9 +68,48 @@ class AddRecipeFragment : Fragment()
         binding.viewModel = viewModel
     }
 
-    private fun initComponents()
+    private fun initComponents(inflater: LayoutInflater)
     {
-        binding.imageViewMeal.setImageResource(R.drawable.ic_hot_tub)
+        val recipe = binding.recipe
+
+        recipe?.let {
+            if (!TextUtils.isEmpty(recipe.imagePath) && File(recipe.imagePath).exists())
+            {
+                binding.imageViewMeal.setImageURI(Uri.parse(recipe.imagePath))
+            }
+            else
+            {
+                binding.imageViewMeal.setImageResource(R.drawable.ic_hot_tub)
+            }
+
+            when (recipe.difficulty)
+            {
+                "Einfach" -> binding.chipEasy.isChecked = true
+                "Normal"  -> binding.chipNormal.isChecked = true
+                "Schwer"  -> binding.chipHard.isChecked = true
+            }
+
+            initIngredientLines(recipe, inflater)
+        }
+    }
+
+    private fun initIngredientLines(recipe: Recipe, inflater: LayoutInflater)
+    {
+        recipe.let {
+            for (ingredient in recipe.recipeIngredients)
+            {
+                val ingredientLine = addIngredientRow(inflater)
+
+                val editTextAmount = ingredientLine.findViewById<EditText>(R.id.edit_text_ingredient_amount)
+                editTextAmount.setText(ingredient.amount, TextView.BufferType.EDITABLE)
+
+                val autoCompleteUnit = ingredientLine.findViewById<AutoCompleteTextView>(R.id.auto_complete_ingredient_unit)
+                autoCompleteUnit.setText(ingredient.unit, TextView.BufferType.EDITABLE)
+
+                val editTextName = ingredientLine.findViewById<EditText>(R.id.edit_text_ingredient)
+                editTextName.setText(ingredient.name, TextView.BufferType.EDITABLE)
+            }
+        }
     }
 
     private fun initListener()
@@ -91,8 +135,11 @@ class AddRecipeFragment : Fragment()
         viewModel.navigateToRecipeDetail.observe(viewLifecycleOwner, Observer { saveRecipe ->
             if (saveRecipe)
             {
-                findNavController().navigate(AddRecipeFragmentDirections.actionAddRecipeFragmentToRecipeDetailFragment(viewModel.recipe.value!!))
-                viewModel.onNavigateToDetailComplete()
+                val recipe = binding.recipe
+                recipe?.let {
+                    findNavController().navigate(EditRecipeFragmentDirections.actionEditRecipeFragmentToRecipeDetailFragment(recipe))
+                    viewModel.onNavigateToDetailComplete()
+                }
             }
         })
     }
@@ -136,7 +183,7 @@ class AddRecipeFragment : Fragment()
         }
     }
 
-    private fun addIngredientRow(inflater: LayoutInflater)
+    private fun addIngredientRow(inflater: LayoutInflater) : LinearLayout
     {
         val ingredientLine = inflater.inflate(R.layout.item_add_ingredient, binding.layoutContainerIngredients)
 
@@ -149,6 +196,8 @@ class AddRecipeFragment : Fragment()
 
         val buttonClear = ingredientLine.findViewById<ImageButton>(R.id.image_button_remove_line)
         buttonClear.setOnClickListener { removeIngredientLine(it) }
+
+        return ingredientLine as LinearLayout
     }
 
     private fun removeIngredientLine(button: View?)
