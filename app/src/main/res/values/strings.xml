@@ -55,6 +55,8 @@
     <string name="recipe_detail_sample_rest_time">Ruhezeit: 120 min</string>
     <string name="recipe_ingredient_amount">Menge</string>
     <string name="recipe_ingredient_unit">Einheit</string>
+    <string name="action_create_own_recipe">Erstellen</string>
+    <string name="action_import_recipe">Importieren</string>
 
     <string-array name="ingredient_units">
         <item>g</item>

@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -26,11 +28,16 @@ class RecipeListFragment : Fragment()
     private lateinit var application: Application
     private lateinit var listAdapter: RecipeListAdapter
 
+    private lateinit var fabOpenAnim: Animation
+    private lateinit var fabCloseAnim: Animation
+    private var isOpen = false
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
         (activity as MainActivity).supportActionBar?.title = "Rezeptliste"
 
         init(inflater, container)
+        initComponents()
         initListener()
         initObserver()
 
@@ -63,9 +70,38 @@ class RecipeListFragment : Fragment()
         binding.recipeList.layoutManager = manager
     }
 
+    private fun initComponents()
+    {
+        fabOpenAnim = AnimationUtils.loadAnimation(requireContext(), R.anim.fab_open)
+        fabCloseAnim = AnimationUtils.loadAnimation(requireContext(), R.anim.fab_close)
+    }
+
     private fun initListener()
     {
-        binding.fab.setOnClickListener {
+        binding.mainFab.setOnClickListener {
+            if (isOpen)
+            {
+                binding.createRecipeFab.animation = fabCloseAnim
+                binding.importRecipeFab.animation = fabCloseAnim
+
+                binding.textViewCreate.visibility = View.INVISIBLE
+                binding.textViewImport.visibility = View.INVISIBLE
+
+                isOpen = false
+            }
+            else
+            {
+                binding.createRecipeFab.animation = fabOpenAnim
+                binding.importRecipeFab.animation = fabOpenAnim
+
+                binding.textViewCreate.visibility = View.VISIBLE
+                binding.textViewImport.visibility = View.VISIBLE
+
+                isOpen = true
+            }
+        }
+
+        binding.createRecipeFab.setOnClickListener {
             findNavController().navigate(RecipeListFragmentDirections.actionRecipeListFragmentToAddRecipeFragment())
         }
     }
