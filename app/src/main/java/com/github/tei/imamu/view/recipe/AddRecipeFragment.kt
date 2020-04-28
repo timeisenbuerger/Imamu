@@ -22,7 +22,7 @@ import com.github.tei.imamu.data.entity.RecipeIngredient
 import com.github.tei.imamu.databinding.FragmentAddRecipeBinding
 import com.github.tei.imamu.viewmodel.recipe.add.AddRecipeViewModel
 import com.github.tei.imamu.viewmodel.recipe.add.AddRecipeViewModelFactory
-import com.github.tei.imamu.viewmodel.recipe.detail.setListViewHeightBasedOnChildren
+import com.github.tei.imamu.util.setListViewHeightBasedOnChildren
 
 class AddRecipeFragment : Fragment()
 {

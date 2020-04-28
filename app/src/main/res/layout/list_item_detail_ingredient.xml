@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="ingredient"
+            type="com.github.tei.imamu.data.entity.RecipeIngredient" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/text_view_amount"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_recipe_margin"
+            android:layout_marginBottom="@dimen/default_recipe_margin"
+            android:text="@{ingredient.amount}"
+            android:hint="@string/recipe_ingredient_amount"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/text_view_unit"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_recipe_margin"
+            android:layout_marginBottom="@dimen/default_recipe_margin"
+            android:text="@{ingredient.unit}"
+            android:hint="@string/recipe_ingredient_unit"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/text_view_ingredient"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_recipe_margin"
+            android:layout_marginBottom="@dimen/default_recipe_margin"
+            android:text="@{ingredient.name}"
+            android:hint="@string/recipe_ingredients_text"
+            android:textStyle="bold" />
+    </LinearLayout>
+</layout>

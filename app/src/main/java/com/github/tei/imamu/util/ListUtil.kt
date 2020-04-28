@@ -1,4 +1,4 @@
-package com.github.tei.imamu.viewmodel.recipe.detail
+package com.github.tei.imamu.util
 
 import android.view.View.MeasureSpec
 import android.widget.ListAdapter

@@ -20,7 +20,7 @@ import com.github.tei.imamu.R
 import com.github.tei.imamu.custom.adapter.IngredientAddEditAdapter
 import com.github.tei.imamu.data.entity.RecipeIngredient
 import com.github.tei.imamu.databinding.FragmentEditRecipeBinding
-import com.github.tei.imamu.viewmodel.recipe.detail.setListViewHeightBasedOnChildren
+import com.github.tei.imamu.util.setListViewHeightBasedOnChildren
 import com.github.tei.imamu.viewmodel.recipe.edit.EditRecipeViewModel
 import com.github.tei.imamu.viewmodel.recipe.edit.EditRecipeViewModelFactory
 import java.io.File
