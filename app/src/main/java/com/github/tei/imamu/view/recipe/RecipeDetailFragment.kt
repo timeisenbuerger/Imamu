@@ -12,7 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
 import com.github.tei.imamu.databinding.FragmentRecipeDetailBinding
-import com.github.tei.imamu.viewmodel.recipe.detail.IngredientsListAdapter
+import com.github.tei.imamu.viewmodel.recipe.detail.IngredientDetailListAdapter
 import com.github.tei.imamu.viewmodel.recipe.detail.RecipeDetailViewModel
 import com.github.tei.imamu.viewmodel.recipe.detail.RecipeDetailViewModelFactory
 import com.github.tei.imamu.viewmodel.recipe.detail.setListViewHeightBasedOnChildren
@@ -56,7 +56,7 @@ class RecipeDetailFragment : Fragment()
         binding.viewModel = viewModel
         binding.recipe = viewModel.currentRecipe.value
 
-        binding.listViewIngredients.adapter = IngredientsListAdapter(requireContext(), viewModel.currentRecipe.value!!.recipeIngredients)
+        binding.listViewIngredients.adapter = IngredientDetailListAdapter(requireContext(), viewModel.currentRecipe.value!!.recipeIngredients)
     }
 
     private fun initComponents(inflater: LayoutInflater)

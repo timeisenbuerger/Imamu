@@ -1,4 +1,4 @@
-package com.github.tei.imamu.viewmodel.recipe.list
+package com.github.tei.imamu.custom.viewholder
 
 import androidx.recyclerview.widget.DiffUtil
 import com.github.tei.imamu.data.entity.Recipe

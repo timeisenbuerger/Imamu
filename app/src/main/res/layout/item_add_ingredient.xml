@@ -1,51 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <EditText
-        android:id="@+id/edit_text_ingredient_amount"
-        android:layout_width="76dp"
+<data>
+    <variable
+        name="item"
+        type="com.github.tei.imamu.data.entity.RecipeIngredient" />
+</data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/default_recipe_margin"
-        android:layout_marginTop="@dimen/default_recipe_padding"
-        android:layout_marginEnd="@dimen/default_recipe_margin"
-        android:layout_weight="1"
-        android:ems="10"
-        android:hint="@string/recipe_ingredient_amount"
-        android:inputType="numberDecimal"
-        android:textAlignment="center" />
+        android:orientation="horizontal">
 
-    <AutoCompleteTextView
-        android:id="@+id/auto_complete_ingredient_unit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/default_recipe_padding"
-        android:layout_marginEnd="@dimen/default_recipe_margin"
-        android:layout_weight="1"
-        android:completionThreshold="1"
-        android:hint="@string/recipe_ingredient_unit"
-        android:textAlignment="center" />
+        <EditText
+            android:id="@+id/edit_text_ingredient_amount"
+            android:layout_width="76dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_recipe_margin"
+            android:layout_marginTop="@dimen/default_recipe_padding"
+            android:layout_marginEnd="@dimen/default_recipe_margin"
+            android:layout_weight="1"
+            android:ems="10"
+            android:text="@={item.amount}"
+            android:hint="@string/recipe_ingredient_amount"
+            android:inputType="numberDecimal"
+            android:textAlignment="center" />
 
-    <EditText
-        android:id="@+id/edit_text_ingredient"
-        android:layout_width="157dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/default_recipe_padding"
-        android:layout_marginEnd="@dimen/default_recipe_padding"
-        android:layout_weight="1"
-        android:ems="10"
-        android:hint="@string/insert_recipe_ingredient"
-        android:inputType="textPersonName" />
+        <AutoCompleteTextView
+            android:id="@+id/auto_complete_ingredient_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_recipe_padding"
+            android:layout_marginEnd="@dimen/default_recipe_margin"
+            android:layout_weight="1"
+            android:completionThreshold="1"
+            android:text="@={item.unit}"
+            android:hint="@string/recipe_ingredient_unit"
+            android:textAlignment="center" />
 
-    <ImageButton
-        android:id="@+id/image_button_remove_line"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/default_recipe_margin"
-        android:background="@color/white"
-        app:srcCompat="@drawable/ic_clear_black" />
+        <EditText
+            android:id="@+id/edit_text_ingredient"
+            android:layout_width="157dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_recipe_padding"
+            android:layout_marginEnd="@dimen/default_recipe_padding"
+            android:layout_weight="1"
+            android:ems="10"
+            android:text="@={item.name}"
+            android:hint="@string/insert_recipe_ingredient"
+            android:inputType="textPersonName" />
 
-</LinearLayout>
+        <ImageButton
+            android:id="@+id/image_button_remove_line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_recipe_margin"
+            android:layout_marginEnd="@dimen/default_recipe_margin"
+            android:background="@color/white"
+            app:srcCompat="@drawable/ic_clear_black" />
+
+    </LinearLayout>
+</layout>

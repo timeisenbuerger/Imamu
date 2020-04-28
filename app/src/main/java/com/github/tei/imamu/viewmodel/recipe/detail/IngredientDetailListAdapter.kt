@@ -9,7 +9,7 @@ import android.widget.TextView
 import com.github.tei.imamu.R
 import com.github.tei.imamu.data.entity.RecipeIngredient
 
-class IngredientsListAdapter(private val context: Context, private val data: List<RecipeIngredient>) : BaseAdapter()
+class IngredientDetailListAdapter(private val context: Context, private val data: List<RecipeIngredient>) : BaseAdapter()
 {
     private val inflater: LayoutInflater = this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 

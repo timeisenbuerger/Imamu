@@ -1,4 +1,4 @@
-package com.github.tei.imamu.viewmodel.recipe.list
+package com.github.tei.imamu.custom.listener
 
 import com.github.tei.imamu.data.entity.Recipe
 

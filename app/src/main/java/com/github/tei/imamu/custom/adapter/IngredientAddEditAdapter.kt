@@ -1,0 +1,50 @@
+package com.github.tei.imamu.custom.adapter
+
+import android.content.Context
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.ListView
+import androidx.databinding.DataBindingUtil
+import com.github.tei.imamu.MainActivity
+import com.github.tei.imamu.R
+import com.github.tei.imamu.data.entity.RecipeIngredient
+import com.github.tei.imamu.databinding.ItemAddIngredientBinding
+import com.github.tei.imamu.viewmodel.recipe.detail.setListViewHeightBasedOnChildren
+import com.github.tei.imamu.viewmodel.recipe.edit.EditRecipeViewModel
+
+class IngredientAddEditAdapter(context: Context, private var ingredients: MutableList<RecipeIngredient>) : ArrayAdapter<RecipeIngredient>(context, 0, ingredients)
+{
+    private val inflater: LayoutInflater = (context as MainActivity).layoutInflater
+
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View
+    {
+        val ingredient = getItem(position)
+        var binding: ItemAddIngredientBinding? = null
+
+        binding = if (convertView == null || binding == null)
+        {
+            DataBindingUtil.inflate(inflater, R.layout.item_add_ingredient, parent, false)
+        }
+        else
+        {
+            DataBindingUtil.getBinding(convertView)
+        }
+
+        binding?.item = ingredient
+        binding?.imageButtonRemoveLine?.setOnClickListener {
+//            viewModel.recipe.value!!.recipeIngredients.remove(ingredient)
+            ingredients.remove(ingredient)
+            notifyDataSetChanged()
+            setListViewHeightBasedOnChildren(parent as ListView)
+        }
+
+        return binding!!.root
+    }
+
+    override fun getItem(position: Int): RecipeIngredient?
+    {
+        return ingredients[position]
+    }
+}

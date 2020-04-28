@@ -121,11 +121,11 @@
                             app:srcCompat="@drawable/ic_add_black" />
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:id="@+id/layout_container_ingredients"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"></LinearLayout>
+                    <ListView
+                        android:id="@+id/list_view_ingredients"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                    </ListView>
 
 
                     <TextView

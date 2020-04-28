@@ -1,4 +1,4 @@
-package com.github.tei.imamu.viewmodel.recipe.list
+package com.github.tei.imamu.custom.viewholder
 
 import android.graphics.Color
 import android.view.LayoutInflater
@@ -9,8 +9,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.view.ActionMode
 import androidx.recyclerview.widget.RecyclerView
 import com.github.tei.imamu.R
+import com.github.tei.imamu.custom.adapter.RecipeListAdapter
+import com.github.tei.imamu.custom.listener.RecipeListListener
 import com.github.tei.imamu.data.entity.Recipe
 import com.github.tei.imamu.databinding.ListItemRecipeBinding
+import com.github.tei.imamu.viewmodel.recipe.list.RecipeListViewModel
 
 class RecipeListViewHolder private constructor(private val binding: ListItemRecipeBinding) : RecyclerView.ViewHolder(binding.root)
 {

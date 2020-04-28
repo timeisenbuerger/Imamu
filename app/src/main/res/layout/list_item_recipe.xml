@@ -10,7 +10,7 @@
             type="com.github.tei.imamu.data.entity.Recipe" />
         <variable
             name="clickListener"
-            type="com.github.tei.imamu.viewmodel.recipe.list.RecipeListListener" />
+            type="com.github.tei.imamu.custom.listener.RecipeListListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

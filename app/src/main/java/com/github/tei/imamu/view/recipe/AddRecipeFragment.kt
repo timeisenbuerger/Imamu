@@ -17,10 +17,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
+import com.github.tei.imamu.custom.adapter.IngredientAddEditAdapter
 import com.github.tei.imamu.data.entity.RecipeIngredient
 import com.github.tei.imamu.databinding.FragmentAddRecipeBinding
 import com.github.tei.imamu.viewmodel.recipe.add.AddRecipeViewModel
 import com.github.tei.imamu.viewmodel.recipe.add.AddRecipeViewModelFactory
+import com.github.tei.imamu.viewmodel.recipe.detail.setListViewHeightBasedOnChildren
 
 class AddRecipeFragment : Fragment()
 {
@@ -30,6 +32,7 @@ class AddRecipeFragment : Fragment()
     private lateinit var viewModel: AddRecipeViewModel
     private lateinit var viewModelFactory: AddRecipeViewModelFactory
     private lateinit var application: Application
+    private lateinit var adapter: IngredientAddEditAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
@@ -66,6 +69,10 @@ class AddRecipeFragment : Fragment()
     private fun initComponents()
     {
         binding.imageViewMeal.setImageResource(R.drawable.ic_hot_tub)
+
+        adapter = IngredientAddEditAdapter(requireContext(), viewModel.recipe.value!!.recipeIngredients)
+        binding.listViewIngredients.adapter = adapter
+        setListViewHeightBasedOnChildren(binding.listViewIngredients)
     }
 
     private fun initListener()
@@ -83,7 +90,11 @@ class AddRecipeFragment : Fragment()
             pickImageFromGallery()
         }
 
-        binding.buttonAddIngredient.setOnClickListener { addIngredientRow(layoutInflater) }
+        binding.buttonAddIngredient.setOnClickListener {
+            adapter.add(RecipeIngredient())
+            adapter.notifyDataSetChanged()
+            setListViewHeightBasedOnChildren(binding.listViewIngredients)
+        }
     }
 
     private fun initObserver()
@@ -136,51 +147,6 @@ class AddRecipeFragment : Fragment()
         }
     }
 
-    private fun addIngredientRow(inflater: LayoutInflater)
-    {
-        val ingredientLine = inflater.inflate(R.layout.item_add_ingredient, binding.layoutContainerIngredients)
-
-        val autoCompleteViewUnit = ingredientLine.findViewById<AutoCompleteTextView>(R.id.auto_complete_ingredient_unit)
-
-        // Get the string array
-        val units: Array<out String> = resources.getStringArray(R.array.ingredient_units)
-        // Create the adapter and set it to the AutoCompleteTextView
-        ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, units).also { adapter -> autoCompleteViewUnit.setAdapter(adapter) }
-
-        val buttonClear = ingredientLine.findViewById<ImageButton>(R.id.image_button_remove_line)
-        buttonClear.setOnClickListener { removeIngredientLine(it) }
-    }
-
-    private fun removeIngredientLine(button: View?)
-    {
-        val index = binding.layoutContainerIngredients.indexOfChild(button?.parent as View)
-        binding.layoutContainerIngredients.removeViewAt(index)
-    }
-
-    private fun updateViewModelWithIngredients()
-    {
-        for (i in 0..binding.layoutContainerIngredients.childCount step 1)
-        {
-            binding.layoutContainerIngredients.getChildAt(i)?.let {
-                val child = it as LinearLayout
-
-                val editTextAmount = child.getChildAt(0) as EditText
-                val autoCompleteUnit = child.getChildAt(1) as AutoCompleteTextView
-                val editTextIngredient = child.getChildAt(2) as EditText
-
-                if (!TextUtils.isEmpty(editTextAmount.text) && !TextUtils.isEmpty(autoCompleteUnit.text) && !TextUtils.isEmpty(editTextIngredient.text))
-                {
-                    val recipeIngredient = RecipeIngredient()
-                    recipeIngredient.amount = editTextAmount.text.toString()
-                    recipeIngredient.unit = autoCompleteUnit.text.toString()
-                    recipeIngredient.name = editTextIngredient.text.toString()
-
-                    viewModel.recipe.value?.recipeIngredients?.add(recipeIngredient)
-                }
-            }
-        }
-    }
-
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater)
     {
         super.onCreateOptionsMenu(menu, inflater)
@@ -193,7 +159,6 @@ class AddRecipeFragment : Fragment()
         {
             if (isSavePossible())
             {
-                updateViewModelWithIngredients()
                 viewModel.onSaveRecipe()
             }
             true
