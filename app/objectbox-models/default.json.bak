@@ -25,11 +25,6 @@
           "type": 9
         },
         {
-          "id": "4:5864946295596553103",
-          "name": "ingredients",
-          "type": 9
-        },
-        {
           "id": "5:6627867037173460085",
           "name": "preparation",
           "type": 9
@@ -113,17 +108,46 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "3:4326319803689828862",
+      "lastPropertyId": "3:3163219465555624903",
+      "name": "ShoppingList",
+      "properties": [
+        {
+          "id": "1:1810412106772342929",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:5614713038289382758",
+          "name": "recipeId",
+          "indexId": "2:4261960209776871919",
+          "type": 11,
+          "flags": 524,
+          "relationTarget": "Recipe"
+        },
+        {
+          "id": "3:3163219465555624903",
+          "name": "name",
+          "type": 9
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "2:6168022746291461423",
-  "lastIndexId": "1:1765103224388080054",
+  "lastEntityId": "3:4326319803689828862",
+  "lastIndexId": "2:4261960209776871919",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,
   "modelVersionParserMinimum": 5,
   "retiredEntityUids": [],
   "retiredIndexUids": [],
-  "retiredPropertyUids": [],
+  "retiredPropertyUids": [
+    5864946295596553103
+  ],
   "retiredRelationUids": [],
   "version": 1
 }

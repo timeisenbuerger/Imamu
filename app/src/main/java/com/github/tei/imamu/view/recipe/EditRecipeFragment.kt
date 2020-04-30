@@ -14,12 +14,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
-import com.github.tei.imamu.custom.adapter.IngredientAddEditAdapter
-import com.github.tei.imamu.data.entity.RecipeIngredient
+import com.github.tei.imamu.custom.adapter.recipe.IngredientAddEditAdapter
+import com.github.tei.imamu.data.entity.recipe.RecipeIngredient
 import com.github.tei.imamu.databinding.FragmentEditRecipeBinding
 import com.github.tei.imamu.util.setListViewHeightBasedOnChildren
 import com.github.tei.imamu.viewmodel.recipe.edit.EditRecipeViewModel

@@ -1,4 +1,4 @@
-package com.github.tei.imamu.data.entity
+package com.github.tei.imamu.data.entity.recipe
 
 
 import io.objectbox.annotation.Backlink

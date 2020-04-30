@@ -47,11 +47,15 @@
         tools:layout="@layout/fragment_recipe_detail">
         <argument
             android:name="recipe"
-            app:argType="com.github.tei.imamu.data.entity.Recipe" />
+            app:argType="com.github.tei.imamu.data.entity.recipe.Recipe" />
         <action
             android:id="@+id/action_recipeDetailFragment_to_editRecipeFragment"
             app:destination="@id/editRecipeFragment"
             app:popUpTo="@id/recipeDetailFragment" />
+        <action
+            android:id="@+id/action_recipeDetailFragment_to_nav_shopping_list"
+            app:destination="@id/nav_shopping_list"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/editRecipeFragment"
@@ -60,7 +64,7 @@
         tools:layout="@layout/fragment_edit_recipe">
         <argument
             android:name="recipe"
-            app:argType="com.github.tei.imamu.data.entity.Recipe" />
+            app:argType="com.github.tei.imamu.data.entity.recipe.Recipe" />
         <action
             android:id="@+id/action_editRecipeFragment_to_recipeDetailFragment"
             app:destination="@id/recipeDetailFragment"
@@ -75,6 +79,16 @@
             android:id="@+id/action_importRecipeFragment_to_recipeDetailFragment"
             app:destination="@id/recipeDetailFragment"
             app:popUpTo="@id/nav_recipe_list" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_shopping_list"
+        android:name="com.github.tei.imamu.view.shoppinglist.ShoppingListFragment"
+        android:label=""
+        tools:layout="@layout/fragment_shopping_list">
+        <argument
+            android:name="shoppingList"
+            app:argType="com.github.tei.imamu.data.entity.shoppinglist.ShoppingList"
+            app:nullable="true" />
     </fragment>
 
 </navigation>

@@ -1,4 +1,4 @@
-package com.github.tei.imamu.custom.adapter
+package com.github.tei.imamu.custom.adapter.recipe
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import android.widget.ListView
 import androidx.databinding.DataBindingUtil
 import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
-import com.github.tei.imamu.data.entity.RecipeIngredient
+import com.github.tei.imamu.data.entity.recipe.RecipeIngredient
 import com.github.tei.imamu.databinding.ListItemAddIngredientBinding
 import com.github.tei.imamu.util.setListViewHeightBasedOnChildren
 

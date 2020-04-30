@@ -1,7 +1,7 @@
-package com.github.tei.imamu.custom.viewholder
+package com.github.tei.imamu.custom.viewholder.recipe
 
 import androidx.recyclerview.widget.DiffUtil
-import com.github.tei.imamu.data.entity.Recipe
+import com.github.tei.imamu.data.entity.recipe.Recipe
 
 class RecipeDiffCallback : DiffUtil.ItemCallback<Recipe>()
 {

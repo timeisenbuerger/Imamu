@@ -5,7 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.github.tei.imamu.data.ObjectBox
-import com.github.tei.imamu.data.entity.Recipe
+import com.github.tei.imamu.data.entity.recipe.Recipe
 import io.objectbox.Box
 import io.objectbox.kotlin.boxFor
 import kotlinx.coroutines.Job

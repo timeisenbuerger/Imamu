@@ -23,6 +23,7 @@
     <string name="action_save">Speichern</string>
     <string name="action_delete">Löschen</string>
     <string name="action_edit">Bearbeiten</string>
+    <string name="action_create_shopping_list">Einkaufsliste erstellen</string>
     <string name="image_view_meal_text">Bild des Gerichts</string>
     <string name="insert_recipe_title">Rezeptname eingeben</string>
     <string name="insert_recipe_ingredients">Zutaten hinzufügen</string>

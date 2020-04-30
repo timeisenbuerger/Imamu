@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
 import com.github.tei.imamu.databinding.FragmentRecipeListBinding
-import com.github.tei.imamu.custom.adapter.RecipeListAdapter
+import com.github.tei.imamu.custom.adapter.recipe.RecipeListAdapter
 import com.github.tei.imamu.viewmodel.recipe.list.RecipeListViewModel
 import com.github.tei.imamu.viewmodel.recipe.list.RecipeListViewModelFactory
 

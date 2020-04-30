@@ -3,7 +3,7 @@ package com.github.tei.imamu.viewmodel.recipe
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.github.tei.imamu.R
-import com.github.tei.imamu.data.entity.Recipe
+import com.github.tei.imamu.data.entity.recipe.Recipe
 import com.squareup.picasso.Picasso
 import java.io.File
 

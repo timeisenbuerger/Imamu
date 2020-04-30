@@ -3,7 +3,7 @@ package com.github.tei.imamu.viewmodel.recipe.edit
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.github.tei.imamu.data.entity.Recipe
+import com.github.tei.imamu.data.entity.recipe.Recipe
 
 class EditRecipeViewModelFactory(private val recipe: Recipe, private val application: Application) : ViewModelProvider.Factory
 {

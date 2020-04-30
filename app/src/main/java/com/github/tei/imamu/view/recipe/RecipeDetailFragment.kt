@@ -8,13 +8,14 @@ import android.view.*
 import androidx.core.text.isDigitsOnly
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
 import com.github.tei.imamu.databinding.FragmentRecipeDetailBinding
-import com.github.tei.imamu.custom.adapter.IngredientDetailListAdapter
-import com.github.tei.imamu.data.entity.Recipe
+import com.github.tei.imamu.custom.adapter.recipe.IngredientDetailListAdapter
+import com.github.tei.imamu.data.entity.recipe.Recipe
 import com.github.tei.imamu.viewmodel.recipe.detail.RecipeDetailViewModel
 import com.github.tei.imamu.viewmodel.recipe.detail.RecipeDetailViewModelFactory
 import com.github.tei.imamu.util.setListViewHeightBasedOnChildren
@@ -33,6 +34,7 @@ class RecipeDetailFragment : Fragment()
     {
         init(inflater, container)
         initComponents(inflater)
+        initObserver()
         initListener()
 
         (activity as MainActivity).supportActionBar?.title = viewModel.currentRecipe.value!!.title
@@ -117,6 +119,13 @@ class RecipeDetailFragment : Fragment()
         setListViewHeightBasedOnChildren(binding.listViewIngredients)
     }
 
+    private fun initObserver()
+    {
+        viewModel.navigateToRecipeDetail.observe(viewLifecycleOwner, Observer {
+            findNavController().navigate(RecipeDetailFragmentDirections.actionRecipeDetailFragmentToNavShoppingList(viewModel.shoppingList.value!!))
+        })
+    }
+
     private fun initListener()
     {
         binding.buttonDecreaseServings.setOnClickListener {
@@ -198,6 +207,9 @@ class RecipeDetailFragment : Fragment()
         when (item.itemId)
         {
             R.id.action_edit -> recipe?.let { findNavController().navigate(RecipeDetailFragmentDirections.actionRecipeDetailFragmentToEditRecipeFragment(recipe)) }
+            R.id.action_shoppingList -> recipe?.let {
+                viewModel.createShoppingList(recipe)
+            }
         }
 
         return super.onOptionsItemSelected(item)

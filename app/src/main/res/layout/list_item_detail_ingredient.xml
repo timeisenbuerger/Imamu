@@ -3,7 +3,7 @@
     <data>
         <variable
             name="ingredient"
-            type="com.github.tei.imamu.data.entity.RecipeIngredient" />
+            type="com.github.tei.imamu.data.entity.recipe.RecipeIngredient" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"

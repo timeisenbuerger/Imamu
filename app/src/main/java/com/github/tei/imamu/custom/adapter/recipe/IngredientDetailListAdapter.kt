@@ -1,4 +1,4 @@
-package com.github.tei.imamu.custom.adapter
+package com.github.tei.imamu.custom.adapter.recipe
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.databinding.DataBindingUtil
 import com.github.tei.imamu.R
-import com.github.tei.imamu.data.entity.RecipeIngredient
+import com.github.tei.imamu.data.entity.recipe.RecipeIngredient
 import com.github.tei.imamu.databinding.ListItemDetailIngredientBinding
 
 class IngredientDetailListAdapter(context: Context, private val ingredients: MutableList<RecipeIngredient>) : ArrayAdapter<RecipeIngredient>(context, 0, ingredients)

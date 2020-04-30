@@ -7,7 +7,7 @@
 
         <variable
             name="recipe"
-            type="com.github.tei.imamu.data.entity.Recipe" />
+            type="com.github.tei.imamu.data.entity.recipe.Recipe" />
         <variable
             name="viewModel"
             type="com.github.tei.imamu.viewmodel.recipe.detail.RecipeDetailViewModel" />

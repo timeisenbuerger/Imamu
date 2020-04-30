@@ -17,8 +17,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
-import com.github.tei.imamu.custom.adapter.IngredientAddEditAdapter
-import com.github.tei.imamu.data.entity.RecipeIngredient
+import com.github.tei.imamu.custom.adapter.recipe.IngredientAddEditAdapter
+import com.github.tei.imamu.data.entity.recipe.RecipeIngredient
 import com.github.tei.imamu.databinding.FragmentAddRecipeBinding
 import com.github.tei.imamu.viewmodel.recipe.add.AddRecipeViewModel
 import com.github.tei.imamu.viewmodel.recipe.add.AddRecipeViewModelFactory
