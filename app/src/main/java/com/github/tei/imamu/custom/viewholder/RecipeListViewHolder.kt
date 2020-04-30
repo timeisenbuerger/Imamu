@@ -21,9 +21,6 @@ class RecipeListViewHolder private constructor(private val binding: ListItemReci
     private lateinit var viewModel: RecipeListViewModel
     private lateinit var adapter: RecipeListAdapter
 
-    private var multiSelect = false
-    private var selectedItems = ArrayList<Recipe>()
-
     companion object
     {
         fun from(parent: ViewGroup): RecipeListViewHolder
@@ -53,7 +50,7 @@ class RecipeListViewHolder private constructor(private val binding: ListItemReci
 
     private fun updateViewBackground(item: Recipe)
     {
-        if (selectedItems.contains(item))
+        if (adapter.selectedItems.contains(item))
         {
             itemView.setBackgroundColor(Color.LTGRAY);
         }
@@ -72,16 +69,16 @@ class RecipeListViewHolder private constructor(private val binding: ListItemReci
 
     private fun selectItem(item: Recipe)
     {
-        if (multiSelect)
+        if (adapter.multiSelect)
         {
-            if (selectedItems.contains(item))
+            if (adapter.selectedItems.contains(item))
             {
-                selectedItems.remove(item)
+                adapter.selectedItems.remove(item)
                 itemView.setBackgroundColor(Color.WHITE)
             }
             else
             {
-                selectedItems.add(item)
+                adapter.selectedItems.add(item)
                 itemView.setBackgroundColor(Color.LTGRAY)
             }
         }
@@ -97,7 +94,7 @@ class RecipeListViewHolder private constructor(private val binding: ListItemReci
         {
             if (item?.itemId == R.id.action_delete)
             {
-                viewModel.deleteRecipes(selectedItems)
+                viewModel.deleteRecipes(adapter.selectedItems)
                 viewModel.initRecipes()
                 mode?.finish()
             }
@@ -106,7 +103,7 @@ class RecipeListViewHolder private constructor(private val binding: ListItemReci
 
         override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean
         {
-            multiSelect = true
+            adapter.multiSelect = true
             mode?.menuInflater?.inflate(R.menu.menu_action_recipe_list, menu)
             return true
         }
@@ -118,8 +115,8 @@ class RecipeListViewHolder private constructor(private val binding: ListItemReci
 
         override fun onDestroyActionMode(mode: ActionMode?)
         {
-            multiSelect = false
-            selectedItems.clear()
+            adapter.multiSelect = false
+            adapter.selectedItems.clear()
             adapter.notifyDataSetChanged()
         }
     }

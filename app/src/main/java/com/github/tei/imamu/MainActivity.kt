@@ -1,10 +1,7 @@
 package com.github.tei.imamu
 
 import android.os.Bundle
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
@@ -12,6 +9,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.*
 import com.github.tei.imamu.data.ObjectBox
 import com.github.tei.imamu.databinding.ActivityMainBinding
+import com.github.tei.imamu.util.PermissionUtil
 
 class MainActivity : AppCompatActivity()
 {

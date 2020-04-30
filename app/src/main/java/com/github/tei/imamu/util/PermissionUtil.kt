@@ -1,4 +1,4 @@
-package com.github.tei.imamu
+package com.github.tei.imamu.util
 
 import android.Manifest
 import android.app.Activity

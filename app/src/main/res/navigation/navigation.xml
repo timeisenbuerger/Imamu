@@ -24,6 +24,10 @@
             app:destination="@id/recipeDetailFragment"
             app:popUpTo="@id/nav_recipe_list"
             app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_nav_recipe_list_to_importRecipeFragment"
+            app:destination="@id/importRecipeFragment"
+            app:popUpTo="@id/nav_recipe_list" />
     </fragment>
 
     <fragment
@@ -62,4 +66,15 @@
             app:destination="@id/recipeDetailFragment"
             app:popUpTo="@id/nav_recipe_list" />
     </fragment>
+    <fragment
+        android:id="@+id/importRecipeFragment"
+        android:name="com.github.tei.imamu.view.recipe.ImportRecipeFragment"
+        android:label="ImportRecipeFragment"
+        tools:layout="@layout/fragment_import_recipe">
+        <action
+            android:id="@+id/action_importRecipeFragment_to_recipeDetailFragment"
+            app:destination="@id/recipeDetailFragment"
+            app:popUpTo="@id/nav_recipe_list" />
+    </fragment>
+
 </navigation>

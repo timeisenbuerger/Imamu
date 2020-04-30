@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
             name="ingredient"
@@ -20,7 +20,7 @@
             android:layout_marginTop="@dimen/default_recipe_margin"
             android:layout_marginBottom="@dimen/default_recipe_margin"
             android:text="@{ingredient.amount}"
-            android:hint="@string/recipe_ingredient_amount"
+            tools:hint="@string/recipe_ingredient_amount"
             android:textAlignment="center" />
 
         <TextView
@@ -30,7 +30,7 @@
             android:layout_marginTop="@dimen/default_recipe_margin"
             android:layout_marginBottom="@dimen/default_recipe_margin"
             android:text="@{ingredient.unit}"
-            android:hint="@string/recipe_ingredient_unit"
+            tools:hint="@string/recipe_ingredient_unit"
             android:textAlignment="center" />
 
         <TextView
@@ -40,7 +40,7 @@
             android:layout_marginTop="@dimen/default_recipe_margin"
             android:layout_marginBottom="@dimen/default_recipe_margin"
             android:text="@{ingredient.name}"
-            android:hint="@string/recipe_ingredients_text"
+            tools:hint="@string/recipe_ingredients_text"
             android:textStyle="bold" />
     </LinearLayout>
 </layout>

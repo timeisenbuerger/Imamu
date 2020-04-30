@@ -57,6 +57,7 @@
     <string name="recipe_ingredient_unit">Einheit</string>
     <string name="action_create_own_recipe">Erstellen</string>
     <string name="action_import_recipe">Importieren</string>
+    <string name="insert_recipe_link">Rezeptlink eingeben</string>
 
     <string-array name="ingredient_units">
         <item>g</item>

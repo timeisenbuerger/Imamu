@@ -14,6 +14,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
@@ -64,7 +65,7 @@ class EditRecipeFragment : Fragment()
         viewModel = ViewModelProvider(this, viewModelFactory).get(EditRecipeViewModel::class.java)
 
         //set lifecycle owner
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
 
         //set viewModel in binding
         binding.viewModel = viewModel
@@ -99,8 +100,6 @@ class EditRecipeFragment : Fragment()
 
     private fun initListener()
     {
-        val recipe = binding.recipe
-
         binding.chipGroupDifficulty.setOnCheckedChangeListener { _, checkedId: Int ->
             when (checkedId)
             {

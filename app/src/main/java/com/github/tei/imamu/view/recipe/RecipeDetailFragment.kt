@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.*
+import androidx.core.text.isDigitsOnly
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -13,6 +14,7 @@ import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
 import com.github.tei.imamu.databinding.FragmentRecipeDetailBinding
 import com.github.tei.imamu.custom.adapter.IngredientDetailListAdapter
+import com.github.tei.imamu.data.entity.Recipe
 import com.github.tei.imamu.viewmodel.recipe.detail.RecipeDetailViewModel
 import com.github.tei.imamu.viewmodel.recipe.detail.RecipeDetailViewModelFactory
 import com.github.tei.imamu.util.setListViewHeightBasedOnChildren
@@ -119,53 +121,69 @@ class RecipeDetailFragment : Fragment()
     {
         binding.buttonDecreaseServings.setOnClickListener {
             viewModel.currentRecipe.value?.let {
-                val number = it.servingsNumber.toInt()
-                val decreasedNumber = it.servingsNumber.toInt() - 1
-
-                if (decreasedNumber == 1)
-                {
-                    binding.buttonDecreaseServings.isEnabled = false
-                }
-
-                it.servingsNumber = decreasedNumber.toString()
-
-                for (ingredient in it.recipeIngredients)
-                {
-                    var amount: Float = ingredient.amount.toFloat()
-                    amount = (amount / number) * decreasedNumber
-
-                    ingredient.amount = amount.toString()
-                }
-
-                adapter.notifyDataSetChanged()
-                binding.textServings.text = "$decreasedNumber Portionen"
+                decreaseServings(it)
             }
         }
 
         binding.buttonIncreaseServings.setOnClickListener {
             viewModel.currentRecipe.value?.let {
-                val number = it.servingsNumber.toInt()
-                val increasedNumber = it.servingsNumber.toInt() + 1
-
-                if (increasedNumber > 1)
-                {
-                    binding.buttonDecreaseServings.isEnabled = true
-                }
-
-                it.servingsNumber = increasedNumber.toString()
-
-                for (ingredient in it.recipeIngredients)
-                {
-                    var amount: Float = ingredient.amount.toFloat()
-                    amount = (amount / number) * increasedNumber
-
-                    ingredient.amount = amount.toString()
-                }
-
-                adapter.notifyDataSetChanged()
-                binding.textServings.text = "$increasedNumber Portionen"
+                increaseServings(it)
             }
         }
+    }
+
+    private fun increaseServings(recipe: Recipe)
+    {
+        val number = recipe.servingsNumber.toInt()
+        val increasedNumber = recipe.servingsNumber.toInt() + 1
+
+        if (increasedNumber > 1)
+        {
+            binding.buttonDecreaseServings.isEnabled = true
+        }
+
+        recipe.servingsNumber = increasedNumber.toString()
+
+        for (ingredient in recipe.recipeIngredients)
+        {
+            if (ingredient.amount.isNotEmpty() && ingredient.amount.isDigitsOnly())
+            {
+                var amount: Float = ingredient.amount.toFloat()
+                amount = (amount / number) * increasedNumber
+
+                ingredient.amount = amount.toString()
+            }
+        }
+
+        adapter.notifyDataSetChanged()
+        binding.textServings.text = "$increasedNumber Portionen"
+    }
+
+    private fun decreaseServings(recipe: Recipe)
+    {
+        val number = recipe.servingsNumber.toInt()
+        val decreasedNumber = recipe.servingsNumber.toInt() - 1
+
+        if (decreasedNumber == 1)
+        {
+            binding.buttonDecreaseServings.isEnabled = false
+        }
+
+        recipe.servingsNumber = decreasedNumber.toString()
+
+        for (ingredient in recipe.recipeIngredients)
+        {
+            if (ingredient.amount.isNotEmpty() && ingredient.amount.isDigitsOnly())
+            {
+                var amount: Float = ingredient.amount.toFloat()
+                amount = (amount / number) * decreasedNumber
+
+                ingredient.amount = amount.toString()
+            }
+        }
+
+        adapter.notifyDataSetChanged()
+        binding.textServings.text = "$decreasedNumber Portionen"
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater)

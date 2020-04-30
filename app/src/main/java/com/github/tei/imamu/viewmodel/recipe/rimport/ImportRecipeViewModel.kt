@@ -1,0 +1,96 @@
+package com.github.tei.imamu.viewmodel.recipe.rimport
+
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.github.tei.imamu.data.ObjectBox
+import com.github.tei.imamu.data.entity.Recipe
+import com.github.tei.imamu.data.entity.RecipeIngredient
+import de.tei.re.logic.ChefkochExtractor
+import io.objectbox.Box
+import io.objectbox.kotlin.boxFor
+import kotlinx.coroutines.Job
+
+class ImportRecipeViewModel(application: Application) : AndroidViewModel(application)
+{
+    private var viewModelJob = Job()
+
+    private var recipeExtractor: ChefkochExtractor
+
+    private val recipeBox: Box<Recipe> = ObjectBox.boxStore.boxFor()
+
+    private val _recipe = MutableLiveData<Recipe>()
+    val recipe: LiveData<Recipe>
+        get() = _recipe
+
+    private val _navigateToRecipeDetail = MutableLiveData<Boolean>()
+    val navigateToRecipeDetail: LiveData<Boolean>
+        get() = _navigateToRecipeDetail
+
+    init
+    {
+        _recipe.value = Recipe()
+        recipeExtractor = ChefkochExtractor()
+    }
+
+    fun startImport(url: String)
+    {
+        recipeExtractor.changeRecipe(url)
+        createRecipe()
+    }
+
+    private fun createRecipe()
+    {
+        _recipe.value?.let {item ->
+            item.title = recipeExtractor.title
+            item.preparation = recipeExtractor.instruction
+            item.servingsNumber = recipeExtractor.portions
+
+            for (ingredient: de.tei.re.model.RecipeIngredient in recipeExtractor.recipeIngredients)
+            {
+                var recipeIngredient = RecipeIngredient()
+
+                recipeIngredient.amount = ingredient.amount
+                recipeIngredient.unit = ingredient.unit
+                recipeIngredient.name = ingredient.name
+
+                item.recipeIngredients.add(recipeIngredient)
+            }
+
+            for (tag in recipeExtractor.tags)
+            {
+                if (tag.contains("Arbeitszeit"))
+                {
+                    item.preparationTime = tag.filter { it.isDigit() }
+                }
+                else if (tag.contains("Ruhezeit"))
+                {
+                    item.restTime = tag.filter { it.isDigit() }
+                }
+                else if (tag.contains("Backzeit"))
+                {
+                    item.bakingTime = tag.filter { it.isDigit() }
+                }
+            }
+
+            recipeBox.put(item)
+        }
+    }
+
+    override fun onCleared()
+    {
+        super.onCleared()
+        viewModelJob.cancel()
+    }
+
+    fun onNavigateToDetail()
+    {
+        _navigateToRecipeDetail.value = true
+    }
+
+    fun onNavigateToDetailComplete()
+    {
+        _navigateToRecipeDetail.value = false
+    }
+}

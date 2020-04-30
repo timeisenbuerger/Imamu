@@ -104,6 +104,10 @@ class RecipeListFragment : Fragment()
         binding.createRecipeFab.setOnClickListener {
             findNavController().navigate(RecipeListFragmentDirections.actionRecipeListFragmentToAddRecipeFragment())
         }
+
+        binding.importRecipeFab.setOnClickListener {
+            findNavController().navigate(RecipeListFragmentDirections.actionNavRecipeListToImportRecipeFragment())
+        }
     }
 
     private fun initObserver()

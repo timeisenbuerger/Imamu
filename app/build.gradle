@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId "com.github.tei.imamu"
-        minSdkVersion 19
+        minSdkVersion 23
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -80,5 +80,8 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    kapt "com.android.databinding:compiler:3.1.4"
+    // recipe api
+    implementation 'com.github.timeisenbuerger:RecipeExtractor:master-SNAPSHOT'
+
+    implementation "org.jetbrains.anko:anko-common:0.10.8"
 }
