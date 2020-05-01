@@ -15,7 +15,7 @@ import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
 import com.github.tei.imamu.custom.adapter.shoppinglist.ShoppingListItemAdapter
 import com.github.tei.imamu.custom.adapter.shoppinglist.ShoppingListRecipeAdapter
-import com.github.tei.imamu.custom.listener.RecipeListListener
+import com.github.tei.imamu.custom.listener.CompositeOnClickListener
 import com.github.tei.imamu.data.entity.recipe.Recipe
 import com.github.tei.imamu.data.entity.shoppinglist.ShoppingList
 import com.github.tei.imamu.databinding.FragmentShoppingListBinding
@@ -63,7 +63,7 @@ class ShoppingListFragment : Fragment()
 
         //set adapters
         val manager = LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
-        recipeListAdapter = ShoppingListRecipeAdapter(viewModel, RecipeListListener { updateShoppingItemList(it) }, shoppingList?.recipe?.target)
+        recipeListAdapter = ShoppingListRecipeAdapter(viewModel, binding)
         binding.listParentRecipes.adapter = recipeListAdapter
         binding.listParentRecipes.layoutManager = manager
 
@@ -78,25 +78,5 @@ class ShoppingListFragment : Fragment()
                 recipeListAdapter.submitList(it)
             }
         })
-    }
-
-    private fun updateShoppingItemList(recipe: Recipe)
-    {
-        val shoppingLists = viewModel.shoppingLists.value!!
-        for (shoppingList in shoppingLists)
-        {
-            if (shoppingList.recipeId == recipe.id)
-            {
-                shoppingListItemAdapter.clear()
-                shoppingListItemAdapter.addAll(shoppingList.shoppingListItems)
-
-                recipeListAdapter.selectedItem = recipe
-
-                shoppingListItemAdapter.notifyDataSetChanged()
-
-                binding.textViewListTitle.text = shoppingList.name
-                break
-            }
-        }
     }
 }
