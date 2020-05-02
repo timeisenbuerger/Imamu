@@ -1,4 +1,4 @@
-package com.github.tei.imamu.custom.viewholder.recipe
+package com.github.tei.imamu.custom.viewholder.shoppinglist
 
 import android.graphics.Color
 import android.view.LayoutInflater
@@ -9,65 +9,67 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.view.ActionMode
 import androidx.recyclerview.widget.RecyclerView
 import com.github.tei.imamu.R
-import com.github.tei.imamu.custom.adapter.recipe.RecipeListAdapter
-import com.github.tei.imamu.custom.listener.RecipeListListener
-import com.github.tei.imamu.data.entity.recipe.Recipe
-import com.github.tei.imamu.databinding.ListItemRecipeBinding
-import com.github.tei.imamu.viewmodel.recipe.list.RecipeListViewModel
+import com.github.tei.imamu.custom.adapter.shoppinglist.ShoppingListItemAdapter
+import com.github.tei.imamu.custom.adapter.shoppinglist.ShoppingListAdapter
+import com.github.tei.imamu.data.entity.shoppinglist.ShoppingList
+import com.github.tei.imamu.databinding.FragmentShoppingListBinding
+import com.github.tei.imamu.databinding.ListItemShoppingListRecipeBinding
+import com.github.tei.imamu.viewmodel.shoppinglist.ShoppingListViewModel
 
-class RecipeListViewHolder private constructor(private val binding: ListItemRecipeBinding) : RecyclerView.ViewHolder(binding.root)
+class ShoppingListViewHolder private constructor(private val binding: ListItemShoppingListRecipeBinding) : RecyclerView.ViewHolder(binding.root)
 {
-    private lateinit var clickListener: RecipeListListener
-    private lateinit var viewModel: RecipeListViewModel
-    private lateinit var adapter: RecipeListAdapter
+    private lateinit var viewModel: ShoppingListViewModel
+    private lateinit var adapter: ShoppingListAdapter
+    private lateinit var shoppingListBinding: FragmentShoppingListBinding
 
     companion object
     {
-        fun from(parent: ViewGroup): RecipeListViewHolder
+        fun from(parent: ViewGroup): ShoppingListViewHolder
         {
             val layoutInflater = LayoutInflater.from(parent.context)
-            val binding = ListItemRecipeBinding.inflate(layoutInflater, parent, false)
+            val binding = ListItemShoppingListRecipeBinding.inflate(layoutInflater, parent, false)
 
-            return RecipeListViewHolder(binding)
+            return ShoppingListViewHolder(binding)
         }
     }
 
-    fun bind(item: Recipe, viewModel: RecipeListViewModel, adapter: RecipeListAdapter)
+    fun bind(item: ShoppingList, viewModel: ShoppingListViewModel, adapter: ShoppingListAdapter, shoppingListBinding: FragmentShoppingListBinding)
     {
         this.viewModel = viewModel
         this.adapter = adapter
-        clickListener = RecipeListListener { selectItem(item) }
+        this.shoppingListBinding = shoppingListBinding
 
-        binding.recipe = item
-        binding.clickListener = clickListener
-        binding.textViewRecipeItem.text = item.title
-        binding.imageViewRecipeItem.setImageResource(R.drawable.ic_hot_tub)
+        binding.shoppingList = item
+        binding.textViewRecipeItem.text = item.name
 
+        itemView.setOnClickListener { handleClick(item) }
         itemView.setOnLongClickListener { handleLongClick(item) }
-
-        updateViewBackground(item)
     }
 
-    private fun updateViewBackground(item: Recipe)
+    private fun handleClick(item: ShoppingList)
     {
-        if (adapter.selectedItems.contains(item))
-        {
-            itemView.setBackgroundColor(Color.LTGRAY);
-        }
-        else
-        {
-            itemView.setBackgroundColor(Color.WHITE);
-        }
+        selectItem(item)
     }
 
-    private fun handleLongClick(item: Recipe): Boolean
+    private fun handleLongClick(item: ShoppingList): Boolean
     {
         (itemView.context as AppCompatActivity).startSupportActionMode(actionModeCallbacks)
         selectItem(item)
         return true
     }
 
-    private fun selectItem(item: Recipe)
+    private fun updateShoppingItemList(item: ShoppingList)
+    {
+        val shoppingListItemAdapter = shoppingListBinding.listViewShoppingListIngredients.adapter as ShoppingListItemAdapter
+        shoppingListItemAdapter.clear()
+        shoppingListItemAdapter.addAll(item.shoppingListItems)
+
+        shoppingListBinding.textViewListTitle.text = "Liste " + item.name
+
+        shoppingListItemAdapter.notifyDataSetChanged()
+    }
+
+    private fun selectItem(item: ShoppingList)
     {
         if (adapter.multiSelect)
         {
@@ -84,7 +86,7 @@ class RecipeListViewHolder private constructor(private val binding: ListItemReci
         }
         else
         {
-            viewModel.onRecipeClicked(item)
+            updateShoppingItemList(item)
         }
     }
 
@@ -94,8 +96,7 @@ class RecipeListViewHolder private constructor(private val binding: ListItemReci
         {
             if (item?.itemId == R.id.action_delete)
             {
-                viewModel.deleteRecipes(adapter.selectedItems)
-                viewModel.initRecipes()
+                viewModel.deleteShoppingLists(adapter.selectedItems)
                 mode?.finish()
             }
             return true

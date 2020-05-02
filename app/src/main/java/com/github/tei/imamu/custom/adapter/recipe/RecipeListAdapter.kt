@@ -10,7 +10,7 @@ import com.github.tei.imamu.viewmodel.recipe.list.RecipeListViewModel
 class RecipeListAdapter(val viewModel: RecipeListViewModel) : ListAdapter<Recipe, RecipeListViewHolder>(RecipeDiffCallback())
 {
     internal var multiSelect = false
-    internal var selectedItems = ArrayList<Recipe>()
+    internal var selectedItems = mutableListOf<Recipe>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeListViewHolder
     {

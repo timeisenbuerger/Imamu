@@ -41,8 +41,7 @@ class RecipeDetailViewModel(recipe: Recipe) : ViewModel()
     fun createShoppingList(recipe: Recipe)
     {
         var shoppingList = ShoppingList()
-        shoppingList.recipe.target = recipe
-        shoppingList.name = "Liste zu " + recipe.title
+        shoppingList.name = recipe.title
 
         var shoppingListItems = mutableListOf<ShoppingListItem>()
         for (ingredient in recipe.recipeIngredients)

@@ -14,9 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
 import com.github.tei.imamu.custom.adapter.shoppinglist.ShoppingListItemAdapter
-import com.github.tei.imamu.custom.adapter.shoppinglist.ShoppingListRecipeAdapter
-import com.github.tei.imamu.custom.listener.CompositeOnClickListener
-import com.github.tei.imamu.data.entity.recipe.Recipe
+import com.github.tei.imamu.custom.adapter.shoppinglist.ShoppingListAdapter
 import com.github.tei.imamu.data.entity.shoppinglist.ShoppingList
 import com.github.tei.imamu.databinding.FragmentShoppingListBinding
 import com.github.tei.imamu.viewmodel.shoppinglist.ShoppingListViewModel
@@ -28,7 +26,7 @@ class ShoppingListFragment : Fragment()
     private lateinit var viewModel: ShoppingListViewModel
     private lateinit var viewModelFactory: ShoppingListViewModelFactory
     private lateinit var application: Application
-    private lateinit var recipeListAdapter: ShoppingListRecipeAdapter
+    private lateinit var recipeListAdapter: ShoppingListAdapter
     private lateinit var shoppingListItemAdapter: ShoppingListItemAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
@@ -63,19 +61,27 @@ class ShoppingListFragment : Fragment()
 
         //set adapters
         val manager = LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
-        recipeListAdapter = ShoppingListRecipeAdapter(viewModel, binding)
+        recipeListAdapter = ShoppingListAdapter(viewModel, binding)
         binding.listParentRecipes.adapter = recipeListAdapter
         binding.listParentRecipes.layoutManager = manager
 
-        shoppingListItemAdapter = ShoppingListItemAdapter(requireContext(), mutableListOf())
+        shoppingListItemAdapter = ShoppingListItemAdapter(requireContext(), mutableListOf(), viewModel)
         binding.listViewShoppingListIngredients.adapter = shoppingListItemAdapter
     }
 
     private fun initObserver()
     {
-        viewModel.recipes.observe(viewLifecycleOwner, Observer {
+        viewModel.shoppingLists.observe(viewLifecycleOwner, Observer {
             it?.let {
                 recipeListAdapter.submitList(it)
+            }
+        })
+
+        viewModel.updateAfterDelete.observe(viewLifecycleOwner, Observer {
+            if (it)
+            {
+                recipeListAdapter.submitList(viewModel.shoppingLists.value)
+                viewModel.onDeleteItemsComplete()
             }
         })
     }

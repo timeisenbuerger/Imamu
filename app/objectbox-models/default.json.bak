@@ -135,10 +135,53 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "4:6648330953913765978",
+      "lastPropertyId": "6:7626136694395327217",
+      "name": "ShoppingListItem",
+      "properties": [
+        {
+          "id": "1:1105968094152673062",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:688709034361027382",
+          "name": "amount",
+          "type": 9
+        },
+        {
+          "id": "3:4472669758983217866",
+          "name": "unit",
+          "type": 9
+        },
+        {
+          "id": "4:5218170753339414575",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "5:3523268934376487439",
+          "name": "isChecked",
+          "type": 1,
+          "flags": 4
+        },
+        {
+          "id": "6:7626136694395327217",
+          "name": "shoppingListId",
+          "indexId": "3:394756915084088812",
+          "type": 11,
+          "flags": 1548,
+          "relationTarget": "ShoppingList"
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "3:4326319803689828862",
-  "lastIndexId": "2:4261960209776871919",
+  "lastEntityId": "4:6648330953913765978",
+  "lastIndexId": "3:394756915084088812",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,
