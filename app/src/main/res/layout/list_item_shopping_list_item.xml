@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+<data>
+    <variable
+        name="item"
+        type="com.github.tei.imamu.data.entity.shoppinglist.ShoppingListItem" />
+</data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/check_box"
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_recipe_margin"
+            android:layout_marginTop="@dimen/default_recipe_padding"
+            android:layout_marginBottom="@dimen/default_recipe_padding"
+            android:layout_weight="1"
+            android:button="@drawable/ic_check"
+            android:checked="@={item.checked}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/edit_text_ingredient_amount"
+            tools:checked="true"/>
+
+        <TextView
+            android:id="@+id/edit_text_ingredient_amount"
+            android:layout_width="76dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_recipe_padding"
+            android:layout_marginTop="@dimen/default_recipe_padding"
+            android:layout_weight="1"
+            android:ems="10"
+            android:text="@={item.amount}"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/check_box"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/auto_complete_ingredient_unit"
+            tools:hint="@string/recipe_ingredient_amount" />
+
+        <TextView
+            android:id="@+id/auto_complete_ingredient_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_recipe_padding"
+            android:layout_marginEnd="@dimen/default_recipe_padding"
+            android:layout_weight="1"
+            android:completionThreshold="1"
+            android:text="@={item.unit}"
+            android:textAlignment="center"
+            app:layout_constraintStart_toEndOf="@id/edit_text_ingredient_amount"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/edit_text_ingredient"
+            tools:hint="@string/recipe_ingredient_unit" />
+
+        <TextView
+            android:id="@+id/edit_text_ingredient"
+            android:layout_width="114dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_recipe_padding"
+            android:layout_marginEnd="@dimen/default_recipe_padding"
+            android:layout_weight="1"
+            android:ems="10"
+            android:text="@={item.name}"
+            app:layout_constraintStart_toEndOf="@id/auto_complete_ingredient_unit"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/image_button_remove_line"
+            android:textStyle="bold"
+            tools:hint="@string/insert_recipe_ingredient" />
+
+        <ImageButton
+            android:id="@+id/image_button_remove_line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_recipe_margin"
+            android:layout_marginEnd="@dimen/default_recipe_margin"
+            android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/edit_text_ingredient"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.41000003"
+            app:srcCompat="@drawable/ic_clear_black" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

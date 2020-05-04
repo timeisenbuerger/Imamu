@@ -53,9 +53,9 @@
             app:destination="@id/editRecipeFragment"
             app:popUpTo="@id/recipeDetailFragment" />
         <action
-            android:id="@+id/action_recipeDetailFragment_to_nav_shopping_list"
-            app:destination="@id/nav_shopping_list"
-            app:popUpToInclusive="false" />
+            android:id="@+id/action_recipeDetailFragment_to_shoppingListDetailFragment"
+            app:destination="@id/shoppingListDetailFragment"
+            app:popUpTo="@id/nav_shopping_list" />
     </fragment>
     <fragment
         android:id="@+id/editRecipeFragment"
@@ -85,10 +85,19 @@
         android:name="com.github.tei.imamu.view.shoppinglist.ShoppingListFragment"
         android:label=""
         tools:layout="@layout/fragment_shopping_list">
+        <action
+            android:id="@+id/action_nav_shopping_list_to_shoppingListDetailFragment"
+            app:destination="@id/shoppingListDetailFragment"
+            app:popUpTo="@id/nav_shopping_list" />
+    </fragment>
+    <fragment
+        android:id="@+id/shoppingListDetailFragment"
+        android:name="com.github.tei.imamu.view.shoppinglist.ShoppingListDetailFragment"
+        android:label=""
+        tools:layout="@layout/fragment_shopping_list_detail">
         <argument
             android:name="shoppingList"
-            app:argType="com.github.tei.imamu.data.entity.shoppinglist.ShoppingList"
-            app:nullable="true" />
+            app:argType="com.github.tei.imamu.data.entity.shoppinglist.ShoppingList" />
     </fragment>
 
 </navigation>

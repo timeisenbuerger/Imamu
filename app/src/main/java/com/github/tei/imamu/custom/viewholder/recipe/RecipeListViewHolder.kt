@@ -1,6 +1,9 @@
 package com.github.tei.imamu.custom.viewholder.recipe
 
+import android.graphics.BitmapFactory
 import android.graphics.Color
+import android.net.Uri
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
@@ -13,7 +16,9 @@ import com.github.tei.imamu.custom.adapter.recipe.RecipeListAdapter
 import com.github.tei.imamu.custom.listener.RecipeListListener
 import com.github.tei.imamu.data.entity.recipe.Recipe
 import com.github.tei.imamu.databinding.ListItemRecipeBinding
+import com.github.tei.imamu.util.TextColorUtil
 import com.github.tei.imamu.viewmodel.recipe.list.RecipeListViewModel
+import java.io.File
 
 class RecipeListViewHolder private constructor(private val binding: ListItemRecipeBinding) : RecyclerView.ViewHolder(binding.root)
 {
@@ -41,11 +46,22 @@ class RecipeListViewHolder private constructor(private val binding: ListItemReci
         binding.recipe = item
         binding.clickListener = clickListener
         binding.textViewRecipeItem.text = item.title
-        binding.imageViewRecipeItem.setImageResource(R.drawable.ic_hot_tub)
+
+        setImage(item)
 
         itemView.setOnLongClickListener { handleLongClick(item) }
 
         updateViewBackground(item)
+    }
+
+    private fun setImage(item: Recipe)
+    {
+        if (!TextUtils.isEmpty(item.imagePath) && File(item.imagePath).exists())
+        {
+            binding.imageViewRecipeItem.setImageURI(Uri.parse(item.imagePath))
+            val bitmap = BitmapFactory.decodeFile(item.imagePath)
+            TextColorUtil.setTextColorForImage(binding.textViewRecipeItem, bitmap)
+        }
     }
 
     private fun updateViewBackground(item: Recipe)

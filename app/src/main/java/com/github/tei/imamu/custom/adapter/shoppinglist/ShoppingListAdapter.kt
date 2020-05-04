@@ -9,7 +9,7 @@ import com.github.tei.imamu.data.entity.shoppinglist.ShoppingList
 import com.github.tei.imamu.databinding.FragmentShoppingListBinding
 import com.github.tei.imamu.viewmodel.shoppinglist.ShoppingListViewModel
 
-class ShoppingListAdapter(val viewModel: ShoppingListViewModel, val binding: FragmentShoppingListBinding) : ListAdapter<ShoppingList, ShoppingListViewHolder>(ShoppingListDiffCallback())
+class ShoppingListAdapter(val viewModel: ShoppingListViewModel) : ListAdapter<ShoppingList, ShoppingListViewHolder>(ShoppingListDiffCallback())
 {
     internal var multiSelect = false
     internal var selectedItems = mutableListOf<ShoppingList>()
@@ -22,6 +22,6 @@ class ShoppingListAdapter(val viewModel: ShoppingListViewModel, val binding: Fra
     override fun onBindViewHolder(holderList: ShoppingListViewHolder, position: Int)
     {
         val item = getItem(position)
-        holderList.bind(item, viewModel, this, binding)
+        holderList.bind(item, viewModel, this)
     }
 }

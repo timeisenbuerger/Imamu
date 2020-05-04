@@ -5,7 +5,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.*
-import androidx.core.text.isDigitsOnly
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -13,12 +12,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
-import com.github.tei.imamu.databinding.FragmentRecipeDetailBinding
 import com.github.tei.imamu.custom.adapter.recipe.IngredientDetailListAdapter
 import com.github.tei.imamu.data.entity.recipe.Recipe
+import com.github.tei.imamu.databinding.FragmentRecipeDetailBinding
+import com.github.tei.imamu.util.setListViewHeightBasedOnChildren
 import com.github.tei.imamu.viewmodel.recipe.detail.RecipeDetailViewModel
 import com.github.tei.imamu.viewmodel.recipe.detail.RecipeDetailViewModelFactory
-import com.github.tei.imamu.util.setListViewHeightBasedOnChildren
 import com.google.android.material.chip.Chip
 import java.io.File
 
@@ -121,8 +120,12 @@ class RecipeDetailFragment : Fragment()
 
     private fun initObserver()
     {
-        viewModel.navigateToRecipeDetail.observe(viewLifecycleOwner, Observer {
-            findNavController().navigate(RecipeDetailFragmentDirections.actionRecipeDetailFragmentToNavShoppingList(viewModel.shoppingList.value!!))
+        viewModel.navigateToShoppingListDetail.observe(viewLifecycleOwner, Observer {
+            if (it)
+            {
+                findNavController().navigate(RecipeDetailFragmentDirections.actionRecipeDetailFragmentToShoppingListDetailFragment(viewModel.shoppingList.value!!))
+                viewModel.onNavigateToShoppingListDetailComplete()
+            }
         })
     }
 
@@ -155,7 +158,7 @@ class RecipeDetailFragment : Fragment()
 
         for (ingredient in recipe.recipeIngredients)
         {
-            if (ingredient.amount.isNotEmpty() && ingredient.amount.isDigitsOnly())
+            if (ingredient.amount.isNotEmpty() && ingredient.amount.matches("-?\\d+(\\.\\d+)?".toRegex()))
             {
                 var amount: Float = ingredient.amount.toFloat()
                 amount = (amount / number) * increasedNumber
@@ -182,7 +185,7 @@ class RecipeDetailFragment : Fragment()
 
         for (ingredient in recipe.recipeIngredients)
         {
-            if (ingredient.amount.isNotEmpty() && ingredient.amount.isDigitsOnly())
+            if (ingredient.amount.isNotEmpty() && ingredient.amount.matches("-?\\d+(\\.\\d+)?".toRegex()))
             {
                 var amount: Float = ingredient.amount.toFloat()
                 amount = (amount / number) * decreasedNumber
@@ -206,7 +209,7 @@ class RecipeDetailFragment : Fragment()
         val recipe = binding.recipe
         when (item.itemId)
         {
-            R.id.action_edit -> recipe?.let { findNavController().navigate(RecipeDetailFragmentDirections.actionRecipeDetailFragmentToEditRecipeFragment(recipe)) }
+            R.id.action_edit         -> recipe?.let { findNavController().navigate(RecipeDetailFragmentDirections.actionRecipeDetailFragmentToEditRecipeFragment(recipe)) }
             R.id.action_shoppingList -> recipe?.let {
                 viewModel.createShoppingList(recipe)
             }

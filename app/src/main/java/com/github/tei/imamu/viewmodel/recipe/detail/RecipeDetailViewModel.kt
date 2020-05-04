@@ -19,9 +19,9 @@ class RecipeDetailViewModel(recipe: Recipe) : ViewModel()
     val currentRecipe: LiveData<Recipe>
         get() = _currentRecipe
 
-    private val _navigateToRecipeDetail = MutableLiveData<Boolean>()
-    val navigateToRecipeDetail: LiveData<Boolean>
-        get() = _navigateToRecipeDetail
+    private val _navigateToShoppingListDetail = MutableLiveData<Boolean>()
+    val navigateToShoppingListDetail: LiveData<Boolean>
+        get() = _navigateToShoppingListDetail
 
     private val shoppingListBox: Box<ShoppingList> = ObjectBox.boxStore.boxFor()
 
@@ -42,6 +42,7 @@ class RecipeDetailViewModel(recipe: Recipe) : ViewModel()
     {
         var shoppingList = ShoppingList()
         shoppingList.name = recipe.title
+        shoppingList.imagePath = recipe.imagePath
 
         var shoppingListItems = mutableListOf<ShoppingListItem>()
         for (ingredient in recipe.recipeIngredients)
@@ -54,6 +55,11 @@ class RecipeDetailViewModel(recipe: Recipe) : ViewModel()
         shoppingListBox.put(shoppingList)
 
         this.shoppingList.value = shoppingList
-        _navigateToRecipeDetail.value = true
+        _navigateToShoppingListDetail.value = true
+    }
+
+    fun onNavigateToShoppingListDetailComplete()
+    {
+        _navigateToShoppingListDetail.value = false
     }
 }

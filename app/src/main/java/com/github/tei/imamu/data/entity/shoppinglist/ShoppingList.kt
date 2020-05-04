@@ -10,7 +10,10 @@ import java.io.Serializable
 data class ShoppingList(
     @Id var id: Long = 0L,
 
-    var name: String = "") : Serializable
+    var name: String = "",
+
+    var imagePath: String = ""
+) : Serializable
 {
     @Backlink(to = "shoppingList")
     lateinit var shoppingListItems: ToMany<ShoppingListItem>

@@ -1,9 +1,9 @@
 package com.github.tei.imamu.data.entity.recipe
 
-import com.github.tei.imamu.data.entity.recipe.Recipe
 import io.objectbox.annotation.Entity
 import io.objectbox.annotation.Id
 import io.objectbox.relation.ToOne
+import java.io.Serializable
 
 @Entity
 data class RecipeIngredient(
@@ -15,7 +15,7 @@ data class RecipeIngredient(
     var unit: String = "",
 
     var name: String = ""
-)
+) : Serializable
 {
     lateinit var recipe: ToOne<Recipe>
 }

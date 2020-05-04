@@ -12,9 +12,3 @@ fun ImageView.setRecipePicture(item: Recipe)
 {
     Picasso.with(context).load(File(item.imagePath)).error(R.drawable.ic_hot_tub).into(this)
 }
-
-//@BindingAdapter("recipeIngredients")
-//fun ListView.inflateIngredientsData(recipe: Recipe)
-//{
-//
-//}

@@ -10,28 +10,24 @@ import io.objectbox.Box
 import io.objectbox.kotlin.boxFor
 import kotlinx.coroutines.Job
 
-class ShoppingListViewModel() : ViewModel()
+class ShoppingListDetailViewModel(currentShoppingList: ShoppingList) : ViewModel()
 {
     private var viewModelJob = Job()
 
-    private val _shoppingLists = MutableLiveData<MutableList<ShoppingList>>()
-    val shoppingLists: LiveData<MutableList<ShoppingList>>
-        get() = _shoppingLists
+    private val _shoppingList = MutableLiveData<ShoppingList>()
+    val shoppingList: LiveData<ShoppingList>
+        get() = _shoppingList
 
     private val _updateAfterDelete = MutableLiveData<Boolean>()
     val updateAfterDelete: LiveData<Boolean>
         get() = _updateAfterDelete
-
-    private val _navigateToDetail = MutableLiveData<ShoppingList>()
-    val navigateToDetail: LiveData<ShoppingList>
-        get() = _navigateToDetail
 
     private val shoppingListBox: Box<ShoppingList> = ObjectBox.boxStore.boxFor()
     private val shoppingListItemBox: Box<ShoppingListItem> = ObjectBox.boxStore.boxFor()
 
     init
     {
-        _shoppingLists.value = shoppingListBox.all
+        _shoppingList.value = currentShoppingList
     }
 
     override fun onCleared()
@@ -43,13 +39,9 @@ class ShoppingListViewModel() : ViewModel()
     fun removeItem(item: ShoppingListItem?)
     {
         item?.let {
-            for (shoppingList in shoppingLists.value!!)
+            if (shoppingList.value?.shoppingListItems!!.contains(it))
             {
-                if (shoppingList.shoppingListItems.contains(it))
-                {
-                    shoppingList.shoppingListItems.remove(it)
-                    break
-                }
+                shoppingList.value?.shoppingListItems!!.remove(it)
             }
 
             shoppingListBox.put()
@@ -64,13 +56,6 @@ class ShoppingListViewModel() : ViewModel()
         }
     }
 
-    fun deleteShoppingLists(items: MutableList<ShoppingList>)
-    {
-        shoppingLists.value?.removeAll(items)
-        shoppingListBox.remove(items)
-        onDeleteItems()
-    }
-
     private fun onDeleteItems()
     {
         _updateAfterDelete.value = true
@@ -79,15 +64,5 @@ class ShoppingListViewModel() : ViewModel()
     fun onDeleteItemsComplete()
     {
         _updateAfterDelete.value = false
-    }
-
-    fun onNavigateToDetail(item: ShoppingList)
-    {
-        _navigateToDetail.value = item
-    }
-
-    fun onNavigateToDetailComplete()
-    {
-        _navigateToDetail.value = null
     }
 }

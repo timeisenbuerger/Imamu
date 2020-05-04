@@ -121,14 +121,6 @@
           "flags": 1
         },
         {
-          "id": "2:5614713038289382758",
-          "name": "recipeId",
-          "indexId": "2:4261960209776871919",
-          "type": 11,
-          "flags": 524,
-          "relationTarget": "Recipe"
-        },
-        {
           "id": "3:3163219465555624903",
           "name": "name",
           "type": 9
@@ -187,9 +179,12 @@
   "modelVersion": 5,
   "modelVersionParserMinimum": 5,
   "retiredEntityUids": [],
-  "retiredIndexUids": [],
+  "retiredIndexUids": [
+    4261960209776871919
+  ],
   "retiredPropertyUids": [
-    5864946295596553103
+    5864946295596553103,
+    5614713038289382758
   ],
   "retiredRelationUids": [],
   "version": 1

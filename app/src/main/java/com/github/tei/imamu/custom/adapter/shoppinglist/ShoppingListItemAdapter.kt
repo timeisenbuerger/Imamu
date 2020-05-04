@@ -9,20 +9,21 @@ import androidx.databinding.DataBindingUtil
 import com.github.tei.imamu.R
 import com.github.tei.imamu.data.entity.shoppinglist.ShoppingListItem
 import com.github.tei.imamu.databinding.ListItemShoppingListBinding
-import com.github.tei.imamu.viewmodel.shoppinglist.ShoppingListViewModel
+import com.github.tei.imamu.databinding.ListItemShoppingListItemBinding
+import com.github.tei.imamu.viewmodel.shoppinglist.ShoppingListDetailViewModel
 
-class ShoppingListItemAdapter(context: Context, private val items: MutableList<ShoppingListItem>, private val viewModel: ShoppingListViewModel) : ArrayAdapter<ShoppingListItem>(context, 0, items)
+class ShoppingListItemAdapter(context: Context, private val items: MutableList<ShoppingListItem>, private val viewModel: ShoppingListDetailViewModel) : ArrayAdapter<ShoppingListItem>(context, 0, items)
 {
     private val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View
     {
         val item = getItem(position)
-        var binding: ListItemShoppingListBinding? = null
+        var binding: ListItemShoppingListItemBinding? = null
 
         binding = if (convertView == null || binding == null)
         {
-            DataBindingUtil.inflate(inflater, R.layout.list_item_shopping_list, parent, false)
+            DataBindingUtil.inflate(inflater, R.layout.list_item_shopping_list_item, parent, false)
         }
         else
         {
@@ -36,7 +37,7 @@ class ShoppingListItemAdapter(context: Context, private val items: MutableList<S
         return binding!!.root
     }
 
-    private fun initListener(binding: ListItemShoppingListBinding?, item: ShoppingListItem?)
+    private fun initListener(binding: ListItemShoppingListItemBinding?, item: ShoppingListItem?)
     {
         binding?.imageButtonRemoveLine?.setOnClickListener {
             items.remove(item)
