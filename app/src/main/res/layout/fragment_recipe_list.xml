@@ -14,11 +14,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
+        <com.mlsdev.animatedrv.AnimatedRecyclerView
             android:id="@+id/recipe_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager" />
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:animationDuration="600"
+            app:layoutAnimation="@anim/layout_animation_random_scale"
+            app:layoutManagerOrientation="vertical"
+            app:layoutManagerReverse="false"
+            app:layoutManagerType="linear"
+            tools:listitem="@layout/list_item_recipe"/>
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/container_layout"
@@ -65,7 +71,7 @@
             app:fabSize="mini"
             app:layout_constraintBottom_toTopOf="@+id/create_recipe_fab"
             app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/ic_add_white"
+            app:srcCompat="@drawable/ic_download_black"
             tools:visibility="visible"/>
 
         <TextView

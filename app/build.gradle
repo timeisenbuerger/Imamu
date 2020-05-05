@@ -86,4 +86,6 @@ dependencies {
     implementation "org.jetbrains.anko:anko-common:0.10.8"
 
     implementation group: 'androidx.palette', name: 'palette', version: '1.0.0'
+
+    implementation "com.mlsdev.animatedrv:library:2.0.0"
 }

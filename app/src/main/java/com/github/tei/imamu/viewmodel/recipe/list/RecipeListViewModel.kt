@@ -29,7 +29,9 @@ class RecipeListViewModel(application: Application) : AndroidViewModel(applicati
 
     fun initRecipes()
     {
-        recipes.value = recipeBox.all
+        recipes.value = recipeBox.query()
+            .build()
+            .findLazyCached()
     }
 
     fun deleteRecipes(recipes: List<Recipe>)

@@ -59,6 +59,8 @@
     <string name="action_create_own_recipe">Erstellen</string>
     <string name="action_import_recipe">Importieren</string>
     <string name="insert_recipe_link">Rezeptlink eingeben</string>
+    <string name="sample_difficulty">Einfach</string>
+    <string name="sample_time">120 min</string>
 
     <string-array name="ingredient_units">
         <item>g</item>

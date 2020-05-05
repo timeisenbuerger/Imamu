@@ -4,12 +4,10 @@ import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.net.Uri
 import android.text.TextUtils
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuItem
-import android.view.ViewGroup
+import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.view.ActionMode
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.github.tei.imamu.R
 import com.github.tei.imamu.custom.adapter.recipe.RecipeListAdapter
@@ -47,11 +45,43 @@ class RecipeListViewHolder private constructor(private val binding: ListItemReci
         binding.clickListener = clickListener
         binding.textViewRecipeItem.text = item.title
 
+        initChips(item, viewModel)
         setImage(item)
 
         itemView.setOnLongClickListener { handleLongClick(item) }
 
         updateViewBackground(item)
+    }
+
+    private fun initChips(item: Recipe, viewModel: RecipeListViewModel)
+    {
+        var time = ""
+        if (!TextUtils.isEmpty(item.preparationTime))
+        {
+            time = item.preparationTime
+        }
+        if (!TextUtils.isEmpty(item.bakingTime))
+        {
+            time = (time.toInt() + item.bakingTime.toInt()).toString()
+        }
+        if (!TextUtils.isEmpty(item.restTime))
+        {
+            time = (time.toInt() + item.restTime.toInt()).toString()
+        }
+
+        if (!TextUtils.isEmpty(time))
+        {
+            binding.chipTime.text = "$time min"
+            binding.chipTime.chipIcon = ContextCompat.getDrawable(viewModel.getApplication(), R.drawable.ic_time_black)
+            binding.chipTime.visibility = View.VISIBLE
+        }
+
+        if (!TextUtils.isEmpty(item.difficulty))
+        {
+            binding.chipDifficulty.text = item.difficulty
+            binding.chipDifficulty.chipIcon = ContextCompat.getDrawable(viewModel.getApplication(), R.drawable.ic_poll_black)
+            binding.chipDifficulty.visibility = View.VISIBLE
+        }
     }
 
     private fun setImage(item: Recipe)

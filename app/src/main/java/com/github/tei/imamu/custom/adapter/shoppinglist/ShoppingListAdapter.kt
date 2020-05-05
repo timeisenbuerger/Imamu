@@ -1,12 +1,10 @@
 package com.github.tei.imamu.custom.adapter.shoppinglist
 
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.github.tei.imamu.custom.viewholder.shoppinglist.ShoppingListDiffCallback
 import com.github.tei.imamu.custom.viewholder.shoppinglist.ShoppingListViewHolder
 import com.github.tei.imamu.data.entity.shoppinglist.ShoppingList
-import com.github.tei.imamu.databinding.FragmentShoppingListBinding
 import com.github.tei.imamu.viewmodel.shoppinglist.ShoppingListViewModel
 
 class ShoppingListAdapter(val viewModel: ShoppingListViewModel) : ListAdapter<ShoppingList, ShoppingListViewHolder>(ShoppingListDiffCallback())

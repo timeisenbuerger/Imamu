@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
+        <com.mlsdev.animatedrv.AnimatedRecyclerView
             android:id="@+id/list_parent_recipes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -21,8 +21,13 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:animationDuration="600"
+            app:layoutAnimation="@anim/layout_animation_random_scale"
+            app:layoutManagerOrientation="vertical"
+            app:layoutManagerReverse="false"
+            app:layoutManagerType="linear">
 
-        </androidx.recyclerview.widget.RecyclerView>
+        </com.mlsdev.animatedrv.AnimatedRecyclerView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

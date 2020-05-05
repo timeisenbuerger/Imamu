@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
 import com.github.tei.imamu.databinding.FragmentRecipeListBinding
@@ -66,7 +67,7 @@ class RecipeListFragment : Fragment()
         listAdapter = RecipeListAdapter(viewModel)
         binding.recipeList.adapter = listAdapter
 
-        val manager = GridLayoutManager(activity, 2)
+        val manager = LinearLayoutManager(activity)
         binding.recipeList.layoutManager = manager
     }
 
@@ -103,10 +104,12 @@ class RecipeListFragment : Fragment()
 
         binding.createRecipeFab.setOnClickListener {
             findNavController().navigate(RecipeListFragmentDirections.actionRecipeListFragmentToAddRecipeFragment())
+            isOpen = false
         }
 
         binding.importRecipeFab.setOnClickListener {
             findNavController().navigate(RecipeListFragmentDirections.actionNavRecipeListToImportRecipeFragment())
+            isOpen = false
         }
     }
 
