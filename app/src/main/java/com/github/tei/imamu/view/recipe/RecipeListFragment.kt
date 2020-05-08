@@ -12,12 +12,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
-import com.github.tei.imamu.databinding.FragmentRecipeListBinding
 import com.github.tei.imamu.custom.adapter.recipe.RecipeListAdapter
+import com.github.tei.imamu.databinding.FragmentRecipeListBinding
 import com.github.tei.imamu.viewmodel.recipe.list.RecipeListViewModel
 import com.github.tei.imamu.viewmodel.recipe.list.RecipeListViewModelFactory
 

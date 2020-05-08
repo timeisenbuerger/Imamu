@@ -89,8 +89,6 @@ class RecipeListViewHolder private constructor(private val binding: ListItemReci
         if (!TextUtils.isEmpty(item.imagePath) && File(item.imagePath).exists())
         {
             binding.imageViewRecipeItem.setImageURI(Uri.parse(item.imagePath))
-            val bitmap = BitmapFactory.decodeFile(item.imagePath)
-            TextColorUtil.setTextColorForImage(binding.textViewRecipeItem, bitmap)
         }
     }
 

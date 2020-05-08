@@ -175,11 +175,36 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "5:8220585078138973708",
+      "lastPropertyId": "2:4063086700752229139",
+      "name": "CookBook",
+      "properties": [
+        {
+          "id": "1:6904525743026776097",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:4063086700752229139",
+          "name": "title",
+          "type": 9
+        }
+      ],
+      "relations": [
+        {
+          "id": "1:7759729924434986405",
+          "name": "recipes",
+          "targetId": "1:2548072088956869254"
+        }
+      ]
     }
   ],
-  "lastEntityId": "4:6648330953913765978",
+  "lastEntityId": "5:8220585078138973708",
   "lastIndexId": "3:394756915084088812",
-  "lastRelationId": "0:0",
+  "lastRelationId": "1:7759729924434986405",
   "lastSequenceId": "0:0",
   "modelVersion": 5,
   "modelVersionParserMinimum": 5,

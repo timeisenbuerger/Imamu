@@ -99,5 +99,17 @@
             android:name="shoppingList"
             app:argType="com.github.tei.imamu.data.entity.shoppinglist.ShoppingList" />
     </fragment>
+    <fragment
+        android:id="@+id/nav_cookbook"
+        android:name="com.github.tei.imamu.view.cookbook.CookBookListFragment"
+        tools:layout="@layout/fragment_cookbook_list">
+        <action
+            android:id="@+id/action_nav_cookbook_to_addCookBookFragment"
+            app:destination="@id/addCookBookFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addCookBookFragment"
+        android:name="com.github.tei.imamu.view.cookbook.AddCookBookFragment"
+        tools:layout="@layout/fragment_add_cookbook"/>
 
 </navigation>
