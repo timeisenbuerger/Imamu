@@ -62,7 +62,7 @@
     <string name="sample_difficulty">Einfach</string>
     <string name="sample_time">120 min</string>
     <string name="sample_cook_book_title">Beispiel Kochbuch</string>
-    <string name="sample_recipe_count">28</string>
+    <string name="sample_recipe_count">2</string>
     <string name="cook_book_title_text">Kochbuchname:</string>
     <string name="insert_cook_book_title">Kochbuchname eingeben</string>
     <string name="text_cook_book_recipes">Rezepte:</string>

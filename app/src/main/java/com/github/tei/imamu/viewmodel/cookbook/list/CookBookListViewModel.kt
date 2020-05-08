@@ -36,7 +36,7 @@ class CookBookListViewModel(application: Application) : AndroidViewModel(applica
             .findLazyCached()
     }
 
-    fun deleteRecipes(cookBooks: List<CookBook>)
+    fun deleteCookBooks(cookBooks: List<CookBook>)
     {
         cookBookBox.remove(cookBooks)
     }

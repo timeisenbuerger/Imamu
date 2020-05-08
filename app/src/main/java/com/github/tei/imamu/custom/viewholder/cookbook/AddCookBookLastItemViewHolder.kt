@@ -28,5 +28,14 @@ class AddCookBookLastItemViewHolder private constructor(private val binding: Lis
     {
         this.viewModel = viewModel
         this.adapter = adapter
+
+        binding.buttonAdd.setOnClickListener {
+            handleClick()
+        }
+    }
+
+    private fun handleClick()
+    {
+        viewModel.navigateToChooseRecipe()
     }
 }

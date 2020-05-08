@@ -5,18 +5,21 @@ import android.os.Bundle
 import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
 import com.github.tei.imamu.custom.adapter.cookbook.AddCookBookAdapter
-import com.github.tei.imamu.databinding.FragmentAddCookbookBinding
+import com.github.tei.imamu.data.entity.cookbook.CookBook
+import com.github.tei.imamu.databinding.FragmentAddCookBookBinding
 import com.github.tei.imamu.viewmodel.cookbook.add.AddCookBookViewModel
 import com.github.tei.imamu.viewmodel.cookbook.add.AddCookBookViewModelFactory
 
 class AddCookBookFragment : Fragment()
 {
-    private lateinit var binding: FragmentAddCookbookBinding
+    private lateinit var binding: FragmentAddCookBookBinding
     private lateinit var viewModel: AddCookBookViewModel
     private lateinit var viewModelFactory: AddCookBookViewModelFactory
     private lateinit var application: Application
@@ -29,14 +32,16 @@ class AddCookBookFragment : Fragment()
         init(inflater, container)
         initListener()
         initObserver()
+        initComponents()
 
+        setHasOptionsMenu(true)
         return binding.root
     }
 
     private fun init(inflater: LayoutInflater, container: ViewGroup?)
     {
         //init binding
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_cookbook, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_cook_book, container, false)
 
         //init application
         application = requireNotNull(this.activity).application
@@ -66,7 +71,31 @@ class AddCookBookFragment : Fragment()
 
     private fun initObserver()
     {
+        viewModel.navigateToChooseRecipe.observe(viewLifecycleOwner, Observer {
+            if (it)
+            {
+                findNavController().navigate(AddCookBookFragmentDirections.actionAddCookBookFragmentToChooseRecipeFragment(viewModel.cookBook.value!!))
+                viewModel.navigateToChooseRecipeComplete()
+            }
+        })
 
+        viewModel.navigateToCookBookList.observe(viewLifecycleOwner, Observer {
+            if (it)
+            {
+                findNavController().navigate(AddCookBookFragmentDirections.actionAddCookBookFragmentToNavCookbook())
+                viewModel.navigateToCookBookListComplete()
+            }
+        })
+    }
+
+    private fun initComponents()
+    {
+        val cookBook = requireArguments().getSerializable("cookBook")
+        cookBook?.let {
+            viewModel.cookBook.value = it as CookBook
+        }
+
+        listAdapter.submitList(viewModel.cookBook.value!!.recipes)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater)
@@ -77,9 +106,12 @@ class AddCookBookFragment : Fragment()
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean
     {
-        when(item.itemId)
+        when (item.itemId)
         {
-            R.id.action_save_changes -> {}
+            R.id.action_save_changes ->
+            {
+                viewModel.saveCookBook()
+            }
         }
         return true
     }

@@ -8,11 +8,15 @@
         <variable
             name="recipe"
             type="com.github.tei.imamu.data.entity.recipe.Recipe" />
+        <variable
+            name="clickListener"
+            type="com.github.tei.imamu.custom.listener.RecipeListListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="170dp"
-        android:layout_height="170dp">
+        android:layout_height="170dp"
+        android:onClick="@{() -> clickListener.onClick(recipe)}">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"

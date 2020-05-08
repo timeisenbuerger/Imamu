@@ -106,10 +106,49 @@
         <action
             android:id="@+id/action_nav_cookbook_to_addCookBookFragment"
             app:destination="@id/addCookBookFragment" />
+        <action
+            android:id="@+id/action_nav_cookbook_to_cookBookDetailFragment"
+            app:destination="@id/cookBookDetailFragment"
+            app:popUpTo="@id/nav_cookbook" />
     </fragment>
     <fragment
         android:id="@+id/addCookBookFragment"
         android:name="com.github.tei.imamu.view.cookbook.AddCookBookFragment"
-        tools:layout="@layout/fragment_add_cookbook"/>
+        tools:layout="@layout/fragment_add_cook_book">
+        <action
+            android:id="@+id/action_addCookBookFragment_to_chooseRecipeFragment"
+            app:destination="@id/chooseRecipeFragment"
+            app:popUpTo="@id/addCookBookFragment" />
+        <argument
+            android:name="cookBook"
+            app:argType="com.github.tei.imamu.data.entity.cookbook.CookBook"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_addCookBookFragment_to_nav_cookbook"
+            app:destination="@id/nav_cookbook" />
+    </fragment>
+    <fragment
+        android:id="@+id/chooseRecipeFragment"
+        android:name="com.github.tei.imamu.view.cookbook.ChooseRecipeFragment"
+        tools:layout="@layout/fragment_add_cook_book_choose_recipes">
+        <action
+            android:id="@+id/action_chooseRecipeFragment_to_addCookBookFragment"
+            app:destination="@id/addCookBookFragment" />
+        <argument
+            android:name="cookBook"
+            app:argType="com.github.tei.imamu.data.entity.cookbook.CookBook" />
+    </fragment>
+    <fragment
+        android:id="@+id/cookBookDetailFragment"
+        android:name="com.github.tei.imamu.view.cookbook.CookBookDetailFragment"
+        tools:layout="@layout/fragment_detail_cook_book">
+        <argument
+            android:name="cookBook"
+            app:argType="com.github.tei.imamu.data.entity.cookbook.CookBook" />
+        <action
+            android:id="@+id/action_cookBookDetailFragment_to_recipeDetailFragment"
+            app:destination="@id/recipeDetailFragment"
+            app:popUpTo="@id/cookBookDetailFragment" />
+    </fragment>
 
 </navigation>

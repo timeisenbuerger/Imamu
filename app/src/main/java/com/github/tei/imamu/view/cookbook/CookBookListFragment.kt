@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
@@ -56,7 +57,7 @@ class CookBookListFragment : Fragment()
         binding.viewModel = viewModel
 
         //set adapter in recyclerview
-        listAdapter = CookBookListAdapter(viewModel)
+        listAdapter = CookBookListAdapter(viewModel, requireContext())
         binding.cookbookList.adapter = listAdapter
 
         val manager = LinearLayoutManager(activity)
@@ -66,7 +67,7 @@ class CookBookListFragment : Fragment()
     private fun initListener()
     {
         binding.fabCreateCookbook.setOnClickListener {
-            findNavController().navigate(CookBookListFragmentDirections.actionNavCookbookToAddCookBookFragment())
+            findNavController().navigate(CookBookListFragmentDirections.actionNavCookbookToAddCookBookFragment(null))
         }
     }
 
@@ -80,7 +81,8 @@ class CookBookListFragment : Fragment()
 
         viewModel.navigateToDetail.observe(viewLifecycleOwner, Observer {
             it?.let {
-
+                findNavController().navigate(CookBookListFragmentDirections.actionNavCookbookToCookBookDetailFragment(it))
+                viewModel.onNavigateToDetailComplete()
             }
         })
     }

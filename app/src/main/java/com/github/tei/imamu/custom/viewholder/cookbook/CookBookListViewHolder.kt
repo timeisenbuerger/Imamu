@@ -1,7 +1,9 @@
 package com.github.tei.imamu.custom.viewholder.cookbook
 
+import android.content.Context
 import android.graphics.BitmapFactory
 import android.graphics.Color
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
@@ -13,10 +15,11 @@ import com.github.tei.imamu.R
 import com.github.tei.imamu.custom.adapter.cookbook.CookBookListAdapter
 import com.github.tei.imamu.custom.listener.CookBookListListener
 import com.github.tei.imamu.data.entity.cookbook.CookBook
-import com.github.tei.imamu.databinding.ListItemCookbookBinding
+import com.github.tei.imamu.databinding.ListItemCookBookBinding
 import com.github.tei.imamu.viewmodel.cookbook.list.CookBookListViewModel
+import java.io.File
 
-class CookBookListViewHolder private constructor(private val binding: ListItemCookbookBinding) : RecyclerView.ViewHolder(binding.root)
+class CookBookListViewHolder private constructor(private val binding: ListItemCookBookBinding, private val context: Context) : RecyclerView.ViewHolder(binding.root)
 {
     private lateinit var clickListener: CookBookListListener
     private lateinit var viewModel: CookBookListViewModel
@@ -24,12 +27,12 @@ class CookBookListViewHolder private constructor(private val binding: ListItemCo
 
     companion object
     {
-        fun from(parent: ViewGroup): CookBookListViewHolder
+        fun from(parent: ViewGroup, context: Context): CookBookListViewHolder
         {
             val layoutInflater = LayoutInflater.from(parent.context)
-            val binding = ListItemCookbookBinding.inflate(layoutInflater, parent, false)
+            val binding = ListItemCookBookBinding.inflate(layoutInflater, parent, false)
 
-            return CookBookListViewHolder(binding)
+            return CookBookListViewHolder(binding, context)
         }
     }
 
@@ -41,11 +44,17 @@ class CookBookListViewHolder private constructor(private val binding: ListItemCo
 
         binding.cookBook = item
         binding.clickListener = clickListener
-//        val sample = BitmapFactory.decodeResource(viewModel.getApplication(), R.drawable.ic_hot_tub)
-//        binding.imageViewRecipeItem.addImage(sample)
-//        binding.imageViewRecipeItem.addImage(sample)
-//        binding.textViewCookBookTitle.text = item.title
-//        binding.textViewRecipeCount.text = item.recipes.size
+
+        for (recipe in item.recipes)
+        {
+            if (!TextUtils.isEmpty(recipe.imagePath) && File(recipe.imagePath).exists())
+            {
+                binding.imageCollectionViewRecipeItem.addImage(BitmapFactory.decodeFile(recipe.imagePath))
+            }
+        }
+
+        binding.textViewCookBookTitle.text = item.title
+        binding.textViewRecipeCount.text = item.recipes.size.toString()
 
         itemView.setOnLongClickListener { handleLongClick(item) }
 
@@ -98,7 +107,7 @@ class CookBookListViewHolder private constructor(private val binding: ListItemCo
         {
             if (item?.itemId == R.id.action_delete)
             {
-                viewModel.deleteRecipes(adapter.selectedItems)
+                viewModel.deleteCookBooks(adapter.selectedItems)
                 viewModel.initCookbooks()
                 mode?.finish()
             }

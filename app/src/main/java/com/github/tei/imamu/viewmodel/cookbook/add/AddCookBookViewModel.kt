@@ -14,20 +14,47 @@ class AddCookBookViewModel(application: Application) : AndroidViewModel(applicat
 {
     private var viewModelJob = Job()
 
-    private val _cookBook = MutableLiveData<CookBook>()
-    val cookBooks: LiveData<CookBook>
-        get() = _cookBook
+    val cookBook = MutableLiveData<CookBook>()
+
+    private val _navigateToChooseRecipe = MutableLiveData<Boolean>()
+    val navigateToChooseRecipe: LiveData<Boolean>
+        get() = _navigateToChooseRecipe
+
+    private val _navigateToCookBookList = MutableLiveData<Boolean>()
+    val navigateToCookBookList: LiveData<Boolean>
+        get() = _navigateToCookBookList
 
     private val cookBookBox: Box<CookBook> = ObjectBox.boxStore.boxFor()
 
     init
     {
-        _cookBook.value = CookBook()
+        cookBook.value = CookBook()
     }
 
     override fun onCleared()
     {
         super.onCleared()
         viewModelJob.cancel()
+    }
+
+    fun saveCookBook()
+    {
+        cookBookBox.put(cookBook.value!!)
+        _navigateToCookBookList.value = true
+    }
+
+    fun navigateToChooseRecipe()
+    {
+        _navigateToChooseRecipe.value = true
+    }
+
+    fun navigateToChooseRecipeComplete()
+    {
+        _navigateToChooseRecipe.value = false
+    }
+
+    fun navigateToCookBookListComplete()
+    {
+        _navigateToCookBookList.value = false
     }
 }

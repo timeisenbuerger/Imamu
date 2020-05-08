@@ -1,6 +1,5 @@
 package com.github.tei.imamu.custom.viewholder.recipe
 
-import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.net.Uri
 import android.text.TextUtils
@@ -14,7 +13,6 @@ import com.github.tei.imamu.custom.adapter.recipe.RecipeListAdapter
 import com.github.tei.imamu.custom.listener.RecipeListListener
 import com.github.tei.imamu.data.entity.recipe.Recipe
 import com.github.tei.imamu.databinding.ListItemRecipeBinding
-import com.github.tei.imamu.util.TextColorUtil
 import com.github.tei.imamu.viewmodel.recipe.list.RecipeListViewModel
 import java.io.File
 

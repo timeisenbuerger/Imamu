@@ -1,6 +1,7 @@
 package com.github.tei.imamu.data.entity.recipe
 
 
+import android.os.Parcelable
 import io.objectbox.annotation.Backlink
 import io.objectbox.annotation.Entity
 import io.objectbox.annotation.Id
