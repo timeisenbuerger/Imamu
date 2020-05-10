@@ -32,7 +32,7 @@
 
         <TextView
             android:id="@+id/edit_text_ingredient_amount"
-            android:layout_width="76dp"
+            android:layout_width="75dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/default_recipe_padding"
             android:layout_marginTop="@dimen/default_recipe_padding"
@@ -41,14 +41,14 @@
             android:text="@={item.amount}"
             android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/auto_complete_ingredient_unit"
             app:layout_constraintStart_toEndOf="@id/check_box"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/auto_complete_ingredient_unit"
             tools:hint="@string/recipe_ingredient_amount" />
 
         <TextView
             android:id="@+id/auto_complete_ingredient_unit"
-            android:layout_width="wrap_content"
+            android:layout_width="75dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/default_recipe_padding"
             android:layout_marginEnd="@dimen/default_recipe_padding"
@@ -56,26 +56,26 @@
             android:completionThreshold="1"
             android:text="@={item.unit}"
             android:textAlignment="center"
-            app:layout_constraintStart_toEndOf="@id/edit_text_ingredient_amount"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/edit_text_ingredient"
+            app:layout_constraintStart_toEndOf="@id/edit_text_ingredient_amount"
+            app:layout_constraintTop_toTopOf="parent"
             tools:hint="@string/recipe_ingredient_unit" />
 
         <TextView
             android:id="@+id/edit_text_ingredient"
-            android:layout_width="114dp"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/default_recipe_padding"
             android:layout_marginEnd="@dimen/default_recipe_padding"
             android:layout_weight="1"
             android:ems="10"
             android:text="@={item.name}"
-            app:layout_constraintStart_toEndOf="@id/auto_complete_ingredient_unit"
-            app:layout_constraintTop_toTopOf="parent"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/image_button_remove_line"
-            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/auto_complete_ingredient_unit"
+            app:layout_constraintTop_toTopOf="parent"
             tools:hint="@string/insert_recipe_ingredient" />
 
         <ImageButton
@@ -84,12 +84,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/default_recipe_margin"
             android:layout_marginEnd="@dimen/default_recipe_margin"
-            android:background="@color/white"
+            android:background="?attr/selectableItemBackground"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/edit_text_ingredient"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.41000003"
+            app:layout_constraintVertical_bias="0.40"
             app:srcCompat="@drawable/ic_clear_black" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

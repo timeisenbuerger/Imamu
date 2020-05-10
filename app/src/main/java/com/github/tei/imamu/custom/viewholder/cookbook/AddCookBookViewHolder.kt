@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.view.ActionMode
 import androidx.recyclerview.widget.RecyclerView
 import com.github.tei.imamu.R
-import com.github.tei.imamu.custom.adapter.cookbook.AddCookBookAdapter
+import com.github.tei.imamu.custom.adapter.cookbook.AddCookBookListAdapter
 import com.github.tei.imamu.data.entity.recipe.Recipe
 import com.github.tei.imamu.databinding.ListItemCookBookRecipeBinding
 import com.github.tei.imamu.viewmodel.cookbook.add.AddCookBookViewModel
@@ -19,7 +19,7 @@ import java.io.File
 class AddCookBookViewHolder private constructor(private val binding: ListItemCookBookRecipeBinding) : RecyclerView.ViewHolder(binding.root)
 {
     private lateinit var viewModel: AddCookBookViewModel
-    private lateinit var adapter: AddCookBookAdapter
+    private lateinit var listAdapter: AddCookBookListAdapter
 
     companion object
     {
@@ -32,12 +32,13 @@ class AddCookBookViewHolder private constructor(private val binding: ListItemCoo
         }
     }
 
-    fun bind(item: Recipe, viewModel: AddCookBookViewModel, adapter: AddCookBookAdapter)
+    fun bind(item: Recipe, viewModel: AddCookBookViewModel, listAdapter: AddCookBookListAdapter)
     {
         this.viewModel = viewModel
-        this.adapter = adapter
+        this.listAdapter = listAdapter
 
         binding.recipe = item
+        binding.textViewRecipeItem.text = item.title
 
         val image = File(item.imagePath)
         when
@@ -59,7 +60,7 @@ class AddCookBookViewHolder private constructor(private val binding: ListItemCoo
 
     private fun updateViewBackground(item: Recipe)
     {
-        if (adapter.selectedItems.contains(item))
+        if (listAdapter.selectedItems.contains(item))
         {
             itemView.setBackgroundColor(Color.LTGRAY);
         }
@@ -78,16 +79,16 @@ class AddCookBookViewHolder private constructor(private val binding: ListItemCoo
 
     private fun selectItem(item: Recipe)
     {
-        if (adapter.multiSelect)
+        if (listAdapter.multiSelect)
         {
-            if (adapter.selectedItems.contains(item))
+            if (listAdapter.selectedItems.contains(item))
             {
-                adapter.selectedItems.remove(item)
+                listAdapter.selectedItems.remove(item)
                 itemView.setBackgroundColor(Color.WHITE)
             }
             else
             {
-                adapter.selectedItems.add(item)
+                listAdapter.selectedItems.add(item)
                 itemView.setBackgroundColor(Color.LTGRAY)
             }
         }
@@ -109,7 +110,7 @@ class AddCookBookViewHolder private constructor(private val binding: ListItemCoo
 
         override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean
         {
-            adapter.multiSelect = true
+            listAdapter.multiSelect = true
             mode?.menuInflater?.inflate(R.menu.menu_action_delete, menu)
             return true
         }
@@ -121,9 +122,9 @@ class AddCookBookViewHolder private constructor(private val binding: ListItemCoo
 
         override fun onDestroyActionMode(mode: ActionMode?)
         {
-            adapter.multiSelect = false
-            adapter.selectedItems.clear()
-            adapter.notifyDataSetChanged()
+            listAdapter.multiSelect = false
+            listAdapter.selectedItems.clear()
+            listAdapter.notifyDataSetChanged()
         }
     }
 }

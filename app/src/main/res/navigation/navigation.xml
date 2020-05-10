@@ -118,7 +118,8 @@
         <action
             android:id="@+id/action_addCookBookFragment_to_chooseRecipeFragment"
             app:destination="@id/chooseRecipeFragment"
-            app:popUpTo="@id/addCookBookFragment" />
+            app:popUpTo="@id/addCookBookFragment"
+            app:popUpToInclusive="false" />
         <argument
             android:name="cookBook"
             app:argType="com.github.tei.imamu.data.entity.cookbook.CookBook"
@@ -133,7 +134,8 @@
         tools:layout="@layout/fragment_add_cook_book_choose_recipes">
         <action
             android:id="@+id/action_chooseRecipeFragment_to_addCookBookFragment"
-            app:destination="@id/addCookBookFragment" />
+            app:destination="@id/addCookBookFragment"
+            app:popUpTo="@id/nav_cookbook" />
         <argument
             android:name="cookBook"
             app:argType="com.github.tei.imamu.data.entity.cookbook.CookBook" />

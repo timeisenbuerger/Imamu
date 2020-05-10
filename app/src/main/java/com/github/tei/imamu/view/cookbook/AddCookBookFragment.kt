@@ -11,7 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
-import com.github.tei.imamu.custom.adapter.cookbook.AddCookBookAdapter
+import com.github.tei.imamu.custom.adapter.cookbook.AddCookBookListAdapter
 import com.github.tei.imamu.data.entity.cookbook.CookBook
 import com.github.tei.imamu.databinding.FragmentAddCookBookBinding
 import com.github.tei.imamu.viewmodel.cookbook.add.AddCookBookViewModel
@@ -23,7 +23,7 @@ class AddCookBookFragment : Fragment()
     private lateinit var viewModel: AddCookBookViewModel
     private lateinit var viewModelFactory: AddCookBookViewModelFactory
     private lateinit var application: Application
-    private lateinit var listAdapter: AddCookBookAdapter
+    private lateinit var listListAdapter: AddCookBookListAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
@@ -57,8 +57,8 @@ class AddCookBookFragment : Fragment()
         binding.viewModel = viewModel
 
         //set adapter in recyclerview
-        listAdapter = AddCookBookAdapter(viewModel)
-        binding.recipeList.adapter = listAdapter
+        listListAdapter = AddCookBookListAdapter(viewModel)
+        binding.recipeList.adapter = listListAdapter
 
         val manager = GridLayoutManager(activity, 2)
         binding.recipeList.layoutManager = manager
@@ -95,7 +95,7 @@ class AddCookBookFragment : Fragment()
             viewModel.cookBook.value = it as CookBook
         }
 
-        listAdapter.submitList(viewModel.cookBook.value!!.recipes)
+        listListAdapter.submitList(viewModel.cookBook.value!!.recipes)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater)

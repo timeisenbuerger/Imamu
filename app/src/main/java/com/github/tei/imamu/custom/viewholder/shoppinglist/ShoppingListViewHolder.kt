@@ -40,6 +40,7 @@ class ShoppingListViewHolder private constructor(private val binding: ListItemSh
 
         binding.shoppingList = item
         binding.textViewShoppingListName.text = item.name
+        binding.textIngredientsAmount.text = "${item.shoppingListItems.size} Zutaten"
 
         setImage(item)
 

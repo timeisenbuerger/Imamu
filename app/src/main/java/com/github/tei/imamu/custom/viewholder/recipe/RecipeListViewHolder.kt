@@ -12,11 +12,11 @@ import com.github.tei.imamu.R
 import com.github.tei.imamu.custom.adapter.recipe.RecipeListAdapter
 import com.github.tei.imamu.custom.listener.RecipeListListener
 import com.github.tei.imamu.data.entity.recipe.Recipe
-import com.github.tei.imamu.databinding.ListItemRecipeBinding
+import com.github.tei.imamu.databinding.ListItemRecipeListBinding
 import com.github.tei.imamu.viewmodel.recipe.list.RecipeListViewModel
 import java.io.File
 
-class RecipeListViewHolder private constructor(private val binding: ListItemRecipeBinding) : RecyclerView.ViewHolder(binding.root)
+class RecipeListViewHolder private constructor(private val binding: ListItemRecipeListBinding) : RecyclerView.ViewHolder(binding.root)
 {
     private lateinit var clickListener: RecipeListListener
     private lateinit var viewModel: RecipeListViewModel
@@ -27,7 +27,7 @@ class RecipeListViewHolder private constructor(private val binding: ListItemReci
         fun from(parent: ViewGroup): RecipeListViewHolder
         {
             val layoutInflater = LayoutInflater.from(parent.context)
-            val binding = ListItemRecipeBinding.inflate(layoutInflater, parent, false)
+            val binding = ListItemRecipeListBinding.inflate(layoutInflater, parent, false)
 
             return RecipeListViewHolder(binding)
         }
@@ -41,7 +41,7 @@ class RecipeListViewHolder private constructor(private val binding: ListItemReci
 
         binding.recipe = item
         binding.clickListener = clickListener
-        binding.textViewRecipeItem.text = item.title
+        binding.textViewRecipeTitle.text = item.title
 
         initChips(item, viewModel)
         setImage(item)
@@ -73,20 +73,13 @@ class RecipeListViewHolder private constructor(private val binding: ListItemReci
             binding.chipTime.chipIcon = ContextCompat.getDrawable(viewModel.getApplication(), R.drawable.ic_time_black)
             binding.chipTime.visibility = View.VISIBLE
         }
-
-        if (!TextUtils.isEmpty(item.difficulty))
-        {
-            binding.chipDifficulty.text = item.difficulty
-            binding.chipDifficulty.chipIcon = ContextCompat.getDrawable(viewModel.getApplication(), R.drawable.ic_poll_black)
-            binding.chipDifficulty.visibility = View.VISIBLE
-        }
     }
 
     private fun setImage(item: Recipe)
     {
         if (!TextUtils.isEmpty(item.imagePath) && File(item.imagePath).exists())
         {
-            binding.imageViewRecipeItem.setImageURI(Uri.parse(item.imagePath))
+            binding.cardBackground.setImageURI(Uri.parse(item.imagePath))
         }
     }
 

@@ -13,7 +13,7 @@ import com.github.tei.imamu.data.entity.recipe.Recipe
 import com.github.tei.imamu.viewmodel.cookbook.add.AddCookBookViewModel
 import com.github.tei.imamu.viewmodel.cookbook.list.CookBookListViewModel
 
-class AddCookBookAdapter(val viewModel: AddCookBookViewModel) : ListAdapter<Recipe, RecyclerView.ViewHolder>(RecipeDiffCallback())
+class AddCookBookListAdapter(val viewModel: AddCookBookViewModel) : ListAdapter<Recipe, RecyclerView.ViewHolder>(RecipeDiffCallback())
 {
     private val VIEW_TYPE_RECIPE = 0
     private val VIEW_TYPE_LAST_ITEM = 1

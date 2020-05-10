@@ -4,16 +4,12 @@ import android.content.Context
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.text.TextUtils
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuItem
-import android.view.ViewGroup
+import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.view.ActionMode
 import androidx.recyclerview.widget.RecyclerView
 import com.github.tei.imamu.R
 import com.github.tei.imamu.custom.adapter.cookbook.CookBookListAdapter
-import com.github.tei.imamu.custom.listener.CookBookListListener
 import com.github.tei.imamu.data.entity.cookbook.CookBook
 import com.github.tei.imamu.databinding.ListItemCookBookBinding
 import com.github.tei.imamu.viewmodel.cookbook.list.CookBookListViewModel
@@ -21,7 +17,6 @@ import java.io.File
 
 class CookBookListViewHolder private constructor(private val binding: ListItemCookBookBinding, private val context: Context) : RecyclerView.ViewHolder(binding.root)
 {
-    private lateinit var clickListener: CookBookListListener
     private lateinit var viewModel: CookBookListViewModel
     private lateinit var adapter: CookBookListAdapter
 
@@ -40,10 +35,8 @@ class CookBookListViewHolder private constructor(private val binding: ListItemCo
     {
         this.viewModel = viewModel
         this.adapter = adapter
-        clickListener = CookBookListListener { selectItem(item) }
 
         binding.cookBook = item
-        binding.clickListener = clickListener
 
         for (recipe in item.recipes)
         {
@@ -56,7 +49,8 @@ class CookBookListViewHolder private constructor(private val binding: ListItemCo
         binding.textViewCookBookTitle.text = item.title
         binding.textViewRecipeCount.text = item.recipes.size.toString()
 
-        itemView.setOnLongClickListener { handleLongClick(item) }
+        binding.transparentOverlay.setOnClickListener { viewModel.onCookBookClicked(item) }
+        binding.transparentOverlay.setOnLongClickListener { handleLongClick(item) }
 
         updateViewBackground(item)
     }

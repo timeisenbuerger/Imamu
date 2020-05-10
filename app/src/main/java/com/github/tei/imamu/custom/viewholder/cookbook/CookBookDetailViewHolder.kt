@@ -16,7 +16,6 @@ class CookBookDetailViewHolder private constructor(private val binding: ListItem
 {
     private lateinit var viewModel: CookBookDetailViewModel
     private lateinit var adapter: CookBookDetailRecipeListAdapter
-    private lateinit var clickListener: RecipeListListener
 
     companion object
     {
@@ -35,10 +34,12 @@ class CookBookDetailViewHolder private constructor(private val binding: ListItem
         this.adapter = adapter
 
         binding.recipe = item
-        clickListener = RecipeListListener { viewModel.onClickRecipe(item) }
         setImage(item)
         binding.textViewRecipeItem.text = item.title
 
+        itemView.setOnClickListener {
+            viewModel.onClickRecipe(item)
+        }
     }
 
     private fun setImage(item: Recipe)
