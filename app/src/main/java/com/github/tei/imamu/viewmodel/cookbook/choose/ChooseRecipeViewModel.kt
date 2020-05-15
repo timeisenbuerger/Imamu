@@ -15,8 +15,8 @@ class ChooseRecipeViewModel(application: Application, cookBook: CookBook) : Andr
 {
     private var viewModelJob = Job()
 
-    private val _recipes = MutableLiveData<List<Recipe>>()
-    val recipes: LiveData<List<Recipe>>
+    private val _recipes = MutableLiveData<MutableList<Recipe>>()
+    val recipes: LiveData<MutableList<Recipe>>
         get() = _recipes
 
     private val _cookBook = MutableLiveData<CookBook>()

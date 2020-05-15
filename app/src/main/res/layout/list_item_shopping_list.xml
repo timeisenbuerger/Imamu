@@ -31,7 +31,7 @@
                 <ImageView
                     android:id="@+id/image_view_shopping_list"
                     android:layout_width="150dp"
-                    android:layout_height="150dp"
+                    android:layout_height="100dp"
                     android:scaleType="centerCrop"
                     android:contentDescription="@string/image_view_meal_text"
                     app:layout_constraintBottom_toBottomOf="parent"

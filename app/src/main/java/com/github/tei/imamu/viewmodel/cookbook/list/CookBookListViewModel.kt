@@ -14,8 +14,8 @@ class CookBookListViewModel(application: Application) : AndroidViewModel(applica
 {
     private var viewModelJob = Job()
 
-    private val _cookBooks = MutableLiveData<List<CookBook>>()
-    val cookBooks: LiveData<List<CookBook>>
+    private val _cookBooks = MutableLiveData<MutableList<CookBook>>()
+    val cookBooks: LiveData<MutableList<CookBook>>
         get() = _cookBooks
 
     private val _navigateToDetail = MutableLiveData<CookBook>()

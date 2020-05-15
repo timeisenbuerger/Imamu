@@ -2,11 +2,10 @@ package com.github.tei.imamu.view.recipe
 
 import android.app.Application
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -41,6 +40,7 @@ class RecipeListFragment : Fragment()
         initListener()
         initObserver()
 
+        setHasOptionsMenu(true)
         return binding.root
     }
 
@@ -63,7 +63,7 @@ class RecipeListFragment : Fragment()
         binding.viewModel = viewModel
 
         //set adapter in recyclerview
-        listAdapter = RecipeListAdapter(viewModel)
+        listAdapter = RecipeListAdapter(viewModel, viewModel.recipes.value!!)
         binding.recipeList.adapter = listAdapter
 
         val manager = LinearLayoutManager(activity)
@@ -128,12 +128,28 @@ class RecipeListFragment : Fragment()
         })
     }
 
-    override fun onResume()
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater)
     {
-        super.onResume()
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_action_search_view, menu)
+        val item = menu.findItem(R.id.action_search)
+        item?.let {
+            val searchView = it.actionView as SearchView
+            searchView.isIconified = false
+            val textListener = object : SearchView.OnQueryTextListener
+            {
+                override fun onQueryTextSubmit(query: String?): Boolean
+                {
+                    return true
+                }
 
-        //TODO dreckig, evtl anpassen!
-        viewModel.initRecipes()
+                override fun onQueryTextChange(newText: String?): Boolean
+                {
+                    listAdapter.filter.filter(newText)
+                    return true
+                }
+            }
+            searchView.setOnQueryTextListener(textListener)
+        }
     }
-
 }

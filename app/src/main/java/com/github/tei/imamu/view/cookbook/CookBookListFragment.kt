@@ -2,15 +2,13 @@ package com.github.tei.imamu.view.cookbook
 
 import android.app.Application
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
@@ -35,6 +33,7 @@ class CookBookListFragment : Fragment()
         initListener()
         initObserver()
 
+        setHasOptionsMenu(true)
         return binding.root
     }
 
@@ -57,7 +56,7 @@ class CookBookListFragment : Fragment()
         binding.viewModel = viewModel
 
         //set adapter in recyclerview
-        listAdapter = CookBookListAdapter(viewModel, requireContext())
+        listAdapter = CookBookListAdapter(viewModel, viewModel.cookBooks.value!!, requireContext())
         binding.cookbookList.adapter = listAdapter
 
         val manager = LinearLayoutManager(activity)
@@ -85,5 +84,31 @@ class CookBookListFragment : Fragment()
                 viewModel.onNavigateToDetailComplete()
             }
         })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater)
+    {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_action_search_view, menu)
+        val item = menu.findItem(R.id.action_search)
+        item?.let {
+            val searchView = it.actionView as SearchView
+            searchView.isIconified = false
+            val textListener = object : SearchView.OnQueryTextListener
+            {
+                override fun onQueryTextSubmit(query: String?): Boolean
+                {
+                    return true
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean
+                {
+                    listAdapter.filter.filter(newText)
+                    return true
+                }
+            }
+
+            searchView.setOnQueryTextListener(textListener)
+        }
     }
 }

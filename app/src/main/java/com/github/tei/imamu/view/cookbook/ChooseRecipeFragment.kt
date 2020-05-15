@@ -3,6 +3,7 @@ package com.github.tei.imamu.view.cookbook
 import android.app.Application
 import android.os.Bundle
 import android.view.*
+import android.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -54,7 +55,7 @@ class ChooseRecipeFragment : Fragment()
         binding.viewModel = viewModel
 
         //set adapter in recyclerview
-        listAdapter = ChooseRecipeAdapter(viewModel)
+        listAdapter = ChooseRecipeAdapter(viewModel, viewModel.recipes.value!!)
         binding.chooseRecipeList.adapter = listAdapter
 
         val manager = GridLayoutManager(activity, 2)
@@ -73,7 +74,26 @@ class ChooseRecipeFragment : Fragment()
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater)
     {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.menu_add_edit, menu)
+        inflater.inflate(R.menu.menu_add_edit_search, menu)
+        val item = menu.findItem(R.id.action_search)
+        item?.let {
+            val searchView = it.actionView as SearchView
+            searchView.isIconified = false
+            val textListener = object : SearchView.OnQueryTextListener
+            {
+                override fun onQueryTextSubmit(query: String?): Boolean
+                {
+                    return true
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean
+                {
+                    listAdapter.filter.filter(newText)
+                    return true
+                }
+            }
+            searchView.setOnQueryTextListener(textListener)
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean

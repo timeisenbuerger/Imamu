@@ -7,4 +7,5 @@
     <color name="gray">#383838</color>
     <color name="pearl">#EDE0C9</color>
     <color name="darker_gray">#E6E6E6</color>
+    <color name="placeholder_bg">#dddddd</color>
 </resources>

@@ -67,6 +67,7 @@
     <string name="insert_cook_book_title">Kochbuchname eingeben</string>
     <string name="text_cook_book_recipes">Rezepte:</string>
     <string name="action_go_to_detail">Detail</string>
+    <string name="action_search">Suchen</string>
 
     <string-array name="ingredient_units">
         <item>g</item>
