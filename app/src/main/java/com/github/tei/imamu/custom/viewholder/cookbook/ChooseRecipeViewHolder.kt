@@ -5,7 +5,9 @@ import android.net.Uri
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.github.tei.imamu.R
 import com.github.tei.imamu.custom.adapter.cookbook.ChooseRecipeAdapter
 import com.github.tei.imamu.data.entity.recipe.Recipe
 import com.github.tei.imamu.databinding.ListItemCookBookRecipeBinding
@@ -47,7 +49,13 @@ class ChooseRecipeViewHolder private constructor(private val binding: ListItemCo
     {
         if (!TextUtils.isEmpty(item.imagePath) && File(item.imagePath).exists())
         {
+            binding.imageViewRecipeItem.scaleType = ImageView.ScaleType.CENTER_CROP
             binding.imageViewRecipeItem.setImageURI(Uri.parse(item.imagePath))
+        }
+        else
+        {
+            binding.imageViewRecipeItem.scaleType = ImageView.ScaleType.FIT_CENTER
+            binding.imageViewRecipeItem.setImageResource(R.drawable.ic_hot_tub)
         }
     }
 

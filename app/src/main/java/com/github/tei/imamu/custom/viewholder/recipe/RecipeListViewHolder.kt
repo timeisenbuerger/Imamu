@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.net.Uri
 import android.text.TextUtils
 import android.view.*
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.view.ActionMode
 import androidx.core.content.ContextCompat
@@ -79,7 +80,13 @@ class RecipeListViewHolder private constructor(private val binding: ListItemReci
     {
         if (!TextUtils.isEmpty(item.imagePath) && File(item.imagePath).exists())
         {
+            binding.cardBackground.scaleType = ImageView.ScaleType.CENTER_CROP
             binding.cardBackground.setImageURI(Uri.parse(item.imagePath))
+        }
+        else
+        {
+            binding.cardBackground.scaleType = ImageView.ScaleType.FIT_CENTER
+            binding.cardBackground.setImageResource(R.drawable.ic_hot_tub)
         }
     }
 

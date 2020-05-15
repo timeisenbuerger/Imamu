@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.view.ActionMode
 import androidx.recyclerview.widget.RecyclerView
@@ -58,10 +59,12 @@ class ShoppingListViewHolder private constructor(private val binding: ListItemSh
     {
         if (!TextUtils.isEmpty(item.imagePath) && File(item.imagePath).exists())
         {
+            binding.imageViewShoppingList.scaleType = ImageView.ScaleType.CENTER_CROP
             binding.imageViewShoppingList.setImageURI(Uri.parse(item.imagePath))
         }
         else
         {
+            binding.imageViewShoppingList.scaleType = ImageView.ScaleType.FIT_CENTER
             binding.imageViewShoppingList.setImageResource(R.drawable.ic_hot_tub)
         }
     }
