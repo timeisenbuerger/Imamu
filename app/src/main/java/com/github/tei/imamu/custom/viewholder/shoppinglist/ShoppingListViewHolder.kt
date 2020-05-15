@@ -38,6 +38,11 @@ class ShoppingListViewHolder private constructor(private val binding: ListItemSh
         this.viewModel = viewModel
         this.adapter = adapter
 
+        init(item, viewModel)
+    }
+
+    private fun init(item: ShoppingList, viewModel: ShoppingListViewModel)
+    {
         binding.shoppingList = item
         binding.textViewShoppingListName.text = item.name
         binding.textIngredientsAmount.text = "${item.shoppingListItems.size} Zutaten"

@@ -22,4 +22,14 @@ class ShoppingListAdapter(val viewModel: ShoppingListViewModel) : ListAdapter<Sh
         val item = getItem(position)
         holderList.bind(item, viewModel, this)
     }
+
+    override fun getItemViewType(position: Int): Int
+    {
+        return position
+    }
+
+    override fun getItemCount(): Int
+    {
+        return currentList.size
+    }
 }

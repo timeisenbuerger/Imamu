@@ -31,7 +31,16 @@ class ShoppingListViewModel() : ViewModel()
 
     init
     {
-        _shoppingLists.value = shoppingListBox.all
+        val shoppingLists = shoppingListBox.all
+        val allShoppingList = ShoppingList()
+        allShoppingList.name = "Alle"
+        for (shoppingList in shoppingLists)
+        {
+            allShoppingList.shoppingListItems.addAll(shoppingList.shoppingListItems)
+        }
+
+        shoppingLists.add(0, allShoppingList)
+        _shoppingLists.value = shoppingLists
     }
 
     override fun onCleared()
@@ -66,6 +75,15 @@ class ShoppingListViewModel() : ViewModel()
 
     fun deleteShoppingLists(items: MutableList<ShoppingList>)
     {
+        if (items.contains(_shoppingLists.value!![0]))
+        {
+            items.remove(_shoppingLists.value!![0])
+        }
+
+        for (item in items)
+        {
+            _shoppingLists.value!![0].shoppingListItems.removeAll(item.shoppingListItems)
+        }
         shoppingLists.value?.removeAll(items)
         shoppingListBox.remove(items)
         onDeleteItems()
