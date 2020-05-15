@@ -66,7 +66,7 @@ class CookBookListFragment : Fragment()
     private fun initListener()
     {
         binding.fabCreateCookbook.setOnClickListener {
-            findNavController().navigate(CookBookListFragmentDirections.actionNavCookbookToAddCookBookFragment(null))
+            viewModel.onNavigateToAdd()
         }
     }
 
@@ -82,6 +82,14 @@ class CookBookListFragment : Fragment()
             it?.let {
                 findNavController().navigate(CookBookListFragmentDirections.actionNavCookbookToCookBookDetailFragment(it))
                 viewModel.onNavigateToDetailComplete()
+            }
+        })
+
+        viewModel.navigateToAdd.observe(viewLifecycleOwner, Observer {
+            if (it)
+            {
+                findNavController().navigate(CookBookListFragmentDirections.actionNavCookbookToAddCookBookFragment(null))
+                viewModel.onNavigateToAddComplete()
             }
         })
     }

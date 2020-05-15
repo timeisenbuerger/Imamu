@@ -107,6 +107,9 @@ class ChooseRecipeFragment : Fragment()
 
                 findNavController().navigate(ChooseRecipeFragmentDirections.actionChooseRecipeFragmentToAddCookBookFragment(viewModel.cookBook.value!!))
             }
+            R.id.action_search       ->
+            {}
+            else                     -> findNavController().popBackStack() //TODO zwangsweise, da die Navigation sonst nicht funktioniert
         }
         return true
     }

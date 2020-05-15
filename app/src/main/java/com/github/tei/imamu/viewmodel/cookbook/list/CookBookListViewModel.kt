@@ -18,6 +18,10 @@ class CookBookListViewModel(application: Application) : AndroidViewModel(applica
     val cookBooks: LiveData<MutableList<CookBook>>
         get() = _cookBooks
 
+    private val _navigateToAdd = MutableLiveData<Boolean>()
+    val navigateToAdd: LiveData<Boolean>
+        get() = _navigateToAdd
+
     private val _navigateToDetail = MutableLiveData<CookBook>()
     val navigateToDetail: LiveData<CookBook>
         get() = _navigateToDetail
@@ -49,6 +53,16 @@ class CookBookListViewModel(application: Application) : AndroidViewModel(applica
     fun onNavigateToDetailComplete()
     {
         _navigateToDetail.value = null
+    }
+
+    fun onNavigateToAdd()
+    {
+        _navigateToAdd.value = true
+    }
+
+    fun onNavigateToAddComplete()
+    {
+        _navigateToAdd.value = false
     }
 
     override fun onCleared()
