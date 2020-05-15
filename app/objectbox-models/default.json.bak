@@ -94,11 +94,6 @@
           "type": 9
         },
         {
-          "id": "4:7211480856525954018",
-          "name": "name",
-          "type": 9
-        },
-        {
           "id": "5:5930784620653630284",
           "name": "recipeId",
           "indexId": "1:1765103224388080054",
@@ -107,7 +102,13 @@
           "relationTarget": "Recipe"
         }
       ],
-      "relations": []
+      "relations": [
+        {
+          "id": "2:4388833860576146167",
+          "name": "ingredient",
+          "targetId": "6:4649709045713696666"
+        }
+      ]
     },
     {
       "id": "3:4326319803689828862",
@@ -175,11 +176,55 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "5:8220585078138973708",
+      "lastPropertyId": "2:4063086700752229139",
+      "name": "CookBook",
+      "properties": [
+        {
+          "id": "1:6904525743026776097",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:4063086700752229139",
+          "name": "title",
+          "type": 9
+        }
+      ],
+      "relations": [
+        {
+          "id": "1:7759729924434986405",
+          "name": "recipes",
+          "targetId": "1:2548072088956869254"
+        }
+      ]
+    },
+    {
+      "id": "6:4649709045713696666",
+      "lastPropertyId": "2:7028583377025862200",
+      "name": "Ingredient",
+      "properties": [
+        {
+          "id": "1:633188115793863107",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:7028583377025862200",
+          "name": "name",
+          "type": 9
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "4:6648330953913765978",
+  "lastEntityId": "6:4649709045713696666",
   "lastIndexId": "3:394756915084088812",
-  "lastRelationId": "0:0",
+  "lastRelationId": "2:4388833860576146167",
   "lastSequenceId": "0:0",
   "modelVersion": 5,
   "modelVersionParserMinimum": 5,
@@ -189,7 +234,8 @@
   ],
   "retiredPropertyUids": [
     5864946295596553103,
-    5614713038289382758
+    5614713038289382758,
+    7211480856525954018
   ],
   "retiredRelationUids": [],
   "version": 1

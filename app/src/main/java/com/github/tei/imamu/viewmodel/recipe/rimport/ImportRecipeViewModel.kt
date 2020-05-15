@@ -5,11 +5,14 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.github.tei.imamu.data.ObjectBox
+import com.github.tei.imamu.data.entity.Ingredient
+import com.github.tei.imamu.data.entity.Ingredient_
 import com.github.tei.imamu.data.entity.recipe.Recipe
 import com.github.tei.imamu.data.entity.recipe.RecipeIngredient
 import de.tei.re.logic.ChefkochExtractor
 import io.objectbox.Box
 import io.objectbox.kotlin.boxFor
+import io.objectbox.relation.ToOne
 import kotlinx.coroutines.Job
 
 class ImportRecipeViewModel(application: Application) : AndroidViewModel(application)
@@ -19,6 +22,7 @@ class ImportRecipeViewModel(application: Application) : AndroidViewModel(applica
     private var recipeExtractor: ChefkochExtractor
 
     private val recipeBox: Box<Recipe> = ObjectBox.boxStore.boxFor()
+    private val ingredientBox: Box<Ingredient> = ObjectBox.boxStore.boxFor()
 
     private val _recipe = MutableLiveData<Recipe>()
     val recipe: LiveData<Recipe>
@@ -53,7 +57,7 @@ class ImportRecipeViewModel(application: Application) : AndroidViewModel(applica
 
                 recipeIngredient.amount = ingredient.amount
                 recipeIngredient.unit = ingredient.unit
-                recipeIngredient.name = ingredient.name
+                recipeIngredient.ingredient.target = getIngredientForName(ingredient.name)
 
                 item.recipeIngredients.add(recipeIngredient)
             }
@@ -78,6 +82,24 @@ class ImportRecipeViewModel(application: Application) : AndroidViewModel(applica
             }
 
             recipeBox.put(item)
+        }
+    }
+
+    private fun getIngredientForName(name: String): Ingredient
+    {
+        val ingredient = ingredientBox.query()
+            .equal(Ingredient_.name, name)
+            .build()
+            .find()
+
+        return if (ingredient.isEmpty())
+        {
+            val newIngredient = Ingredient(name = name)
+            newIngredient
+        }
+        else
+        {
+            ingredient[0]
         }
     }
 

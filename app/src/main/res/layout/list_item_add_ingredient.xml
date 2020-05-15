@@ -47,7 +47,7 @@
             android:layout_marginEnd="@dimen/default_recipe_padding"
             android:layout_weight="1"
             android:ems="10"
-            android:text="@={item.name}"
+            android:text="@={item.ingredient.target.name}"
             android:hint="@string/insert_recipe_ingredient"
             android:inputType="textPersonName" />
 

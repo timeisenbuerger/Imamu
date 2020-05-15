@@ -1,5 +1,6 @@
 package com.github.tei.imamu.data.entity.recipe
 
+import com.github.tei.imamu.data.entity.Ingredient
 import io.objectbox.annotation.Entity
 import io.objectbox.annotation.Id
 import io.objectbox.relation.ToOne
@@ -12,10 +13,9 @@ data class RecipeIngredient(
 
     var amount: String = "",
 
-    var unit: String = "",
-
-    var name: String = ""
+    var unit: String = ""
 ) : Serializable
 {
     lateinit var recipe: ToOne<Recipe>
+    lateinit var ingredient: ToOne<Ingredient>
 }

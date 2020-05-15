@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/default_recipe_margin"
             android:layout_marginBottom="@dimen/default_recipe_margin"
-            android:text="@{ingredient.name}"
+            android:text="@{ingredient.ingredient.target.name}"
             tools:hint="@string/recipe_ingredients_text"
             android:textStyle="bold" />
     </LinearLayout>

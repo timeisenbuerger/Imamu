@@ -20,6 +20,8 @@ import com.github.tei.imamu.viewmodel.recipe.detail.RecipeDetailViewModel
 import com.github.tei.imamu.viewmodel.recipe.detail.RecipeDetailViewModelFactory
 import com.google.android.material.chip.Chip
 import java.io.File
+import java.math.BigDecimal
+import java.text.DecimalFormat
 
 class RecipeDetailFragment : Fragment()
 {
@@ -160,10 +162,10 @@ class RecipeDetailFragment : Fragment()
         {
             if (ingredient.amount.isNotEmpty() && ingredient.amount.matches("-?\\d+(\\.\\d+)?".toRegex()))
             {
-                var amount: Float = ingredient.amount.toFloat()
+                var amount = ingredient.amount.toFloat()
                 amount = (amount / number) * increasedNumber
 
-                ingredient.amount = amount.toString()
+                ingredient.amount = DecimalFormat.getInstance().format(amount).replace(",", ".")
             }
         }
 
@@ -187,10 +189,10 @@ class RecipeDetailFragment : Fragment()
         {
             if (ingredient.amount.isNotEmpty() && ingredient.amount.matches("-?\\d+(\\.\\d+)?".toRegex()))
             {
-                var amount: Float = ingredient.amount.toFloat()
+                var amount = ingredient.amount.toFloat()
                 amount = (amount / number) * decreasedNumber
 
-                ingredient.amount = amount.toString()
+                ingredient.amount = DecimalFormat.getInstance().format(amount).replace(",", ".")
             }
         }
 

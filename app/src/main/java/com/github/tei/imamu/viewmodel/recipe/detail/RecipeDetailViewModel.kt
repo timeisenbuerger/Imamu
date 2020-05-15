@@ -47,7 +47,7 @@ class RecipeDetailViewModel(recipe: Recipe) : ViewModel()
         var shoppingListItems = mutableListOf<ShoppingListItem>()
         for (ingredient in recipe.recipeIngredients)
         {
-            var shoppingListItem = ShoppingListItem(amount = ingredient.amount, unit = ingredient.unit, name = ingredient.name)
+            var shoppingListItem = ShoppingListItem(amount = ingredient.amount, unit = ingredient.unit, name = ingredient.ingredient.target.name)
             shoppingListItems.add(shoppingListItem)
         }
         shoppingList.shoppingListItems.addAll(shoppingListItems)

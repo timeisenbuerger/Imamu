@@ -74,7 +74,7 @@
     },
     {
       "id": "2:6168022746291461423",
-      "lastPropertyId": "5:5930784620653630284",
+      "lastPropertyId": "6:6709752495725744009",
       "name": "RecipeIngredient",
       "properties": [
         {
@@ -94,17 +94,20 @@
           "type": 9
         },
         {
-          "id": "4:7211480856525954018",
-          "name": "name",
-          "type": 9
-        },
-        {
           "id": "5:5930784620653630284",
           "name": "recipeId",
           "indexId": "1:1765103224388080054",
           "type": 11,
           "flags": 1548,
           "relationTarget": "Recipe"
+        },
+        {
+          "id": "6:6709752495725744009",
+          "name": "ingredientId",
+          "indexId": "4:1496609911292335364",
+          "type": 11,
+          "flags": 1548,
+          "relationTarget": "Ingredient"
         }
       ],
       "relations": []
@@ -200,11 +203,30 @@
           "targetId": "1:2548072088956869254"
         }
       ]
+    },
+    {
+      "id": "6:4649709045713696666",
+      "lastPropertyId": "2:7028583377025862200",
+      "name": "Ingredient",
+      "properties": [
+        {
+          "id": "1:633188115793863107",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:7028583377025862200",
+          "name": "name",
+          "type": 9
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "5:8220585078138973708",
-  "lastIndexId": "3:394756915084088812",
-  "lastRelationId": "1:7759729924434986405",
+  "lastEntityId": "6:4649709045713696666",
+  "lastIndexId": "4:1496609911292335364",
+  "lastRelationId": "2:4388833860576146167",
   "lastSequenceId": "0:0",
   "modelVersion": 5,
   "modelVersionParserMinimum": 5,
@@ -214,8 +236,11 @@
   ],
   "retiredPropertyUids": [
     5864946295596553103,
-    5614713038289382758
+    5614713038289382758,
+    7211480856525954018
   ],
-  "retiredRelationUids": [],
+  "retiredRelationUids": [
+    4388833860576146167
+  ],
   "version": 1
 }

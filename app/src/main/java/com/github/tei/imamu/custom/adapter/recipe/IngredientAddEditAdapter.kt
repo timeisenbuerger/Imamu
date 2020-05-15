@@ -9,6 +9,7 @@ import android.widget.ListView
 import androidx.databinding.DataBindingUtil
 import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
+import com.github.tei.imamu.data.entity.Ingredient
 import com.github.tei.imamu.data.entity.recipe.RecipeIngredient
 import com.github.tei.imamu.databinding.ListItemAddIngredientBinding
 import com.github.tei.imamu.util.setListViewHeightBasedOnChildren
@@ -31,9 +32,13 @@ class IngredientAddEditAdapter(context: Context, private var ingredients: Mutabl
             DataBindingUtil.getBinding(convertView)
         }
 
+        if (ingredient!!.ingredient.target == null)
+        {
+            ingredient!!.ingredient.target = Ingredient()
+        }
+
         binding?.item = ingredient
         binding?.imageButtonRemoveLine?.setOnClickListener {
-            //            viewModel.recipe.value!!.recipeIngredients.remove(ingredient)
             ingredients.remove(ingredient)
             notifyDataSetChanged()
             setListViewHeightBasedOnChildren(parent as ListView)

@@ -152,4 +152,10 @@ class RecipeListFragment : Fragment()
             searchView.setOnQueryTextListener(textListener)
         }
     }
+
+    override fun onResume()
+    {
+        super.onResume()
+        viewModel.initRecipes()
+    }
 }

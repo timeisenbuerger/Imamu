@@ -5,6 +5,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.github.tei.imamu.data.ObjectBox
+import com.github.tei.imamu.data.entity.Ingredient
+import com.github.tei.imamu.data.entity.Ingredient_
 import com.github.tei.imamu.data.entity.recipe.Recipe
 import io.objectbox.Box
 import io.objectbox.kotlin.boxFor
@@ -23,6 +25,7 @@ class AddRecipeViewModel(application: Application) : AndroidViewModel(applicatio
         get() = _navigateToRecipeDetail
 
     private val recipeBox: Box<Recipe> = ObjectBox.boxStore.boxFor()
+    private val ingredientBox: Box<Ingredient> = ObjectBox.boxStore.boxFor()
 
     init
     {
@@ -31,8 +34,35 @@ class AddRecipeViewModel(application: Application) : AndroidViewModel(applicatio
 
     fun onSaveRecipe()
     {
-        recipe.value?.let { recipeBox.put(it) }
+        recipe.value?.let {
+            for (recipeIngredient in it.recipeIngredients)
+            {
+                if (recipeIngredient.ingredient.target.id == 0L)
+                {
+                    recipeIngredient.ingredient.target = getIngredientForName(recipeIngredient.ingredient.target.name)
+                }
+            }
+            recipeBox.put(it)
+        }
         _navigateToRecipeDetail.value = true
+    }
+
+    private fun getIngredientForName(name: String): Ingredient
+    {
+        val ingredient = ingredientBox.query()
+            .equal(Ingredient_.name, name)
+            .build()
+            .find()
+
+        return if (ingredient.isEmpty())
+        {
+            val newIngredient = Ingredient(name = name)
+            newIngredient
+        }
+        else
+        {
+            ingredient[0]
+        }
     }
 
     fun onNavigateToDetailComplete()
