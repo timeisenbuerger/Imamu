@@ -6,7 +6,6 @@ import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.github.tei.imamu.MainActivity
@@ -14,16 +13,15 @@ import com.github.tei.imamu.R
 import com.github.tei.imamu.custom.adapter.cookbook.AddCookBookListAdapter
 import com.github.tei.imamu.data.entity.cookbook.CookBook
 import com.github.tei.imamu.databinding.FragmentAddCookBookBinding
-import com.github.tei.imamu.viewmodel.cookbook.add.AddCookBookViewModel
-import com.github.tei.imamu.viewmodel.cookbook.add.AddCookBookViewModelFactory
+import com.github.tei.imamu.viewmodel.cookbook.AddCookBookViewModel
+import org.koin.android.ext.android.inject
 
 class AddCookBookFragment : Fragment()
 {
     private lateinit var binding: FragmentAddCookBookBinding
-    private lateinit var viewModel: AddCookBookViewModel
-    private lateinit var viewModelFactory: AddCookBookViewModelFactory
     private lateinit var application: Application
     private lateinit var listListAdapter: AddCookBookListAdapter
+    private val viewModel: AddCookBookViewModel by inject()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
@@ -45,10 +43,6 @@ class AddCookBookFragment : Fragment()
 
         //init application
         application = requireNotNull(this.activity).application
-
-        //init viewModel
-        viewModelFactory = AddCookBookViewModelFactory(application)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(AddCookBookViewModel::class.java)
 
         //set lifecycle owner
         binding.lifecycleOwner = this

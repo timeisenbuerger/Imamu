@@ -7,21 +7,19 @@ import android.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
 import com.github.tei.imamu.custom.adapter.cookbook.CookBookListAdapter
 import com.github.tei.imamu.databinding.FragmentCookbookListBinding
-import com.github.tei.imamu.viewmodel.cookbook.list.CookBookListViewModel
-import com.github.tei.imamu.viewmodel.cookbook.list.CookBookListViewModelFactory
+import com.github.tei.imamu.viewmodel.cookbook.CookBookListViewModel
+import org.koin.android.ext.android.inject
 
 class CookBookListFragment : Fragment()
 {
     private lateinit var binding: FragmentCookbookListBinding
-    private lateinit var viewModel: CookBookListViewModel
-    private lateinit var viewModelFactory: CookBookListViewModelFactory
+    private val viewModel: CookBookListViewModel by inject()
     private lateinit var application: Application
     private lateinit var listAdapter: CookBookListAdapter
 
@@ -45,10 +43,6 @@ class CookBookListFragment : Fragment()
         //init application
         application = requireNotNull(this.activity).application
 
-        //init viewModel
-        viewModelFactory = CookBookListViewModelFactory(application)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(CookBookListViewModel::class.java)
-
         //set lifecycle owner
         binding.lifecycleOwner = this
 
@@ -56,7 +50,7 @@ class CookBookListFragment : Fragment()
         binding.viewModel = viewModel
 
         //set adapter in recyclerview
-        listAdapter = CookBookListAdapter(viewModel, viewModel.cookBooks.value!!, requireContext())
+        listAdapter = CookBookListAdapter(viewModel, requireContext())
         binding.cookbookList.adapter = listAdapter
 
         val manager = LinearLayoutManager(activity)
@@ -74,6 +68,7 @@ class CookBookListFragment : Fragment()
     {
         viewModel.cookBooks.observe(viewLifecycleOwner, Observer {
             it?.let {
+                listAdapter.allCookBooks = it
                 listAdapter.submitList(it)
             }
         })

@@ -4,7 +4,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.github.tei.imamu.viewmodel.cookbook.choose.ChooseRecipeViewModel" />
+            type="com.github.tei.imamu.viewmodel.cookbook.ChooseRecipeViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.github.tei.imamu.custom.adapter.cookbook.AddCookBookListAdapter
 import com.github.tei.imamu.databinding.ListItemLastItemActionAddBinding
-import com.github.tei.imamu.viewmodel.cookbook.add.AddCookBookViewModel
+import com.github.tei.imamu.viewmodel.cookbook.AddCookBookViewModel
 
 class AddCookBookLastItemViewHolder private constructor(private val binding: ListItemLastItemActionAddBinding) : RecyclerView.ViewHolder(binding.root)
 {

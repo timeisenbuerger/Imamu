@@ -7,21 +7,19 @@ import android.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
 import com.github.tei.imamu.custom.adapter.cookbook.ChooseRecipeAdapter
 import com.github.tei.imamu.databinding.FragmentAddCookBookChooseRecipesBinding
-import com.github.tei.imamu.viewmodel.cookbook.choose.ChooseRecipeViewModel
-import com.github.tei.imamu.viewmodel.cookbook.choose.ChooseRecipeViewModelFactory
+import com.github.tei.imamu.viewmodel.cookbook.ChooseRecipeViewModel
+import org.koin.android.ext.android.inject
 
 class ChooseRecipeFragment : Fragment()
 {
     private lateinit var binding: FragmentAddCookBookChooseRecipesBinding
-    private lateinit var viewModel: ChooseRecipeViewModel
-    private lateinit var viewModelFactory: ChooseRecipeViewModelFactory
+    private val viewModel: ChooseRecipeViewModel by inject()
     private lateinit var application: Application
     private lateinit var listAdapter: ChooseRecipeAdapter
 
@@ -45,8 +43,7 @@ class ChooseRecipeFragment : Fragment()
         application = requireNotNull(this.activity).application
 
         //init viewModel
-        viewModelFactory = ChooseRecipeViewModelFactory(application, ChooseRecipeFragmentArgs.fromBundle(requireArguments()).cookBook)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(ChooseRecipeViewModel::class.java)
+        viewModel.cookBook.value = ChooseRecipeFragmentArgs.fromBundle(requireArguments()).cookBook
 
         //set lifecycle owner
         binding.lifecycleOwner = this
@@ -55,7 +52,7 @@ class ChooseRecipeFragment : Fragment()
         binding.viewModel = viewModel
 
         //set adapter in recyclerview
-        listAdapter = ChooseRecipeAdapter(viewModel, viewModel.recipes.value!!)
+        listAdapter = ChooseRecipeAdapter(viewModel)
         binding.chooseRecipeList.adapter = listAdapter
 
         val manager = GridLayoutManager(activity, 2)
@@ -66,6 +63,7 @@ class ChooseRecipeFragment : Fragment()
     {
         viewModel.recipes.observe(viewLifecycleOwner, Observer {
             it?.let {
+                listAdapter.allRecipes = it
                 listAdapter.submitList(it)
             }
         })
@@ -108,7 +106,8 @@ class ChooseRecipeFragment : Fragment()
                 findNavController().navigate(ChooseRecipeFragmentDirections.actionChooseRecipeFragmentToAddCookBookFragment(viewModel.cookBook.value!!))
             }
             R.id.action_search       ->
-            {}
+            {
+            }
             else                     -> findNavController().popBackStack() //TODO zwangsweise, da die Navigation sonst nicht funktioniert
         }
         return true

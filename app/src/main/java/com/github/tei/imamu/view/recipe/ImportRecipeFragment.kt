@@ -14,21 +14,19 @@ import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
 import com.github.tei.imamu.databinding.FragmentImportRecipeBinding
-import com.github.tei.imamu.viewmodel.recipe.rimport.ImportRecipeViewModel
-import com.github.tei.imamu.viewmodel.recipe.rimport.ImportRecipeViewModelFactory
+import com.github.tei.imamu.viewmodel.recipe.ImportRecipeViewModel
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
+import org.koin.android.ext.android.inject
 
 class ImportRecipeFragment : Fragment()
 {
     private lateinit var binding: FragmentImportRecipeBinding
-    private lateinit var viewModel: ImportRecipeViewModel
-    private lateinit var viewModelFactory: ImportRecipeViewModelFactory
+    private val viewModel: ImportRecipeViewModel by inject()
     private lateinit var application: Application
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
@@ -50,10 +48,6 @@ class ImportRecipeFragment : Fragment()
 
         //init application
         application = requireNotNull(this.activity).application
-
-        //init viewModel
-        viewModelFactory = ImportRecipeViewModelFactory(application)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(ImportRecipeViewModel::class.java)
 
         //set lifecycle owner
         binding.lifecycleOwner = viewLifecycleOwner

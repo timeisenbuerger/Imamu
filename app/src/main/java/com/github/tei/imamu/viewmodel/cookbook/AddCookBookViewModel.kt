@@ -1,19 +1,16 @@
-package com.github.tei.imamu.viewmodel.cookbook.add
+package com.github.tei.imamu.viewmodel.cookbook
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.github.tei.imamu.data.ObjectBox
 import com.github.tei.imamu.data.entity.cookbook.CookBook
+import com.github.tei.imamu.data.repository.CookBookRepository
 import io.objectbox.Box
 import io.objectbox.kotlin.boxFor
-import kotlinx.coroutines.Job
 
-class AddCookBookViewModel(application: Application) : AndroidViewModel(application)
+class AddCookBookViewModel(private val cookBookRepository: CookBookRepository) : ViewModel()
 {
-    private var viewModelJob = Job()
-
     val cookBook = MutableLiveData<CookBook>()
 
     private val _navigateToChooseRecipe = MutableLiveData<Boolean>()
@@ -24,22 +21,14 @@ class AddCookBookViewModel(application: Application) : AndroidViewModel(applicat
     val navigateToCookBookList: LiveData<Boolean>
         get() = _navigateToCookBookList
 
-    private val cookBookBox: Box<CookBook> = ObjectBox.boxStore.boxFor()
-
     init
     {
         cookBook.value = CookBook()
     }
 
-    override fun onCleared()
-    {
-        super.onCleared()
-        viewModelJob.cancel()
-    }
-
     fun saveCookBook()
     {
-        cookBookBox.put(cookBook.value!!)
+        cookBookRepository.save(cookBook.value!!)
         _navigateToCookBookList.value = true
     }
 

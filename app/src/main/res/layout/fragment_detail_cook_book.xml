@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.github.tei.imamu.viewmodel.cookbook.detail.CookBookDetailViewModel" />
+            type="com.github.tei.imamu.viewmodel.cookbook.CookBookDetailViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

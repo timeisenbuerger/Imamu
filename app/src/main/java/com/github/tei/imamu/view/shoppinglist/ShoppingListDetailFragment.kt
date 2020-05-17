@@ -8,19 +8,17 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
 import com.github.tei.imamu.custom.adapter.shoppinglist.ShoppingListItemAdapter
 import com.github.tei.imamu.databinding.FragmentShoppingListDetailBinding
 import com.github.tei.imamu.viewmodel.shoppinglist.ShoppingListDetailViewModel
-import com.github.tei.imamu.viewmodel.shoppinglist.ShoppingListDetailViewModelFactory
+import org.koin.android.ext.android.inject
 
 class ShoppingListDetailFragment : Fragment()
 {
     private lateinit var binding: FragmentShoppingListDetailBinding
-    private lateinit var viewModel: ShoppingListDetailViewModel
-    private lateinit var viewModelFactory: ShoppingListDetailViewModelFactory
+    private val viewModel: ShoppingListDetailViewModel by inject()
     private lateinit var application: Application
     private lateinit var shoppingListItemAdapter: ShoppingListItemAdapter
 
@@ -43,8 +41,7 @@ class ShoppingListDetailFragment : Fragment()
         application = requireNotNull(this.activity).application
 
         //init viewModel
-        viewModelFactory = ShoppingListDetailViewModelFactory(ShoppingListDetailFragmentArgs.fromBundle(requireArguments()).shoppingList)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(ShoppingListDetailViewModel::class.java)
+        viewModel.shoppingList.value = ShoppingListDetailFragmentArgs.fromBundle(requireArguments()).shoppingList
 
         //set lifecycle owner
         binding.lifecycleOwner = this

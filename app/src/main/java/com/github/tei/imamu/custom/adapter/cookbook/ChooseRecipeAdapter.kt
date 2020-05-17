@@ -8,12 +8,13 @@ import androidx.recyclerview.widget.ListAdapter
 import com.github.tei.imamu.custom.viewholder.cookbook.ChooseRecipeViewHolder
 import com.github.tei.imamu.custom.viewholder.recipe.RecipeDiffCallback
 import com.github.tei.imamu.data.entity.recipe.Recipe
-import com.github.tei.imamu.viewmodel.cookbook.choose.ChooseRecipeViewModel
+import com.github.tei.imamu.viewmodel.cookbook.ChooseRecipeViewModel
 import java.util.*
 
-class ChooseRecipeAdapter(val viewModel: ChooseRecipeViewModel, private val allRecipes: MutableList<Recipe>) : ListAdapter<Recipe, ChooseRecipeViewHolder>(RecipeDiffCallback()), Filterable
+class ChooseRecipeAdapter(val viewModel: ChooseRecipeViewModel) : ListAdapter<Recipe, ChooseRecipeViewHolder>(RecipeDiffCallback()), Filterable
 {
     internal var selectedItems = mutableListOf<Recipe>()
+    lateinit var allRecipes: MutableList<Recipe>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChooseRecipeViewHolder
     {

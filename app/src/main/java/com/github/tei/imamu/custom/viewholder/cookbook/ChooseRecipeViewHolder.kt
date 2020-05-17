@@ -11,7 +11,7 @@ import com.github.tei.imamu.R
 import com.github.tei.imamu.custom.adapter.cookbook.ChooseRecipeAdapter
 import com.github.tei.imamu.data.entity.recipe.Recipe
 import com.github.tei.imamu.databinding.ListItemCookBookRecipeBinding
-import com.github.tei.imamu.viewmodel.cookbook.choose.ChooseRecipeViewModel
+import com.github.tei.imamu.viewmodel.cookbook.ChooseRecipeViewModel
 import java.io.File
 
 class ChooseRecipeViewHolder private constructor(private val binding: ListItemCookBookRecipeBinding) : RecyclerView.ViewHolder(binding.root)

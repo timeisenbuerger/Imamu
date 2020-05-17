@@ -9,13 +9,14 @@ import androidx.recyclerview.widget.ListAdapter
 import com.github.tei.imamu.custom.viewholder.cookbook.CookBookDiffCallback
 import com.github.tei.imamu.custom.viewholder.cookbook.CookBookListViewHolder
 import com.github.tei.imamu.data.entity.cookbook.CookBook
-import com.github.tei.imamu.viewmodel.cookbook.list.CookBookListViewModel
+import com.github.tei.imamu.viewmodel.cookbook.CookBookListViewModel
 import java.util.*
 
-class CookBookListAdapter(val viewModel: CookBookListViewModel, private val allCookBooks: MutableList<CookBook>, val context: Context) : ListAdapter<CookBook, CookBookListViewHolder>(CookBookDiffCallback()), Filterable
+class CookBookListAdapter(val viewModel: CookBookListViewModel, val context: Context) : ListAdapter<CookBook, CookBookListViewHolder>(CookBookDiffCallback()), Filterable
 {
     internal var multiSelect = false
     internal var selectedItems = mutableListOf<CookBook>()
+    lateinit var allCookBooks: MutableList<CookBook>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CookBookListViewHolder
     {

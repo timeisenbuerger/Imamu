@@ -11,7 +11,7 @@
 
         <variable
             name="viewModel"
-            type="com.github.tei.imamu.viewmodel.recipe.detail.RecipeDetailViewModel" />
+            type="com.github.tei.imamu.viewmodel.recipe.RecipeDetailViewModel" />
     </data>
 
     <ScrollView
@@ -53,7 +53,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="24dp"
-                    android:text="@{viewModel.currentRecipe.title}"
+                    android:text="@{recipe.title}"
                     android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="24sp"
@@ -97,7 +97,7 @@
                     android:layout_marginStart="@dimen/default_recipe_padding"
                     android:layout_marginTop="@dimen/default_recipe_margin"
                     android:layout_marginBottom="@dimen/default_recipe_margin"
-                    android:text='@{viewModel.currentRecipe.servingsNumber + " Portionen"}'
+                    android:text='@{recipe.servingsNumber + " Portionen"}'
                     android:textSize="18sp"
                     android:textStyle="bold"
                     tools:text="2 Portionen" />
@@ -150,7 +150,7 @@
                 android:layout_marginTop="@dimen/default_recipe_padding"
                 android:layout_marginEnd="@dimen/default_recipe_margin"
                 android:layout_marginBottom="@dimen/default_recipe_margin"
-                android:text="@{viewModel.currentRecipe.preparation}"
+                android:text="@{recipe.preparation}"
                 tools:text="@string/sample_preparation" />
 
         </LinearLayout>

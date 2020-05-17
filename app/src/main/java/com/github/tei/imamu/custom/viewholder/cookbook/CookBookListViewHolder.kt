@@ -12,7 +12,7 @@ import com.github.tei.imamu.R
 import com.github.tei.imamu.custom.adapter.cookbook.CookBookListAdapter
 import com.github.tei.imamu.data.entity.cookbook.CookBook
 import com.github.tei.imamu.databinding.ListItemCookBookBinding
-import com.github.tei.imamu.viewmodel.cookbook.list.CookBookListViewModel
+import com.github.tei.imamu.viewmodel.cookbook.CookBookListViewModel
 import java.io.File
 
 class CookBookListViewHolder private constructor(private val binding: ListItemCookBookBinding, private val context: Context) : RecyclerView.ViewHolder(binding.root)
@@ -102,7 +102,7 @@ class CookBookListViewHolder private constructor(private val binding: ListItemCo
             if (item?.itemId == R.id.action_delete)
             {
                 viewModel.deleteCookBooks(adapter.selectedItems)
-                viewModel.initCookbooks()
+                viewModel.initCookBooks()
                 mode?.finish()
             }
             return true

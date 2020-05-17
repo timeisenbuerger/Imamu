@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.github.tei.imamu.viewmodel.recipe.list.RecipeListViewModel" />
+            type="com.github.tei.imamu.viewmodel.recipe.RecipeListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

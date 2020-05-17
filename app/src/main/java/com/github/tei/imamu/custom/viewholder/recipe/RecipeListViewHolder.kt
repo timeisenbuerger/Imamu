@@ -14,7 +14,7 @@ import com.github.tei.imamu.custom.adapter.recipe.RecipeListAdapter
 import com.github.tei.imamu.custom.listener.RecipeListListener
 import com.github.tei.imamu.data.entity.recipe.Recipe
 import com.github.tei.imamu.databinding.ListItemRecipeListBinding
-import com.github.tei.imamu.viewmodel.recipe.list.RecipeListViewModel
+import com.github.tei.imamu.viewmodel.recipe.RecipeListViewModel
 import java.io.File
 
 class RecipeListViewHolder private constructor(private val binding: ListItemRecipeListBinding) : RecyclerView.ViewHolder(binding.root)
@@ -71,7 +71,7 @@ class RecipeListViewHolder private constructor(private val binding: ListItemReci
         if (!TextUtils.isEmpty(time))
         {
             binding.chipTime.text = "$time min"
-            binding.chipTime.chipIcon = ContextCompat.getDrawable(viewModel.getApplication(), R.drawable.ic_time_black)
+            binding.chipTime.chipIcon = ContextCompat.getDrawable(itemView.context, R.drawable.ic_time_black)
             binding.chipTime.visibility = View.VISIBLE
         }
     }

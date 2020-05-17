@@ -1,20 +1,15 @@
-package com.github.tei.imamu.viewmodel.cookbook.detail
+package com.github.tei.imamu.viewmodel.cookbook
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.github.tei.imamu.data.entity.cookbook.CookBook
 import com.github.tei.imamu.data.entity.recipe.Recipe
-import kotlinx.coroutines.Job
+import com.github.tei.imamu.data.repository.CookBookRepository
 
-class CookBookDetailViewModel(application: Application, cookBook: CookBook) : AndroidViewModel(application)
+class CookBookDetailViewModel(private val cookBookRepository: CookBookRepository) : ViewModel()
 {
-    private var viewModelJob = Job()
-
-    private val _cookBook = MutableLiveData<CookBook>()
-    val cookBook: LiveData<CookBook>
-        get() = _cookBook
+    val cookBook = MutableLiveData<CookBook>()
 
     private val _clickedRecipe = MutableLiveData<Recipe>()
     val clickedRecipe: LiveData<Recipe>
@@ -23,11 +18,6 @@ class CookBookDetailViewModel(application: Application, cookBook: CookBook) : An
     private val _navigateToRecipeDetail = MutableLiveData<Boolean>()
     val navigateToRecipeDetail: LiveData<Boolean>
         get() = _navigateToRecipeDetail
-
-    init
-    {
-        _cookBook.value = cookBook
-    }
 
     fun onClickRecipe(item: Recipe)
     {
@@ -38,11 +28,5 @@ class CookBookDetailViewModel(application: Application, cookBook: CookBook) : An
     fun onNavigateToRecipeDetailComplete()
     {
         _navigateToRecipeDetail.value = false
-    }
-
-    override fun onCleared()
-    {
-        super.onCleared()
-        viewModelJob.cancel()
     }
 }

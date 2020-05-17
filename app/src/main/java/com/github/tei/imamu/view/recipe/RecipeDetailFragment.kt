@@ -8,7 +8,6 @@ import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
@@ -16,18 +15,16 @@ import com.github.tei.imamu.custom.adapter.recipe.IngredientDetailListAdapter
 import com.github.tei.imamu.data.entity.recipe.Recipe
 import com.github.tei.imamu.databinding.FragmentRecipeDetailBinding
 import com.github.tei.imamu.util.setListViewHeightBasedOnChildren
-import com.github.tei.imamu.viewmodel.recipe.detail.RecipeDetailViewModel
-import com.github.tei.imamu.viewmodel.recipe.detail.RecipeDetailViewModelFactory
+import com.github.tei.imamu.viewmodel.recipe.RecipeDetailViewModel
 import com.google.android.material.chip.Chip
+import org.koin.android.ext.android.inject
 import java.io.File
-import java.math.BigDecimal
 import java.text.DecimalFormat
 
 class RecipeDetailFragment : Fragment()
 {
     private lateinit var binding: FragmentRecipeDetailBinding
-    private lateinit var viewModel: RecipeDetailViewModel
-    private lateinit var viewModelFactory: RecipeDetailViewModelFactory
+    private val viewModel: RecipeDetailViewModel by inject()
     private lateinit var application: Application
     private lateinit var adapter: IngredientDetailListAdapter
 
@@ -53,8 +50,7 @@ class RecipeDetailFragment : Fragment()
         application = requireNotNull(this.activity).application
 
         //init viewModel
-        viewModelFactory = RecipeDetailViewModelFactory(RecipeDetailFragmentArgs.fromBundle(requireArguments()).recipe)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(RecipeDetailViewModel::class.java)
+        viewModel.currentRecipe.value = RecipeDetailFragmentArgs.fromBundle(requireArguments()).recipe
 
         //set lifecycle owner
         binding.lifecycleOwner = this
@@ -165,7 +161,9 @@ class RecipeDetailFragment : Fragment()
                 var amount = ingredient.amount.toFloat()
                 amount = (amount / number) * increasedNumber
 
-                ingredient.amount = DecimalFormat.getInstance().format(amount).replace(",", ".")
+                ingredient.amount = DecimalFormat.getInstance()
+                    .format(amount)
+                    .replace(",", ".")
             }
         }
 
@@ -192,7 +190,9 @@ class RecipeDetailFragment : Fragment()
                 var amount = ingredient.amount.toFloat()
                 amount = (amount / number) * decreasedNumber
 
-                ingredient.amount = DecimalFormat.getInstance().format(amount).replace(",", ".")
+                ingredient.amount = DecimalFormat.getInstance()
+                    .format(amount)
+                    .replace(",", ".")
             }
         }
 

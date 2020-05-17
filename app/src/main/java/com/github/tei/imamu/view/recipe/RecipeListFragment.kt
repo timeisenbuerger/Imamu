@@ -9,21 +9,19 @@ import android.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
 import com.github.tei.imamu.custom.adapter.recipe.RecipeListAdapter
 import com.github.tei.imamu.databinding.FragmentRecipeListBinding
-import com.github.tei.imamu.viewmodel.recipe.list.RecipeListViewModel
-import com.github.tei.imamu.viewmodel.recipe.list.RecipeListViewModelFactory
+import com.github.tei.imamu.viewmodel.recipe.RecipeListViewModel
+import org.koin.android.ext.android.inject
 
 class RecipeListFragment : Fragment()
 {
     private lateinit var binding: FragmentRecipeListBinding
-    private lateinit var viewModel: RecipeListViewModel
-    private lateinit var viewModelFactory: RecipeListViewModelFactory
+    private val viewModel: RecipeListViewModel by inject()
     private lateinit var application: Application
     private lateinit var listAdapter: RecipeListAdapter
 
@@ -52,10 +50,6 @@ class RecipeListFragment : Fragment()
         //init application
         application = requireNotNull(this.activity).application
 
-        //init viewModel
-        viewModelFactory = RecipeListViewModelFactory(application)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(RecipeListViewModel::class.java)
-
         //set lifecycle owner
         binding.lifecycleOwner = this
 
@@ -63,7 +57,7 @@ class RecipeListFragment : Fragment()
         binding.viewModel = viewModel
 
         //set adapter in recyclerview
-        listAdapter = RecipeListAdapter(viewModel, viewModel.recipes.value!!)
+        listAdapter = RecipeListAdapter(viewModel)
         binding.recipeList.adapter = listAdapter
 
         val manager = LinearLayoutManager(activity)
@@ -116,6 +110,7 @@ class RecipeListFragment : Fragment()
     {
         viewModel.recipes.observe(viewLifecycleOwner, Observer {
             it?.let {
+                listAdapter.allRecipes = it
                 listAdapter.submitList(it)
             }
         })

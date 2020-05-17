@@ -10,7 +10,7 @@
 
         <variable
             name="viewModel"
-            type="com.github.tei.imamu.viewmodel.recipe.edit.EditRecipeViewModel" />
+            type="com.github.tei.imamu.viewmodel.recipe.EditRecipeViewModel" />
     </data>
 
     <LinearLayout

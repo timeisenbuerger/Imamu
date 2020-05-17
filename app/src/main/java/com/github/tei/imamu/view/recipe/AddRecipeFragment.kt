@@ -9,28 +9,26 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.text.TextUtils
 import android.view.*
-import android.widget.*
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
 import com.github.tei.imamu.custom.adapter.recipe.IngredientAddEditAdapter
 import com.github.tei.imamu.data.entity.recipe.RecipeIngredient
 import com.github.tei.imamu.databinding.FragmentAddRecipeBinding
-import com.github.tei.imamu.viewmodel.recipe.add.AddRecipeViewModel
-import com.github.tei.imamu.viewmodel.recipe.add.AddRecipeViewModelFactory
 import com.github.tei.imamu.util.setListViewHeightBasedOnChildren
+import com.github.tei.imamu.viewmodel.recipe.AddRecipeViewModel
+import org.koin.android.ext.android.inject
 
 class AddRecipeFragment : Fragment()
 {
     private val GALLERY_REQUEST_CODE = 28
 
     private lateinit var binding: FragmentAddRecipeBinding
-    private lateinit var viewModel: AddRecipeViewModel
-    private lateinit var viewModelFactory: AddRecipeViewModelFactory
+    private val viewModel: AddRecipeViewModel by inject()
     private lateinit var application: Application
     private lateinit var adapter: IngredientAddEditAdapter
 
@@ -54,10 +52,6 @@ class AddRecipeFragment : Fragment()
 
         //init application
         application = requireNotNull(this.activity).application
-
-        //init viewModel
-        viewModelFactory = AddRecipeViewModelFactory(application)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(AddRecipeViewModel::class.java)
 
         //set lifecycle owner
         binding.lifecycleOwner = this
@@ -165,7 +159,8 @@ class AddRecipeFragment : Fragment()
         }
         else                     ->
         {
-            Toast.makeText(context, "Back", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Back", Toast.LENGTH_SHORT)
+                .show()
             super.onOptionsItemSelected(item)
         }
     }

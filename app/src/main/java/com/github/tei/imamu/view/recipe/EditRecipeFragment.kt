@@ -9,11 +9,10 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.text.TextUtils
 import android.view.*
-import android.widget.*
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
@@ -21,8 +20,8 @@ import com.github.tei.imamu.custom.adapter.recipe.IngredientAddEditAdapter
 import com.github.tei.imamu.data.entity.recipe.RecipeIngredient
 import com.github.tei.imamu.databinding.FragmentEditRecipeBinding
 import com.github.tei.imamu.util.setListViewHeightBasedOnChildren
-import com.github.tei.imamu.viewmodel.recipe.edit.EditRecipeViewModel
-import com.github.tei.imamu.viewmodel.recipe.edit.EditRecipeViewModelFactory
+import com.github.tei.imamu.viewmodel.recipe.EditRecipeViewModel
+import org.koin.android.ext.android.inject
 import java.io.File
 
 class EditRecipeFragment : Fragment()
@@ -30,8 +29,7 @@ class EditRecipeFragment : Fragment()
     private val GALLERY_REQUEST_CODE = 28
 
     private lateinit var binding: FragmentEditRecipeBinding
-    private lateinit var viewModel: EditRecipeViewModel
-    private lateinit var viewModelFactory: EditRecipeViewModelFactory
+    private val viewModel: EditRecipeViewModel by inject()
     private lateinit var application: Application
     private lateinit var adapter: IngredientAddEditAdapter
 
@@ -40,7 +38,7 @@ class EditRecipeFragment : Fragment()
         (activity as MainActivity).supportActionBar?.title = "Rezept bearbeiten"
 
         init(inflater, container)
-        initComponents(inflater)
+        initComponents()
         initListener()
         initObserver()
 
@@ -60,8 +58,7 @@ class EditRecipeFragment : Fragment()
         application = requireNotNull(this.activity).application
 
         //init viewModel
-        viewModelFactory = EditRecipeViewModelFactory(EditRecipeFragmentArgs.fromBundle(requireArguments()).recipe, application)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(EditRecipeViewModel::class.java)
+        viewModel.recipe.value = EditRecipeFragmentArgs.fromBundle(requireArguments()).recipe
 
         //set lifecycle owner
         binding.lifecycleOwner = viewLifecycleOwner
@@ -70,7 +67,7 @@ class EditRecipeFragment : Fragment()
         binding.viewModel = viewModel
     }
 
-    private fun initComponents(inflater: LayoutInflater)
+    private fun initComponents()
     {
         val recipe = viewModel.recipe.value
 
@@ -190,7 +187,8 @@ class EditRecipeFragment : Fragment()
         }
         else                     ->
         {
-            Toast.makeText(context, "Back", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Back", Toast.LENGTH_SHORT)
+                .show()
             super.onOptionsItemSelected(item)
         }
     }

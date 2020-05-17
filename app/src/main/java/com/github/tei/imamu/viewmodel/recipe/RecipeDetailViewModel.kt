@@ -1,4 +1,4 @@
-package com.github.tei.imamu.viewmodel.recipe.detail
+package com.github.tei.imamu.viewmodel.recipe
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,17 +7,14 @@ import com.github.tei.imamu.data.ObjectBox
 import com.github.tei.imamu.data.entity.recipe.Recipe
 import com.github.tei.imamu.data.entity.shoppinglist.ShoppingList
 import com.github.tei.imamu.data.entity.shoppinglist.ShoppingListItem
+import com.github.tei.imamu.data.repository.RecipeRepository
 import io.objectbox.Box
 import io.objectbox.kotlin.boxFor
 import kotlinx.coroutines.Job
 
-class RecipeDetailViewModel(recipe: Recipe) : ViewModel()
+class RecipeDetailViewModel(private val recipeRepository: RecipeRepository) : ViewModel()
 {
-    private var viewModelJob = Job()
-
-    private val _currentRecipe = MutableLiveData<Recipe>()
-    val currentRecipe: LiveData<Recipe>
-        get() = _currentRecipe
+    internal var currentRecipe = MutableLiveData<Recipe>()
 
     private val _navigateToShoppingListDetail = MutableLiveData<Boolean>()
     val navigateToShoppingListDetail: LiveData<Boolean>
@@ -26,17 +23,6 @@ class RecipeDetailViewModel(recipe: Recipe) : ViewModel()
     private val shoppingListBox: Box<ShoppingList> = ObjectBox.boxStore.boxFor()
 
     internal var shoppingList: MutableLiveData<ShoppingList> = MutableLiveData<ShoppingList>()
-
-    init
-    {
-        _currentRecipe.value = recipe
-    }
-
-    override fun onCleared()
-    {
-        super.onCleared()
-        viewModelJob.cancel()
-    }
 
     fun createShoppingList(recipe: Recipe)
     {

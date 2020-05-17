@@ -1,28 +1,17 @@
-package com.github.tei.imamu.viewmodel.recipe.rimport
+package com.github.tei.imamu.viewmodel.recipe
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.github.tei.imamu.data.ObjectBox
-import com.github.tei.imamu.data.entity.Ingredient
-import com.github.tei.imamu.data.entity.Ingredient_
+import androidx.lifecycle.ViewModel
 import com.github.tei.imamu.data.entity.recipe.Recipe
 import com.github.tei.imamu.data.entity.recipe.RecipeIngredient
+import com.github.tei.imamu.data.repository.IngredientRepository
+import com.github.tei.imamu.data.repository.RecipeRepository
 import de.tei.re.logic.ChefkochExtractor
-import io.objectbox.Box
-import io.objectbox.kotlin.boxFor
-import io.objectbox.relation.ToOne
-import kotlinx.coroutines.Job
 
-class ImportRecipeViewModel(application: Application) : AndroidViewModel(application)
+class ImportRecipeViewModel(private val recipeRepository: RecipeRepository, private val ingredientRepository: IngredientRepository) : ViewModel()
 {
-    private var viewModelJob = Job()
-
     private var recipeExtractor: ChefkochExtractor
-
-    private val recipeBox: Box<Recipe> = ObjectBox.boxStore.boxFor()
-    private val ingredientBox: Box<Ingredient> = ObjectBox.boxStore.boxFor()
 
     private val _recipe = MutableLiveData<Recipe>()
     val recipe: LiveData<Recipe>
@@ -46,7 +35,7 @@ class ImportRecipeViewModel(application: Application) : AndroidViewModel(applica
 
     private fun createRecipe()
     {
-        _recipe.value?.let {item ->
+        _recipe.value?.let { item ->
             item.title = recipeExtractor.title
             item.preparation = recipeExtractor.instruction
             item.servingsNumber = recipeExtractor.portions
@@ -57,7 +46,7 @@ class ImportRecipeViewModel(application: Application) : AndroidViewModel(applica
 
                 recipeIngredient.amount = ingredient.amount
                 recipeIngredient.unit = ingredient.unit
-                recipeIngredient.ingredient.target = getIngredientForName(ingredient.name)
+                recipeIngredient.ingredient.target = ingredientRepository.getIngredientForName(ingredient.name)
 
                 item.recipeIngredients.add(recipeIngredient)
             }
@@ -81,32 +70,8 @@ class ImportRecipeViewModel(application: Application) : AndroidViewModel(applica
                 }
             }
 
-            recipeBox.put(item)
+            recipeRepository.save(item)
         }
-    }
-
-    private fun getIngredientForName(name: String): Ingredient
-    {
-        val ingredient = ingredientBox.query()
-            .equal(Ingredient_.name, name)
-            .build()
-            .find()
-
-        return if (ingredient.isEmpty())
-        {
-            val newIngredient = Ingredient(name = name)
-            newIngredient
-        }
-        else
-        {
-            ingredient[0]
-        }
-    }
-
-    override fun onCleared()
-    {
-        super.onCleared()
-        viewModelJob.cancel()
     }
 
     fun onNavigateToDetail()

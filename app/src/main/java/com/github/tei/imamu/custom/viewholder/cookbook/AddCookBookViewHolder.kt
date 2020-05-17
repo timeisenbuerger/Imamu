@@ -13,7 +13,7 @@ import com.github.tei.imamu.R
 import com.github.tei.imamu.custom.adapter.cookbook.AddCookBookListAdapter
 import com.github.tei.imamu.data.entity.recipe.Recipe
 import com.github.tei.imamu.databinding.ListItemCookBookRecipeBinding
-import com.github.tei.imamu.viewmodel.cookbook.add.AddCookBookViewModel
+import com.github.tei.imamu.viewmodel.cookbook.AddCookBookViewModel
 import java.io.File
 
 class AddCookBookViewHolder private constructor(private val binding: ListItemCookBookRecipeBinding) : RecyclerView.ViewHolder(binding.root)

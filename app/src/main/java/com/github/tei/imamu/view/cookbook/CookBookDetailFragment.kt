@@ -8,21 +8,19 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
 import com.github.tei.imamu.custom.adapter.cookbook.CookBookDetailRecipeListAdapter
 import com.github.tei.imamu.databinding.FragmentDetailCookBookBinding
-import com.github.tei.imamu.viewmodel.cookbook.detail.CookBookDetailViewModel
-import com.github.tei.imamu.viewmodel.cookbook.detail.CookBookDetailViewModelFactory
+import com.github.tei.imamu.viewmodel.cookbook.CookBookDetailViewModel
+import org.koin.android.ext.android.inject
 
 class CookBookDetailFragment : Fragment()
 {
     private lateinit var binding: FragmentDetailCookBookBinding
-    private lateinit var viewModel: CookBookDetailViewModel
-    private lateinit var viewModelFactory: CookBookDetailViewModelFactory
+    private val viewModel: CookBookDetailViewModel by inject()
     private lateinit var application: Application
     private lateinit var listAdapter: CookBookDetailRecipeListAdapter
 
@@ -45,8 +43,7 @@ class CookBookDetailFragment : Fragment()
         application = requireNotNull(this.activity).application
 
         //init viewModel
-        viewModelFactory = CookBookDetailViewModelFactory(application, CookBookDetailFragmentArgs.fromBundle(requireArguments()).cookBook)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(CookBookDetailViewModel::class.java)
+        viewModel.cookBook.value = CookBookDetailFragmentArgs.fromBundle(requireArguments()).cookBook
 
         //set lifecycle owner
         binding.lifecycleOwner = this
