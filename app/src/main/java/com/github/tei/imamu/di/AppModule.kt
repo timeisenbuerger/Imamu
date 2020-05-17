@@ -6,6 +6,7 @@ import com.github.tei.imamu.viewmodel.cookbook.AddCookBookViewModel
 import com.github.tei.imamu.viewmodel.cookbook.ChooseRecipeViewModel
 import com.github.tei.imamu.viewmodel.cookbook.CookBookDetailViewModel
 import com.github.tei.imamu.viewmodel.cookbook.CookBookListViewModel
+import com.github.tei.imamu.viewmodel.finder.RecipeFinderSearchViewModel
 import com.github.tei.imamu.viewmodel.recipe.*
 import com.github.tei.imamu.viewmodel.shoppinglist.ShoppingListDetailViewModel
 import com.github.tei.imamu.viewmodel.shoppinglist.ShoppingListViewModel
@@ -40,4 +41,6 @@ val viewModelModule = module {
 
     viewModel { ShoppingListViewModel(get()) }
     viewModel { ShoppingListDetailViewModel(get(), get()) }
+
+    viewModel { RecipeFinderSearchViewModel(get()) }
 }

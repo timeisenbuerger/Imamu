@@ -104,7 +104,11 @@ dependencies {
     // Shimmer
     implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
 
+    //Nacho
+    implementation "com.hootsuite.android:nachos:1.1.1"
 
+    //Flexbox
+    implementation 'com.google.android:flexbox:2.0.1'
 
     //TODO für später
     implementation 'com.github.iammert:MultiSearchView:0.1'

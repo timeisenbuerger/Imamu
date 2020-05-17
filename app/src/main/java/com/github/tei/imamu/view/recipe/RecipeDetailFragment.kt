@@ -79,7 +79,7 @@ class RecipeDetailFragment : Fragment()
         if (!TextUtils.isEmpty(recipe.difficulty))
         {
             val chip = inflater.inflate(R.layout.item_chip_recipe_feature, binding.chipGroupFeatures, false) as Chip
-            chip.text = (recipe.difficulty)
+            chip.text = recipe.difficulty
             binding.chipGroupFeatures.addView(chip)
         }
         if (!TextUtils.isEmpty(recipe.kitchen))

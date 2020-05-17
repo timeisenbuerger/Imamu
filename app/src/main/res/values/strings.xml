@@ -68,6 +68,11 @@
     <string name="text_cook_book_recipes">Rezepte:</string>
     <string name="action_go_to_detail">Detail</string>
     <string name="action_search">Suchen</string>
+    <string name="sample_ingredient">Paprika</string>
+    <string name="type_of_recipe">Art des Gerichts:</string>
+    <string name="recipe_feature">Eigenschaft:</string>
+    <string name="recipe_time">Gesamtzeit:</string>
+    <string name="start_search">Suche starten</string>
 
     <string-array name="ingredient_units">
         <item>g</item>

@@ -154,5 +154,10 @@
             app:destination="@id/recipeDetailFragment"
             app:popUpTo="@id/cookBookDetailFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/nav_recipe_suggestion"
+        android:name="com.github.tei.imamu.view.finder.RecipeFinderSearchFragment"
+        android:label=""
+        tools:layout="@layout/fragment_recipe_finder_search"/>
 
 </navigation>
