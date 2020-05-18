@@ -105,7 +105,7 @@ dependencies {
     implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
 
     //Nacho
-    implementation "com.hootsuite.android:nachos:1.1.1"
+    implementation "com.hootsuite.android:nachos:1.2.0"
 
     //Flexbox
     implementation 'com.google.android:flexbox:2.0.1'

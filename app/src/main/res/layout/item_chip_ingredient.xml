@@ -8,6 +8,9 @@
     android:layout_height="wrap_content"
     android:layout_marginEnd="@dimen/default_recipe_padding"
     android:textAppearance="?android:attr/textAppearance"
-    android:textColor="@color/white"
-    app:chipBackgroundColor="@color/green"
+    android:textColor="@color/text_color_chip_state_list"
+    app:chipStrokeColor="@color/colorPrimary"
+    app:chipStrokeWidth="1dp"
+    app:checkedIcon="@drawable/ic_check"
+    app:chipBackgroundColor="@color/bg_chip_state_list"
     tools:text="@string/sample_ingredient" />

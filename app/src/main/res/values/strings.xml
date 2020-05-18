@@ -45,8 +45,6 @@
     <string name="recipe_baking_time_text">Backzeit:</string>
     <string name="recipe_rest_time_text">Ruhezeit:</string>
     <string name="recipe_time_unit_text">min</string>
-    <string name="recipe_type_text">Rezept-Typ:</string>
-    <string name="recipe_kitchen_text">Küche:</string>
     <string name="recipe_mood_text">Stimmung:</string>
     <string name="recipe_type_hint_text">z.B. Hauptspeise</string>
     <string name="recipe_kitchen_hint_text">z.B. Italienisch</string>
@@ -70,7 +68,7 @@
     <string name="action_search">Suchen</string>
     <string name="sample_ingredient">Paprika</string>
     <string name="type_of_recipe">Art des Gerichts:</string>
-    <string name="recipe_feature">Eigenschaft:</string>
+    <string name="recipe_nutrition">Ernährung:</string>
     <string name="recipe_time">Gesamtzeit:</string>
     <string name="start_search">Suche starten</string>
 

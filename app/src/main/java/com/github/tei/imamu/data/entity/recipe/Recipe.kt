@@ -27,9 +27,7 @@ data class Recipe(
 
     var type: String = "",
 
-    var kitchen: String = "",
-
-    var mood: String = "",
+    var nutrition: String = "",
 
     var imagePath: String = ""
 

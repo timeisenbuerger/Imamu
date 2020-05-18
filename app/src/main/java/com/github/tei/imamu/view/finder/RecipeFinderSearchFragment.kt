@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import androidx.core.view.marginEnd
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -16,7 +15,6 @@ import com.github.tei.imamu.R
 import com.github.tei.imamu.databinding.FragmentRecipeFinderSearchBinding
 import com.github.tei.imamu.viewmodel.finder.RecipeFinderSearchViewModel
 import com.google.android.material.chip.Chip
-import com.hootsuite.nachos.NachoTextView
 import com.hootsuite.nachos.terminator.ChipTerminatorHandler
 import org.koin.android.ext.android.inject
 
@@ -25,11 +23,12 @@ class RecipeFinderSearchFragment : Fragment()
     private lateinit var binding: FragmentRecipeFinderSearchBinding
     private val viewModel: RecipeFinderSearchViewModel by inject()
     private lateinit var application: Application
+    private var selectableChips: MutableList<Chip> = mutableListOf()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
         init(inflater, container)
-        initObserver(inflater)
+        initObserver()
         initComponents(inflater)
 
         (activity as MainActivity).supportActionBar?.title = "Rezeptsuche"
@@ -52,7 +51,7 @@ class RecipeFinderSearchFragment : Fragment()
         binding.viewModel = viewModel
     }
 
-    private fun initObserver(inflater: LayoutInflater)
+    private fun initObserver()
     {
         viewModel.ingredients.observe(viewLifecycleOwner, Observer {
             it?.let {
@@ -76,35 +75,37 @@ class RecipeFinderSearchFragment : Fragment()
     private fun initComponents(inflater: LayoutInflater)
     {
         //Type of Recipe
-        initChip("Vorspeise", inflater, binding.typeOfRecipe)
-        initChip("Salat", inflater, binding.typeOfRecipe)
-        initChip("Hauptspeise", inflater, binding.typeOfRecipe)
-        initChip("Dessert", inflater, binding.typeOfRecipe)
-        initChip("Getränk", inflater, binding.typeOfRecipe)
+        createChip("Vorspeise", inflater, binding.typeOfRecipe)
+        createChip("Salat", inflater, binding.typeOfRecipe)
+        createChip("Hauptspeise", inflater, binding.typeOfRecipe)
+        createChip("Dessert", inflater, binding.typeOfRecipe)
+        createChip("Getränk", inflater, binding.typeOfRecipe)
 
         //Recipe Feature
-        initChip("Vegetarisch", inflater, binding.recipeFeature)
-        initChip("Vegan", inflater, binding.recipeFeature)
-        initChip("Laktosefrei", inflater, binding.recipeFeature)
-        initChip("Glutenfrei", inflater, binding.recipeFeature)
-        initChip("Kalorienarm", inflater, binding.recipeFeature)
+        createChip("Vegetarisch", inflater, binding.recipeFeature)
+        createChip("Vegan", inflater, binding.recipeFeature)
+        createChip("Laktosefrei", inflater, binding.recipeFeature)
+        createChip("Glutenfrei", inflater, binding.recipeFeature)
+        createChip("Kalorienarm", inflater, binding.recipeFeature)
 
         //Recipe Difficulty
-        initChip("Einfach", inflater, binding.recipeDifficulty)
-        initChip("Schwierig", inflater, binding.recipeDifficulty)
-        initChip("Schnell", inflater, binding.recipeDifficulty)
+        createChip("Einfach", inflater, binding.recipeDifficulty)
+        createChip("Mittel", inflater, binding.recipeDifficulty)
+        createChip("Schwer", inflater, binding.recipeDifficulty)
 
         //Recipe Time
-        initChip("ca. 20 min", inflater, binding.recipeTime)
-        initChip("ca. 30 min", inflater, binding.recipeTime)
-        initChip("ca. 50 min", inflater, binding.recipeTime)
-        initChip("> 60 min", inflater, binding.recipeTime)
+        createChip("≤ 20 min", inflater, binding.recipeTime)
+        createChip("≤ 30 min", inflater, binding.recipeTime)
+        createChip("≤ 50 min", inflater, binding.recipeTime)
+        createChip("≥ 60 min", inflater, binding.recipeTime)
     }
 
-    private fun initChip(name: String, inflater: LayoutInflater, parent: ViewGroup)
+    private fun createChip(name: String, inflater: LayoutInflater, parent: ViewGroup)
     {
         val chip = inflater.inflate(R.layout.item_chip_ingredient, parent, false) as Chip
         chip.text = name
         parent.addView(chip)
+
+        selectableChips.add(chip)
     }
 }

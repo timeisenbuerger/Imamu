@@ -74,7 +74,7 @@
     },
     {
       "id": "2:6168022746291461423",
-      "lastPropertyId": "5:5930784620653630284",
+      "lastPropertyId": "6:6709752495725744009",
       "name": "RecipeIngredient",
       "properties": [
         {
@@ -100,15 +100,17 @@
           "type": 11,
           "flags": 1548,
           "relationTarget": "Recipe"
+        },
+        {
+          "id": "6:6709752495725744009",
+          "name": "ingredientId",
+          "indexId": "4:1496609911292335364",
+          "type": 11,
+          "flags": 1548,
+          "relationTarget": "Ingredient"
         }
       ],
-      "relations": [
-        {
-          "id": "2:4388833860576146167",
-          "name": "ingredient",
-          "targetId": "6:4649709045713696666"
-        }
-      ]
+      "relations": []
     },
     {
       "id": "3:4326319803689828862",
@@ -223,7 +225,7 @@
     }
   ],
   "lastEntityId": "6:4649709045713696666",
-  "lastIndexId": "3:394756915084088812",
+  "lastIndexId": "4:1496609911292335364",
   "lastRelationId": "2:4388833860576146167",
   "lastSequenceId": "0:0",
   "modelVersion": 5,
@@ -237,6 +239,8 @@
     5614713038289382758,
     7211480856525954018
   ],
-  "retiredRelationUids": [],
+  "retiredRelationUids": [
+    4388833860576146167
+  ],
   "version": 1
 }

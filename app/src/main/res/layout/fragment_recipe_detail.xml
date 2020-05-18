@@ -65,16 +65,17 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/chip_group_features"
+            <com.google.android.flexbox.FlexboxLayout
+                android:id="@+id/recipe_features"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/default_recipe_margin"
                 android:layout_marginTop="@dimen/default_recipe_margin"
                 android:layout_marginEnd="@dimen/default_recipe_margin"
-                app:chipSpacingHorizontal="16dp"
-                app:singleLine="false"
-                app:singleSelection="false"></com.google.android.material.chip.ChipGroup>
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:flexWrap="wrap"
+                app:justifyContent="flex_start" />
 
             <LinearLayout
                 android:layout_width="match_parent"

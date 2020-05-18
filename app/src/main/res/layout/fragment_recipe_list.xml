@@ -15,32 +15,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-<!--        <com.facebook.shimmer.ShimmerFrameLayout-->
-<!--            android:id="@+id/shimmer_container"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:orientation="vertical"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            shimmer:duration="800">-->
-
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:orientation="vertical">-->
-
-<!--                <include layout="@layout/recipe_placeholder_item" />-->
-
-<!--                <include layout="@layout/recipe_placeholder_item" />-->
-
-<!--                <include layout="@layout/recipe_placeholder_item" />-->
-
-<!--            </LinearLayout>-->
-
-<!--        </com.facebook.shimmer.ShimmerFrameLayout>-->
-
         <com.mlsdev.animatedrv.AnimatedRecyclerView
             android:id="@+id/recipe_list"
             android:layout_width="match_parent"
@@ -66,7 +40,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|end"
                 android:layout_margin="@dimen/fab_margin"
-                app:srcCompat="@drawable/ic_add_white" />
+                android:textColor="@color/colorPrimary"
+                app:backgroundTint="@color/colorAccent"
+                app:srcCompat="@drawable/ic_add_white"
+                app:tint="@color/colorPrimary"/>
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
@@ -77,13 +54,16 @@
             android:layout_marginEnd="21dp"
             android:layout_marginBottom="14dp"
             android:clickable="true"
+            android:focusable="true"
             android:visibility="invisible"
             app:fabSize="mini"
+            android:textColor="@color/colorPrimary"
+            app:backgroundTint="@color/colorAccent"
+            app:tint="@color/colorPrimary"
             app:layout_constraintBottom_toTopOf="@+id/container_layout"
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@drawable/ic_add_white"
-            android:focusable="true"
-            tools:visibility="visible"/>
+            tools:visibility="visible" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/import_recipe_fab"
@@ -97,7 +77,10 @@
             app:fabSize="mini"
             app:layout_constraintBottom_toTopOf="@+id/create_recipe_fab"
             app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/ic_download_black"
+            android:textColor="@color/colorPrimary"
+            app:backgroundTint="@color/colorAccent"
+            app:tint="@color/colorPrimary"
+            app:srcCompat="@drawable/ic_download_white"
             tools:visibility="visible"/>
 
         <TextView
@@ -105,11 +88,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="32dp"
+            android:background="@drawable/fab_text_view_border"
             android:paddingStart="16dp"
             android:paddingTop="8dp"
             android:paddingEnd="16dp"
             android:paddingBottom="8dp"
             android:text="@string/action_create_own_recipe"
+            android:textColor="@color/white"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@+id/create_recipe_fab"
             app:layout_constraintEnd_toStartOf="@+id/create_recipe_fab"
@@ -121,11 +106,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="32dp"
+            android:background="@drawable/fab_text_view_border"
             android:paddingStart="16dp"
             android:paddingTop="8dp"
             android:paddingEnd="16dp"
             android:paddingBottom="8dp"
             android:text="@string/action_import_recipe"
+            android:textColor="@color/white"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@+id/import_recipe_fab"
             app:layout_constraintEnd_toStartOf="@+id/import_recipe_fab"

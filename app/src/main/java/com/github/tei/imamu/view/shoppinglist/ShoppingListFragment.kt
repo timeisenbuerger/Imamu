@@ -60,12 +60,15 @@ class ShoppingListFragment : Fragment()
     {
         viewModel.shoppingLists.observe(viewLifecycleOwner, Observer {
             it?.let {
-                if (it[0].name != "Alle")
+                if (it.isNotEmpty())
                 {
-                    viewModel.addAllItemsList()
-                }
+                    if (it[0].name != "Alle")
+                    {
+                        viewModel.addAllItemsList()
+                    }
 
-                shoppingListAdapter.submitList(it)
+                    shoppingListAdapter.submitList(it)
+                }
             }
         })
 
@@ -78,7 +81,7 @@ class ShoppingListFragment : Fragment()
         })
 
         viewModel.navigateToDetail.observe(viewLifecycleOwner, Observer {
-            it?.let{
+            it?.let {
                 findNavController().navigate(ShoppingListFragmentDirections.actionNavShoppingListToShoppingListDetailFragment(it))
                 viewModel.onNavigateToDetailComplete()
             }

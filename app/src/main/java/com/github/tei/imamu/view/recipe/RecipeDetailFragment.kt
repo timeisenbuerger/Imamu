@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.*
+import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -69,48 +70,45 @@ class RecipeDetailFragment : Fragment()
 
         if (!TextUtils.isEmpty(recipe.imagePath) && File(recipe.imagePath).exists())
         {
+            binding.imageRecipe.scaleType = ImageView.ScaleType.CENTER_CROP
             binding.imageRecipe.setImageURI(Uri.parse(recipe.imagePath))
         }
         else
         {
+            binding.imageRecipe.scaleType = ImageView.ScaleType.FIT_CENTER
             binding.imageRecipe.setImageResource(R.drawable.ic_hot_tub)
         }
 
+        if (!TextUtils.isEmpty(recipe.type))
+        {
+            createChip(recipe.type, inflater, binding.recipeFeatures)
+        }
+        if (!TextUtils.isEmpty(recipe.nutrition))
+        {
+            val nutritionOptions = recipe.nutrition.split(";").toMutableList()
+            for (nutritionOption in nutritionOptions)
+            {
+                if (!TextUtils.isEmpty(nutritionOption))
+                {
+                    createChip(nutritionOption, inflater, binding.recipeFeatures)
+                }
+            }
+        }
         if (!TextUtils.isEmpty(recipe.difficulty))
         {
-            val chip = inflater.inflate(R.layout.item_chip_recipe_feature, binding.chipGroupFeatures, false) as Chip
-            chip.text = recipe.difficulty
-            binding.chipGroupFeatures.addView(chip)
-        }
-        if (!TextUtils.isEmpty(recipe.kitchen))
-        {
-            val chip = inflater.inflate(R.layout.item_chip_recipe_feature, binding.chipGroupFeatures, false) as Chip
-            chip.text = (recipe.kitchen)
-            binding.chipGroupFeatures.addView(chip)
-        }
-        if (!TextUtils.isEmpty(recipe.mood))
-        {
-            val chip = inflater.inflate(R.layout.item_chip_recipe_feature, binding.chipGroupFeatures, false) as Chip
-            chip.text = (recipe.mood)
-            binding.chipGroupFeatures.addView(chip)
+            createChip(recipe.difficulty, inflater, binding.recipeFeatures)
         }
         if (!TextUtils.isEmpty(recipe.preparationTime))
         {
-            val chip = inflater.inflate(R.layout.item_chip_recipe_feature, binding.chipGroupFeatures, false) as Chip
-            chip.text = ("Zubereitung: " + recipe.preparationTime + " min")
-            binding.chipGroupFeatures.addView(chip)
+            createChip("Zubereitung: " + recipe.preparationTime + " min", inflater, binding.recipeFeatures)
         }
         if (!TextUtils.isEmpty(recipe.bakingTime))
         {
-            val chip = inflater.inflate(R.layout.item_chip_recipe_feature, binding.chipGroupFeatures, false) as Chip
-            chip.text = ("Backzeit: " + recipe.bakingTime + " min")
-            binding.chipGroupFeatures.addView(chip)
+            createChip("Backzeit: " + recipe.bakingTime + " min", inflater, binding.recipeFeatures)
         }
         if (!TextUtils.isEmpty(recipe.restTime))
         {
-            val chip = inflater.inflate(R.layout.item_chip_recipe_feature, binding.chipGroupFeatures, false) as Chip
-            chip.text = ("Ruhezeit: " + recipe.restTime + " min")
-            binding.chipGroupFeatures.addView(chip)
+            createChip("Ruhezeit: " + recipe.restTime + " min", inflater, binding.recipeFeatures)
         }
 
         setListViewHeightBasedOnChildren(binding.listViewIngredients)
@@ -140,6 +138,13 @@ class RecipeDetailFragment : Fragment()
                 increaseServings(it)
             }
         }
+    }
+
+    private fun createChip(name: String, inflater: LayoutInflater, parent: ViewGroup)
+    {
+        val chip = inflater.inflate(R.layout.item_chip_recipe_feature, parent, false) as Chip
+        chip.text = name
+        parent.addView(chip)
     }
 
     private fun increaseServings(recipe: Recipe)

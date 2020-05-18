@@ -10,6 +10,7 @@ import android.provider.MediaStore
 import android.text.TextUtils
 import android.view.*
 import android.widget.Toast
+import androidx.core.view.get
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -21,6 +22,7 @@ import com.github.tei.imamu.data.entity.recipe.RecipeIngredient
 import com.github.tei.imamu.databinding.FragmentAddRecipeBinding
 import com.github.tei.imamu.util.setListViewHeightBasedOnChildren
 import com.github.tei.imamu.viewmodel.recipe.AddRecipeViewModel
+import com.google.android.material.chip.Chip
 import org.koin.android.ext.android.inject
 
 class AddRecipeFragment : Fragment()
@@ -37,7 +39,7 @@ class AddRecipeFragment : Fragment()
         (activity as MainActivity).supportActionBar?.title = "Rezept hinzufügen"
 
         init(inflater, container)
-        initComponents()
+        initComponents(inflater)
         initListener()
         initObserver()
 
@@ -60,26 +62,19 @@ class AddRecipeFragment : Fragment()
         binding.viewModel = viewModel
     }
 
-    private fun initComponents()
+    private fun initComponents(inflater: LayoutInflater)
     {
         binding.imageViewMeal.setImageResource(R.drawable.ic_hot_tub)
 
         adapter = IngredientAddEditAdapter(requireContext(), viewModel.recipe.value!!.recipeIngredients)
         binding.listViewIngredients.adapter = adapter
         setListViewHeightBasedOnChildren(binding.listViewIngredients)
+
+        initChips(inflater)
     }
 
     private fun initListener()
     {
-        binding.chipGroupDifficulty.setOnCheckedChangeListener { _, checkedId: Int ->
-            when (checkedId)
-            {
-                R.id.chip_easy   -> viewModel.recipe.value!!.difficulty = "Einfach"
-                R.id.chip_normal -> viewModel.recipe.value!!.difficulty = "Normal"
-                R.id.chip_hard   -> viewModel.recipe.value!!.difficulty = "Schwer"
-            }
-        }
-
         binding.imageViewMeal.setOnClickListener {
             pickImageFromGallery()
         }
@@ -100,6 +95,35 @@ class AddRecipeFragment : Fragment()
                 viewModel.onNavigateToDetailComplete()
             }
         })
+    }
+
+    private fun initChips(inflater: LayoutInflater)
+    {
+        //Type of Recipe
+        createChip("Vorspeise", inflater, binding.chipGroupRecipeType)
+        createChip("Salat", inflater, binding.chipGroupRecipeType)
+        createChip("Hauptspeise", inflater, binding.chipGroupRecipeType)
+        createChip("Dessert", inflater, binding.chipGroupRecipeType)
+        createChip("Getränk", inflater, binding.chipGroupRecipeType)
+
+        //Recipe Feature
+        createChip("Vegetarisch", inflater, binding.chipGroupNutrition)
+        createChip("Vegan", inflater, binding.chipGroupNutrition)
+        createChip("Laktosefrei", inflater, binding.chipGroupNutrition)
+        createChip("Glutenfrei", inflater, binding.chipGroupNutrition)
+        createChip("Kalorienarm", inflater, binding.chipGroupNutrition)
+
+        //Recipe Difficulty
+        createChip("Einfach", inflater, binding.chipGroupDifficulty)
+        createChip("Mittel", inflater, binding.chipGroupDifficulty)
+        createChip("Schwer", inflater, binding.chipGroupDifficulty)
+    }
+
+    private fun createChip(name: String, inflater: LayoutInflater, parent: ViewGroup)
+    {
+        val chip = inflater.inflate(R.layout.item_chip_ingredient, parent, false) as Chip
+        chip.text = name
+        parent.addView(chip)
     }
 
     private fun pickImageFromGallery()
@@ -153,6 +177,7 @@ class AddRecipeFragment : Fragment()
         {
             if (isSavePossible())
             {
+                updateRecipeDataFromUI()
                 viewModel.onSaveRecipe()
             }
             true
@@ -189,5 +214,37 @@ class AddRecipeFragment : Fragment()
         }
 
         return result
+    }
+
+    private fun updateRecipeDataFromUI()
+    {
+        for(i in 0 until binding.chipGroupRecipeType.childCount)
+        {
+            val chip = binding.chipGroupRecipeType.getChildAt(i) as Chip
+            if (chip.isChecked)
+            {
+                viewModel.recipe.value!!.type = chip.text.toString()
+                break
+            }
+        }
+
+        for(i in 0 until binding.chipGroupDifficulty.childCount)
+        {
+            val chip = binding.chipGroupDifficulty.getChildAt(i) as Chip
+            if (chip.isChecked)
+            {
+                viewModel.recipe.value!!.difficulty = chip.text.toString()
+                break
+            }
+        }
+
+        for(i in 0 until binding.chipGroupNutrition.childCount)
+        {
+            val chip = binding.chipGroupNutrition.getChildAt(i) as Chip
+            if (chip.isChecked)
+            {
+                viewModel.recipe.value!!.nutrition += chip.text.toString() + ";"
+            }
+        }
     }
 }
