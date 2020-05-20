@@ -28,7 +28,10 @@ class CookBookListViewModel(private val cookBookRepository: CookBookRepository) 
 
     fun deleteCookBooks(cookBooks: List<CookBook>)
     {
-        cookBookRepository.remove(cookBooks)
+        for (cookBook in cookBooks)
+        {
+            cookBookRepository.remove(cookBook)
+        }
     }
 
     fun onCookBookClicked(cookBook: CookBook)

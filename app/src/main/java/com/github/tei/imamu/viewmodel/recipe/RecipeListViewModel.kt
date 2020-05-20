@@ -29,7 +29,10 @@ class RecipeListViewModel(private val recipeRepository: RecipeRepository) : View
 
     fun deleteRecipes(recipes: List<Recipe>)
     {
-        recipeRepository.remove(recipes)
+        for (recipe in recipes)
+        {
+            recipeRepository.remove(recipe)
+        }
     }
 
     fun onRecipeClicked(recipe: Recipe)

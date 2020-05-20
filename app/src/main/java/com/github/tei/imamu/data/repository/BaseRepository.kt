@@ -19,23 +19,7 @@ abstract class BaseRepository<T>(@PublishedApi internal val boxStore: BoxStore)
         }
     }
 
-    inline fun <reified T : Any> save(data: List<T>)
-    {
-        CoroutineScope(Dispatchers.IO).launch {
-            boxStore.boxFor<T>()
-                .put(data)
-        }
-    }
-
     inline fun <reified T : Any> remove(data: T)
-    {
-        CoroutineScope(Dispatchers.IO).launch {
-            boxStore.boxFor<T>()
-                .remove(data)
-        }
-    }
-
-    inline fun <reified T : Any> remove(data: List<T>)
     {
         CoroutineScope(Dispatchers.IO).launch {
             boxStore.boxFor<T>()

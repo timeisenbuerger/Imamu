@@ -47,7 +47,10 @@ class ShoppingListViewModel(private val shoppingListRepository: ShoppingListRepo
         }
 
         _shoppingLists.value?.removeAll(items)
-        shoppingListRepository.remove(items)
+        for (item in items)
+        {
+            shoppingListRepository.remove(item)
+        }
         onDeleteItems()
     }
 
