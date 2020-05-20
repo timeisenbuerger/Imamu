@@ -32,6 +32,10 @@ class AddRecipeViewModel(private val recipeRepository: RecipeRepository, private
                     recipeIngredient.ingredient.target = ingredientRepository.getIngredientForName(recipeIngredient.ingredient.target.name)
                 }
             }
+
+            val totalTime = it.preparationTime.toInt() + it.bakingTime.toInt() + it.restTime.toInt()
+            it.totalTime = totalTime
+
             recipeRepository.save(it)
         }
         _navigateToRecipeDetail.value = true

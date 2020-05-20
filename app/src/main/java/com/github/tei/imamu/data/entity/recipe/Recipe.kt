@@ -25,6 +25,8 @@ data class Recipe(
 
     var restTime: String = "",
 
+    var totalTime: Int = 0,
+
     var type: String = "",
 
     var nutrition: String = "",

@@ -158,6 +158,24 @@
         android:id="@+id/nav_recipe_suggestion"
         android:name="com.github.tei.imamu.view.finder.RecipeFinderSearchFragment"
         android:label=""
-        tools:layout="@layout/fragment_recipe_finder_search"/>
+        tools:layout="@layout/fragment_recipe_finder_search">
+        <action
+            android:id="@+id/action_nav_recipe_suggestion_to_recipeFinderResultListFragment"
+            app:destination="@id/recipeFinderResultListFragment"
+            app:popUpTo="@id/nav_recipe_suggestion" />
+    </fragment>
+    <fragment
+        android:id="@+id/recipeFinderResultListFragment"
+        android:name="com.github.tei.imamu.view.finder.RecipeFinderResultListFragment"
+        android:label="RecipeFinderResultListFragment"
+        tools:layout="@layout/fragment_recipe_finder_result_list">
+        <action
+            android:id="@+id/action_recipeFinderResultListFragment_to_recipeDetailFragment"
+            app:destination="@id/recipeDetailFragment"
+            app:popUpTo="@id/recipeFinderResultListFragment" />
+        <argument
+            android:name="searchResult"
+            app:argType="com.github.tei.imamu.wrapper.FullSearchResultWrapper" />
+    </fragment>
 
 </navigation>

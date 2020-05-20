@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
 import com.github.tei.imamu.databinding.FragmentRecipeFinderSearchBinding
@@ -23,12 +24,15 @@ class RecipeFinderSearchFragment : Fragment()
     private lateinit var binding: FragmentRecipeFinderSearchBinding
     private val viewModel: RecipeFinderSearchViewModel by inject()
     private lateinit var application: Application
-    private var selectableChips: MutableList<Chip> = mutableListOf()
+    private var chips: MutableList<Chip> = mutableListOf()
+    private var selectedChipValues = mutableMapOf<String, String>()
+    private var selectedIngredients = mutableListOf<String>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
         init(inflater, container)
         initObserver()
+        initListener()
         initComponents(inflater)
 
         (activity as MainActivity).supportActionBar?.title = "Rezeptsuche"
@@ -70,6 +74,21 @@ class RecipeFinderSearchFragment : Fragment()
                 binding.chipAutoComplete.addChipTerminator('\n', ChipTerminatorHandler.BEHAVIOR_CHIPIFY_ALL)
             }
         })
+
+        viewModel.navigateToSearchResult.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                findNavController().navigate(RecipeFinderSearchFragmentDirections.actionNavRecipeSuggestionToRecipeFinderResultListFragment(it))
+                viewModel.onNavigateToSearchResultComplete()
+            }
+        })
+    }
+
+    private fun initListener()
+    {
+        binding.fabStartSearch.setOnClickListener {
+            collectSearchData()
+            viewModel.startSearch(selectedChipValues, selectedIngredients)
+        }
     }
 
     private fun initComponents(inflater: LayoutInflater)
@@ -82,11 +101,11 @@ class RecipeFinderSearchFragment : Fragment()
         createChip("Getränk", inflater, binding.typeOfRecipe)
 
         //Recipe Feature
-        createChip("Vegetarisch", inflater, binding.recipeFeature)
-        createChip("Vegan", inflater, binding.recipeFeature)
-        createChip("Laktosefrei", inflater, binding.recipeFeature)
-        createChip("Glutenfrei", inflater, binding.recipeFeature)
-        createChip("Kalorienarm", inflater, binding.recipeFeature)
+        createChip("Vegetarisch", inflater, binding.recipeNutrition)
+        createChip("Vegan", inflater, binding.recipeNutrition)
+        createChip("Laktosefrei", inflater, binding.recipeNutrition)
+        createChip("Glutenfrei", inflater, binding.recipeNutrition)
+        createChip("Kalorienarm", inflater, binding.recipeNutrition)
 
         //Recipe Difficulty
         createChip("Einfach", inflater, binding.recipeDifficulty)
@@ -106,6 +125,33 @@ class RecipeFinderSearchFragment : Fragment()
         chip.text = name
         parent.addView(chip)
 
-        selectableChips.add(chip)
+        chips.add(chip)
+    }
+
+    private fun collectSearchData()
+    {
+        selectedChipValues.clear()
+        selectedIngredients.clear()
+
+        selectedChipValues["type"] = ""
+        selectedChipValues["nutrition"] = ""
+        selectedChipValues["difficulty"] = ""
+        selectedChipValues["time"] = ""
+
+        for (chip in chips)
+        {
+            if (chip.isChecked)
+            {
+                when(chip.parent)
+                {
+                    binding.typeOfRecipe -> selectedChipValues["type"] = chip.text.toString()
+                    binding.recipeNutrition -> selectedChipValues["nutrition"] += chip.text.toString() + ";"
+                    binding.recipeDifficulty -> selectedChipValues["difficulty"] = chip.text.toString()
+                    binding.recipeTime -> selectedChipValues["time"] = chip.text.toString()
+                }
+            }
+        }
+
+        selectedIngredients = binding.chipAutoComplete.chipValues
     }
 }

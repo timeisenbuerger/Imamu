@@ -6,7 +6,7 @@ buildscript {
         room_version = "2.2.5"
         navigation_version = "2.2.2"
         lifecycle_version = "2.2.0"
-        objectboxVersion = "2.5.1"
+        objectboxVersion = "2.6.0-RC"
     }
 
     repositories {
