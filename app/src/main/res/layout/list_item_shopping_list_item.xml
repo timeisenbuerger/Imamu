@@ -32,6 +32,7 @@
 
         <TextView
             android:id="@+id/edit_text_ingredient_amount"
+            style="@style/ingredient_item_text_view"
             android:layout_width="75dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/default_recipe_padding"
@@ -48,6 +49,7 @@
 
         <TextView
             android:id="@+id/auto_complete_ingredient_unit"
+            style="@style/ingredient_item_text_view"
             android:layout_width="75dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/default_recipe_padding"
@@ -64,6 +66,7 @@
 
         <TextView
             android:id="@+id/edit_text_ingredient"
+            style="@style/ingredient_item_text_view_bold"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/default_recipe_padding"

@@ -16,9 +16,8 @@
             android:id="@+id/edit_text_recipe_link"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="10"
             android:hint="@string/insert_recipe_link"
-            android:inputType="textPersonName"
+            style="@style/edit_text_string_style"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.2"
@@ -36,7 +35,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/edit_text_recipe_link"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.23" />
+            app:layout_constraintVertical_bias="0.23"
+            style="@style/button_style" />
 
         <ProgressBar
             android:id="@+id/import_progressBar"

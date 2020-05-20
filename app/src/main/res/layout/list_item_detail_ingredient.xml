@@ -19,9 +19,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/default_recipe_margin"
             android:layout_marginBottom="@dimen/default_recipe_margin"
+            android:layout_marginStart="@dimen/default_recipe_padding"
+            android:layout_marginEnd="@dimen/default_recipe_padding"
             android:text="@{ingredient.amount}"
             tools:hint="@string/recipe_ingredient_amount"
-            android:textAlignment="center" />
+            style="@style/ingredient_item_text_view" />
 
         <TextView
             android:id="@+id/text_view_unit"
@@ -29,9 +31,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/default_recipe_margin"
             android:layout_marginBottom="@dimen/default_recipe_margin"
+            android:layout_marginEnd="@dimen/default_recipe_padding"
             android:text="@{ingredient.unit}"
             tools:hint="@string/recipe_ingredient_unit"
-            android:textAlignment="center" />
+            style="@style/ingredient_item_text_view" />
 
         <TextView
             android:id="@+id/text_view_ingredient"
@@ -41,6 +44,6 @@
             android:layout_marginBottom="@dimen/default_recipe_margin"
             android:text="@{ingredient.ingredient.target.name}"
             tools:hint="@string/recipe_ingredients_text"
-            android:textStyle="bold" />
+            style="@style/ingredient_item_text_view_bold" />
     </LinearLayout>
 </layout>

@@ -54,14 +54,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="24dp"
                     android:text="@{recipe.title}"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:textSize="24sp"
-                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    tools:text="@string/sample_recipe_title" />
+                    tools:text="@string/sample_recipe_title"
+                    style="@style/title_medium_style" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -93,15 +90,14 @@
 
                 <TextView
                     android:id="@+id/text_servings"
+                    style="@style/caption_medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/default_recipe_padding"
                     android:layout_marginTop="@dimen/default_recipe_margin"
                     android:layout_marginBottom="@dimen/default_recipe_margin"
                     android:text='@{recipe.servingsNumber + " Portionen"}'
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    tools:text="2 Portionen" />
+                    tools:text="@string/sample_servings_number" />
 
                 <ImageButton
                     android:id="@+id/button_increase_servings"
@@ -121,8 +117,7 @@
                 android:layout_marginStart="@dimen/default_recipe_margin"
                 android:layout_marginEnd="@dimen/default_recipe_margin"
                 android:text="@string/recipe_ingredients_text"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                style="@style/caption_medium" />
 
             <ListView
                 android:id="@+id/list_view_ingredients"
@@ -130,10 +125,11 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/default_recipe_margin"
                 android:layout_marginEnd="@dimen/default_recipe_margin"
-                android:nestedScrollingEnabled="true"></ListView>
+                android:nestedScrollingEnabled="true"/>
 
             <TextView
                 android:id="@+id/text_title_instructions"
+                style="@style/caption_medium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/default_recipe_margin"
@@ -152,7 +148,8 @@
                 android:layout_marginEnd="@dimen/default_recipe_margin"
                 android:layout_marginBottom="@dimen/default_recipe_margin"
                 android:text="@{recipe.preparation}"
-                tools:text="@string/sample_preparation" />
+                tools:text="@string/sample_preparation"
+                style="@style/multi_line_text_view" />
 
         </LinearLayout>
     </ScrollView>

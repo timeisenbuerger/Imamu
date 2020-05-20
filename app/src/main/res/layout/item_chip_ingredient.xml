@@ -7,10 +7,11 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginEnd="@dimen/default_recipe_padding"
+    android:fontFamily="@font/roboto"
     android:textAppearance="?android:attr/textAppearance"
     android:textColor="@color/text_color_chip_state_list"
-    app:chipStrokeColor="@color/colorPrimary"
-    app:chipStrokeWidth="1dp"
     app:checkedIcon="@drawable/ic_check"
     app:chipBackgroundColor="@color/bg_chip_state_list"
+    app:chipStrokeColor="@color/colorPrimary"
+    app:chipStrokeWidth="1dp"
     tools:text="@string/sample_ingredient" />

@@ -49,9 +49,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/default_recipe_padding"
                     android:text="@string/type_of_recipe"
-                    android:textColor="@android:color/black"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
+                    style="@style/caption_big" />
 
                 <com.google.android.flexbox.FlexboxLayout
                     android:id="@+id/type_of_recipe"
@@ -65,13 +63,11 @@
 
                 <TextView
                     android:id="@+id/text_view_recipe_feature"
+                    style="@style/caption_big"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/default_recipe_padding"
-                    android:text="@string/recipe_nutrition"
-                    android:textColor="@android:color/black"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
+                    android:text="@string/recipe_nutrition" />
 
                 <com.google.android.flexbox.FlexboxLayout
                     android:id="@+id/recipe_nutrition"
@@ -85,13 +81,11 @@
 
                 <TextView
                     android:id="@+id/text_view_recipe_difficulty"
+                    style="@style/caption_big"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/default_recipe_padding"
-                    android:text="@string/recipe_difficulty_text"
-                    android:textColor="@android:color/black"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
+                    android:text="@string/recipe_difficulty_text"/>
 
                 <com.google.android.flexbox.FlexboxLayout
                     android:id="@+id/recipe_difficulty"
@@ -105,13 +99,11 @@
 
                 <TextView
                     android:id="@+id/text_view_time"
+                    style="@style/caption_big"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/default_recipe_padding"
-                    android:text="@string/recipe_time"
-                    android:textColor="@android:color/black"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
+                    android:text="@string/recipe_time"/>
 
                 <com.google.android.flexbox.FlexboxLayout
                     android:id="@+id/recipe_time"

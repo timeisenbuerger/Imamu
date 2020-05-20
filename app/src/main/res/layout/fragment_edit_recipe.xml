@@ -48,8 +48,7 @@
                         android:layout_marginTop="@dimen/default_recipe_padding"
                         android:layout_marginEnd="@dimen/default_recipe_margin"
                         android:text="@string/recipe_title_text"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
+                        style="@style/caption_medium"/>
 
                     <EditText
                         android:id="@+id/edit_text_recipe_title"
@@ -57,11 +56,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/default_recipe_margin"
                         android:layout_marginEnd="@dimen/default_recipe_margin"
-                        android:autofillHints=""
-                        android:ems="10"
                         android:hint="@string/insert_recipe_title"
-                        android:inputType="textPersonName"
-                        android:text="@={recipe.title}" />
+                        android:text="@={recipe.title}"
+                        style="@style/edit_text_string_style"/>
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -78,8 +75,7 @@
                             android:labelFor="@id/edit_text_number_servings"
                             android:paddingTop="@dimen/default_recipe_padding"
                             android:text="@string/recipe_servings_text"
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
+                            style="@style/caption_medium"/>
 
                         <EditText
                             android:id="@+id/edit_text_number_servings"
@@ -88,11 +84,9 @@
                             android:layout_marginStart="@dimen/default_recipe_margin"
                             android:layout_marginEnd="@dimen/default_recipe_margin"
                             android:layout_weight="1"
-                            android:ems="10"
-                            android:inputType="number"
                             android:padding="@dimen/default_recipe_padding"
                             android:text="@={recipe.servingsNumber}"
-                            android:textAlignment="center" />
+                            style="@style/edit_text_number_style" />
 
                     </LinearLayout>
 
@@ -109,8 +103,7 @@
                             android:layout_marginTop="@dimen/default_recipe_margin"
                             android:layout_marginEnd="@dimen/default_recipe_margin"
                             android:text="@string/recipe_ingredients_text"
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
+                            style="@style/caption_medium" />
 
                         <ImageButton
                             android:id="@+id/button_add_ingredient"
@@ -131,28 +124,25 @@
 
                     <TextView
                         android:id="@+id/text_view_recipe_preparation"
+                        style="@style/caption_medium"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/default_recipe_margin"
                         android:layout_marginTop="@dimen/default_recipe_margin"
                         android:layout_marginEnd="@dimen/default_recipe_margin"
-                        android:text="@string/recipe_preparation_text"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:text="@string/recipe_preparation_text" />
 
                     <EditText
                         android:id="@+id/multi_edit_text_recipe_preparation"
+                        style="@style/edit_text_string_multi_style"
                         android:layout_width="match_parent"
                         android:layout_height="200dp"
                         android:layout_marginStart="@dimen/default_recipe_margin"
                         android:layout_marginEnd="@dimen/default_recipe_margin"
                         android:layout_marginBottom="@dimen/default_recipe_margin"
-                        android:autofillHints=""
                         android:background="@drawable/edit_view_border"
-                        android:ems="10"
                         android:gravity="start|top"
                         android:hint="@string/insert_recipe_preparation"
-                        android:inputType="textMultiLine"
                         android:padding="@dimen/default_recipe_padding"
                         android:text="@={recipe.preparation}" />
 
@@ -163,6 +153,7 @@
 
                         <TextView
                             android:id="@+id/text_view_recipe_preparation_time"
+                            style="@style/caption_medium"
                             android:layout_width="145dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/default_recipe_margin"
@@ -170,9 +161,7 @@
                             android:layout_marginEnd="@dimen/default_recipe_margin"
                             android:layout_marginBottom="@dimen/default_recipe_margin"
                             android:layout_weight="1"
-                            android:text="@string/recipe_preparation_time_text"
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
+                            android:text="@string/recipe_preparation_time_text" />
 
                         <EditText
                             android:id="@+id/edit_text_preparation_time"
@@ -181,10 +170,8 @@
                             android:layout_gravity="center_horizontal"
                             android:layout_marginEnd="@dimen/default_recipe_margin"
                             android:layout_weight="1"
-                            android:ems="10"
-                            android:inputType="number"
                             android:text="@={recipe.preparationTime}"
-                            android:textAlignment="center" />
+                            style="@style/edit_text_number_style"/>
 
                         <TextView
                             android:id="@+id/text_view_recipe_preparation_time_unit"
@@ -195,7 +182,7 @@
                             android:layout_marginBottom="@dimen/default_recipe_margin"
                             android:layout_weight="1"
                             android:text="@string/recipe_time_unit_text"
-                            android:textSize="14sp" />
+                            style="@style/caption_small"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -205,6 +192,7 @@
 
                         <TextView
                             android:id="@+id/text_view_recipe_baking_time"
+                            style="@style/caption_medium"
                             android:layout_width="145dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/default_recipe_margin"
@@ -212,9 +200,7 @@
                             android:layout_marginEnd="@dimen/default_recipe_margin"
                             android:layout_marginBottom="@dimen/default_recipe_margin"
                             android:layout_weight="1"
-                            android:text="@string/recipe_baking_time_text"
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
+                            android:text="@string/recipe_baking_time_text" />
 
                         <EditText
                             android:id="@+id/edit_text_baking_time"
@@ -223,10 +209,8 @@
                             android:layout_gravity="center_horizontal"
                             android:layout_marginEnd="@dimen/default_recipe_margin"
                             android:layout_weight="1"
-                            android:ems="10"
-                            android:inputType="number"
                             android:text="@={recipe.bakingTime}"
-                            android:textAlignment="center" />
+                            style="@style/edit_text_number_style" />
 
                         <TextView
                             android:id="@+id/text_view_recipe_baking_time_unit"
@@ -237,7 +221,7 @@
                             android:layout_marginBottom="@dimen/default_recipe_margin"
                             android:layout_weight="1"
                             android:text="@string/recipe_time_unit_text"
-                            android:textSize="14sp" />
+                            style="@style/caption_small" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -247,6 +231,7 @@
 
                         <TextView
                             android:id="@+id/text_view_recipe_rest_time"
+                            style="@style/caption_medium"
                             android:layout_width="145dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/default_recipe_margin"
@@ -254,44 +239,40 @@
                             android:layout_marginEnd="@dimen/default_recipe_margin"
                             android:layout_marginBottom="@dimen/default_recipe_margin"
                             android:layout_weight="1"
-                            android:text="@string/recipe_rest_time_text"
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
+                            android:text="@string/recipe_rest_time_text" />
 
                         <EditText
                             android:id="@+id/edit_text_rest_time"
+                            style="@style/edit_text_number_style"
                             android:layout_width="90dp"
                             android:layout_height="match_parent"
                             android:layout_gravity="center_horizontal"
                             android:layout_marginEnd="@dimen/default_recipe_margin"
                             android:layout_weight="1"
-                            android:ems="10"
-                            android:inputType="number"
-                            android:text="@={recipe.restTime}"
-                            android:textAlignment="center" />
+                            android:text="@={recipe.restTime}"/>
 
                         <TextView
                             android:id="@+id/text_view_recipe_rest_time_unit"
+                            style="@style/caption_small"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/default_recipe_margin"
                             android:layout_marginEnd="@dimen/default_recipe_margin"
+                            android:layout_marginBottom="@dimen/default_recipe_margin"
                             android:layout_weight="1"
-                            android:text="@string/recipe_time_unit_text"
-                            android:textSize="14sp" />
+                            android:text="@string/recipe_time_unit_text" />
                     </LinearLayout>
 
                     <TextView
                         android:id="@+id/text_view_recipe_type"
+                        style="@style/caption_medium"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/default_recipe_margin"
                         android:layout_marginTop="@dimen/default_recipe_margin"
                         android:layout_marginEnd="@dimen/default_recipe_margin"
                         android:layout_weight="1"
-                        android:text="@string/type_of_recipe"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:text="@string/type_of_recipe" />
 
                     <com.google.android.material.chip.ChipGroup
                         android:id="@+id/chip_group_recipe_type"
@@ -304,33 +285,32 @@
 
                     <TextView
                         android:id="@+id/text_view_recipe_nutrition"
+                        style="@style/caption_medium"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/default_recipe_margin"
                         android:layout_marginTop="@dimen/default_recipe_margin"
                         android:layout_marginEnd="@dimen/default_recipe_margin"
                         android:layout_weight="1"
-                        android:text="@string/recipe_nutrition"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:text="@string/recipe_nutrition" />
 
                     <com.google.android.material.chip.ChipGroup
                         android:id="@+id/chip_group_nutrition"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginStart="@dimen/default_recipe_margin"
-                        android:layout_marginEnd="@dimen/default_recipe_margin"
-                        app:chipSpacingHorizontal="8dp" />
+                        android:layout_marginEnd="@dimen/default_recipe_margin" />
 
                     <TextView
                         android:id="@+id/text_view_difficulty"
+                        style="@style/caption_medium"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/default_recipe_margin"
+                        android:layout_marginTop="@dimen/default_recipe_margin"
                         android:layout_marginEnd="@dimen/default_recipe_margin"
-                        android:text="@string/recipe_difficulty_text"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:layout_marginBottom="@dimen/default_recipe_padding"
+                        android:text="@string/recipe_difficulty_text" />
 
                     <com.google.android.material.chip.ChipGroup
                         android:id="@+id/chip_group_difficulty"
