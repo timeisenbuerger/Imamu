@@ -26,7 +26,19 @@ class EditRecipeViewModel(private val recipeRepository: RecipeRepository, privat
                 }
             }
 
-            val totalTime = it.preparationTime.toInt() + it.bakingTime.toInt() + it.restTime.toInt()
+            var totalTime = 0
+            if (it.preparationTime.isNotEmpty())
+            {
+                totalTime += it.preparationTime.toInt()
+            }
+            if (it.bakingTime.isNotEmpty())
+            {
+                totalTime += it.bakingTime.toInt()
+            }
+            if (it.restTime.isNotEmpty())
+            {
+                totalTime += it.restTime.toInt()
+            }
             it.totalTime = totalTime
 
             recipeRepository.save(it)

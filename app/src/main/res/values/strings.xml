@@ -71,6 +71,7 @@
     <string name="recipe_nutrition">Ernährung:</string>
     <string name="recipe_time">Gesamtzeit:</string>
     <string name="start_search">Suche starten</string>
+    <string name="sample_ingredient_info">0 fehlende Zutaten</string>
 
     <string-array name="ingredient_units">
         <item>g</item>

@@ -3,6 +3,7 @@ package com.github.tei.imamu.custom.viewholder.finder
 import android.net.Uri
 import android.text.TextUtils
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
@@ -41,7 +42,13 @@ class RecipeFinderResultListViewHolder private constructor(private val binding: 
         binding.recipe = item
         binding.wrapper = viewModel.getWrapper(item)
         binding.clickListener = clickListener
-        binding.textViewRecipeName.text = item.title
+        binding.textViewRecipeTitle.text = item.title
+
+        if (item.totalTime != 0)
+        {
+            binding.chipTime.text = "${item.totalTime} min"
+            binding.chipTime.visibility = View.VISIBLE
+        }
 
         setImage(item)
         initChips(item)
@@ -51,13 +58,13 @@ class RecipeFinderResultListViewHolder private constructor(private val binding: 
     {
         if (!TextUtils.isEmpty(item.imagePath) && File(item.imagePath).exists())
         {
-            binding.imageViewRecipe.scaleType = ImageView.ScaleType.CENTER_CROP
-            binding.imageViewRecipe.setImageURI(Uri.parse(item.imagePath))
+            binding.cardBackground.scaleType = ImageView.ScaleType.CENTER_CROP
+            binding.cardBackground.setImageURI(Uri.parse(item.imagePath))
         }
         else
         {
-            binding.imageViewRecipe.scaleType = ImageView.ScaleType.FIT_CENTER
-            binding.imageViewRecipe.setImageResource(R.drawable.ic_hot_tub)
+            binding.cardBackground.scaleType = ImageView.ScaleType.FIT_CENTER
+            binding.cardBackground.setImageResource(R.drawable.ic_hot_tub)
         }
     }
 

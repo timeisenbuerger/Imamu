@@ -60,7 +60,7 @@
     <fragment
         android:id="@+id/editRecipeFragment"
         android:name="com.github.tei.imamu.view.recipe.EditRecipeFragment"
-        android:label="EditRecipeFragment"
+        android:label=""
         tools:layout="@layout/fragment_edit_recipe">
         <argument
             android:name="recipe"
@@ -167,7 +167,7 @@
     <fragment
         android:id="@+id/recipeFinderResultListFragment"
         android:name="com.github.tei.imamu.view.finder.RecipeFinderResultListFragment"
-        android:label="RecipeFinderResultListFragment"
+        android:label=""
         tools:layout="@layout/fragment_recipe_finder_result_list">
         <action
             android:id="@+id/action_recipeFinderResultListFragment_to_recipeDetailFragment"

@@ -60,7 +60,16 @@ class RecipeFinderSearchViewModel(private val recipeRepository: RecipeRepository
 
                 if (isResult)
                 {
-                    val info = (selectedIngredients.size - containedIngredientNumber).toString() + " fehlende Zutaten"
+                    var info = ""
+                    val diff = recipe.recipeIngredients.size - containedIngredientNumber
+                    info = if (diff == 0)
+                    {
+                        "Alle Zutaten vorhanden"
+                    }
+                    else
+                    {
+                        "$diff fehlende Zutaten"
+                    }
                     val singleSearchResultWrapper = SingleSearchResultWrapper(info, recipe)
                     fullSearchResultWrapper.resultList.add(singleSearchResultWrapper)
                 }
@@ -81,7 +90,7 @@ class RecipeFinderSearchViewModel(private val recipeRepository: RecipeRepository
     private fun buildQuery(selectedChipValues: MutableMap<String, String>): QueryBuilder<Recipe>
     {
         var query = recipeRepository.recipeBox.query()
-        var isAndNecessary: Boolean = false
+        var isAndNecessary = false
         if (!TextUtils.isEmpty(selectedChipValues["difficulty"]))
         {
             query = query.contains(Recipe_.difficulty, selectedChipValues["difficulty"])

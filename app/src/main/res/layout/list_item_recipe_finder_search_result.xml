@@ -19,14 +19,12 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="300dp"
         android:onClick="@{() -> clickListener.onClick(recipe)}">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="1dp"
-            app:cardElevation="3dp"
+            android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -34,72 +32,91 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/image_view_recipe"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
+                    android:id="@+id/card_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:contentDescription="@string/image_view_meal_text"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:srcCompat="@mipmap/pancakes" />
 
-                <TextView
-                    android:id="@+id/text_view_recipe_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="@{recipe.title}"
-                    android:textAlignment="viewStart"
-                    android:textColor="@android:color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@id/image_view_recipe"
+                <ImageButton
+                    android:id="@+id/button_open_detail"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/btn_detail_style"
+                    android:src="@drawable/ic_share_black"
+                    android:text="@string/action_go_to_detail"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.25"
-                    app:layout_constraintStart_toEndOf="@id/image_view_recipe"
-                    app:layout_constraintTop_toTopOf="@id/image_view_recipe"
-                    app:layout_constraintVertical_bias="0.35000002"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/gradient_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="105dp"
+                    android:background="@drawable/black_gradient"
+                    app:layout_constraintBottom_toBottomOf="@+id/card_background"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/text_view_recipe_title"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginEnd="100dp"
+                    android:layout_marginBottom="40dp"
+                    android:singleLine="false"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
                     tools:text="@string/sample_recipe_title" />
 
                 <TextView
-                    android:id="@+id/text_ingredients_amount"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/text_view_info"
+                    android:layout_width="250dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="@dimen/default_recipe_margin"
+                    android:layout_marginStart="32dp"
                     android:layout_marginBottom="16dp"
                     android:text="@{wrapper.info}"
-                    android:textAlignment="viewStart"
-                    android:textColor="@color/design_default_color_error"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/card_background"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.224"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_view_recipe_title"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:text="@string/sample_ingredient_info" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:visibility="gone"
+                    app:chipSurfaceColor="#8FFF"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.218"
-                    app:layout_constraintStart_toEndOf="@id/image_view_recipe"
-                    app:layout_constraintTop_toBottomOf="@id/text_view_recipe_name"
-                    app:layout_constraintVertical_bias="0.162"
-                    tools:text="@string/sample_recipe_title" />
-
-                <com.google.android.flexbox.FlexboxLayout
-                    android:id="@+id/recipe_features"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    app:flexWrap="wrap"
-                    app:justifyContent="flex_start"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_ingredients_amount"
-                    app:layout_constraintStart_toEndOf="@id/image_view_recipe"
-                    app:layout_constraintEnd_toEndOf="parent"/>
-
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.89"
+                    tools:text="@string/sample_time"
+                    tools:visibility="visible" />
             </androidx.constraintlayout.widget.ConstraintLayout>
+
         </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

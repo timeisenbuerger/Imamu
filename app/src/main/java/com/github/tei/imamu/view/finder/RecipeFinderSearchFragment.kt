@@ -24,7 +24,7 @@ class RecipeFinderSearchFragment : Fragment()
     private lateinit var binding: FragmentRecipeFinderSearchBinding
     private val viewModel: RecipeFinderSearchViewModel by inject()
     private lateinit var application: Application
-    private var chips: MutableList<Chip> = mutableListOf()
+    private var chips = mutableMapOf<String, Chip>()
     private var selectedChipValues = mutableMapOf<String, String>()
     private var selectedIngredients = mutableListOf<String>()
 
@@ -125,7 +125,10 @@ class RecipeFinderSearchFragment : Fragment()
         chip.text = name
         parent.addView(chip)
 
-        chips.add(chip)
+        chips[name]?.let {
+            chip.isChecked = it.isChecked
+        }
+        chips[name] = chip
     }
 
     private fun collectSearchData()
@@ -138,16 +141,17 @@ class RecipeFinderSearchFragment : Fragment()
         selectedChipValues["difficulty"] = ""
         selectedChipValues["time"] = ""
 
-        for (chip in chips)
+        for (entry in chips)
         {
+            val chip = entry.value
             if (chip.isChecked)
             {
-                when(chip.parent)
+                when (chip.parent)
                 {
-                    binding.typeOfRecipe -> selectedChipValues["type"] = chip.text.toString()
-                    binding.recipeNutrition -> selectedChipValues["nutrition"] += chip.text.toString() + ";"
+                    binding.typeOfRecipe     -> selectedChipValues["type"] = chip.text.toString()
+                    binding.recipeNutrition  -> selectedChipValues["nutrition"] += chip.text.toString() + ";"
                     binding.recipeDifficulty -> selectedChipValues["difficulty"] = chip.text.toString()
-                    binding.recipeTime -> selectedChipValues["time"] = chip.text.toString()
+                    binding.recipeTime       -> selectedChipValues["time"] = chip.text.toString()
                 }
             }
         }

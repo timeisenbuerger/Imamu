@@ -70,7 +70,19 @@ class ImportRecipeViewModel(private val recipeRepository: RecipeRepository, priv
                 }
             }
 
-            val totalTime = item.preparationTime.toInt() + item.bakingTime.toInt() + item.restTime.toInt()
+            var totalTime = 0
+            if (item.preparationTime.isNotEmpty())
+            {
+                totalTime += item.preparationTime.toInt()
+            }
+            if (item.bakingTime.isNotEmpty())
+            {
+                totalTime += item.bakingTime.toInt()
+            }
+            if (item.restTime.isNotEmpty())
+            {
+                totalTime += item.restTime.toInt()
+            }
             item.totalTime = totalTime
 
             recipeRepository.save(item)
