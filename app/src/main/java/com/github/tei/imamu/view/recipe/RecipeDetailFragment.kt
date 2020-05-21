@@ -6,10 +6,12 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.view.*
 import android.widget.ImageView
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
 import com.github.tei.imamu.custom.adapter.recipe.IngredientDetailListAdapter
@@ -18,6 +20,7 @@ import com.github.tei.imamu.databinding.FragmentRecipeDetailBinding
 import com.github.tei.imamu.util.setListViewHeightBasedOnChildren
 import com.github.tei.imamu.viewmodel.recipe.RecipeDetailViewModel
 import com.google.android.material.chip.Chip
+import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.android.inject
 import java.io.File
 import java.text.DecimalFormat
@@ -35,8 +38,6 @@ class RecipeDetailFragment : Fragment()
         initComponents(inflater)
         initObserver()
         initListener()
-
-        (activity as MainActivity).supportActionBar?.title = viewModel.currentRecipe.value!!.title
 
         setHasOptionsMenu(true)
         return binding.root
@@ -223,5 +224,25 @@ class RecipeDetailFragment : Fragment()
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onResume()
+    {
+        super.onResume()
+        val mainActivity = activity as MainActivity
+        mainActivity.setSupportActionBar(binding.toolbar)
+        mainActivity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        mainActivity.supportActionBar?.title = viewModel.currentRecipe.value!!.title
+        mainActivity.binding.appBar.visibility = View.GONE
+    }
+
+    override fun onStop()
+    {
+        super.onStop()
+        val mainActivity = activity as MainActivity
+        mainActivity.setSupportActionBar(mainActivity.toolbar)
+        mainActivity.binding.appBar.visibility = View.VISIBLE
+        NavigationUI.setupActionBarWithNavController(mainActivity, mainActivity.navController, mainActivity.appBarConfiguration)
+        NavigationUI.setupWithNavController(mainActivity.binding.navView, mainActivity.navController)
     }
 }

@@ -2,6 +2,7 @@ package com.github.tei.imamu
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
@@ -22,10 +23,10 @@ import org.koin.core.context.stopKoin
 
 class MainActivity : AppCompatActivity()
 {
-    private lateinit var binding: ActivityMainBinding
-    private lateinit var drawerLayout: DrawerLayout
-    private lateinit var navController: NavController
-    private lateinit var appBarConfiguration: AppBarConfiguration
+    lateinit var binding: ActivityMainBinding
+    lateinit var drawerLayout: DrawerLayout
+    lateinit var navController: NavController
+    lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
