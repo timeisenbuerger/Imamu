@@ -1,7 +1,7 @@
 package com.github.tei.imamu.custom.viewholder.shoppinglist
 
 import androidx.recyclerview.widget.DiffUtil
-import com.github.tei.imamu.data.entity.shoppinglist.ShoppingList
+import com.github.tei.imamu.data.database.entity.shoppinglist.ShoppingList
 
 class ShoppingListDiffCallback : DiffUtil.ItemCallback<ShoppingList>()
 {

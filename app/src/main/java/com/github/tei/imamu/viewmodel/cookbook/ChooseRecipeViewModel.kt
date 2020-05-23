@@ -2,8 +2,8 @@ package com.github.tei.imamu.viewmodel.cookbook
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.github.tei.imamu.data.entity.cookbook.CookBook
-import com.github.tei.imamu.data.entity.recipe.Recipe
+import com.github.tei.imamu.data.database.entity.cookbook.CookBook
+import com.github.tei.imamu.data.database.entity.recipe.Recipe
 import com.github.tei.imamu.data.repository.CookBookRepository
 import com.github.tei.imamu.data.repository.RecipeRepository
 import io.objectbox.android.ObjectBoxLiveData

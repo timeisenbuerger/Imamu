@@ -1,7 +1,7 @@
 package com.github.tei.imamu.custom.viewholder.cookbook
 
 import androidx.recyclerview.widget.DiffUtil
-import com.github.tei.imamu.data.entity.cookbook.CookBook
+import com.github.tei.imamu.data.database.entity.cookbook.CookBook
 
 class CookBookDiffCallback : DiffUtil.ItemCallback<CookBook>()
 {

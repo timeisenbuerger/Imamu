@@ -15,7 +15,7 @@ import androidx.navigation.ui.NavigationUI
 import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
 import com.github.tei.imamu.custom.adapter.recipe.IngredientDetailListAdapter
-import com.github.tei.imamu.data.entity.recipe.Recipe
+import com.github.tei.imamu.data.database.entity.recipe.Recipe
 import com.github.tei.imamu.databinding.FragmentRecipeDetailBinding
 import com.github.tei.imamu.util.setListViewHeightBasedOnChildren
 import com.github.tei.imamu.viewmodel.recipe.RecipeDetailViewModel
@@ -41,6 +41,12 @@ class RecipeDetailFragment : Fragment()
 
         setHasOptionsMenu(true)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?)
+    {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.updateLastViewed()
     }
 
     private fun init(inflater: LayoutInflater, container: ViewGroup?)
@@ -69,6 +75,15 @@ class RecipeDetailFragment : Fragment()
     {
         val recipe = binding.viewModel!!.currentRecipe.value!!
 
+        if (recipe.isFavorite)
+        {
+            binding.fabFavorite.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_favorite_checked))
+        }
+        else
+        {
+            binding.fabFavorite.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_favorite_unchecked))
+        }
+
         if (!TextUtils.isEmpty(recipe.imagePath) && File(recipe.imagePath).exists())
         {
             binding.imageRecipe.scaleType = ImageView.ScaleType.CENTER_CROP
@@ -86,7 +101,8 @@ class RecipeDetailFragment : Fragment()
         }
         if (!TextUtils.isEmpty(recipe.nutrition))
         {
-            val nutritionOptions = recipe.nutrition.split(";").toMutableList()
+            val nutritionOptions = recipe.nutrition.split(";")
+                .toMutableList()
             for (nutritionOption in nutritionOptions)
             {
                 if (!TextUtils.isEmpty(nutritionOption))
@@ -137,6 +153,21 @@ class RecipeDetailFragment : Fragment()
         binding.buttonIncreaseServings.setOnClickListener {
             viewModel.currentRecipe.value?.let {
                 increaseServings(it)
+            }
+        }
+
+        binding.fabFavorite.setOnClickListener {
+            if (viewModel.currentRecipe.value!!.isFavorite)
+            {
+                binding.fabFavorite.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_favorite_unchecked))
+                viewModel.currentRecipe.value!!.isFavorite = false
+                viewModel.updateRecipe()
+            }
+            else
+            {
+                binding.fabFavorite.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_favorite_checked))
+                viewModel.currentRecipe.value!!.isFavorite = true
+                viewModel.updateRecipe()
             }
         }
     }

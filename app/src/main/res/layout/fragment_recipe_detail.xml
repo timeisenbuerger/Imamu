@@ -6,7 +6,7 @@
     <data>
         <variable
             name="recipe"
-            type="com.github.tei.imamu.data.entity.recipe.Recipe" />
+            type="com.github.tei.imamu.data.database.entity.recipe.Recipe" />
 
         <variable
             name="viewModel"
@@ -176,6 +176,7 @@
                     android:layout_marginEnd="@dimen/default_recipe_margin"
                     android:layout_marginBottom="@dimen/default_recipe_margin"
                     android:text="@{recipe.preparation}"
+                    android:lineSpacingMultiplier="1.35"
                     tools:text="@string/sample_preparation" />
 
             </LinearLayout>

@@ -1,7 +1,7 @@
 package com.github.tei.imamu.data.repository
 
-import com.github.tei.imamu.data.entity.recipe.Recipe
-import com.github.tei.imamu.data.entity.recipe.Recipe_
+import com.github.tei.imamu.data.database.entity.recipe.Recipe
+import com.github.tei.imamu.data.database.entity.recipe.Recipe_
 import io.objectbox.BoxStore
 import io.objectbox.android.ObjectBoxLiveData
 import io.objectbox.kotlin.boxFor
@@ -18,5 +18,10 @@ class RecipeRepository(store: BoxStore) : BaseRepository<Recipe>(store)
     override fun getAll(): ObjectBoxLiveData<Recipe>
     {
         return ObjectBoxLiveData(recipeBox.query().build())
+    }
+
+    fun getAllFavorites(): ObjectBoxLiveData<Recipe>
+    {
+        return ObjectBoxLiveData(recipeBox.query().equal(Recipe_.isFavorite, true).build())
     }
 }

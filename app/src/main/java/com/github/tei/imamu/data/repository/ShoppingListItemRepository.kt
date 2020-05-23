@@ -1,6 +1,6 @@
 package com.github.tei.imamu.data.repository
 
-import com.github.tei.imamu.data.entity.shoppinglist.ShoppingListItem
+import com.github.tei.imamu.data.database.entity.shoppinglist.ShoppingListItem
 import io.objectbox.BoxStore
 import io.objectbox.android.ObjectBoxLiveData
 import io.objectbox.kotlin.boxFor

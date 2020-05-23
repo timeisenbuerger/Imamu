@@ -8,7 +8,7 @@ import android.widget.Filterable
 import androidx.recyclerview.widget.ListAdapter
 import com.github.tei.imamu.custom.viewholder.cookbook.CookBookDiffCallback
 import com.github.tei.imamu.custom.viewholder.cookbook.CookBookListViewHolder
-import com.github.tei.imamu.data.entity.cookbook.CookBook
+import com.github.tei.imamu.data.database.entity.cookbook.CookBook
 import com.github.tei.imamu.viewmodel.cookbook.CookBookListViewModel
 import java.util.*
 

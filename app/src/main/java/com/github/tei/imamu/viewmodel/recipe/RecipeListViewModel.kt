@@ -3,7 +3,7 @@ package com.github.tei.imamu.viewmodel.recipe
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.github.tei.imamu.data.entity.recipe.Recipe
+import com.github.tei.imamu.data.database.entity.recipe.Recipe
 import com.github.tei.imamu.data.repository.RecipeRepository
 import io.objectbox.android.ObjectBoxLiveData
 
@@ -16,11 +16,6 @@ class RecipeListViewModel(private val recipeRepository: RecipeRepository) : View
     private val _navigateToDetail = MutableLiveData<Recipe>()
     val navigateToDetail: LiveData<Recipe>
         get() = _navigateToDetail
-
-    init
-    {
-        initRecipes()
-    }
 
     fun initRecipes()
     {

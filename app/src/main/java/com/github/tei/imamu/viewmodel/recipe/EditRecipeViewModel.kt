@@ -3,7 +3,7 @@ package com.github.tei.imamu.viewmodel.recipe
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.github.tei.imamu.data.entity.recipe.Recipe
+import com.github.tei.imamu.data.database.entity.recipe.Recipe
 import com.github.tei.imamu.data.repository.IngredientRepository
 import com.github.tei.imamu.data.repository.RecipeRepository
 

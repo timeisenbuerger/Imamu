@@ -5,7 +5,7 @@
 <data>
     <variable
         name="item"
-        type="com.github.tei.imamu.data.entity.recipe.RecipeIngredient" />
+        type="com.github.tei.imamu.data.database.entity.recipe.RecipeIngredient" />
 </data>
 
     <LinearLayout

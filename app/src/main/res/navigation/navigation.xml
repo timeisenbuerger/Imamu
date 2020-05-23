@@ -8,8 +8,17 @@
     <fragment
         android:id="@+id/nav_home"
         android:name="com.github.tei.imamu.view.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home"/>
+        android:label=""
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_nav_home_to_recipeDetailFragment"
+            app:destination="@id/recipeDetailFragment"
+            app:popUpTo="@id/nav_home" />
+        <action
+            android:id="@+id/action_nav_home_to_cookBookDetailFragment"
+            app:destination="@id/cookBookDetailFragment"
+            app:popUpTo="@id/nav_home" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_recipe_list"
@@ -47,7 +56,7 @@
         tools:layout="@layout/fragment_recipe_detail">
         <argument
             android:name="recipe"
-            app:argType="com.github.tei.imamu.data.entity.recipe.Recipe" />
+            app:argType="com.github.tei.imamu.data.database.entity.recipe.Recipe" />
         <action
             android:id="@+id/action_recipeDetailFragment_to_editRecipeFragment"
             app:destination="@id/editRecipeFragment"
@@ -64,7 +73,7 @@
         tools:layout="@layout/fragment_edit_recipe">
         <argument
             android:name="recipe"
-            app:argType="com.github.tei.imamu.data.entity.recipe.Recipe" />
+            app:argType="com.github.tei.imamu.data.database.entity.recipe.Recipe" />
         <action
             android:id="@+id/action_editRecipeFragment_to_recipeDetailFragment"
             app:destination="@id/recipeDetailFragment"
@@ -97,7 +106,7 @@
         tools:layout="@layout/fragment_shopping_list_detail">
         <argument
             android:name="shoppingList"
-            app:argType="com.github.tei.imamu.data.entity.shoppinglist.ShoppingList" />
+            app:argType="com.github.tei.imamu.data.database.entity.shoppinglist.ShoppingList" />
     </fragment>
 
     <fragment
@@ -124,7 +133,7 @@
             app:popUpTo="@id/addCookBookFragment" />
         <argument
             android:name="cookBook"
-            app:argType="com.github.tei.imamu.data.entity.cookbook.CookBook"
+            app:argType="com.github.tei.imamu.data.database.entity.cookbook.CookBook"
             app:nullable="true" />
         <action
             android:id="@+id/action_addCookBookFragment_to_nav_cookbook"
@@ -140,7 +149,7 @@
             app:popUpTo="@id/nav_cookbook" />
         <argument
             android:name="cookBook"
-            app:argType="com.github.tei.imamu.data.entity.cookbook.CookBook" />
+            app:argType="com.github.tei.imamu.data.database.entity.cookbook.CookBook" />
     </fragment>
     <fragment
         android:id="@+id/cookBookDetailFragment"
@@ -148,11 +157,15 @@
         tools:layout="@layout/fragment_detail_cook_book">
         <argument
             android:name="cookBook"
-            app:argType="com.github.tei.imamu.data.entity.cookbook.CookBook" />
+            app:argType="com.github.tei.imamu.data.database.entity.cookbook.CookBook" />
         <action
             android:id="@+id/action_cookBookDetailFragment_to_recipeDetailFragment"
             app:destination="@id/recipeDetailFragment"
             app:popUpTo="@id/cookBookDetailFragment" />
+        <action
+            android:id="@+id/action_cookBookDetailFragment_to_nav_home"
+            app:destination="@id/nav_home"
+            app:popUpTo="@id/nav_home" />
     </fragment>
     <fragment
         android:id="@+id/nav_recipe_suggestion"

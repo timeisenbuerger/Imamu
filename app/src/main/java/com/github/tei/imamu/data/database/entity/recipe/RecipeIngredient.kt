@@ -1,6 +1,6 @@
-package com.github.tei.imamu.data.entity.recipe
+package com.github.tei.imamu.data.database.entity.recipe
 
-import com.github.tei.imamu.data.entity.Ingredient
+import com.github.tei.imamu.data.database.entity.Ingredient
 import io.objectbox.annotation.Entity
 import io.objectbox.annotation.Id
 import io.objectbox.relation.ToOne

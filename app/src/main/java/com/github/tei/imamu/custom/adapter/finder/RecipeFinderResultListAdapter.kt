@@ -7,7 +7,7 @@ import android.widget.Filterable
 import androidx.recyclerview.widget.ListAdapter
 import com.github.tei.imamu.custom.viewholder.finder.RecipeFinderResultListViewHolder
 import com.github.tei.imamu.custom.viewholder.recipe.RecipeDiffCallback
-import com.github.tei.imamu.data.entity.recipe.Recipe
+import com.github.tei.imamu.data.database.entity.recipe.Recipe
 import com.github.tei.imamu.viewmodel.finder.RecipeFinderResultListViewModel
 import java.util.*
 

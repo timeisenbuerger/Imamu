@@ -73,6 +73,9 @@
     <string name="start_search">Suche starten</string>
     <string name="sample_ingredient_info">0 fehlende Zutaten</string>
     <string name="sample_servings_number">2 Portionen</string>
+    <string name="caption_favorites">Deine Favoriten</string>
+    <string name="caption_last_viewed_recipes">Zuletzt geöffnete Rezepte</string>
+    <string name="caption_last_viewed_cook_books">Zuletzt geöffnete Kochbücher</string>
 
     <string-array name="ingredient_units">
         <item>g</item>

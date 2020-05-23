@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "1:2548072088956869254",
-      "lastPropertyId": "14:8651693078277595375",
+      "lastPropertyId": "16:4672317359595211883",
       "name": "Recipe",
       "properties": [
         {
@@ -63,6 +63,18 @@
           "id": "14:8651693078277595375",
           "name": "nutrition",
           "type": 9
+        },
+        {
+          "id": "15:3607269205505283310",
+          "name": "totalTime",
+          "type": 5,
+          "flags": 4
+        },
+        {
+          "id": "16:4672317359595211883",
+          "name": "isFavorite",
+          "type": 1,
+          "flags": 4
         }
       ],
       "relations": []

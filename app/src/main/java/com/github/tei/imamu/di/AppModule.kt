@@ -1,6 +1,6 @@
 package com.github.tei.imamu.di
 
-import com.github.tei.imamu.data.ObjectBox
+import com.github.tei.imamu.data.database.ObjectBox
 import com.github.tei.imamu.data.repository.*
 import com.github.tei.imamu.viewmodel.cookbook.AddCookBookViewModel
 import com.github.tei.imamu.viewmodel.cookbook.ChooseRecipeViewModel
@@ -8,6 +8,7 @@ import com.github.tei.imamu.viewmodel.cookbook.CookBookDetailViewModel
 import com.github.tei.imamu.viewmodel.cookbook.CookBookListViewModel
 import com.github.tei.imamu.viewmodel.finder.RecipeFinderResultListViewModel
 import com.github.tei.imamu.viewmodel.finder.RecipeFinderSearchViewModel
+import com.github.tei.imamu.viewmodel.home.HomeViewModel
 import com.github.tei.imamu.viewmodel.recipe.*
 import com.github.tei.imamu.viewmodel.shoppinglist.ShoppingListDetailViewModel
 import com.github.tei.imamu.viewmodel.shoppinglist.ShoppingListViewModel
@@ -21,24 +22,29 @@ val boxModule = module {
 
 val repositoryModule = module {
     single { RecipeRepository(get()) }
+    single { LastViewedRecipeRepository(get()) }
     single { RecipeIngredientRepository(get()) }
     single { IngredientRepository(get()) }
     single { CookBookRepository(get()) }
+    single { LastViewedCookBookRepository(get()) }
     single { ShoppingListRepository(get()) }
     single { ShoppingListItemRepository(get()) }
 }
 
 val viewModelModule = module {
-    viewModel { CookBookListViewModel(get()) }
-    viewModel { CookBookDetailViewModel(get()) }
-    viewModel { AddCookBookViewModel(get()) }
-    viewModel { ChooseRecipeViewModel(get(), get()) }
+
+    viewModel { HomeViewModel(get(), get(), get()) }
 
     viewModel { RecipeListViewModel(get()) }
-    viewModel { RecipeDetailViewModel(get()) }
+    viewModel { RecipeDetailViewModel(get(), get()) }
     viewModel { ImportRecipeViewModel(get(), get()) }
     viewModel { AddRecipeViewModel(get(), get()) }
     viewModel { EditRecipeViewModel(get(), get()) }
+
+    viewModel { CookBookListViewModel(get()) }
+    viewModel { CookBookDetailViewModel(get(), get()) }
+    viewModel { AddCookBookViewModel(get()) }
+    viewModel { ChooseRecipeViewModel(get(), get()) }
 
     viewModel { ShoppingListViewModel(get()) }
     viewModel { ShoppingListDetailViewModel(get(), get()) }

@@ -27,8 +27,6 @@ class ShoppingListDetailFragment : Fragment()
         init(inflater, container)
         initObserver()
 
-        (activity as MainActivity).supportActionBar?.title = viewModel.shoppingList.value?.name
-
         return binding.root
     }
 
@@ -63,5 +61,11 @@ class ShoppingListDetailFragment : Fragment()
                 viewModel.onDeleteItemsComplete()
             }
         })
+    }
+
+    override fun onResume()
+    {
+        super.onResume()
+        (activity as MainActivity).supportActionBar?.title = viewModel.shoppingList.value?.name
     }
 }

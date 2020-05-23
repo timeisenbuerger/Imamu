@@ -7,7 +7,7 @@
 
         <variable
             name="cookBook"
-            type="com.github.tei.imamu.data.entity.cookbook.CookBook" />
+            type="com.github.tei.imamu.data.database.entity.cookbook.CookBook" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

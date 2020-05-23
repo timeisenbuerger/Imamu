@@ -3,8 +3,8 @@ package com.github.tei.imamu.viewmodel.shoppinglist
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.github.tei.imamu.data.entity.shoppinglist.ShoppingList
-import com.github.tei.imamu.data.entity.shoppinglist.ShoppingListItem
+import com.github.tei.imamu.data.database.entity.shoppinglist.ShoppingList
+import com.github.tei.imamu.data.database.entity.shoppinglist.ShoppingListItem
 import com.github.tei.imamu.data.repository.ShoppingListItemRepository
 import com.github.tei.imamu.data.repository.ShoppingListRepository
 

@@ -1,4 +1,4 @@
-package com.github.tei.imamu.data.entity.recipe
+package com.github.tei.imamu.data.database.entity.recipe
 
 import io.objectbox.annotation.Backlink
 import io.objectbox.annotation.Entity
@@ -31,7 +31,9 @@ data class Recipe(
 
     var nutrition: String = "",
 
-    var imagePath: String = ""
+    var imagePath: String = "",
+
+    var isFavorite: Boolean = false
 
 ) : Serializable
 {

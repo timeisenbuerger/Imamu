@@ -3,6 +3,7 @@ package com.github.tei.imamu.view.cookbook
 import android.app.Application
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -32,6 +33,12 @@ class CookBookDetailFragment : Fragment()
         (activity as MainActivity).supportActionBar?.title = viewModel.cookBook.value!!.title
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?)
+    {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.updateLastViewed()
     }
 
     private fun init(inflater: LayoutInflater, container: ViewGroup?)

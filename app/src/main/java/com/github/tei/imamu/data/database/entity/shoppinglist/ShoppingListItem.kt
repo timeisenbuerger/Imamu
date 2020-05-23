@@ -1,6 +1,5 @@
-package com.github.tei.imamu.data.entity.shoppinglist
+package com.github.tei.imamu.data.database.entity.shoppinglist
 
-import com.github.tei.imamu.data.entity.shoppinglist.ShoppingList
 import io.objectbox.annotation.Entity
 import io.objectbox.annotation.Id
 import io.objectbox.relation.ToOne

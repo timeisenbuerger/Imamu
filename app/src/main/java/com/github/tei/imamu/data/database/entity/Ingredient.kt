@@ -1,4 +1,4 @@
-package com.github.tei.imamu.data.entity
+package com.github.tei.imamu.data.database.entity
 
 import io.objectbox.annotation.Entity
 import io.objectbox.annotation.Id

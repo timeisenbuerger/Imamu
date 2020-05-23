@@ -9,8 +9,8 @@ import android.widget.ListView
 import androidx.databinding.DataBindingUtil
 import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
-import com.github.tei.imamu.data.entity.Ingredient
-import com.github.tei.imamu.data.entity.recipe.RecipeIngredient
+import com.github.tei.imamu.data.database.entity.Ingredient
+import com.github.tei.imamu.data.database.entity.recipe.RecipeIngredient
 import com.github.tei.imamu.databinding.ListItemAddIngredientBinding
 import com.github.tei.imamu.util.setListViewHeightBasedOnChildren
 

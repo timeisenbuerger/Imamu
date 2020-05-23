@@ -4,9 +4,9 @@ import android.text.TextUtils
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.github.tei.imamu.data.entity.Ingredient
-import com.github.tei.imamu.data.entity.recipe.Recipe
-import com.github.tei.imamu.data.entity.recipe.Recipe_
+import com.github.tei.imamu.data.database.entity.Ingredient
+import com.github.tei.imamu.data.database.entity.recipe.Recipe
+import com.github.tei.imamu.data.database.entity.recipe.Recipe_
 import com.github.tei.imamu.data.repository.IngredientRepository
 import com.github.tei.imamu.data.repository.RecipeRepository
 import com.github.tei.imamu.wrapper.FullSearchResultWrapper

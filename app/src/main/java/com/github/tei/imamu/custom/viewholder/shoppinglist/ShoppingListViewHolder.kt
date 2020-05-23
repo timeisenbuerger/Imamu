@@ -13,7 +13,7 @@ import androidx.appcompat.view.ActionMode
 import androidx.recyclerview.widget.RecyclerView
 import com.github.tei.imamu.R
 import com.github.tei.imamu.custom.adapter.shoppinglist.ShoppingListAdapter
-import com.github.tei.imamu.data.entity.shoppinglist.ShoppingList
+import com.github.tei.imamu.data.database.entity.shoppinglist.ShoppingList
 import com.github.tei.imamu.databinding.ListItemShoppingListBinding
 import com.github.tei.imamu.viewmodel.shoppinglist.ShoppingListViewModel
 import java.io.File

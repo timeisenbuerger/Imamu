@@ -10,7 +10,7 @@ import androidx.appcompat.view.ActionMode
 import androidx.recyclerview.widget.RecyclerView
 import com.github.tei.imamu.R
 import com.github.tei.imamu.custom.adapter.cookbook.CookBookListAdapter
-import com.github.tei.imamu.data.entity.cookbook.CookBook
+import com.github.tei.imamu.data.database.entity.cookbook.CookBook
 import com.github.tei.imamu.databinding.ListItemCookBookBinding
 import com.github.tei.imamu.viewmodel.cookbook.CookBookListViewModel
 import java.io.File

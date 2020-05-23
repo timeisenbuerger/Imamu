@@ -1,22 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".view.home.HomeFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/text_home"
+    <data>
+        <variable
+            name="viewModel"
+            type="com.github.tei.imamu.viewmodel.home.HomeViewModel" />
+    </data>
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".view.home.HomeFragment">
+
+            <TextView
+                android:id="@+id/text_view_caption_favorites"
+                style="@style/caption_big"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_recipe_margin"
+                android:layout_marginTop="@dimen/default_recipe_margin"
+                android:layout_marginEnd="@dimen/default_recipe_margin"
+                android:text="@string/caption_favorites"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.mlsdev.animatedrv.AnimatedRecyclerView
+                android:id="@+id/favorites_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_recipe_margin"
+                android:layout_marginStart="6dp"
+                app:animationDuration="600"
+                app:layoutAnimation="@anim/layout_animation_from_scale"
+                app:layoutManagerOrientation="horizontal"
+                app:layoutManagerReverse="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_view_caption_favorites"
+                tools:listitem="@layout/list_item_recipe_list" />
+
+            <TextView
+                android:id="@+id/text_view_caption_last_viewed_recipes"
+                style="@style/caption_big"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_recipe_margin"
+                android:layout_marginTop="@dimen/default_recipe_margin"
+                android:layout_marginEnd="@dimen/default_recipe_margin"
+                android:text="@string/caption_last_viewed_recipes"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/favorites_list" />
+
+            <com.mlsdev.animatedrv.AnimatedRecyclerView
+                android:id="@+id/last_viewed_recipes_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="@dimen/default_recipe_margin"
+                app:animationDuration="600"
+                app:layoutAnimation="@anim/layout_animation_from_scale"
+                app:layoutManagerOrientation="horizontal"
+                app:layoutManagerReverse="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_view_caption_last_viewed_recipes"
+                tools:listitem="@layout/list_item_recipe_list" />
+
+            <TextView
+                android:id="@+id/text_view_caption_last_viewed_cook_books"
+                style="@style/caption_big"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_recipe_margin"
+                android:layout_marginTop="@dimen/default_recipe_margin"
+                android:layout_marginEnd="@dimen/default_recipe_margin"
+                android:text="@string/caption_last_viewed_cook_books"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/last_viewed_recipes_list" />
+
+            <com.mlsdev.animatedrv.AnimatedRecyclerView
+                android:id="@+id/last_viewed_cook_books_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="@dimen/default_recipe_margin"
+                app:animationDuration="600"
+                app:layoutAnimation="@anim/layout_animation_from_scale"
+                app:layoutManagerOrientation="horizontal"
+                app:layoutManagerReverse="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_view_caption_last_viewed_cook_books"
+                tools:listitem="@layout/list_item_recipe_list" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

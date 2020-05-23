@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.tei.imamu.custom.viewholder.cookbook.AddCookBookLastItemViewHolder
 import com.github.tei.imamu.custom.viewholder.cookbook.AddCookBookViewHolder
 import com.github.tei.imamu.custom.viewholder.recipe.RecipeDiffCallback
-import com.github.tei.imamu.data.entity.recipe.Recipe
+import com.github.tei.imamu.data.database.entity.recipe.Recipe
 import com.github.tei.imamu.viewmodel.cookbook.AddCookBookViewModel
 
 class AddCookBookListAdapter(val viewModel: AddCookBookViewModel) : ListAdapter<Recipe, RecyclerView.ViewHolder>(RecipeDiffCallback())

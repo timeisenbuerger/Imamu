@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "1:2548072088956869254",
-      "lastPropertyId": "15:3607269205505283310",
+      "lastPropertyId": "16:4672317359595211883",
       "name": "Recipe",
       "properties": [
         {
@@ -68,6 +68,12 @@
           "id": "15:3607269205505283310",
           "name": "totalTime",
           "type": 5,
+          "flags": 4
+        },
+        {
+          "id": "16:4672317359595211883",
+          "name": "isFavorite",
+          "type": 1,
           "flags": 4
         }
       ],
@@ -223,10 +229,54 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "7:6726403140080002288",
+      "lastPropertyId": "2:8819935425994128913",
+      "name": "LastViewedCookBook",
+      "properties": [
+        {
+          "id": "1:2330603687511079348",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:8819935425994128913",
+          "name": "cookBookId",
+          "indexId": "5:1048050119982302786",
+          "type": 11,
+          "flags": 1548,
+          "relationTarget": "CookBook"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "8:8132533005751163067",
+      "lastPropertyId": "2:7698702283491794620",
+      "name": "LastViewedRecipe",
+      "properties": [
+        {
+          "id": "1:5355048142116463441",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:7698702283491794620",
+          "name": "recipeId",
+          "indexId": "6:476494859806588187",
+          "type": 11,
+          "flags": 1548,
+          "relationTarget": "Recipe"
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "6:4649709045713696666",
-  "lastIndexId": "4:1496609911292335364",
+  "lastEntityId": "8:8132533005751163067",
+  "lastIndexId": "6:476494859806588187",
   "lastRelationId": "2:4388833860576146167",
   "lastSequenceId": "0:0",
   "modelVersion": 5,

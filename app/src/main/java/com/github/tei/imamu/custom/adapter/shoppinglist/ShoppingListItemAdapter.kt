@@ -7,8 +7,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.databinding.DataBindingUtil
 import com.github.tei.imamu.R
-import com.github.tei.imamu.data.entity.shoppinglist.ShoppingListItem
-import com.github.tei.imamu.databinding.ListItemShoppingListBinding
+import com.github.tei.imamu.data.database.entity.shoppinglist.ShoppingListItem
 import com.github.tei.imamu.databinding.ListItemShoppingListItemBinding
 import com.github.tei.imamu.viewmodel.shoppinglist.ShoppingListDetailViewModel
 

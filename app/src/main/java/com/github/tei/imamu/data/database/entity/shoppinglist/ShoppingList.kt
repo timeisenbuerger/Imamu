@@ -1,4 +1,4 @@
-package com.github.tei.imamu.data.entity.shoppinglist
+package com.github.tei.imamu.data.database.entity.shoppinglist
 
 import io.objectbox.annotation.Backlink
 import io.objectbox.annotation.Entity

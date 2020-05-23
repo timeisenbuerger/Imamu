@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
 import com.github.tei.imamu.custom.adapter.cookbook.AddCookBookListAdapter
-import com.github.tei.imamu.data.entity.cookbook.CookBook
+import com.github.tei.imamu.data.database.entity.cookbook.CookBook
 import com.github.tei.imamu.databinding.FragmentAddCookBookBinding
 import com.github.tei.imamu.viewmodel.cookbook.AddCookBookViewModel
 import org.koin.android.ext.android.inject

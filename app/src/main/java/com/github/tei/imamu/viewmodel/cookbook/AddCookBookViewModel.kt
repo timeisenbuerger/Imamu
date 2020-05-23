@@ -3,11 +3,8 @@ package com.github.tei.imamu.viewmodel.cookbook
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.github.tei.imamu.data.ObjectBox
-import com.github.tei.imamu.data.entity.cookbook.CookBook
+import com.github.tei.imamu.data.database.entity.cookbook.CookBook
 import com.github.tei.imamu.data.repository.CookBookRepository
-import io.objectbox.Box
-import io.objectbox.kotlin.boxFor
 
 class AddCookBookViewModel(private val cookBookRepository: CookBookRepository) : ViewModel()
 {

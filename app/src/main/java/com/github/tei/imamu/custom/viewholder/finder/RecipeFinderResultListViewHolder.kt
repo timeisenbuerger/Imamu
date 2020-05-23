@@ -10,9 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.tei.imamu.R
 import com.github.tei.imamu.custom.adapter.finder.RecipeFinderResultListAdapter
 import com.github.tei.imamu.custom.listener.RecipeListListener
-import com.github.tei.imamu.data.entity.recipe.Recipe
+import com.github.tei.imamu.data.database.entity.recipe.Recipe
 import com.github.tei.imamu.databinding.ListItemRecipeFinderSearchResultBinding
-import com.github.tei.imamu.databinding.ListItemRecipeListBinding
 import com.github.tei.imamu.viewmodel.finder.RecipeFinderResultListViewModel
 import java.io.File
 

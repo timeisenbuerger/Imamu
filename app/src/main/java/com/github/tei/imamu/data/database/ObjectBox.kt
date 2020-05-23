@@ -1,9 +1,9 @@
-package com.github.tei.imamu.data
+package com.github.tei.imamu.data.database
 
 import android.content.Context
 import android.util.Log
 import com.github.tei.imamu.BuildConfig
-import com.github.tei.imamu.data.entity.MyObjectBox
+import com.github.tei.imamu.data.database.entity.MyObjectBox
 import io.objectbox.BoxStore
 import io.objectbox.android.AndroidObjectBrowser
 
@@ -14,7 +14,7 @@ object ObjectBox
 
     fun init(context: Context): BoxStore
     {
-        if (::boxStore.isInitialized && !boxStore.isClosed)
+        if (ObjectBox::boxStore.isInitialized && !boxStore.isClosed)
         {
             return boxStore
         }

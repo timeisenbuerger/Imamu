@@ -112,6 +112,7 @@ class RecipeListFragment : Fragment()
             it?.let {
                 listAdapter.allRecipes = it
                 listAdapter.submitList(it)
+                binding.recipeList.scheduleLayoutAnimation()
             }
         })
 

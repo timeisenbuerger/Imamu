@@ -1,6 +1,6 @@
-package com.github.tei.imamu.data.entity.cookbook
+package com.github.tei.imamu.data.database.entity.cookbook
 
-import com.github.tei.imamu.data.entity.recipe.Recipe
+import com.github.tei.imamu.data.database.entity.recipe.Recipe
 import io.objectbox.annotation.Entity
 import io.objectbox.annotation.Id
 import io.objectbox.relation.ToMany

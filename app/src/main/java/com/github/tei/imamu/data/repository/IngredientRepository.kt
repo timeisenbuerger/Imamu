@@ -1,7 +1,7 @@
 package com.github.tei.imamu.data.repository
 
-import com.github.tei.imamu.data.entity.Ingredient
-import com.github.tei.imamu.data.entity.Ingredient_
+import com.github.tei.imamu.data.database.entity.Ingredient
+import com.github.tei.imamu.data.database.entity.Ingredient_
 import io.objectbox.BoxStore
 import io.objectbox.android.ObjectBoxLiveData
 import io.objectbox.kotlin.boxFor

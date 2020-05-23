@@ -3,16 +3,17 @@ package com.github.tei.imamu.viewmodel.recipe
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.github.tei.imamu.data.ObjectBox
-import com.github.tei.imamu.data.entity.recipe.Recipe
-import com.github.tei.imamu.data.entity.shoppinglist.ShoppingList
-import com.github.tei.imamu.data.entity.shoppinglist.ShoppingListItem
+import com.github.tei.imamu.data.database.ObjectBox
+import com.github.tei.imamu.data.database.entity.recipe.LastViewedRecipe
+import com.github.tei.imamu.data.database.entity.recipe.Recipe
+import com.github.tei.imamu.data.database.entity.shoppinglist.ShoppingList
+import com.github.tei.imamu.data.database.entity.shoppinglist.ShoppingListItem
+import com.github.tei.imamu.data.repository.LastViewedRecipeRepository
 import com.github.tei.imamu.data.repository.RecipeRepository
 import io.objectbox.Box
 import io.objectbox.kotlin.boxFor
-import kotlinx.coroutines.Job
 
-class RecipeDetailViewModel(private val recipeRepository: RecipeRepository) : ViewModel()
+class RecipeDetailViewModel(private val recipeRepository: RecipeRepository, private val lastViewedRecipeRepository: LastViewedRecipeRepository) : ViewModel()
 {
     internal var currentRecipe = MutableLiveData<Recipe>()
 
@@ -44,8 +45,55 @@ class RecipeDetailViewModel(private val recipeRepository: RecipeRepository) : Vi
         _navigateToShoppingListDetail.value = true
     }
 
+    fun updateRecipe()
+    {
+        recipeRepository.save(currentRecipe.value!!)
+    }
+
     fun onNavigateToShoppingListDetailComplete()
     {
         _navigateToShoppingListDetail.value = false
+    }
+
+    fun updateLastViewed()
+    {
+        val lastViewed = lastViewedRecipeRepository.getAllAsLazyList()
+        lastViewed.let {
+            val containsRecipe = lastViewedContainsRecipe(it)
+            if (it.size == 10 && !containsRecipe)
+            {
+                //remove oldest entry
+                lastViewedRecipeRepository.remove(it.first())
+
+                addNewLastViewedEntry()
+            }
+            else if (!containsRecipe)
+            {
+                addNewLastViewedEntry()
+            }
+        }
+    }
+
+    private fun addNewLastViewedEntry()
+    {
+        //add new entry
+        val newLastViewedCookBook = LastViewedRecipe()
+        newLastViewedCookBook.recipe.target = currentRecipe.value
+        lastViewedRecipeRepository.save(newLastViewedCookBook)
+    }
+
+    private fun lastViewedContainsRecipe(list: List<LastViewedRecipe>) : Boolean
+    {
+        var containsCookBook = false
+        for (lastViewedCookBook in list)
+        {
+            if (lastViewedCookBook.recipe.target == currentRecipe.value)
+            {
+                containsCookBook = true
+                break
+            }
+        }
+
+        return containsCookBook
     }
 }

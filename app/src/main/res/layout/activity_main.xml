@@ -56,11 +56,13 @@
                 app:defaultNavHost="true"/>
         </LinearLayout>
 
-        <com.google.android.material.navigation.NavigationView
+        <com.shreyaspatil.material.navigationview.MaterialNavigationView
             android:id="@+id/navView"
+            android:theme="@style/Widget.NavigationView.RippleEffect"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
+            app:itemStyle="rounded_rectangle"
             app:headerLayout="@layout/nav_header_main"
             app:menu="@menu/drawer_activity_main"
             app:itemTextAppearance="@style/fontRoboto"/>

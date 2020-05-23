@@ -8,7 +8,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.github.tei.imamu.R
 import com.github.tei.imamu.custom.adapter.cookbook.CookBookDetailRecipeListAdapter
-import com.github.tei.imamu.data.entity.recipe.Recipe
+import com.github.tei.imamu.data.database.entity.recipe.Recipe
 import com.github.tei.imamu.databinding.ListItemCookBookDetailRecipeBinding
 import com.github.tei.imamu.viewmodel.cookbook.CookBookDetailViewModel
 import java.io.File

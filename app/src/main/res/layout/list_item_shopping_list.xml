@@ -7,7 +7,7 @@
 
         <variable
             name="shoppingList"
-            type="com.github.tei.imamu.data.entity.shoppinglist.ShoppingList" />
+            type="com.github.tei.imamu.data.database.entity.shoppinglist.ShoppingList" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
