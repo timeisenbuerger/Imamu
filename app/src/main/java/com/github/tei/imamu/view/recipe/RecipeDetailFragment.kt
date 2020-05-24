@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.view.*
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -36,7 +37,6 @@ class RecipeDetailFragment : Fragment()
     {
         init(inflater, container)
         initComponents(inflater)
-        initObserver()
         initListener()
 
         setHasOptionsMenu(true)
@@ -129,17 +129,6 @@ class RecipeDetailFragment : Fragment()
         }
 
         setListViewHeightBasedOnChildren(binding.listViewIngredients)
-    }
-
-    private fun initObserver()
-    {
-        viewModel.navigateToShoppingListDetail.observe(viewLifecycleOwner, Observer {
-            if (it)
-            {
-                findNavController().navigate(RecipeDetailFragmentDirections.actionRecipeDetailFragmentToShoppingListDetailFragment(viewModel.shoppingList.value!!))
-                viewModel.onNavigateToShoppingListDetailComplete()
-            }
-        })
     }
 
     private fun initListener()
@@ -248,9 +237,12 @@ class RecipeDetailFragment : Fragment()
         val recipe = binding.recipe
         when (item.itemId)
         {
-            R.id.action_edit         -> recipe?.let { findNavController().navigate(RecipeDetailFragmentDirections.actionRecipeDetailFragmentToEditRecipeFragment(recipe)) }
+            R.id.action_edit         -> recipe?.let {
+                findNavController().navigate(RecipeDetailFragmentDirections.actionRecipeDetailFragmentToEditRecipeFragment(recipe))
+            }
             R.id.action_shoppingList -> recipe?.let {
                 viewModel.createShoppingList(recipe)
+                Toast.makeText(requireContext(), "Aus den Zutaten wurde eine Einkaufsliste erstellt", Toast.LENGTH_LONG).show()
             }
         }
 

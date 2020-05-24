@@ -1,6 +1,5 @@
 package com.github.tei.imamu.viewmodel.recipe
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.github.tei.imamu.data.database.ObjectBox
@@ -10,20 +9,13 @@ import com.github.tei.imamu.data.database.entity.shoppinglist.ShoppingList
 import com.github.tei.imamu.data.database.entity.shoppinglist.ShoppingListItem
 import com.github.tei.imamu.data.repository.LastViewedRecipeRepository
 import com.github.tei.imamu.data.repository.RecipeRepository
+import com.github.tei.imamu.data.repository.ShoppingListRepository
 import io.objectbox.Box
 import io.objectbox.kotlin.boxFor
 
-class RecipeDetailViewModel(private val recipeRepository: RecipeRepository, private val lastViewedRecipeRepository: LastViewedRecipeRepository) : ViewModel()
+class RecipeDetailViewModel(private val recipeRepository: RecipeRepository, private val lastViewedRecipeRepository: LastViewedRecipeRepository, private val shoppingListRepository: ShoppingListRepository) : ViewModel()
 {
     internal var currentRecipe = MutableLiveData<Recipe>()
-
-    private val _navigateToShoppingListDetail = MutableLiveData<Boolean>()
-    val navigateToShoppingListDetail: LiveData<Boolean>
-        get() = _navigateToShoppingListDetail
-
-    private val shoppingListBox: Box<ShoppingList> = ObjectBox.boxStore.boxFor()
-
-    internal var shoppingList: MutableLiveData<ShoppingList> = MutableLiveData<ShoppingList>()
 
     fun createShoppingList(recipe: Recipe)
     {
@@ -39,20 +31,12 @@ class RecipeDetailViewModel(private val recipeRepository: RecipeRepository, priv
         }
         shoppingList.shoppingListItems.addAll(shoppingListItems)
 
-        shoppingListBox.put(shoppingList)
-
-        this.shoppingList.value = shoppingList
-        _navigateToShoppingListDetail.value = true
+        shoppingListRepository.save(shoppingList)
     }
 
     fun updateRecipe()
     {
         recipeRepository.save(currentRecipe.value!!)
-    }
-
-    fun onNavigateToShoppingListDetailComplete()
-    {
-        _navigateToShoppingListDetail.value = false
     }
 
     fun updateLastViewed()
@@ -82,7 +66,7 @@ class RecipeDetailViewModel(private val recipeRepository: RecipeRepository, priv
         lastViewedRecipeRepository.save(newLastViewedCookBook)
     }
 
-    private fun lastViewedContainsRecipe(list: List<LastViewedRecipe>) : Boolean
+    private fun lastViewedContainsRecipe(list: List<LastViewedRecipe>): Boolean
     {
         var containsCookBook = false
         for (lastViewedCookBook in list)

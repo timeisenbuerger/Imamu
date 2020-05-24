@@ -14,6 +14,7 @@ import com.github.tei.imamu.R
 import com.github.tei.imamu.custom.adapter.finder.RecipeFinderResultListAdapter
 import com.github.tei.imamu.databinding.FragmentRecipeFinderResultListBinding
 import com.github.tei.imamu.viewmodel.finder.RecipeFinderResultListViewModel
+import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.android.inject
 
 class RecipeFinderResultListFragment : Fragment()
@@ -25,8 +26,6 @@ class RecipeFinderResultListFragment : Fragment()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
-        (activity as MainActivity).supportActionBar?.title = "Suchergebnis"
-
         init(inflater, container)
         initObserver()
         initComponents()
@@ -103,5 +102,13 @@ class RecipeFinderResultListFragment : Fragment()
             }
             searchView.setOnQueryTextListener(textListener)
         }
+    }
+
+    override fun onResume()
+    {
+        super.onResume()
+        val mainActivity = (activity as MainActivity)
+        mainActivity.setSupportActionBar(mainActivity.toolbar)
+        mainActivity.supportActionBar?.title = "Suchergebnis"
     }
 }

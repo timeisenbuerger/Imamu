@@ -61,10 +61,6 @@
             android:id="@+id/action_recipeDetailFragment_to_editRecipeFragment"
             app:destination="@id/editRecipeFragment"
             app:popUpTo="@id/recipeDetailFragment" />
-        <action
-            android:id="@+id/action_recipeDetailFragment_to_shoppingListDetailFragment"
-            app:destination="@id/shoppingListDetailFragment"
-            app:popUpTo="@id/nav_shopping_list" />
     </fragment>
     <fragment
         android:id="@+id/editRecipeFragment"

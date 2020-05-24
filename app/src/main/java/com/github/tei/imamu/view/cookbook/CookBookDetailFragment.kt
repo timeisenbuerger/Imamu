@@ -16,6 +16,7 @@ import com.github.tei.imamu.R
 import com.github.tei.imamu.custom.adapter.cookbook.CookBookDetailRecipeListAdapter
 import com.github.tei.imamu.databinding.FragmentDetailCookBookBinding
 import com.github.tei.imamu.viewmodel.cookbook.CookBookDetailViewModel
+import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.android.inject
 
 class CookBookDetailFragment : Fragment()
@@ -29,8 +30,6 @@ class CookBookDetailFragment : Fragment()
     {
         init(inflater, container)
         initObserver()
-
-        (activity as MainActivity).supportActionBar?.title = viewModel.cookBook.value!!.title
 
         return binding.root
     }
@@ -81,5 +80,13 @@ class CookBookDetailFragment : Fragment()
                 viewModel.onNavigateToRecipeDetailComplete()
             }
         })
+    }
+
+    override fun onResume()
+    {
+        super.onResume()
+        val mainActivity = (activity as MainActivity)
+        mainActivity.setSupportActionBar(mainActivity.toolbar)
+        mainActivity.supportActionBar?.title = viewModel.cookBook.value!!.title
     }
 }

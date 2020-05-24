@@ -36,7 +36,7 @@ val viewModelModule = module {
     viewModel { HomeViewModel(get(), get(), get()) }
 
     viewModel { RecipeListViewModel(get()) }
-    viewModel { RecipeDetailViewModel(get(), get()) }
+    viewModel { RecipeDetailViewModel(get(), get(), get()) }
     viewModel { ImportRecipeViewModel(get(), get()) }
     viewModel { AddRecipeViewModel(get(), get()) }
     viewModel { EditRecipeViewModel(get(), get()) }

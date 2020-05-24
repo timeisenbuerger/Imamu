@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.github.tei.imamu.viewmodel.home.HomeViewModel" />
@@ -18,89 +19,320 @@
             android:layout_height="wrap_content"
             tools:context=".view.home.HomeFragment">
 
-            <TextView
-                android:id="@+id/text_view_caption_favorites"
-                style="@style/caption_big"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/default_recipe_margin"
-                android:layout_marginTop="@dimen/default_recipe_margin"
-                android:layout_marginEnd="@dimen/default_recipe_margin"
-                android:text="@string/caption_favorites"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_recipes"
+                android:layout_width="185dp"
+                android:layout_height="180dp"
+                android:layout_margin="@dimen/default_recipe_padding"
+                app:cardBackgroundColor="@color/colorAccentLight"
+                app:cardElevation="3dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.01"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0">
 
-            <com.mlsdev.animatedrv.AnimatedRecyclerView
-                android:id="@+id/favorites_list"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/default_recipe_margin"
-                android:layout_marginStart="6dp"
-                app:animationDuration="600"
-                app:layoutAnimation="@anim/layout_animation_from_scale"
-                app:layoutManagerOrientation="horizontal"
-                app:layoutManagerReverse="false"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_view_caption_favorites"
-                tools:listitem="@layout/list_item_recipe_list" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/text_view_caption_last_viewed_recipes"
-                style="@style/caption_big"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/default_recipe_margin"
-                android:layout_marginTop="@dimen/default_recipe_margin"
-                android:layout_marginEnd="@dimen/default_recipe_margin"
-                android:text="@string/caption_last_viewed_recipes"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/favorites_list" />
+                    <ImageView
+                        android:id="@+id/shortcut_recipe"
+                        android:layout_width="match_parent"
+                        android:layout_height="155dp"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0" />
 
-            <com.mlsdev.animatedrv.AnimatedRecyclerView
-                android:id="@+id/last_viewed_recipes_list"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
-                android:layout_marginTop="@dimen/default_recipe_margin"
-                app:animationDuration="600"
-                app:layoutAnimation="@anim/layout_animation_from_scale"
-                app:layoutManagerOrientation="horizontal"
-                app:layoutManagerReverse="false"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_view_caption_last_viewed_recipes"
-                tools:listitem="@layout/list_item_recipe_list" />
+                    <TextView
+                        style="@style/caption_medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/menu_recipe"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="1.0" />
 
-            <TextView
-                android:id="@+id/text_view_caption_last_viewed_cook_books"
-                style="@style/caption_big"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/default_recipe_margin"
-                android:layout_marginTop="@dimen/default_recipe_margin"
-                android:layout_marginEnd="@dimen/default_recipe_margin"
-                android:text="@string/caption_last_viewed_cook_books"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/last_viewed_recipes_list" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-            <com.mlsdev.animatedrv.AnimatedRecyclerView
-                android:id="@+id/last_viewed_cook_books_list"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_cook_books"
+                android:layout_width="185dp"
+                android:layout_height="180dp"
+                android:layout_margin="@dimen/default_recipe_padding"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:cardBackgroundColor="@color/colorAccentLight"
+                app:cardElevation="3dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.99"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/shortcut_cook_books"
+                        android:layout_width="match_parent"
+                        android:layout_height="155dp"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0" />
+
+                    <TextView
+                        style="@style/caption_medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/menu_cookbook"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="1.0" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_shopping_lists"
+                android:layout_width="185dp"
+                android:layout_height="180dp"
+                android:layout_margin="@dimen/default_recipe_padding"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="@color/colorAccentLight"
+                app:cardElevation="3dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.01"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.145">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/shortcut_shopping_lists"
+                        android:layout_width="match_parent"
+                        android:layout_height="155dp"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0" />
+
+                    <TextView
+                        style="@style/caption_medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/menu_shopping_list"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="1.0" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_recipe_finder"
+                android:layout_width="185dp"
+                android:layout_height="180dp"
+                android:layout_margin="@dimen/default_recipe_padding"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:cardBackgroundColor="@color/colorAccentLight"
+                app:cardElevation="3dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.99"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.145">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/shortcut_recipe_finder"
+                        android:layout_width="match_parent"
+                        android:layout_height="155dp"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0" />
+
+                    <TextView
+                        style="@style/caption_medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/menu_recipe_suggestion"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="1.0" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_favorites"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
-                android:layout_marginTop="@dimen/default_recipe_margin"
-                app:animationDuration="600"
-                app:layoutAnimation="@anim/layout_animation_from_scale"
-                app:layoutManagerOrientation="horizontal"
-                app:layoutManagerReverse="false"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/default_recipe_padding"
+                app:cardBackgroundColor="@color/colorAccentLight"
+                app:cardElevation="3dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_view_caption_last_viewed_cook_books"
-                tools:listitem="@layout/list_item_recipe_list" />
+                app:layout_constraintTop_toBottomOf="@id/card_shopping_lists">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="375dp">
+
+                    <TextView
+                        android:id="@+id/text_view_caption_favorites"
+                        style="@style/caption_big"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/default_recipe_padding"
+                        android:layout_marginTop="@dimen/default_recipe_padding"
+                        android:layout_marginEnd="@dimen/default_recipe_padding"
+                        android:text="@string/caption_favorites"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.mlsdev.animatedrv.AnimatedRecyclerView
+                        android:id="@+id/favorites_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/default_recipe_padding"
+                        android:layout_marginBottom="@dimen/default_recipe_margin"
+                        app:animationDuration="600"
+                        app:layoutAnimation="@anim/layout_animation_from_scale"
+                        app:layoutManagerOrientation="horizontal"
+                        app:layoutManagerReverse="false"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/text_view_caption_favorites"
+                        tools:listitem="@layout/list_item_recipe_list" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_last_viewed_recipes"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/default_recipe_padding"
+                app:cardBackgroundColor="@color/colorAccentLight"
+                app:cardElevation="3dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/card_favorites">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="375dp">
+
+                    <TextView
+                        android:id="@+id/text_view_caption_last_viewed_recipes"
+                        style="@style/caption_big"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/default_recipe_margin"
+                        android:layout_marginTop="@dimen/default_recipe_margin"
+                        android:layout_marginEnd="@dimen/default_recipe_margin"
+                        android:text="@string/caption_last_viewed_recipes"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.mlsdev.animatedrv.AnimatedRecyclerView
+                        android:id="@+id/last_viewed_recipes_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:layout_marginTop="@dimen/default_recipe_margin"
+                        app:animationDuration="600"
+                        app:layoutAnimation="@anim/layout_animation_from_scale"
+                        app:layoutManagerOrientation="horizontal"
+                        app:layoutManagerReverse="false"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/text_view_caption_last_viewed_recipes"
+                        tools:listitem="@layout/list_item_recipe_list" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_last_viewed_cook_books"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/default_recipe_padding"
+                app:cardBackgroundColor="@color/colorAccentLight"
+                app:cardElevation="3dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/card_last_viewed_recipes">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="375dp">
+
+                    <TextView
+                        android:id="@+id/text_view_caption_last_viewed_cook_books"
+                        style="@style/caption_big"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/default_recipe_margin"
+                        android:layout_marginTop="@dimen/default_recipe_margin"
+                        android:layout_marginEnd="@dimen/default_recipe_margin"
+                        android:text="@string/caption_last_viewed_cook_books"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.mlsdev.animatedrv.AnimatedRecyclerView
+                        android:id="@+id/last_viewed_cook_books_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:layout_marginTop="@dimen/default_recipe_margin"
+                        app:animationDuration="600"
+                        app:layoutAnimation="@anim/layout_animation_from_scale"
+                        app:layoutManagerOrientation="horizontal"
+                        app:layoutManagerReverse="false"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/text_view_caption_last_viewed_cook_books"
+                        tools:listitem="@layout/list_item_recipe_list" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
