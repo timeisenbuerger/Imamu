@@ -76,6 +76,7 @@
     <string name="caption_favorites">Deine Favoriten</string>
     <string name="caption_last_viewed_recipes">Zuletzt geöffnete Rezepte</string>
     <string name="caption_last_viewed_cook_books">Zuletzt geöffnete Kochbücher</string>
+    <string name="caption_show_all">Alle anzeigen</string>
 
     <string-array name="ingredient_units">
         <item>g</item>

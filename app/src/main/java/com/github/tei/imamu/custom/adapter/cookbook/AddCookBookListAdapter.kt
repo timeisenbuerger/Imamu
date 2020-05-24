@@ -14,9 +14,6 @@ class AddCookBookListAdapter(val viewModel: AddCookBookViewModel) : ListAdapter<
     private val VIEW_TYPE_RECIPE = 0
     private val VIEW_TYPE_LAST_ITEM = 1
 
-    internal var multiSelect = false
-    internal var selectedItems = mutableListOf<Recipe>()
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder
     {
         return if (viewType == VIEW_TYPE_RECIPE)

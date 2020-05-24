@@ -51,8 +51,8 @@ class ShoppingListViewHolder private constructor(private val binding: ListItemSh
         setImage(item)
 
         binding.buttonGoToItems.setOnClickListener { viewModel.onNavigateToDetail(item) }
-        itemView.setOnClickListener { handleClick(item) }
-        itemView.setOnLongClickListener { handleLongClick(item) }
+        binding.cardView.setOnClickListener { selectItem(item) }
+        binding.cardView.setOnLongClickListener { handleLongClick(item) }
     }
 
     private fun setImage(item: ShoppingList)
@@ -69,11 +69,6 @@ class ShoppingListViewHolder private constructor(private val binding: ListItemSh
         }
     }
 
-    private fun handleClick(item: ShoppingList)
-    {
-        selectItem(item)
-    }
-
     private fun handleLongClick(item: ShoppingList): Boolean
     {
         (itemView.context as AppCompatActivity).startSupportActionMode(actionModeCallbacks)
@@ -88,13 +83,17 @@ class ShoppingListViewHolder private constructor(private val binding: ListItemSh
             if (adapter.selectedItems.contains(item))
             {
                 adapter.selectedItems.remove(item)
-                itemView.setBackgroundColor(Color.WHITE)
+                binding.cardView.isChecked = false
             }
             else
             {
                 adapter.selectedItems.add(item)
-                itemView.setBackgroundColor(Color.LTGRAY)
+                binding.cardView.isChecked = true
             }
+        }
+        else
+        {
+            viewModel.onNavigateToDetail(item)
         }
     }
 
@@ -124,6 +123,7 @@ class ShoppingListViewHolder private constructor(private val binding: ListItemSh
 
         override fun onDestroyActionMode(mode: ActionMode?)
         {
+            binding.cardView.isChecked = false
             adapter.multiSelect = false
             adapter.selectedItems.clear()
             adapter.notifyDataSetChanged()

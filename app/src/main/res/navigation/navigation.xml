@@ -34,6 +34,10 @@
             android:id="@+id/action_nav_home_to_nav_recipe_suggestion"
             app:destination="@id/nav_recipe_suggestion"
             app:popUpTo="@id/nav_home" />
+        <action
+            android:id="@+id/action_nav_home_to_favoriteRecipesFragment"
+            app:destination="@id/favoriteRecipesFragment"
+            app:popUpTo="@id/nav_home" />
     </fragment>
 
     <fragment
@@ -201,6 +205,16 @@
         <argument
             android:name="searchResult"
             app:argType="com.github.tei.imamu.wrapper.FullSearchResultWrapper" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoriteRecipesFragment"
+        android:name="com.github.tei.imamu.view.home.FavoriteRecipesFragment"
+        android:label=""
+        tools:layout="@layout/fragment_favorite_recipes">
+        <action
+            android:id="@+id/action_favoriteRecipesFragment_to_recipeDetailFragment"
+            app:destination="@id/recipeDetailFragment"
+            app:popUpTo="@id/favoriteRecipesFragment" />
     </fragment>
 
 </navigation>

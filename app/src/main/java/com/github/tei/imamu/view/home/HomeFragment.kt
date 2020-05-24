@@ -141,6 +141,10 @@ class HomeFragment : Fragment()
         binding.transparentOverlayRecipeFinder.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.actionNavHomeToNavRecipeSuggestion())
         }
+
+        binding.textViewShowAllFavorites.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.actionNavHomeToFavoriteRecipesFragment())
+        }
     }
 
     override fun onResume()

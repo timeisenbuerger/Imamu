@@ -46,15 +46,6 @@
                 app:layout_constraintVertical_bias="0.0"
                 tools:srcCompat="@mipmap/pancakes" />
 
-            <View
-                android:id="@+id/gradient_background"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:background="@drawable/black_gradient"
-                app:layout_constraintBottom_toBottomOf="@+id/card_background"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_recipe_count"
                 android:layout_width="wrap_content"

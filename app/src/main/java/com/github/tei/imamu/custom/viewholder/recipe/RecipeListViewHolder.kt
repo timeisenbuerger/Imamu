@@ -44,15 +44,13 @@ class RecipeListViewHolder private constructor(private val binding: ListItemReci
         binding.clickListener = clickListener
         binding.textViewRecipeTitle.text = item.title
 
-        initChips(item, viewModel)
+        initChips(item)
         setImage(item)
 
-        itemView.setOnLongClickListener { handleLongClick(item) }
-
-        updateViewBackground(item)
+        binding.cardView.setOnLongClickListener { handleLongClick(item) }
     }
 
-    private fun initChips(item: Recipe, viewModel: RecipeListViewModel)
+    private fun initChips(item: Recipe)
     {
         var time = ""
         if (!TextUtils.isEmpty(item.preparationTime))
@@ -90,18 +88,6 @@ class RecipeListViewHolder private constructor(private val binding: ListItemReci
         }
     }
 
-    private fun updateViewBackground(item: Recipe)
-    {
-        if (adapter.selectedItems.contains(item))
-        {
-            itemView.setBackgroundColor(Color.LTGRAY);
-        }
-        else
-        {
-            itemView.setBackgroundColor(Color.WHITE);
-        }
-    }
-
     private fun handleLongClick(item: Recipe): Boolean
     {
         (itemView.context as AppCompatActivity).startSupportActionMode(actionModeCallbacks)
@@ -116,12 +102,12 @@ class RecipeListViewHolder private constructor(private val binding: ListItemReci
             if (adapter.selectedItems.contains(item))
             {
                 adapter.selectedItems.remove(item)
-                itemView.setBackgroundColor(Color.WHITE)
+                binding.cardView.isChecked = false
             }
             else
             {
                 adapter.selectedItems.add(item)
-                itemView.setBackgroundColor(Color.LTGRAY)
+                binding.cardView.isChecked = true
             }
         }
         else
@@ -157,9 +143,9 @@ class RecipeListViewHolder private constructor(private val binding: ListItemReci
 
         override fun onDestroyActionMode(mode: ActionMode?)
         {
+            binding.cardView.isChecked = false
             adapter.multiSelect = false
             adapter.selectedItems.clear()
-            adapter.notifyDataSetChanged()
         }
     }
 }

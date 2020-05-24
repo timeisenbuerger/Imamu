@@ -187,9 +187,16 @@ class RecipeDetailFragment : Fragment()
                 var amount = ingredient.amount.toFloat()
                 amount = (amount / number) * increasedNumber
 
-                ingredient.amount = DecimalFormat.getInstance()
-                    .format(amount)
-                    .replace(",", ".")
+                ingredient.amount = (if ((amount % 1.0) == 0.0)
+                {
+                    amount.toInt().toString()
+                }
+                else
+                {
+                    DecimalFormat.getInstance()
+                        .format(amount)
+                        .replace(",", ".")
+                })
             }
         }
 
@@ -216,9 +223,16 @@ class RecipeDetailFragment : Fragment()
                 var amount = ingredient.amount.toFloat()
                 amount = (amount / number) * decreasedNumber
 
-                ingredient.amount = DecimalFormat.getInstance()
-                    .format(amount)
-                    .replace(",", ".")
+                ingredient.amount = (if ((amount % 1.0) == 0.0)
+                {
+                    amount.toInt().toString()
+                }
+                else
+                {
+                    DecimalFormat.getInstance()
+                        .format(amount)
+                        .replace(",", ".")
+                })
             }
         }
 

@@ -1,5 +1,6 @@
-package com.github.tei.imamu.custom.viewholder.cookbook
+package com.github.tei.imamu.custom.viewholder.home
 
+import android.graphics.Color
 import android.net.Uri
 import android.text.TextUtils
 import android.view.LayoutInflater
@@ -8,28 +9,32 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.github.tei.imamu.R
 import com.github.tei.imamu.custom.adapter.cookbook.ChooseRecipeAdapter
+import com.github.tei.imamu.custom.adapter.home.FavoriteRecipesAdapter
 import com.github.tei.imamu.data.database.entity.recipe.Recipe
 import com.github.tei.imamu.databinding.ListItemCookBookRecipeBinding
+import com.github.tei.imamu.databinding.ListItemFavoriteRecipeBinding
+import com.github.tei.imamu.databinding.ListItemFavoriteRecipesBinding
 import com.github.tei.imamu.viewmodel.cookbook.ChooseRecipeViewModel
+import com.github.tei.imamu.viewmodel.home.FavoriteRecipesViewModel
 import java.io.File
 
-class ChooseRecipeViewHolder private constructor(private val binding: ListItemCookBookRecipeBinding) : RecyclerView.ViewHolder(binding.root)
+class FavoriteRecipesViewHolder private constructor(private val binding: ListItemFavoriteRecipesBinding) : RecyclerView.ViewHolder(binding.root)
 {
-    private lateinit var viewModel: ChooseRecipeViewModel
-    private lateinit var adapter: ChooseRecipeAdapter
+    private lateinit var viewModel: FavoriteRecipesViewModel
+    private lateinit var adapter: FavoriteRecipesAdapter
 
     companion object
     {
-        fun from(parent: ViewGroup): ChooseRecipeViewHolder
+        fun from(parent: ViewGroup): FavoriteRecipesViewHolder
         {
             val layoutInflater = LayoutInflater.from(parent.context)
-            val binding = ListItemCookBookRecipeBinding.inflate(layoutInflater, parent, false)
+            val binding = ListItemFavoriteRecipesBinding.inflate(layoutInflater, parent, false)
 
-            return ChooseRecipeViewHolder(binding)
+            return FavoriteRecipesViewHolder(binding)
         }
     }
 
-    fun bind(item: Recipe, viewModel: ChooseRecipeViewModel, adapter: ChooseRecipeAdapter)
+    fun bind(item: Recipe, viewModel: FavoriteRecipesViewModel, adapter: FavoriteRecipesAdapter)
     {
         this.viewModel = viewModel
         this.adapter = adapter
@@ -39,8 +44,8 @@ class ChooseRecipeViewHolder private constructor(private val binding: ListItemCo
         setImage(item)
         binding.textViewRecipeItem.text = item.title
 
-        binding.cardView.setOnClickListener {
-            handleClick(item)
+        itemView.setOnClickListener {
+            viewModel.onRecipeClicked(item)
         }
     }
 
@@ -55,20 +60,6 @@ class ChooseRecipeViewHolder private constructor(private val binding: ListItemCo
         {
             binding.imageViewRecipeItem.scaleType = ImageView.ScaleType.FIT_CENTER
             binding.imageViewRecipeItem.setImageResource(R.drawable.ic_hot_tub)
-        }
-    }
-
-    private fun handleClick(item: Recipe)
-    {
-        if (adapter.selectedItems.contains(item))
-        {
-            adapter.selectedItems.remove(item)
-            binding.cardView.isChecked = false
-        }
-        else
-        {
-            adapter.selectedItems.add(item)
-            binding.cardView.isChecked = true
         }
     }
 }

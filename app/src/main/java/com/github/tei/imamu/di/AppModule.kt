@@ -8,6 +8,7 @@ import com.github.tei.imamu.viewmodel.cookbook.CookBookDetailViewModel
 import com.github.tei.imamu.viewmodel.cookbook.CookBookListViewModel
 import com.github.tei.imamu.viewmodel.finder.RecipeFinderResultListViewModel
 import com.github.tei.imamu.viewmodel.finder.RecipeFinderSearchViewModel
+import com.github.tei.imamu.viewmodel.home.FavoriteRecipesViewModel
 import com.github.tei.imamu.viewmodel.home.HomeViewModel
 import com.github.tei.imamu.viewmodel.recipe.*
 import com.github.tei.imamu.viewmodel.shoppinglist.ShoppingListDetailViewModel
@@ -34,6 +35,7 @@ val repositoryModule = module {
 val viewModelModule = module {
 
     viewModel { HomeViewModel(get(), get(), get()) }
+    viewModel { FavoriteRecipesViewModel(get()) }
 
     viewModel { RecipeListViewModel(get()) }
     viewModel { RecipeDetailViewModel(get(), get(), get()) }

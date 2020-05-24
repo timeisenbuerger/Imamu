@@ -49,22 +49,8 @@ class CookBookListViewHolder private constructor(private val binding: ListItemCo
         binding.textViewCookBookTitle.text = item.title
         binding.textViewRecipeCount.text = item.recipes.size.toString()
 
-        binding.transparentOverlay.setOnClickListener { viewModel.onCookBookClicked(item) }
+        binding.transparentOverlay.setOnClickListener { selectItem(item) }
         binding.transparentOverlay.setOnLongClickListener { handleLongClick(item) }
-
-        updateViewBackground(item)
-    }
-
-    private fun updateViewBackground(item: CookBook)
-    {
-        if (adapter.selectedItems.contains(item))
-        {
-            itemView.setBackgroundColor(Color.LTGRAY);
-        }
-        else
-        {
-            itemView.setBackgroundColor(Color.WHITE);
-        }
     }
 
     private fun handleLongClick(item: CookBook): Boolean
@@ -81,12 +67,12 @@ class CookBookListViewHolder private constructor(private val binding: ListItemCo
             if (adapter.selectedItems.contains(item))
             {
                 adapter.selectedItems.remove(item)
-                itemView.setBackgroundColor(Color.WHITE)
+                binding.cardView.isChecked = false
             }
             else
             {
                 adapter.selectedItems.add(item)
-                itemView.setBackgroundColor(Color.LTGRAY)
+                binding.cardView.isChecked = true
             }
         }
         else
@@ -122,9 +108,9 @@ class CookBookListViewHolder private constructor(private val binding: ListItemCo
 
         override fun onDestroyActionMode(mode: ActionMode?)
         {
+            binding.cardView.isChecked = false
             adapter.multiSelect = false
             adapter.selectedItems.clear()
-            adapter.notifyDataSetChanged()
         }
     }
 }

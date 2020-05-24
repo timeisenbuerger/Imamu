@@ -53,7 +53,10 @@ class LastViewedCookBookListViewHolder private constructor(private val binding: 
             }
             else
             {
-                binding.cardBackground.addImage(BitmapFactory.decodeResource(itemView.context.resources, R.drawable.ic_hot_tub))
+                val bitmap = BitmapFactory.decodeResource(itemView.context.resources, R.drawable.ic_hot_tub)
+                bitmap?.let {
+                    binding.cardBackground.addImage(bitmap)
+                }
             }
         }
     }
