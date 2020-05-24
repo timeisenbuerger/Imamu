@@ -18,6 +18,22 @@
             android:id="@+id/action_nav_home_to_cookBookDetailFragment"
             app:destination="@id/cookBookDetailFragment"
             app:popUpTo="@id/nav_home" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_shopping_list"
+            app:destination="@id/nav_shopping_list"
+            app:popUpTo="@id/nav_home" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_recipe_list"
+            app:destination="@id/nav_recipe_list"
+            app:popUpTo="@id/nav_home" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_cookbook"
+            app:destination="@id/nav_cookbook"
+            app:popUpTo="@id/nav_home" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_recipe_suggestion"
+            app:destination="@id/nav_recipe_suggestion"
+            app:popUpTo="@id/nav_home" />
     </fragment>
 
     <fragment

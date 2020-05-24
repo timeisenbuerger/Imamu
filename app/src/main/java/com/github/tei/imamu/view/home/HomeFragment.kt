@@ -35,6 +35,7 @@ class HomeFragment : Fragment()
     {
         init(inflater, container)
         initObserver()
+        initListener()
 
         return binding.root
     }
@@ -121,6 +122,25 @@ class HomeFragment : Fragment()
                 viewModel.onNavigateToCookBookDetailComplete()
             }
         })
+    }
+
+    private fun initListener()
+    {
+        binding.transparentOverlayRecipes.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.actionNavHomeToNavRecipeList())
+        }
+
+        binding.transparentOverlayCookBooks.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.actionNavHomeToNavCookbook())
+        }
+
+        binding.transparentOverlayShoppingLists.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.actionNavHomeToNavShoppingList())
+        }
+
+        binding.transparentOverlayRecipeFinder.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.actionNavHomeToNavRecipeSuggestion())
+        }
     }
 
     override fun onResume()
