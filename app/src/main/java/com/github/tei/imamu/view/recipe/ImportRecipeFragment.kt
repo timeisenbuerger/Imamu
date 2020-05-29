@@ -78,12 +78,17 @@ class ImportRecipeFragment : Fragment()
             if (isNetworkConnected())
             {
                 requireActivity().window.setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
-                binding.importProgressBar.visibility = View.VISIBLE
+                binding.editTextRecipeLink.visibility = View.GONE
+                binding.buttonImportRecipe.visibility = View.GONE
+                binding.shimmerViewContainer.visibility = View.VISIBLE
+                binding.shimmerViewContainer.startShimmerAnimation()
+
                 doAsync {
                     viewModel.startImport(binding.editTextRecipeLink.text.toString())
 
                     uiThread {
-                        binding.importProgressBar.visibility = View.GONE
+                        binding.shimmerViewContainer.visibility = View.GONE
+                        binding.shimmerViewContainer.stopShimmerAnimation()
                         requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
                         viewModel.onNavigateToDetail()
                     }

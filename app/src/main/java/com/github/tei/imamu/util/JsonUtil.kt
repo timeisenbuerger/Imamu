@@ -1,0 +1,50 @@
+package com.github.tei.imamu.util
+
+import com.github.tei.imamu.data.database.entity.cookbook.CookBook
+import org.json.JSONArray
+import org.json.JSONObject
+
+class JsonUtil
+{
+    companion object
+    {
+        fun toJson(cookBook: CookBook): JSONObject
+        {
+            val jSonObj = JSONObject()
+            jSonObj.put("name", cookBook.title)
+
+            val jsonArr = JSONArray()
+            for (recipe in cookBook.recipes)
+            {
+                val recipeObj = JSONObject()
+
+                recipeObj.put("title", recipe.title)
+                recipeObj.put("servingsNumber", recipe.servingsNumber)
+
+                val recipeArr = JSONArray()
+                for (ingredient in recipe.recipeIngredients)
+                {
+                    val ingredientObj = JSONObject()
+                    ingredientObj.put("amount", ingredient.amount)
+                    ingredientObj.put("unit", ingredient.unit)
+                    ingredientObj.put("bane", ingredient.ingredient.target.name)
+                    recipeArr.put(ingredientObj)
+                }
+
+                recipeObj.put("preparation", recipe.preparation)
+                recipeObj.put("bakingTime", recipe.bakingTime)
+                recipeObj.put("preparationTime", recipe.preparationTime)
+                recipeObj.put("restTime", recipe.restTime)
+                recipeObj.put("totalTime", recipe.totalTime)
+                recipeObj.put("difficulty", recipe.difficulty)
+                recipeObj.put("nutrition", recipe.nutrition)
+                recipeObj.put("type", recipe.type)
+
+                jsonArr.put(recipeObj)
+            }
+            jSonObj.put("recipes", jsonArr)
+
+            return jSonObj
+        }
+    }
+}

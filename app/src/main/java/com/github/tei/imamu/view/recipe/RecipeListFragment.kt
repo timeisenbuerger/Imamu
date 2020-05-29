@@ -15,6 +15,7 @@ import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
 import com.github.tei.imamu.custom.adapter.recipe.RecipeListAdapter
 import com.github.tei.imamu.databinding.FragmentRecipeListBinding
+import com.github.tei.imamu.util.ShareUtil
 import com.github.tei.imamu.viewmodel.recipe.RecipeListViewModel
 import org.koin.android.ext.android.inject
 
@@ -120,6 +121,13 @@ class RecipeListFragment : Fragment()
             recipe?.let {
                 findNavController().navigate(RecipeListFragmentDirections.actionNavRecipeListToRecipeDetailFragment(recipe))
                 viewModel.onNavigateToDetailComplete()
+            }
+        })
+
+        viewModel.startRecipeIntent.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                ShareUtil.shareRecipe(it, requireActivity())
+                viewModel.onShareRecipeComplete()
             }
         })
     }

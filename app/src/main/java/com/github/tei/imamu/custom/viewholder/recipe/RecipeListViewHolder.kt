@@ -1,6 +1,5 @@
 package com.github.tei.imamu.custom.viewholder.recipe
 
-import android.graphics.Color
 import android.net.Uri
 import android.text.TextUtils
 import android.view.*
@@ -48,6 +47,7 @@ class RecipeListViewHolder private constructor(private val binding: ListItemReci
         setImage(item)
 
         binding.cardView.setOnLongClickListener { handleLongClick(item) }
+        binding.buttonShareItem.setOnClickListener { viewModel.onShareRecipe(item) }
     }
 
     private fun initChips(item: Recipe)

@@ -17,6 +17,10 @@ class RecipeListViewModel(private val recipeRepository: RecipeRepository) : View
     val navigateToDetail: LiveData<Recipe>
         get() = _navigateToDetail
 
+    private val _startRecipeIntent = MutableLiveData<Recipe>()
+    val startRecipeIntent: LiveData<Recipe>
+        get() = _startRecipeIntent
+
     fun initRecipes()
     {
         _recipes = recipeRepository.getAll()
@@ -38,5 +42,15 @@ class RecipeListViewModel(private val recipeRepository: RecipeRepository) : View
     fun onNavigateToDetailComplete()
     {
         _navigateToDetail.value = null
+    }
+
+    fun onShareRecipe(item: Recipe)
+    {
+        _startRecipeIntent.value = item
+    }
+
+    fun onShareRecipeComplete()
+    {
+        _startRecipeIntent.value = null
     }
 }

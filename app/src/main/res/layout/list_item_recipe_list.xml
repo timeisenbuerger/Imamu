@@ -49,7 +49,7 @@
                     tools:srcCompat="@mipmap/pancakes" />
 
                 <ImageButton
-                    android:id="@+id/button_open_detail"
+                    android:id="@+id/button_share_item"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginStart="16dp"

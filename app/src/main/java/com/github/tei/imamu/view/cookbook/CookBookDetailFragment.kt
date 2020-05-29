@@ -1,11 +1,14 @@
 package com.github.tei.imamu.view.cookbook
 
 import android.app.Application
+import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.content.pm.ResolveInfo
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.core.app.ShareCompat
+import androidx.core.content.FileProvider
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -15,9 +18,14 @@ import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
 import com.github.tei.imamu.custom.adapter.cookbook.CookBookDetailRecipeListAdapter
 import com.github.tei.imamu.databinding.FragmentDetailCookBookBinding
+import com.github.tei.imamu.util.JsonUtil
+import com.github.tei.imamu.util.ShareUtil
 import com.github.tei.imamu.viewmodel.cookbook.CookBookDetailViewModel
+import io.objectbox.BoxStore
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.android.inject
+import java.io.File
+import java.io.FileOutputStream
 
 class CookBookDetailFragment : Fragment()
 {
@@ -31,6 +39,7 @@ class CookBookDetailFragment : Fragment()
         init(inflater, container)
         initObserver()
 
+        setHasOptionsMenu(true)
         return binding.root
     }
 
@@ -80,6 +89,27 @@ class CookBookDetailFragment : Fragment()
                 viewModel.onNavigateToRecipeDetailComplete()
             }
         })
+    }
+
+    private fun shareCookBook()
+    {
+        val cookBook = viewModel.cookBook.value!!
+        ShareUtil.shareCookBook(cookBook, requireActivity())
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater)
+    {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_action_share, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean
+    {
+        when (item.itemId)
+        {
+            R.id.action_share -> shareCookBook()
+        }
+        return true
     }
 
     override fun onResume()
