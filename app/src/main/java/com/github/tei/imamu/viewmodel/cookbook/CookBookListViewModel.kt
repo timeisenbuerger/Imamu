@@ -5,9 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.github.tei.imamu.data.database.entity.cookbook.CookBook
 import com.github.tei.imamu.data.repository.CookBookRepository
+import com.github.tei.imamu.data.repository.IngredientRepository
 import io.objectbox.android.ObjectBoxLiveData
 
-class CookBookListViewModel(private val cookBookRepository: CookBookRepository) : ViewModel()
+class CookBookListViewModel(private val cookBookRepository: CookBookRepository, val ingredientRepository: IngredientRepository) : ViewModel()
 {
     private var _cookBooks: ObjectBoxLiveData<CookBook> = cookBookRepository.getAll()
     val cookBooks: ObjectBoxLiveData<CookBook>
@@ -32,6 +33,11 @@ class CookBookListViewModel(private val cookBookRepository: CookBookRepository) 
         {
             cookBookRepository.remove(cookBook)
         }
+    }
+
+    fun saveNewCookBook(newCookBook: CookBook)
+    {
+        cookBookRepository.save(newCookBook)
     }
 
     fun onCookBookClicked(cookBook: CookBook)

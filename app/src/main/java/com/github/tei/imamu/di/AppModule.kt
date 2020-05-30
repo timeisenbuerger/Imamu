@@ -43,7 +43,7 @@ val viewModelModule = module {
     viewModel { AddRecipeViewModel(get(), get()) }
     viewModel { EditRecipeViewModel(get(), get()) }
 
-    viewModel { CookBookListViewModel(get()) }
+    viewModel { CookBookListViewModel(get(), get()) }
     viewModel { CookBookDetailViewModel(get(), get()) }
     viewModel { AddCookBookViewModel(get()) }
     viewModel { ChooseRecipeViewModel(get(), get()) }

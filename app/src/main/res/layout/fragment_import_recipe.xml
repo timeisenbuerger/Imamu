@@ -41,31 +41,46 @@
 
         </com.facebook.shimmer.ShimmerFrameLayout>
 
-        <EditText
-            android:id="@+id/edit_text_recipe_link"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="@string/insert_recipe_link"
-            style="@style/edit_text_string_style"
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/import_background"
+            android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <EditText
+            android:id="@+id/edit_text_recipe_link"
+            style="@style/edit_text_string_style"
+            android:layout_width="230dp"
+            android:layout_height="40dp"
+            android:background="@drawable/edit_view_border"
+            android:hint="@string/insert_recipe_link"
+            android:paddingStart="@dimen/default_recipe_padding"
+            android:paddingEnd="@dimen/default_recipe_padding"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.11"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.23000002" />
+            app:layout_constraintVertical_bias="0.06" />
 
         <Button
             android:id="@+id/button_import_recipe"
+            style="@style/button_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:text="@string/action_import_recipe"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.12"
             app:layout_constraintStart_toEndOf="@+id/edit_text_recipe_link"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.23"
-            style="@style/button_style" />
+            app:layout_constraintVertical_bias="0.055" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

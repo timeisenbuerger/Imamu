@@ -1,8 +1,11 @@
 package com.github.tei.imamu.view.cookbook
 
 import android.app.Application
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -13,21 +16,32 @@ import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
 import com.github.tei.imamu.custom.adapter.cookbook.CookBookListAdapter
 import com.github.tei.imamu.databinding.FragmentCookbookListBinding
+import com.github.tei.imamu.util.ImportUtil
 import com.github.tei.imamu.viewmodel.cookbook.CookBookListViewModel
 import org.koin.android.ext.android.inject
 
 class CookBookListFragment : Fragment()
 {
+    companion object
+    {
+        const val REQUEST_CODE = 28
+    }
+
     private lateinit var binding: FragmentCookbookListBinding
     private val viewModel: CookBookListViewModel by inject()
     private lateinit var application: Application
     private lateinit var listAdapter: CookBookListAdapter
+
+    private lateinit var fabOpenAnim: Animation
+    private lateinit var fabCloseAnim: Animation
+    private var isOpen = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
         (activity as MainActivity).supportActionBar?.title = "Kochbücher"
 
         init(inflater, container)
+        initComponents()
         initListener()
         initObserver()
 
@@ -59,8 +73,44 @@ class CookBookListFragment : Fragment()
 
     private fun initListener()
     {
-        binding.fabCreateCookbook.setOnClickListener {
+        binding.fabMain.setOnClickListener {
+            if (isOpen)
+            {
+                binding.createCookBookFab.animation = fabCloseAnim
+                binding.importCookBookFab.animation = fabCloseAnim
+
+                binding.textViewCreate.visibility = View.INVISIBLE
+                binding.textViewImport.visibility = View.INVISIBLE
+
+                isOpen = false
+            }
+            else
+            {
+                binding.createCookBookFab.animation = fabOpenAnim
+                binding.importCookBookFab.animation = fabOpenAnim
+
+                binding.textViewCreate.visibility = View.VISIBLE
+                binding.textViewImport.visibility = View.VISIBLE
+
+                isOpen = true
+            }
+        }
+
+        binding.createCookBookFab.setOnClickListener {
             viewModel.onNavigateToAdd()
+            isOpen = false
+        }
+
+        binding.importCookBookFab.setOnClickListener {
+
+            val intent = Intent(Intent.ACTION_GET_CONTENT)
+            intent.type = "application/json"
+            intent.addCategory(Intent.CATEGORY_OPENABLE)
+            intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true)
+
+            startActivityForResult(intent, REQUEST_CODE)
+
+            isOpen = false
         }
     }
 
@@ -87,6 +137,23 @@ class CookBookListFragment : Fragment()
                 viewModel.onNavigateToAddComplete()
             }
         })
+    }
+
+    private fun initComponents()
+    {
+        fabOpenAnim = AnimationUtils.loadAnimation(requireContext(), R.anim.fab_open)
+        fabCloseAnim = AnimationUtils.loadAnimation(requireContext(), R.anim.fab_close)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?)
+    {
+        if (requestCode != REQUEST_CODE || resultCode == 0)
+        {
+            return
+        }
+
+        ImportUtil.importCookBook(viewModel, requireContext(), data!!.data)
+        viewModel.initCookBooks()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater)
