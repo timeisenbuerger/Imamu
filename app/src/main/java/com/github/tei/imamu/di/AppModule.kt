@@ -2,10 +2,7 @@ package com.github.tei.imamu.di
 
 import com.github.tei.imamu.data.database.ObjectBox
 import com.github.tei.imamu.data.repository.*
-import com.github.tei.imamu.viewmodel.cookbook.AddCookBookViewModel
-import com.github.tei.imamu.viewmodel.cookbook.ChooseRecipeViewModel
-import com.github.tei.imamu.viewmodel.cookbook.CookBookDetailViewModel
-import com.github.tei.imamu.viewmodel.cookbook.CookBookListViewModel
+import com.github.tei.imamu.viewmodel.cookbook.*
 import com.github.tei.imamu.viewmodel.finder.RecipeFinderResultListViewModel
 import com.github.tei.imamu.viewmodel.finder.RecipeFinderSearchViewModel
 import com.github.tei.imamu.viewmodel.home.FavoriteRecipesViewModel
@@ -46,6 +43,7 @@ val viewModelModule = module {
     viewModel { CookBookListViewModel(get(), get()) }
     viewModel { CookBookDetailViewModel(get(), get()) }
     viewModel { AddCookBookViewModel(get()) }
+    viewModel { EditCookBookViewModel(get()) }
     viewModel { ChooseRecipeViewModel(get(), get()) }
 
     viewModel { ShoppingListViewModel(get()) }

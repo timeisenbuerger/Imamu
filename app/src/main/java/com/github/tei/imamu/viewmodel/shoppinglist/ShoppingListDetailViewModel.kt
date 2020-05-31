@@ -44,4 +44,10 @@ class ShoppingListDetailViewModel(private val shoppingListRepository: ShoppingLi
     {
         _updateAfterDelete.value = false
     }
+
+    fun saveNewItem(shoppingListItem: ShoppingListItem)
+    {
+        shoppingListItemRepository.save(shoppingListItem)
+        shoppingList.value!!.shoppingListItems.add(shoppingListItem)
+    }
 }

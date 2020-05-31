@@ -2,32 +2,31 @@ package com.github.tei.imamu.custom.viewholder.cookbook
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
 import com.github.tei.imamu.custom.adapter.cookbook.AddCookBookListAdapter
 import com.github.tei.imamu.databinding.ListItemLastItemActionAddBinding
 import com.github.tei.imamu.viewmodel.cookbook.AddCookBookViewModel
+import com.github.tei.imamu.viewmodel.cookbook.EditCookBookViewModel
 
-class AddCookBookLastItemViewHolder private constructor(private val binding: ListItemLastItemActionAddBinding) : RecyclerView.ViewHolder(binding.root)
+class CookBookLastItemViewHolder private constructor(private val binding: ListItemLastItemActionAddBinding) : RecyclerView.ViewHolder(binding.root)
 {
-    private lateinit var viewModel: AddCookBookViewModel
-    private lateinit var listAdapter: AddCookBookListAdapter
+    private lateinit var viewModel: ViewModel
 
     companion object
     {
-        fun from(parent: ViewGroup): AddCookBookLastItemViewHolder
+        fun from(parent: ViewGroup): CookBookLastItemViewHolder
         {
             val layoutInflater = LayoutInflater.from(parent.context)
             val binding = ListItemLastItemActionAddBinding.inflate(layoutInflater, parent, false)
 
-            return AddCookBookLastItemViewHolder(binding)
+            return CookBookLastItemViewHolder(binding)
         }
     }
 
-    fun bind(viewModel: AddCookBookViewModel, listAdapter: AddCookBookListAdapter)
+    fun bind(viewModel: ViewModel)
     {
         this.viewModel = viewModel
-        this.listAdapter = listAdapter
-
         binding.buttonAdd.setOnClickListener {
             handleClick()
         }
@@ -35,6 +34,13 @@ class AddCookBookLastItemViewHolder private constructor(private val binding: Lis
 
     private fun handleClick()
     {
-        viewModel.navigateToChooseRecipe()
+        if (viewModel is AddCookBookViewModel)
+        {
+            (viewModel as AddCookBookViewModel).navigateToChooseRecipe()
+        }
+        else if (viewModel is EditCookBookViewModel)
+        {
+            (viewModel as EditCookBookViewModel).navigateToChooseRecipe()
+        }
     }
 }

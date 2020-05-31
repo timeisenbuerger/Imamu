@@ -72,7 +72,7 @@ class ChooseRecipeFragment : Fragment()
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater)
     {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.menu_add_edit_search, menu)
+        inflater.inflate(R.menu.menu_save_edit_search, menu)
         val item = menu.findItem(R.id.action_search)
         item?.let {
             val searchView = it.actionView as SearchView

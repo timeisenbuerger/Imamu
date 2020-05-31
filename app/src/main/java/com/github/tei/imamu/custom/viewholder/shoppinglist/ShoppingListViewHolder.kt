@@ -50,7 +50,6 @@ class ShoppingListViewHolder private constructor(private val binding: ListItemSh
 
         setImage(item)
 
-        binding.buttonGoToItems.setOnClickListener { viewModel.onNavigateToDetail(item) }
         binding.cardView.setOnClickListener { selectItem(item) }
         binding.cardView.setOnLongClickListener { handleLongClick(item) }
     }

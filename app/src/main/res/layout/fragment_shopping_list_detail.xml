@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -7,9 +9,7 @@
             type="com.github.tei.imamu.viewmodel.shoppinglist.ShoppingListDetailViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -17,10 +17,81 @@
             android:id="@+id/list_view_shopping_list_items"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/layout_add_ingredient"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:listitem="@layout/list_item_shopping_list_item" />
+
+        <LinearLayout
+            android:id="@+id/layout_add_ingredient"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <EditText
+                android:id="@+id/editTextAmount"
+                style="@style/edit_text_decimal_style"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:layout_weight="1"
+                android:layout_marginStart="@dimen/default_recipe_padding"
+                android:layout_marginEnd="@dimen/default_recipe_padding"
+                android:background="@drawable/ingredient_edit_text_border"
+                android:ems="10"
+                android:hint="@string/recipe_ingredient_amount"
+                android:paddingStart="@dimen/default_recipe_padding"
+                android:paddingEnd="@dimen/default_recipe_padding" />
+
+            <EditText
+                android:id="@+id/editTextUnit"
+                style="@style/edit_text_string_style"
+                android:textAlignment="center"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/ingredient_edit_text_border"
+                android:ems="10"
+                android:hint="@string/recipe_ingredient_unit"
+                android:paddingStart="@dimen/default_recipe_padding"
+                android:paddingEnd="@dimen/default_recipe_padding" />
+
+            <EditText
+                android:id="@+id/editTextIngredient"
+                style="@style/edit_text_string_style"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/default_recipe_padding"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/ingredient_edit_text_border"
+                android:ems="10"
+                android:hint="@string/ingredient"
+                android:visibility="gone"
+                android:paddingStart="@dimen/default_recipe_margin"
+                android:paddingEnd="@dimen/default_recipe_padding" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginStart="@dimen/default_recipe_padding"
+                app:backgroundTint="@color/orange_red"
+                android:src="@drawable/ic_arrow_next"
+                app:tint="@color/white"
+                app:fabSize="mini"/>
+
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

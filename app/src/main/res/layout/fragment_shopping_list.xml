@@ -23,7 +23,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:animationDuration="600"
-            app:layoutAnimation="@anim/layout_animation_random_scale"
+            app:layoutAnimation="@anim/layout_animation_from_bottom_scale"
             app:layoutManagerOrientation="vertical"
             app:layoutManagerReverse="false"
             app:layoutManagerType="linear">

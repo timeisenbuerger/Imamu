@@ -103,7 +103,9 @@ class HomeFragment : Fragment()
                 val cookBooks: MutableList<CookBook> = mutableListOf()
                 for (lastViewedCookBook in it)
                 {
-                    cookBooks.add(lastViewedCookBook.cookBook.target)
+                    lastViewedCookBook.cookBook.target?.let {
+                        cookBooks.add(lastViewedCookBook.cookBook.target)
+                    }
                 }
 
                 lastViewedCookBookListAdapter.submitList(cookBooks)

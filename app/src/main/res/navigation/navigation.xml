@@ -132,7 +132,7 @@
         <action
             android:id="@+id/action_nav_cookbook_to_cookBookDetailFragment"
             app:destination="@id/cookBookDetailFragment"
-            />
+            app:popUpTo="@id/nav_cookbook" />
         <action
             android:id="@+id/action_nav_cookbook_to_addCookBookFragment"
             app:destination="@id/addCookBookFragment"
@@ -166,6 +166,9 @@
         <argument
             android:name="cookBook"
             app:argType="com.github.tei.imamu.data.database.entity.cookbook.CookBook" />
+        <action
+            android:id="@+id/action_chooseRecipeFragment_to_editCookBookFragment"
+            app:destination="@id/editCookBookFragment" />
     </fragment>
     <fragment
         android:id="@+id/cookBookDetailFragment"
@@ -182,6 +185,10 @@
             android:id="@+id/action_cookBookDetailFragment_to_nav_home"
             app:destination="@id/nav_home"
             app:popUpTo="@id/nav_home" />
+        <action
+            android:id="@+id/action_cookBookDetailFragment_to_editCookBookFragment"
+            app:destination="@id/editCookBookFragment"
+            app:popUpTo="@id/cookBookDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/nav_recipe_suggestion"
@@ -215,6 +222,22 @@
             android:id="@+id/action_favoriteRecipesFragment_to_recipeDetailFragment"
             app:destination="@id/recipeDetailFragment"
             app:popUpTo="@id/favoriteRecipesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editCookBookFragment"
+        android:name="com.github.tei.imamu.view.cookbook.EditCookBookFragment"
+        android:label=""
+        tools:layout="@layout/fragment_edit_cook_book">
+        <action
+            android:id="@+id/action_editCookBookFragment_to_cookBookDetailFragment"
+            app:destination="@id/cookBookDetailFragment" />
+        <action
+            android:id="@+id/action_editCookBookFragment_to_chooseRecipeFragment"
+            app:destination="@id/chooseRecipeFragment"
+            app:popUpTo="@id/editCookBookFragment" />
+        <argument
+            android:name="cookBook"
+            app:argType="com.github.tei.imamu.data.database.entity.cookbook.CookBook" />
     </fragment>
 
 </navigation>

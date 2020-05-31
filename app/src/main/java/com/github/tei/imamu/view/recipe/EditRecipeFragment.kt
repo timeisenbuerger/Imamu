@@ -219,7 +219,7 @@ class EditRecipeFragment : Fragment()
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater)
     {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.menu_add_edit, menu)
+        inflater.inflate(R.menu.menu_save, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId)

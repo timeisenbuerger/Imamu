@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.github.tei.imamu.viewmodel.cookbook.EditCookBookViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/text_view_cook_book_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_recipe_margin"
+            android:layout_marginTop="@dimen/default_recipe_margin"
+            android:text="@string/cook_book_title_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            style="@style/caption_medium" />
+
+        <EditText
+            android:id="@+id/edit_text_cook_book_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_recipe_margin"
+            android:layout_marginEnd="@dimen/default_recipe_margin"
+            android:hint="@string/insert_cook_book_title"
+            android:text="@={viewModel.cookBook.title}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_cook_book_title"
+            style="@style/edit_text_string_style" />
+
+        <TextView
+            android:id="@+id/text_view_recipes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_recipe_margin"
+            android:hint="@string/text_cook_book_recipes"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_text_cook_book_title"
+            app:layout_constraintVertical_bias="0.05"
+            style="@style/caption_medium"/>
+
+        <com.mlsdev.animatedrv.AnimatedRecyclerView
+            android:id="@+id/recipe_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/default_recipe_margin"
+            android:layout_marginTop="@dimen/default_recipe_margin"
+            android:layout_marginEnd="@dimen/default_recipe_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_view_recipes" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

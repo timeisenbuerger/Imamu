@@ -18,11 +18,11 @@ class ImportUtil
     companion object
     {
         lateinit var viewModel: CookBookListViewModel
-        fun importCookBook(viewModel: CookBookListViewModel, context: Context, data: Uri?)
+        fun importCookBook(viewModel: CookBookListViewModel, context: Context, data: Uri) : CookBook
         {
             this.viewModel = viewModel
-            data?.let { uri ->
-                val json = getFile(context, uri)
+
+                val json = getFile(context, data)
                 var jsonContent = ""
                 BufferedReader(FileReader(json)).lines()
                     .forEach {
@@ -35,7 +35,7 @@ class ImportUtil
                 viewModel.saveNewCookBook(newCookBook)
 
                 json.delete()
-            }
+                return newCookBook
         }
 
         private fun createCookBook(jsonObject: JSONObject) : CookBook

@@ -78,6 +78,8 @@
     <string name="caption_last_viewed_cook_books">Zuletzt geöffnete Kochbücher</string>
     <string name="caption_show_all">Alle anzeigen</string>
     <string name="action_share">Teilen</string>
+    <string name="ingredient">Zutat</string>
+    <string name="action_add">Hinzufügen</string>
 
     <string-array name="ingredient_units">
         <item>g</item>

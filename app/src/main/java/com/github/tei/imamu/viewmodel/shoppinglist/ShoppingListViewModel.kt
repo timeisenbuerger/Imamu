@@ -6,6 +6,9 @@ import androidx.lifecycle.ViewModel
 import com.github.tei.imamu.data.database.entity.shoppinglist.ShoppingList
 import com.github.tei.imamu.data.repository.ShoppingListRepository
 import io.objectbox.android.ObjectBoxLiveData
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.util.*
 
 class ShoppingListViewModel(private val shoppingListRepository: ShoppingListRepository) : ViewModel()
 {
@@ -52,6 +55,19 @@ class ShoppingListViewModel(private val shoppingListRepository: ShoppingListRepo
             shoppingListRepository.remove(item)
         }
         onDeleteItems()
+    }
+
+    fun createNewShoppingList()
+    {
+        val newShoppingList = ShoppingList()
+
+        val sdf = SimpleDateFormat("dd/M/yyyy", Locale.getDefault())
+        val currentDate = sdf.format(Date())
+
+        newShoppingList.name = "Einkaufsliste $currentDate"
+
+        shoppingListRepository.save(newShoppingList)
+        _shoppingLists.value!!.add(newShoppingList)
     }
 
     private fun onDeleteItems()

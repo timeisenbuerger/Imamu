@@ -2,9 +2,7 @@ package com.github.tei.imamu.view.shoppinglist
 
 import android.app.Application
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -32,6 +30,7 @@ class ShoppingListFragment : Fragment()
 
         (activity as MainActivity).supportActionBar?.title = "Einkaufslisten"
 
+        setHasOptionsMenu(true)
         return binding.root
     }
 
@@ -68,6 +67,7 @@ class ShoppingListFragment : Fragment()
                     }
 
                     shoppingListAdapter.submitList(it)
+                    binding.listParentRecipes.startLayoutAnimation()
                 }
             }
         })
@@ -86,5 +86,23 @@ class ShoppingListFragment : Fragment()
                 viewModel.onNavigateToDetailComplete()
             }
         })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater)
+    {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_action_add, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean
+    {
+        when(item.itemId)
+        {
+            R.id.action_add -> {
+                viewModel.createNewShoppingList()
+            }
+        }
+
+        return true
     }
 }

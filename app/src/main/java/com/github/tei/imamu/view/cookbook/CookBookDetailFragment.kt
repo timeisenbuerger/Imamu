@@ -1,14 +1,8 @@
 package com.github.tei.imamu.view.cookbook
 
 import android.app.Application
-import android.content.Context
-import android.content.Intent
-import android.content.pm.PackageManager
-import android.content.pm.ResolveInfo
 import android.os.Bundle
 import android.view.*
-import androidx.core.app.ShareCompat
-import androidx.core.content.FileProvider
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -18,14 +12,10 @@ import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
 import com.github.tei.imamu.custom.adapter.cookbook.CookBookDetailRecipeListAdapter
 import com.github.tei.imamu.databinding.FragmentDetailCookBookBinding
-import com.github.tei.imamu.util.JsonUtil
 import com.github.tei.imamu.util.ShareUtil
 import com.github.tei.imamu.viewmodel.cookbook.CookBookDetailViewModel
-import io.objectbox.BoxStore
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.android.inject
-import java.io.File
-import java.io.FileOutputStream
 
 class CookBookDetailFragment : Fragment()
 {
@@ -57,7 +47,6 @@ class CookBookDetailFragment : Fragment()
         //init application
         application = requireNotNull(this.activity).application
 
-        //init viewModel
         viewModel.cookBook.value = CookBookDetailFragmentArgs.fromBundle(requireArguments()).cookBook
 
         //set lifecycle owner
@@ -100,7 +89,7 @@ class CookBookDetailFragment : Fragment()
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater)
     {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.menu_action_share, menu)
+        inflater.inflate(R.menu.menu_action_edit_share, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean
@@ -108,6 +97,8 @@ class CookBookDetailFragment : Fragment()
         when (item.itemId)
         {
             R.id.action_share -> shareCookBook()
+            R.id.action_edit  -> findNavController().navigate(CookBookDetailFragmentDirections.actionCookBookDetailFragmentToEditCookBookFragment(viewModel.cookBook.value!!))
+            else              -> findNavController().popBackStack()
         }
         return true
     }

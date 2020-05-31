@@ -5,23 +5,21 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.github.tei.imamu.custom.viewholder.cookbook.CookBookLastItemViewHolder
 import com.github.tei.imamu.custom.viewholder.cookbook.AddCookBookViewHolder
+import com.github.tei.imamu.custom.viewholder.cookbook.EditCookBookViewHolder
 import com.github.tei.imamu.custom.viewholder.recipe.RecipeDiffCallback
 import com.github.tei.imamu.data.database.entity.recipe.Recipe
-import com.github.tei.imamu.viewmodel.cookbook.AddCookBookViewModel
+import com.github.tei.imamu.viewmodel.cookbook.EditCookBookViewModel
 
-class AddCookBookListAdapter(val viewModel: AddCookBookViewModel) : ListAdapter<Recipe, RecyclerView.ViewHolder>(RecipeDiffCallback())
+class EditCookBookListAdapter(val viewModel: EditCookBookViewModel) : ListAdapter<Recipe, RecyclerView.ViewHolder>(RecipeDiffCallback())
 {
-    companion object
-    {
-        private const val VIEW_TYPE_RECIPE = 0
-        private const val VIEW_TYPE_LAST_ITEM = 1
-    }
+    private val VIEW_TYPE_RECIPE = 0
+    private val VIEW_TYPE_LAST_ITEM = 1
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder
     {
         return if (viewType == VIEW_TYPE_RECIPE)
         {
-            AddCookBookViewHolder.from(parent)
+            EditCookBookViewHolder.from(parent)
         }
         else
         {
@@ -36,7 +34,7 @@ class AddCookBookListAdapter(val viewModel: AddCookBookViewModel) : ListAdapter<
             getItemViewType(position) ->
             {
                 val item = getItem(position)
-                (holderList as AddCookBookViewHolder).bind(item, viewModel, this)
+                (holderList as EditCookBookViewHolder).bind(item, viewModel, this)
             }
             else                      ->
             {

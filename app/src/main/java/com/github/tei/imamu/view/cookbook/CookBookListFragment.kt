@@ -152,8 +152,8 @@ class CookBookListFragment : Fragment()
             return
         }
 
-        ImportUtil.importCookBook(viewModel, requireContext(), data!!.data)
-        viewModel.initCookBooks()
+        val cookBook = ImportUtil.importCookBook(viewModel, requireContext(), data!!.data!!)
+        viewModel.onCookBookClicked(cookBook)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater)

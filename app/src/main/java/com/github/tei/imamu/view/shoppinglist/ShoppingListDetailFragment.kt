@@ -1,6 +1,7 @@
 package com.github.tei.imamu.view.shoppinglist
 
 import android.app.Application
+import android.graphics.drawable.Icon
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +12,9 @@ import androidx.lifecycle.Observer
 import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
 import com.github.tei.imamu.custom.adapter.shoppinglist.ShoppingListItemAdapter
+import com.github.tei.imamu.data.database.entity.shoppinglist.ShoppingListItem
 import com.github.tei.imamu.databinding.FragmentShoppingListDetailBinding
+import com.github.tei.imamu.util.KeyboardUtil
 import com.github.tei.imamu.viewmodel.shoppinglist.ShoppingListDetailViewModel
 import org.koin.android.ext.android.inject
 
@@ -26,6 +29,7 @@ class ShoppingListDetailFragment : Fragment()
     {
         init(inflater, container)
         initObserver()
+        initListener()
 
         return binding.root
     }
@@ -61,6 +65,49 @@ class ShoppingListDetailFragment : Fragment()
                 viewModel.onDeleteItemsComplete()
             }
         })
+    }
+
+    private fun initListener()
+    {
+        binding.fabCheck.setOnClickListener {
+            when (binding.editTextAmount.visibility)
+            {
+                View.VISIBLE ->
+                {
+                    binding.editTextAmount.visibility = View.GONE
+                    binding.editTextUnit.visibility = View.GONE
+                    binding.editTextIngredient.visibility = View.VISIBLE
+
+                    binding.fabCheck.setImageIcon(Icon.createWithResource(requireContext(), R.drawable.ic_check))
+                    binding.editTextIngredient.requestFocus()
+                }
+                else         ->
+                {
+                    KeyboardUtil.hideKeyboard(view, requireContext())
+                    addNewIngredient()
+                    shoppingListItemAdapter.notifyDataSetChanged()
+
+                    binding.editTextAmount.setText("")
+                    binding.editTextUnit.setText("")
+                    binding.editTextIngredient.setText("")
+                    binding.editTextAmount.visibility = View.VISIBLE
+                    binding.editTextUnit.visibility = View.VISIBLE
+                    binding.editTextIngredient.visibility = View.GONE
+
+                    binding.fabCheck.setImageIcon(Icon.createWithResource(requireContext(), R.drawable.ic_arrow_next))
+                }
+            }
+        }
+    }
+
+    private fun addNewIngredient()
+    {
+        val amount = binding.editTextAmount.text.toString()
+        val unit = binding.editTextUnit.text.toString()
+        val ingredientName = binding.editTextIngredient.text.toString()
+
+        val shoppingListItem = ShoppingListItem(amount = amount, unit = unit, name = ingredientName)
+        viewModel.saveNewItem(shoppingListItem)
     }
 
     override fun onResume()
