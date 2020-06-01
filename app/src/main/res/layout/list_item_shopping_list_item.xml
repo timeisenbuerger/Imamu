@@ -27,11 +27,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/edit_text_ingredient_amount"
+            app:layout_constraintEnd_toStartOf="@id/text_view_ingredient_amount"
             tools:checked="true"/>
 
         <TextView
-            android:id="@+id/edit_text_ingredient_amount"
+            android:id="@+id/text_view_ingredient_amount"
             style="@style/ingredient_item_text_view"
             android:layout_width="75dp"
             android:layout_height="wrap_content"
@@ -42,13 +42,13 @@
             android:text="@={item.amount}"
             android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/auto_complete_ingredient_unit"
+            app:layout_constraintEnd_toStartOf="@id/text_view_ingredient_amount"
             app:layout_constraintStart_toEndOf="@id/check_box"
             app:layout_constraintTop_toTopOf="parent"
             tools:hint="@string/recipe_ingredient_amount" />
 
         <TextView
-            android:id="@+id/auto_complete_ingredient_unit"
+            android:id="@+id/text_view_ingredient_unit"
             style="@style/ingredient_item_text_view"
             android:layout_width="75dp"
             android:layout_height="wrap_content"
@@ -59,13 +59,13 @@
             android:text="@={item.unit}"
             android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/edit_text_ingredient"
-            app:layout_constraintStart_toEndOf="@id/edit_text_ingredient_amount"
+            app:layout_constraintEnd_toStartOf="@id/text_view_ingredient"
+            app:layout_constraintStart_toEndOf="@id/text_view_ingredient_amount"
             app:layout_constraintTop_toTopOf="parent"
             tools:hint="@string/recipe_ingredient_unit" />
 
         <TextView
-            android:id="@+id/edit_text_ingredient"
+            android:id="@+id/text_view_ingredient"
             style="@style/ingredient_item_text_view_bold"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
@@ -77,7 +77,7 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/image_button_remove_line"
-            app:layout_constraintStart_toEndOf="@id/auto_complete_ingredient_unit"
+            app:layout_constraintStart_toEndOf="@id/text_view_ingredient_unit"
             app:layout_constraintTop_toTopOf="parent"
             tools:hint="@string/insert_recipe_ingredient" />
 
@@ -90,7 +90,7 @@
             android:background="?attr/selectableItemBackground"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/edit_text_ingredient"
+            app:layout_constraintStart_toEndOf="@id/text_view_ingredient"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.40"
             app:srcCompat="@drawable/ic_clear_black" />

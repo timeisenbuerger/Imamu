@@ -102,7 +102,6 @@ class ShoppingListFragment : Fragment()
                 viewModel.createNewShoppingList()
             }
         }
-
-        return true
+        return super.onOptionsItemSelected(item)
     }
 }

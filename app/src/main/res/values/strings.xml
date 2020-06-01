@@ -42,8 +42,11 @@
     <string name="chip_difficulty_normal">Mittel</string>
     <string name="chip_difficulty_hard">Schwer</string>
     <string name="recipe_preparation_time_text">Zubereitungszeit:</string>
+    <string name="preparation_time_text">Zubereitung</string>
     <string name="recipe_baking_time_text">Backzeit:</string>
+    <string name="baking_time_text">Backzeit</string>
     <string name="recipe_rest_time_text">Ruhezeit:</string>
+    <string name="rest_time_text">Ruhezeit</string>
     <string name="recipe_time_unit_text">min</string>
     <string name="recipe_mood_text">Stimmung:</string>
     <string name="recipe_type_hint_text">z.B. Hauptspeise</string>

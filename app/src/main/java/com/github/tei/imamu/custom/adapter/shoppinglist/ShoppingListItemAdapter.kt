@@ -1,10 +1,13 @@
 package com.github.tei.imamu.custom.adapter.shoppinglist
 
 import android.content.Context
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
+import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import com.github.tei.imamu.R
 import com.github.tei.imamu.data.database.entity.shoppinglist.ShoppingListItem
@@ -31,9 +34,19 @@ class ShoppingListItemAdapter(context: Context, private val items: MutableList<S
 
         binding?.item = item
 
+        initCheckBox(binding)
         initListener(binding, item)
 
         return binding!!.root
+    }
+
+    private fun initCheckBox(binding: ListItemShoppingListItemBinding?)
+    {
+        binding?.let {
+            strikeThrough(it.checkBox.isChecked, it.textViewIngredient)
+            strikeThrough(it.checkBox.isChecked, it.textViewIngredientAmount)
+            strikeThrough(it.checkBox.isChecked, it.textViewIngredientUnit)
+        }
     }
 
     private fun initListener(binding: ListItemShoppingListItemBinding?, item: ShoppingListItem?)
@@ -45,11 +58,26 @@ class ShoppingListItemAdapter(context: Context, private val items: MutableList<S
             viewModel.removeItem(item)
         }
 
-        binding?.checkBox?.setOnClickListener { viewModel.updateItem(item) }
+        binding?.checkBox?.setOnClickListener {
+            initCheckBox(binding)
+            viewModel.updateItem(item)
+        }
     }
 
     override fun getItem(position: Int): ShoppingListItem?
     {
         return items[position]
+    }
+
+    private fun strikeThrough(enable: Boolean, textView: TextView)
+    {
+        textView.paintFlags = if (enable)
+        {
+            (textView.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG)
+        }
+        else
+        {
+            textView.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+        }
     }
 }

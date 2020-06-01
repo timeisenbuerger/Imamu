@@ -89,6 +89,127 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/default_recipe_padding"
+                    android:layout_marginBottom="@dimen/default_recipe_padding"
+                    android:orientation="horizontal">
+
+                    <com.mikhaellopez.circularprogressbar.CircularProgressBar
+                        android:id="@+id/circle_preparation_time"
+                        android:layout_width="85dp"
+                        android:layout_height="85dp"
+                        android:layout_marginStart="14dp"
+                        android:layout_marginEnd="@dimen/default_recipe_margin"
+                        app:cpb_background_progressbar_color="#b6bbd8"
+                        app:cpb_background_progressbar_width="3dp"
+                        app:cpb_progress_direction="to_right"
+                        app:cpb_progressbar_color="#3f51b5"
+                        app:cpb_progressbar_width="4dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/circle_baking_time"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/text_view_circle_preparation_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto"
+                        app:layout_constraintBottom_toBottomOf="@id/circle_preparation_time"
+                        app:layout_constraintEnd_toEndOf="@id/circle_preparation_time"
+                        app:layout_constraintStart_toStartOf="@id/circle_preparation_time"
+                        app:layout_constraintTop_toTopOf="@id/circle_preparation_time"
+                        tools:text="@string/sample_time"/>
+
+                    <TextView
+                        style="@style/caption_small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/default_recipe_padding"
+                        android:text="@string/preparation_time_text"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@id/circle_preparation_time"
+                        app:layout_constraintStart_toStartOf="@id/circle_preparation_time"
+                        app:layout_constraintTop_toBottomOf="@id/circle_preparation_time" />
+
+                    <com.mikhaellopez.circularprogressbar.CircularProgressBar
+                        android:id="@+id/circle_baking_time"
+                        android:layout_width="85dp"
+                        android:layout_height="85dp"
+                        android:layout_marginEnd="@dimen/default_recipe_margin"
+                        app:cpb_background_progressbar_color="#b6bbd8"
+                        app:cpb_background_progressbar_width="3dp"
+                        app:cpb_progress_direction="to_right"
+                        app:cpb_progressbar_color="#3f51b5"
+                        app:cpb_progressbar_width="4dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/circle_rest_time"
+                        app:layout_constraintStart_toEndOf="@id/circle_preparation_time"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/text_view_circle_baking_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto"
+                        app:layout_constraintBottom_toBottomOf="@id/circle_baking_time"
+                        app:layout_constraintEnd_toEndOf="@id/circle_baking_time"
+                        app:layout_constraintStart_toStartOf="@id/circle_baking_time"
+                        app:layout_constraintTop_toTopOf="@id/circle_baking_time"
+                        tools:text="@string/sample_time"/>
+
+                    <TextView
+                        style="@style/caption_small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/default_recipe_padding"
+                        android:text="@string/baking_time_text"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@id/circle_baking_time"
+                        app:layout_constraintStart_toStartOf="@id/circle_baking_time"
+                        app:layout_constraintTop_toBottomOf="@id/circle_baking_time" />
+
+                    <com.mikhaellopez.circularprogressbar.CircularProgressBar
+                        android:id="@+id/circle_rest_time"
+                        android:layout_width="85dp"
+                        android:layout_height="85dp"
+                        android:layout_marginEnd="14dp"
+                        app:cpb_background_progressbar_color="#b6bbd8"
+                        app:cpb_background_progressbar_width="3dp"
+                        app:cpb_progress_direction="to_right"
+                        app:cpb_progressbar_color="#3f51b5"
+                        app:cpb_progressbar_width="4dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/circle_baking_time"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/text_view_circle_rest_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto"
+                        app:layout_constraintBottom_toBottomOf="@id/circle_rest_time"
+                        app:layout_constraintEnd_toEndOf="@id/circle_rest_time"
+                        app:layout_constraintStart_toStartOf="@id/circle_rest_time"
+                        app:layout_constraintTop_toTopOf="@id/circle_rest_time"
+                        tools:text="@string/sample_time"/>
+
+                    <TextView
+                        style="@style/caption_small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/default_recipe_padding"
+                        android:text="@string/rest_time_text"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@id/circle_rest_time"
+                        app:layout_constraintStart_toStartOf="@id/circle_rest_time"
+                        app:layout_constraintTop_toBottomOf="@id/circle_rest_time" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
                 <com.google.android.flexbox.FlexboxLayout
                     android:id="@+id/recipe_features"
                     android:layout_width="match_parent"

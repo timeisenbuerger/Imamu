@@ -102,8 +102,7 @@ class EditCookBookFragment : Fragment()
             {
                 viewModel.saveCookBook()
             }
-            else                     -> findNavController().popBackStack() //TODO zwangsweise, da die Navigation sonst nicht funktioniert
         }
-        return true
+        return super.onOptionsItemSelected(item)
     }
 }

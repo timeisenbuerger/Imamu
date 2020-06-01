@@ -10,7 +10,6 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.github.tei.imamu.MainActivity
@@ -115,18 +114,8 @@ class RecipeDetailFragment : Fragment()
         {
             createChip(recipe.difficulty, inflater, binding.recipeFeatures)
         }
-        if (!TextUtils.isEmpty(recipe.preparationTime))
-        {
-            createChip("Zubereitung: " + recipe.preparationTime + " min", inflater, binding.recipeFeatures)
-        }
-        if (!TextUtils.isEmpty(recipe.bakingTime))
-        {
-            createChip("Backzeit: " + recipe.bakingTime + " min", inflater, binding.recipeFeatures)
-        }
-        if (!TextUtils.isEmpty(recipe.restTime))
-        {
-            createChip("Ruhezeit: " + recipe.restTime + " min", inflater, binding.recipeFeatures)
-        }
+
+        initTimeCircles(recipe)
 
         setListViewHeightBasedOnChildren(binding.listViewIngredients)
     }
@@ -168,6 +157,59 @@ class RecipeDetailFragment : Fragment()
         parent.addView(chip)
     }
 
+    private fun initTimeCircles(recipe: Recipe)
+    {
+        binding.circlePreparationTime.apply {
+            progressMax = recipe.totalTime.toFloat()
+            recipe.preparationTime.toFloatOrNull()
+                ?.let {
+                    progress = it
+                }
+        }
+        if (!TextUtils.isEmpty(recipe.bakingTime))
+        {
+            binding.textViewCirclePreparationTime.text = recipe.preparationTime + " min"
+        }
+        else
+        {
+            binding.textViewCirclePreparationTime.text = "0 min"
+        }
+
+        binding.circleBakingTime.apply {
+            progressMax = recipe.totalTime.toFloat()
+            recipe.bakingTime.toFloatOrNull()
+                ?.let {
+                    progress = it
+                }
+        }
+        if (!TextUtils.isEmpty(recipe.bakingTime))
+        {
+            binding.textViewCircleBakingTime.text = recipe.bakingTime + " min"
+        }
+        else
+        {
+            binding.textViewCircleBakingTime.text = "0 min"
+        }
+
+
+        binding.circleRestTime.apply {
+            progressMax = recipe.totalTime.toFloat()
+            recipe.restTime.toFloatOrNull()
+                ?.let {
+                    progress = it
+                }
+        }
+
+        if (!TextUtils.isEmpty(recipe.restTime))
+        {
+            binding.textViewCircleRestTime.text = recipe.restTime + " min"
+        }
+        else
+        {
+            binding.textViewCircleRestTime.text = "0 min"
+        }
+    }
+
     private fun increaseServings(recipe: Recipe)
     {
         val number = recipe.servingsNumber.toInt()
@@ -189,7 +231,8 @@ class RecipeDetailFragment : Fragment()
 
                 ingredient.amount = (if ((amount % 1.0) == 0.0)
                 {
-                    amount.toInt().toString()
+                    amount.toInt()
+                        .toString()
                 }
                 else
                 {
@@ -225,7 +268,8 @@ class RecipeDetailFragment : Fragment()
 
                 ingredient.amount = (if ((amount % 1.0) == 0.0)
                 {
-                    amount.toInt().toString()
+                    amount.toInt()
+                        .toString()
                 }
                 else
                 {
@@ -256,7 +300,8 @@ class RecipeDetailFragment : Fragment()
             }
             R.id.action_shoppingList -> recipe?.let {
                 viewModel.createShoppingList(recipe)
-                Toast.makeText(requireContext(), "Aus den Zutaten wurde eine Einkaufsliste erstellt", Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), "Aus den Zutaten wurde eine Einkaufsliste erstellt", Toast.LENGTH_LONG)
+                    .show()
             }
         }
 

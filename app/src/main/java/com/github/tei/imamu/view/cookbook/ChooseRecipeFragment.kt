@@ -108,8 +108,7 @@ class ChooseRecipeFragment : Fragment()
             R.id.action_search       ->
             {
             }
-            else                     -> findNavController().popBackStack() //TODO zwangsweise, da die Navigation sonst nicht funktioniert
         }
-        return true
+        return super.onOptionsItemSelected(item)
     }
 }

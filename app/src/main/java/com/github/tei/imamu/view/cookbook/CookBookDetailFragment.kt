@@ -98,9 +98,8 @@ class CookBookDetailFragment : Fragment()
         {
             R.id.action_share -> shareCookBook()
             R.id.action_edit  -> findNavController().navigate(CookBookDetailFragmentDirections.actionCookBookDetailFragmentToEditCookBookFragment(viewModel.cookBook.value!!))
-            else              -> findNavController().popBackStack()
         }
-        return true
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onResume()
