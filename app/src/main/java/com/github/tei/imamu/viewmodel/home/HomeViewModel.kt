@@ -11,6 +11,7 @@ import com.github.tei.imamu.data.repository.CookBookRepository
 import com.github.tei.imamu.data.repository.LastViewedCookBookRepository
 import com.github.tei.imamu.data.repository.LastViewedRecipeRepository
 import com.github.tei.imamu.data.repository.RecipeRepository
+import com.github.tei.imamu.wrapper.ShortcutWrapper
 import io.objectbox.android.ObjectBoxLiveData
 
 class HomeViewModel(private val recipeRepository: RecipeRepository, private val lastViewedRecipeRepository: LastViewedRecipeRepository, private val lastViewedCookBookRepository: LastViewedCookBookRepository) : ViewModel()
@@ -35,6 +36,10 @@ class HomeViewModel(private val recipeRepository: RecipeRepository, private val 
     val navigateToCookBookDetail: LiveData<CookBook>
         get() = _navigateToCookBookDetail
 
+    private val _navigateToShortcut = MutableLiveData<ShortcutWrapper>()
+    val navigateToShortcut: LiveData<ShortcutWrapper>
+        get() = _navigateToShortcut
+
     fun onRecipeClicked(recipe: Recipe)
     {
         _navigateToRecipeDetail.value = recipe
@@ -53,5 +58,15 @@ class HomeViewModel(private val recipeRepository: RecipeRepository, private val 
     fun onNavigateToCookBookDetailComplete()
     {
         _navigateToCookBookDetail.value = null
+    }
+
+    fun onShortcutClicked(item: ShortcutWrapper)
+    {
+        _navigateToShortcut.value = item
+    }
+
+    fun onNavigateToShortcutComplete()
+    {
+        _navigateToShortcut.value = null
     }
 }
