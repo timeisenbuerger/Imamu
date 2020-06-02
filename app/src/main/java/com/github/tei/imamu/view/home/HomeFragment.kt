@@ -40,6 +40,7 @@ class HomeFragment : Fragment()
         init(inflater, container)
         initComponents()
         initObserver()
+        initListener()
 
         return binding.root
     }
@@ -154,6 +155,13 @@ class HomeFragment : Fragment()
                 viewModel.onNavigateToCookBookDetailComplete()
             }
         })
+    }
+
+    private fun initListener()
+    {
+        binding.textViewShowAllFavorites.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.actionNavHomeToFavoriteRecipesFragment())
+        }
     }
 
     private fun initShortcutData(): MutableList<ShortcutWrapper>
