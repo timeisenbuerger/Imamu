@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
 import com.github.tei.imamu.custom.adapter.recipe.RecipeListAdapter
+import com.github.tei.imamu.data.database.entity.recipe.Recipe
 import com.github.tei.imamu.databinding.FragmentRecipeListBinding
 import com.github.tei.imamu.util.ShareUtil
 import com.github.tei.imamu.viewmodel.recipe.RecipeListViewModel
@@ -97,7 +98,7 @@ class RecipeListFragment : Fragment()
         }
 
         binding.createRecipeFab.setOnClickListener {
-            findNavController().navigate(RecipeListFragmentDirections.actionRecipeListFragmentToAddRecipeFragment())
+            findNavController().navigate(RecipeListFragmentDirections.actionNavRecipeListToAddRecipeStep1Fragment(Recipe()))
             isOpen = false
         }
 

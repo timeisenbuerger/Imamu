@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.github.tei.imamu.viewmodel.recipe.AddRecipeViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/text_view_recipe_servings"
+            style="@style/caption_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_recipe_padding"
+            android:layout_marginTop="@dimen/default_recipe_margin"
+            android:layout_marginEnd="@dimen/default_recipe_padding"
+            android:text="@string/recipe_servings_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/edit_text_number_servings"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/default_recipe_padding"
+            android:layout_marginTop="@dimen/default_recipe_padding"
+            android:padding="@dimen/default_recipe_padding"
+            android:text="@={viewModel.recipe.servingsNumber}"
+            style="@style/edit_text_number_style"
+            app:layout_constraintStart_toEndOf="@id/text_view_recipe_servings"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="5"/>
+
+        <TextView
+            android:id="@+id/text_view_recipe_servings_text"
+            style="@style/caption_small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="@dimen/default_recipe_padding"
+            android:text="@string/recipe_servings"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/edit_text_number_servings"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_view_recipe_servings_description"
+            style="@style/description_small"
+            android:layout_width="225dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_recipe_padding"
+            android:layout_marginTop="@dimen/default_recipe_padding"
+            android:layout_marginEnd="@dimen/default_recipe_padding"
+            android:text="@string/recipe_servings_description"
+            app:layout_constraintEnd_toStartOf="@id/edit_text_number_servings"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_view_recipe_servings" />
+
+        <View
+            android:id="@+id/first_divider"
+            style="@style/Divider"
+            android:layout_marginStart="@dimen/default_recipe_margin"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginEnd="@dimen/default_recipe_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_view_recipe_servings_description" />
+
+        <TextView
+            android:id="@+id/text_view_recipe_difficulty"
+            style="@style/caption_medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_recipe_padding"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="@dimen/default_recipe_padding"
+            android:text="@string/recipe_difficulty_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/first_divider" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chip_group_difficulty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_recipe_padding"
+            android:layout_marginEnd="@dimen/default_recipe_padding"
+            android:layout_marginTop="@dimen/default_recipe_margin"
+            app:chipSpacingHorizontal="8dp"
+            app:singleSelection="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_view_recipe_difficulty"/>
+
+        <View
+            android:id="@+id/second_divider"
+            style="@style/Divider"
+            android:layout_marginStart="@dimen/default_recipe_margin"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginEnd="@dimen/default_recipe_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chip_group_difficulty" />
+
+        <LinearLayout
+            android:id="@+id/layout_preparation_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/second_divider">
+
+            <TextView
+                android:id="@+id/text_view_recipe_preparation_time"
+                style="@style/caption_medium"
+                android:layout_width="145dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_recipe_padding"
+                android:layout_marginTop="@dimen/default_recipe_margin"
+                android:layout_marginEnd="@dimen/default_recipe_margin"
+                android:layout_marginBottom="@dimen/default_recipe_margin"
+                android:layout_weight="1"
+                android:text="@string/recipe_preparation_time_text" />
+
+            <EditText
+                android:id="@+id/edit_text_preparation_time"
+                style="@style/edit_text_number_style"
+                android:layout_width="90dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginEnd="@dimen/default_recipe_margin"
+                android:layout_weight="1"
+                android:text="@={viewModel.recipe.preparationTime}" />
+
+            <TextView
+                android:id="@+id/text_view_recipe_preparation_time_unit"
+                style="@style/caption_small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_recipe_margin"
+                android:layout_marginEnd="@dimen/default_recipe_margin"
+                android:layout_marginBottom="@dimen/default_recipe_margin"
+                android:layout_weight="1"
+                tools:text="10 min"
+                android:text="@string/recipe_time_unit_text" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/text_view_preparation_time_description"
+            style="@style/description_small"
+            android:layout_width="195dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_recipe_padding"
+            android:layout_marginEnd="@dimen/default_recipe_padding"
+            android:text="@string/recipe_preparation_time_description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_preparation_time" />
+
+        <LinearLayout
+            android:id="@+id/layout_baking_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_view_preparation_time_description">
+
+            <TextView
+                android:id="@+id/text_view_recipe_baking_time"
+                style="@style/caption_medium"
+                android:layout_width="145dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_recipe_padding"
+                android:layout_marginTop="@dimen/default_recipe_margin"
+                android:layout_marginEnd="@dimen/default_recipe_margin"
+                android:layout_marginBottom="@dimen/default_recipe_margin"
+                android:layout_weight="1"
+                android:text="@string/recipe_baking_time_text" />
+
+            <EditText
+                android:id="@+id/edit_text_baking_time"
+                style="@style/edit_text_number_style"
+                android:layout_width="90dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginEnd="@dimen/default_recipe_margin"
+                android:layout_weight="1"
+                android:text="@={viewModel.recipe.bakingTime}" />
+
+            <TextView
+                android:id="@+id/text_view_recipe_baking_time_unit"
+                style="@style/caption_small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_recipe_margin"
+                android:layout_marginEnd="@dimen/default_recipe_margin"
+                android:layout_marginBottom="@dimen/default_recipe_margin"
+                android:layout_weight="1"
+                tools:text="10 min"
+                android:text="@string/recipe_time_unit_text" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/text_view_baking_time_description"
+            style="@style/description_small"
+            android:layout_width="195dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_recipe_padding"
+            android:layout_marginEnd="@dimen/default_recipe_padding"
+            android:text="@string/recipe_baking_time_description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_baking_time" />
+
+        <LinearLayout
+            android:id="@+id/layout_rest_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_view_baking_time_description">
+
+            <TextView
+                android:id="@+id/text_view_recipe_rest_time"
+                style="@style/caption_medium"
+                android:layout_width="145dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_recipe_margin"
+                android:layout_marginTop="@dimen/default_recipe_margin"
+                android:layout_marginEnd="@dimen/default_recipe_margin"
+                android:layout_marginBottom="@dimen/default_recipe_margin"
+                android:layout_weight="1"
+                android:text="@string/recipe_rest_time_text" />
+
+            <EditText
+                android:id="@+id/edit_text_rest_time"
+                style="@style/edit_text_number_style"
+                android:layout_width="90dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginEnd="@dimen/default_recipe_margin"
+                android:layout_weight="1"
+                android:text="@={viewModel.recipe.restTime}" />
+
+            <TextView
+                android:id="@+id/text_view_recipe_rest_time_unit"
+                style="@style/caption_small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_recipe_margin"
+                android:layout_marginEnd="@dimen/default_recipe_margin"
+                android:layout_marginBottom="@dimen/default_recipe_margin"
+                android:layout_weight="1"
+                tools:text="10 min"
+                android:text="@string/recipe_time_unit_text" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/text_view_rest_time_description"
+            style="@style/description_small"
+            android:layout_width="195dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_recipe_padding"
+            android:layout_marginEnd="@dimen/default_recipe_padding"
+            android:text="@string/recipe_rest_time_description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_rest_time" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_continue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="@dimen/default_recipe_margin"
+            android:text="@string/action_continue"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

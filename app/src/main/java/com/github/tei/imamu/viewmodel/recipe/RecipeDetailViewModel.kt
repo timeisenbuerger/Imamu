@@ -1,5 +1,6 @@
 package com.github.tei.imamu.viewmodel.recipe
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.github.tei.imamu.data.database.ObjectBox
@@ -15,7 +16,11 @@ import io.objectbox.kotlin.boxFor
 
 class RecipeDetailViewModel(private val recipeRepository: RecipeRepository, private val lastViewedRecipeRepository: LastViewedRecipeRepository, private val shoppingListRepository: ShoppingListRepository) : ViewModel()
 {
-    internal var currentRecipe = MutableLiveData<Recipe>()
+    internal val currentRecipe = MutableLiveData<Recipe>()
+
+    private var _navigateToEditRecipe = MutableLiveData<Recipe>()
+    val navigateToEditRecipe: LiveData<Recipe>
+        get() = _navigateToEditRecipe
 
     fun createShoppingList(recipe: Recipe)
     {
@@ -79,5 +84,15 @@ class RecipeDetailViewModel(private val recipeRepository: RecipeRepository, priv
         }
 
         return containsCookBook
+    }
+
+    fun onNavigateToEditRecipe()
+    {
+        _navigateToEditRecipe.value = currentRecipe.value
+    }
+
+    fun onNavigateToEditRecipeComplete()
+    {
+        _navigateToEditRecipe.value = null
     }
 }

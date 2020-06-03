@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.github.tei.imamu.viewmodel.recipe.AddRecipeViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <View
+            android:id="@+id/description_background"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:background="@color/peach"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/text_view_recipe_servings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_recipe_padding"
+            android:layout_marginTop="@dimen/default_recipe_padding"
+            android:layout_marginEnd="@dimen/default_recipe_padding"
+            android:text="@string/recipe_description_step1"
+            style="@style/caption_medium"
+            android:textAlignment="textStart"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/text_view_recipe_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_recipe_padding"
+            android:layout_marginTop="@dimen/default_recipe_margin"
+            android:layout_marginEnd="@dimen/default_recipe_padding"
+            android:text="@string/recipe_title_text"
+            style="@style/caption_medium"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/description_background"/>
+
+        <EditText
+            android:id="@+id/edit_text_recipe_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_recipe_padding"
+            android:layout_marginEnd="@dimen/default_recipe_padding"
+            android:layout_marginTop="@dimen/default_recipe_padding"
+            android:hint="@string/insert_recipe_title"
+            android:text="@={viewModel.recipe.title}"
+            style="@style/edit_text_string_style"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_view_recipe_title"/>
+
+        <TextView
+            android:id="@+id/text_view_recipe_image"
+            style="@style/caption_medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_recipe_padding"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="@dimen/default_recipe_padding"
+            android:text="@string/recipe_image_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_text_recipe_title" />
+
+        <ImageView
+            android:id="@+id/image_view_meal"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_marginStart="@dimen/default_recipe_padding"
+            android:layout_marginEnd="@dimen/default_recipe_padding"
+            android:layout_marginTop="@dimen/default_recipe_padding"
+            android:contentDescription="@string/image_view_meal_text"
+            android:src="@drawable/ic_camera"
+            android:scaleType="center"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_view_recipe_image" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_continue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="@dimen/default_recipe_margin"
+            android:text="@string/action_continue"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

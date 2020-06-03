@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.github.tei.imamu.MainActivity
@@ -37,6 +38,7 @@ class RecipeDetailFragment : Fragment()
         init(inflater, container)
         initComponents(inflater)
         initListener()
+        initObserver()
 
         setHasOptionsMenu(true)
         return binding.root
@@ -148,6 +150,16 @@ class RecipeDetailFragment : Fragment()
                 viewModel.updateRecipe()
             }
         }
+    }
+
+    private fun initObserver()
+    {
+        viewModel.navigateToEditRecipe.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                findNavController().navigate(RecipeDetailFragmentDirections.actionRecipeDetailFragmentToAddRecipeStep1Fragment(it))
+                viewModel.onNavigateToEditRecipeComplete()
+            }
+        })
     }
 
     private fun createChip(name: String, inflater: LayoutInflater, parent: ViewGroup)
@@ -296,7 +308,7 @@ class RecipeDetailFragment : Fragment()
         when (item.itemId)
         {
             R.id.action_edit         -> recipe?.let {
-                findNavController().navigate(RecipeDetailFragmentDirections.actionRecipeDetailFragmentToEditRecipeFragment(recipe))
+                viewModel.onNavigateToEditRecipe()
             }
             R.id.action_shoppingList -> recipe?.let {
                 viewModel.createShoppingList(recipe)

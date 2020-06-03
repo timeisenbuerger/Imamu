@@ -9,22 +9,19 @@ import com.github.tei.imamu.data.repository.RecipeRepository
 
 class AddRecipeViewModel(private val recipeRepository: RecipeRepository, private val ingredientRepository: IngredientRepository) : ViewModel()
 {
-    private val _recipe = MutableLiveData<Recipe>()
-    val recipe: LiveData<Recipe>
-        get() = _recipe
+    val recipe = MutableLiveData<Recipe>()
 
-    private val _navigateToRecipeDetail = MutableLiveData<Boolean>()
-    val navigateToRecipeDetail: LiveData<Boolean>
+    private val _navigateToNextStep = MutableLiveData<Recipe>()
+    val navigateToNextStep: LiveData<Recipe>
+        get() = _navigateToNextStep
+
+    private val _navigateToRecipeDetail = MutableLiveData<Recipe>()
+    val navigateToRecipeDetail: LiveData<Recipe>
         get() = _navigateToRecipeDetail
-
-    init
-    {
-        _recipe.value = Recipe()
-    }
 
     fun onSaveRecipe()
     {
-        _recipe.value?.let {
+        recipe.value?.let {
             for (recipeIngredient in it.recipeIngredients)
             {
                 if (recipeIngredient.ingredient.target.id == 0L)
@@ -50,11 +47,25 @@ class AddRecipeViewModel(private val recipeRepository: RecipeRepository, private
 
             recipeRepository.save(it)
         }
-        _navigateToRecipeDetail.value = true
+    }
+
+    fun onNavigateToNextStep()
+    {
+        _navigateToNextStep.value = recipe.value
+    }
+
+    fun onNavigateToNextStepComplete()
+    {
+        _navigateToNextStep.value = null
+    }
+
+    fun onNavigateToDetail()
+    {
+        _navigateToRecipeDetail.value = recipe.value
     }
 
     fun onNavigateToDetailComplete()
     {
-        _navigateToRecipeDetail.value = false
+        _navigateToRecipeDetail.value = null
     }
 }

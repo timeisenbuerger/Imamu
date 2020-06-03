@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.github.tei.imamu.viewmodel.recipe.AddRecipeViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <View
+            android:id="@+id/description_background"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:background="@color/peach"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_view_preparation_description"
+            style="@style/caption_medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_recipe_padding"
+            android:layout_marginTop="@dimen/default_recipe_padding"
+            android:layout_marginEnd="@dimen/default_recipe_padding"
+            android:layout_marginBottom="@dimen/default_recipe_padding"
+            android:text="@string/recipe_description_step4"
+            android:textAlignment="viewStart"
+            app:layout_constraintBottom_toBottomOf="@id/description_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_view_preparation_text"
+            style="@style/caption_medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_recipe_padding"
+            android:layout_marginTop="@dimen/default_recipe_margin"
+            android:layout_marginEnd="@dimen/default_recipe_padding"
+            android:text="@string/recipe_add_preparation_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/description_background" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:layout_marginStart="@dimen/default_recipe_padding"
+            android:layout_marginTop="@dimen/default_recipe_margin"
+            android:layout_marginEnd="@dimen/default_recipe_padding"
+            app:layout_constraintBottom_toTopOf="@+id/button_continue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_view_preparation_text"
+            app:layout_constraintVertical_bias="0.0">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_text_preparation"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/roboto"
+                android:ems="10"
+                android:gravity="start|top"
+                android:inputType="textMultiLine"
+                android:text="@={viewModel.recipe.preparation}"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_continue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="@dimen/default_recipe_margin"
+            android:fontFamily="@font/roboto"
+            android:text="@string/action_continue"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

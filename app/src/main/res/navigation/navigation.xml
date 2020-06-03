@@ -46,9 +46,6 @@
         android:label="@string/menu_recipe"
         tools:layout="@layout/fragment_recipe_list">
         <action
-            android:id="@+id/action_recipeListFragment_to_addRecipeFragment"
-            app:destination="@id/addRecipeFragment" />
-        <action
             android:id="@+id/action_nav_recipe_list_to_recipeDetailFragment"
             app:destination="@id/recipeDetailFragment"
             app:popUpTo="@id/nav_recipe_list"
@@ -57,18 +54,12 @@
             android:id="@+id/action_nav_recipe_list_to_importRecipeFragment"
             app:destination="@id/importRecipeFragment"
             app:popUpTo="@id/nav_recipe_list" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/addRecipeFragment"
-        android:name="com.github.tei.imamu.view.recipe.AddRecipeFragment"
-        android:label="@string/action_add_recipe"
-        tools:layout="@layout/fragment_add_recipe">
         <action
-            android:id="@+id/action_addRecipeFragment_to_recipeDetailFragment"
-            app:destination="@id/recipeDetailFragment"
+            android:id="@+id/action_nav_recipe_list_to_addRecipeStep1Fragment"
+            app:destination="@id/addRecipeStep1Fragment"
             app:popUpTo="@id/nav_recipe_list" />
     </fragment>
+
     <fragment
         android:id="@+id/recipeDetailFragment"
         android:name="com.github.tei.imamu.view.recipe.RecipeDetailFragment"
@@ -78,22 +69,9 @@
             android:name="recipe"
             app:argType="com.github.tei.imamu.data.database.entity.recipe.Recipe" />
         <action
-            android:id="@+id/action_recipeDetailFragment_to_editRecipeFragment"
-            app:destination="@id/editRecipeFragment"
+            android:id="@+id/action_recipeDetailFragment_to_addRecipeStep1Fragment"
+            app:destination="@id/addRecipeStep1Fragment"
             app:popUpTo="@id/recipeDetailFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/editRecipeFragment"
-        android:name="com.github.tei.imamu.view.recipe.EditRecipeFragment"
-        android:label=""
-        tools:layout="@layout/fragment_edit_recipe">
-        <argument
-            android:name="recipe"
-            app:argType="com.github.tei.imamu.data.database.entity.recipe.Recipe" />
-        <action
-            android:id="@+id/action_editRecipeFragment_to_recipeDetailFragment"
-            app:destination="@id/recipeDetailFragment"
-            app:popUpTo="@id/nav_recipe_list" />
     </fragment>
     <fragment
         android:id="@+id/importRecipeFragment"
@@ -238,6 +216,86 @@
         <argument
             android:name="cookBook"
             app:argType="com.github.tei.imamu.data.database.entity.cookbook.CookBook" />
+    </fragment>
+    <fragment
+        android:id="@+id/addRecipeStep1Fragment"
+        android:name="com.github.tei.imamu.view.recipe.AddRecipeStep1Fragment"
+        android:label=""
+        tools:layout="@layout/fragment_add_recipe_step1">
+        <action
+            android:id="@+id/action_addRecipeStep1Fragment_to_nav_recipe_list"
+            app:destination="@id/nav_recipe_list" />
+        <action
+            android:id="@+id/action_addRecipeStep1Fragment_to_addRecipeStep2Fragment"
+            app:destination="@id/addRecipeStep2Fragment"
+            app:popUpTo="@id/addRecipeStep1Fragment" />
+        <argument
+            android:name="recipe"
+            app:argType="com.github.tei.imamu.data.database.entity.recipe.Recipe" />
+    </fragment>
+    <fragment
+        android:id="@+id/addRecipeStep2Fragment"
+        android:name="com.github.tei.imamu.view.recipe.AddRecipeStep2Fragment"
+        android:label=""
+        tools:layout="@layout/fragment_add_recipe_step2">
+        <action
+            android:id="@+id/action_addRecipeStep2Fragment_to_nav_recipe_list"
+            app:destination="@id/nav_recipe_list" />
+        <action
+            android:id="@+id/action_addRecipeStep2Fragment_to_addRecipeStep3Fragment"
+            app:destination="@id/addRecipeStep3Fragment"
+            app:popUpTo="@id/addRecipeStep2Fragment" />
+        <argument
+            android:name="recipe"
+            app:argType="com.github.tei.imamu.data.database.entity.recipe.Recipe" />
+    </fragment>
+    <fragment
+        android:id="@+id/addRecipeStep3Fragment"
+        android:name="com.github.tei.imamu.view.recipe.AddRecipeStep3Fragment"
+        android:label=""
+        tools:layout="@layout/fragment_add_recipe_step3">
+        <action
+            android:id="@+id/action_addRecipeStep3Fragment_to_nav_recipe_list"
+            app:destination="@id/nav_recipe_list" />
+        <action
+            android:id="@+id/action_addRecipeStep3Fragment_to_addRecipeStep4Fragment"
+            app:destination="@id/addRecipeStep4Fragment"
+            app:popUpTo="@id/addRecipeStep3Fragment" />
+        <argument
+            android:name="recipe"
+            app:argType="com.github.tei.imamu.data.database.entity.recipe.Recipe" />
+    </fragment>
+    <fragment
+        android:id="@+id/addRecipeStep4Fragment"
+        android:name="com.github.tei.imamu.view.recipe.AddRecipeStep4Fragment"
+        android:label=""
+        tools:layout="@layout/fragment_add_recipe_step4">
+        <action
+            android:id="@+id/action_addRecipeStep4Fragment_to_nav_recipe_list"
+            app:destination="@id/nav_recipe_list" />
+        <action
+            android:id="@+id/action_addRecipeStep4Fragment_to_addRecipeStep5Fragment"
+            app:destination="@id/addRecipeStep5Fragment"
+            app:popUpTo="@id/addRecipeStep4Fragment" />
+        <argument
+            android:name="recipe"
+            app:argType="com.github.tei.imamu.data.database.entity.recipe.Recipe" />
+    </fragment>
+    <fragment
+        android:id="@+id/addRecipeStep5Fragment"
+        android:name="com.github.tei.imamu.view.recipe.AddRecipeStep5Fragment"
+        android:label=""
+        tools:layout="@layout/fragment_add_recipe_step5">
+        <action
+            android:id="@+id/action_addRecipeStep5Fragment_to_nav_recipe_list"
+            app:destination="@id/nav_recipe_list" />
+        <action
+            android:id="@+id/action_addRecipeStep5Fragment_to_recipeDetailFragment"
+            app:destination="@id/recipeDetailFragment"
+            app:popUpTo="@id/nav_recipe_list" />
+        <argument
+            android:name="recipe"
+            app:argType="com.github.tei.imamu.data.database.entity.recipe.Recipe" />
     </fragment>
 
 </navigation>
