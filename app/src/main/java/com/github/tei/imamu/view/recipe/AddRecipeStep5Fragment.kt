@@ -9,6 +9,8 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
+import com.github.tei.imamu.data.database.entity.recipe.Recipe
+import com.github.tei.imamu.data.database.entity.recipe.RecipeFeature
 import com.github.tei.imamu.databinding.FragmentAddRecipeStep5Binding
 import com.github.tei.imamu.viewmodel.recipe.AddRecipeViewModel
 import com.google.android.material.chip.Chip
@@ -90,7 +92,7 @@ class AddRecipeStep5Fragment : Fragment()
         chip.text = name
         parent.addView(chip)
 
-        if (name == viewModel.recipe.value!!.type || viewModel.recipe.value!!.nutrition.contains(name))
+        if (name == viewModel.recipe.value!!.type || recipeContainsFeature(viewModel.recipe.value!!, name))
         {
             chip.isChecked = true
         }
@@ -113,9 +115,28 @@ class AddRecipeStep5Fragment : Fragment()
             val chip = binding.chipGroupNutrition.getChildAt(i) as Chip
             if (chip.isChecked)
             {
-                viewModel.recipe.value!!.nutrition += chip.text.toString() + ";"
+                if (!recipeContainsFeature(viewModel.recipe.value!!, chip.text.toString()))
+                {
+                    val newFeature = RecipeFeature(name = chip.text.toString())
+                    viewModel.recipe.value!!.recipeFeatures.add(newFeature)
+                }
             }
         }
+    }
+
+    private fun recipeContainsFeature(recipe: Recipe, name: String): Boolean
+    {
+        var result = false
+        for (recipeFeature in recipe.recipeFeatures)
+        {
+            if (recipeFeature.name == name)
+            {
+                result = true
+                break
+            }
+        }
+
+        return result
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater)

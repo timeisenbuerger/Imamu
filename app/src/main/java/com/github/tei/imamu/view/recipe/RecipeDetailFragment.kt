@@ -100,18 +100,15 @@ class RecipeDetailFragment : Fragment()
         {
             createChip(recipe.type, inflater, binding.recipeFeatures)
         }
-        if (!TextUtils.isEmpty(recipe.nutrition))
+
+        if (recipe.recipeFeatures.isNotEmpty())
         {
-            val nutritionOptions = recipe.nutrition.split(";")
-                .toMutableList()
-            for (nutritionOption in nutritionOptions)
+            for (feature in recipe.recipeFeatures)
             {
-                if (!TextUtils.isEmpty(nutritionOption))
-                {
-                    createChip(nutritionOption, inflater, binding.recipeFeatures)
-                }
+                createChip(feature.name, inflater, binding.recipeFeatures)
             }
         }
+
         if (!TextUtils.isEmpty(recipe.difficulty))
         {
             createChip(recipe.difficulty, inflater, binding.recipeFeatures)

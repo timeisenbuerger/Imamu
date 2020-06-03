@@ -38,11 +38,20 @@ class JsonUtil
                 recipeObj.put("restTime", recipe.restTime)
                 recipeObj.put("totalTime", recipe.totalTime)
                 recipeObj.put("difficulty", recipe.difficulty)
-                recipeObj.put("nutrition", recipe.nutrition)
+
+                val recipeFeatures = JSONArray()
+                for (feature in recipe.recipeFeatures)
+                {
+                    val featureObj = JSONObject()
+                    featureObj.put("name", feature.name)
+                    recipeFeatures.put(featureObj)
+                }
+                recipeObj.put("recipeFeatures", recipeFeatures)
                 recipeObj.put("type", recipe.type)
 
                 jsonArr.put(recipeObj)
             }
+
             jSonObj.put("recipes", jsonArr)
 
             return jSonObj

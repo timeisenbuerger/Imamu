@@ -4,6 +4,7 @@ import android.content.Context
 import android.net.Uri
 import com.github.tei.imamu.data.database.entity.cookbook.CookBook
 import com.github.tei.imamu.data.database.entity.recipe.Recipe
+import com.github.tei.imamu.data.database.entity.recipe.RecipeFeature
 import com.github.tei.imamu.data.database.entity.recipe.RecipeIngredient
 import com.github.tei.imamu.viewmodel.cookbook.CookBookListViewModel
 import org.json.JSONArray
@@ -18,27 +19,27 @@ class ImportUtil
     companion object
     {
         lateinit var viewModel: CookBookListViewModel
-        fun importCookBook(viewModel: CookBookListViewModel, context: Context, data: Uri) : CookBook
+        fun importCookBook(viewModel: CookBookListViewModel, context: Context, data: Uri): CookBook
         {
             this.viewModel = viewModel
 
-                val json = getFile(context, data)
-                var jsonContent = ""
-                BufferedReader(FileReader(json)).lines()
-                    .forEach {
-                        jsonContent += it + "\n"
-                    }
+            val json = getFile(context, data)
+            var jsonContent = ""
+            BufferedReader(FileReader(json)).lines()
+                .forEach {
+                    jsonContent += it + "\n"
+                }
 
-                val cookBookJson = JSONObject(jsonContent.trim())
+            val cookBookJson = JSONObject(jsonContent.trim())
 
-                val newCookBook = createCookBook(cookBookJson)
-                viewModel.saveNewCookBook(newCookBook)
+            val newCookBook = createCookBook(cookBookJson)
+            viewModel.saveNewCookBook(newCookBook)
 
-                json.delete()
-                return newCookBook
+            json.delete()
+            return newCookBook
         }
 
-        private fun createCookBook(jsonObject: JSONObject) : CookBook
+        private fun createCookBook(jsonObject: JSONObject): CookBook
         {
             val newCookBook = CookBook()
             val keys: Iterator<String> = jsonObject.keys()
@@ -83,7 +84,16 @@ class ImportUtil
                     "restTime"          -> recipe.restTime = jsonObject.get(key) as String
                     "totalTime"         -> recipe.totalTime = jsonObject.get(key) as Int
                     "type"              -> recipe.type = jsonObject.get(key) as String
-                    "nutrition"         -> recipe.nutrition = jsonObject.get(key) as String
+                    "recipeFeatures"    ->
+                    {
+                        val recipeFeatures = jsonObject.get(key) as JSONArray
+                        for (index in 0 until recipeFeatures.length())
+                        {
+                            val obj = recipeFeatures.get(index) as JSONObject
+                            val feature = createFeature(obj)
+                            recipe.recipeFeatures.add(feature)
+                        }
+                    }
                     "recipeIngredients" ->
                     {
                         val recipeIngredients = jsonObject.get(key) as JSONArray
@@ -98,6 +108,21 @@ class ImportUtil
             }
 
             return recipe
+        }
+
+        private fun createFeature(jsonObject: JSONObject): RecipeFeature
+        {
+            val feature = RecipeFeature()
+            val keys: Iterator<String> = jsonObject.keys()
+            while (keys.hasNext())
+            {
+                when (val key = keys.next())
+                {
+                    "name" -> feature.name = jsonObject.get(key) as String
+                }
+            }
+
+            return feature
         }
 
         private fun createIngredient(jsonObject: JSONObject): RecipeIngredient

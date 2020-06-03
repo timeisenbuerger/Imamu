@@ -137,7 +137,7 @@ class RecipeFinderSearchFragment : Fragment()
         selectedIngredients.clear()
 
         selectedChipValues["type"] = ""
-        selectedChipValues["nutrition"] = ""
+        selectedChipValues["feature"] = ""
         selectedChipValues["difficulty"] = ""
         selectedChipValues["time"] = ""
 
@@ -149,7 +149,7 @@ class RecipeFinderSearchFragment : Fragment()
                 when (chip.parent)
                 {
                     binding.typeOfRecipe     -> selectedChipValues["type"] = chip.text.toString()
-                    binding.recipeNutrition  -> selectedChipValues["nutrition"] += chip.text.toString() + ";"
+                    binding.recipeNutrition  -> selectedChipValues["feature"] += chip.text.toString() + ";"
                     binding.recipeDifficulty -> selectedChipValues["difficulty"] = chip.text.toString()
                     binding.recipeTime       -> selectedChipValues["time"] = chip.text.toString()
                 }

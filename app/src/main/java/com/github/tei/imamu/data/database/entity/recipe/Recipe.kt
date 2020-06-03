@@ -4,6 +4,7 @@ import io.objectbox.annotation.Backlink
 import io.objectbox.annotation.Entity
 import io.objectbox.annotation.Id
 import io.objectbox.relation.ToMany
+import io.objectbox.relation.ToOne
 import java.io.Serializable
 
 @Entity
@@ -29,8 +30,6 @@ data class Recipe(
 
     var type: String = "",
 
-    var nutrition: String = "",
-
     var imagePath: String = "",
 
     var isFavorite: Boolean = false
@@ -39,4 +38,5 @@ data class Recipe(
 {
     @Backlink(to = "recipe")
     lateinit var recipeIngredients: ToMany<RecipeIngredient>
+    lateinit var recipeFeatures: ToMany<RecipeFeature>
 }

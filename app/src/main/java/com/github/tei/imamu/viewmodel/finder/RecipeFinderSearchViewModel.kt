@@ -39,8 +39,41 @@ class RecipeFinderSearchViewModel(private val recipeRepository: RecipeRepository
         var fullSearchResultWrapper = FullSearchResultWrapper(mutableListOf())
 
         val query = buildQuery(selectedChipValues)
-        val recipes = query.build()
-            .findLazyCached()
+        var recipes = query.build().find()
+
+        if (!TextUtils.isEmpty(selectedChipValues["feature"]))
+        {
+            val features = selectedChipValues["feature"]!!.split(";")
+            val notSuitableRecipes = mutableListOf<Recipe>()
+            for (recipe in recipes)
+            {
+                for (feature in features)
+                {
+                    if (feature.isNotEmpty())
+                    {
+                        var found = false
+                        for (recipeFeature in recipe.recipeFeatures)
+                        {
+                            if (feature == recipeFeature.name)
+                            {
+                                found = true
+                                break
+                            }
+                        }
+
+                        if (!found)
+                        {
+                            if (!notSuitableRecipes.contains(recipe))
+                            {
+                                notSuitableRecipes.add(recipe)
+                            }
+                        }
+                    }
+                }
+            }
+
+            recipes.removeAll(notSuitableRecipes)
+        }
 
         if (selectedIngredients.isNotEmpty())
         {
@@ -106,19 +139,6 @@ class RecipeFinderSearchViewModel(private val recipeRepository: RecipeRepository
             else
             {
                 query.contains(Recipe_.type, selectedChipValues["type"])
-            }
-            isAndNecessary = true
-        }
-        if (!TextUtils.isEmpty(selectedChipValues["nutrition"]))
-        {
-            query = if (isAndNecessary)
-            {
-                query.and()
-                    .contains(Recipe_.nutrition, selectedChipValues["nutrition"])
-            }
-            else
-            {
-                query.contains(Recipe_.nutrition, selectedChipValues["nutrition"])
             }
             isAndNecessary = true
         }
