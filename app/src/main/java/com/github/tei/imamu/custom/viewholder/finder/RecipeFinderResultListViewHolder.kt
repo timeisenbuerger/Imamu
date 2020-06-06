@@ -63,7 +63,7 @@ class RecipeFinderResultListViewHolder private constructor(private val binding: 
         else
         {
             binding.cardBackground.scaleType = ImageView.ScaleType.FIT_CENTER
-            binding.cardBackground.setImageResource(R.drawable.ic_hot_tub)
+            binding.cardBackground.setImageResource(R.drawable.ic_fastfood_grey)
         }
     }
 

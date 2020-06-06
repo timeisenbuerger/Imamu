@@ -44,7 +44,7 @@ class AddCookBookViewHolder private constructor(private val binding: ListItemCoo
             }
             else           ->
             {
-                binding.imageViewRecipeItem.setImageResource(R.drawable.ic_hot_tub)
+                binding.imageViewRecipeItem.setImageResource(R.drawable.ic_fastfood_grey)
             }
         }
 

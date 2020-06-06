@@ -18,13 +18,16 @@
             android:id="@+id/card_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="4dp"
+            android:layout_marginStart="@dimen/default_recipe_padding"
+            android:layout_marginEnd="@dimen/default_recipe_padding"
+            android:layout_marginTop="@dimen/default_recipe_padding"
             android:clickable="true"
             android:focusable="true"
             android:checkable="true"
             app:checkedIcon="@drawable/ic_check"
             app:checkedIconTint="@color/white"
             app:cardElevation="3dp"
+            app:cardCornerRadius="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +46,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:contentDescription="@string/image_view_meal_text"
+                    android:contentDescription="@string/image_view_recipe_text"
                     tools:srcCompat="@mipmap/pancakes" />
 
                 <View

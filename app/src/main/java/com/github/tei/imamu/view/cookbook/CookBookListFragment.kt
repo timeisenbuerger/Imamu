@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
 import com.github.tei.imamu.custom.adapter.cookbook.CookBookListAdapter
-import com.github.tei.imamu.databinding.FragmentCookbookListBinding
+import com.github.tei.imamu.databinding.FragmentCookBookListBinding
 import com.github.tei.imamu.util.ImportUtil
 import com.github.tei.imamu.viewmodel.cookbook.CookBookListViewModel
 import org.koin.android.ext.android.inject
@@ -27,7 +27,7 @@ class CookBookListFragment : Fragment()
         const val REQUEST_CODE = 28
     }
 
-    private lateinit var binding: FragmentCookbookListBinding
+    private lateinit var binding: FragmentCookBookListBinding
     private val viewModel: CookBookListViewModel by inject()
     private lateinit var application: Application
     private lateinit var listAdapter: CookBookListAdapter
@@ -52,7 +52,7 @@ class CookBookListFragment : Fragment()
     private fun init(inflater: LayoutInflater, container: ViewGroup?)
     {
         //init binding
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_cookbook_list, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_cook_book_list, container, false)
 
         //init application
         application = requireNotNull(this.activity).application

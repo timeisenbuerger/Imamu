@@ -22,7 +22,7 @@
             android:layout_marginStart="@dimen/default_recipe_padding"
             android:layout_marginEnd="@dimen/default_recipe_padding"
             android:text="@{ingredient.amount}"
-            tools:hint="@string/recipe_ingredient_amount"
+            tools:hint="@string/amount"
             style="@style/ingredient_item_text_view" />
 
         <TextView
@@ -33,7 +33,7 @@
             android:layout_marginBottom="@dimen/default_recipe_margin"
             android:layout_marginEnd="@dimen/default_recipe_padding"
             android:text="@{ingredient.unit}"
-            tools:hint="@string/recipe_ingredient_unit"
+            tools:hint="@string/unit"
             style="@style/ingredient_item_text_view" />
 
         <TextView
@@ -43,7 +43,7 @@
             android:layout_marginTop="@dimen/default_recipe_margin"
             android:layout_marginBottom="@dimen/default_recipe_margin"
             android:text="@{ingredient.ingredient.target.name}"
-            tools:hint="@string/recipe_ingredients_text"
+            tools:hint="@string/ingredients"
             style="@style/ingredient_item_text_view_bold" />
     </LinearLayout>
 </layout>

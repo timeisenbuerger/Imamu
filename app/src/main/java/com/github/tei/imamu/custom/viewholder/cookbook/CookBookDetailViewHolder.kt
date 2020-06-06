@@ -53,7 +53,7 @@ class CookBookDetailViewHolder private constructor(private val binding: ListItem
         else
         {
             binding.imageViewRecipeItem.scaleType = ImageView.ScaleType.FIT_CENTER
-            binding.imageViewRecipeItem.setImageResource(R.drawable.ic_hot_tub)
+            binding.imageViewRecipeItem.setImageResource(R.drawable.ic_fastfood_grey)
         }
     }
 }

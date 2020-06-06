@@ -45,7 +45,7 @@
             app:layout_constraintEnd_toStartOf="@id/text_view_ingredient_amount"
             app:layout_constraintStart_toEndOf="@id/check_box"
             app:layout_constraintTop_toTopOf="parent"
-            tools:hint="@string/recipe_ingredient_amount" />
+            tools:hint="@string/amount" />
 
         <TextView
             android:id="@+id/text_view_ingredient_unit"
@@ -62,7 +62,7 @@
             app:layout_constraintEnd_toStartOf="@id/text_view_ingredient"
             app:layout_constraintStart_toEndOf="@id/text_view_ingredient_amount"
             app:layout_constraintTop_toTopOf="parent"
-            tools:hint="@string/recipe_ingredient_unit" />
+            tools:hint="@string/unit" />
 
         <TextView
             android:id="@+id/text_view_ingredient"

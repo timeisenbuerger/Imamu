@@ -38,11 +38,28 @@ class CookBookListViewHolder private constructor(private val binding: ListItemCo
 
         binding.cookBook = item
 
-        for (recipe in item.recipes)
+        if (item.recipes.size == 1)
         {
+            binding.imageCollectionViewRecipeItem.visibility = View.GONE
+            binding.imageViewRecipeItem.visibility = View.VISIBLE
+
+            val recipe = item.recipes[0]
             if (!TextUtils.isEmpty(recipe.imagePath) && File(recipe.imagePath).exists())
             {
-                binding.imageCollectionViewRecipeItem.addImage(BitmapFactory.decodeFile(recipe.imagePath))
+                binding.imageViewRecipeItem.setImageBitmap(BitmapFactory.decodeFile(recipe.imagePath))
+            }
+        }
+        else
+        {
+            binding.imageCollectionViewRecipeItem.visibility = View.VISIBLE
+            binding.imageViewRecipeItem.visibility = View.GONE
+
+            for (recipe in item.recipes)
+            {
+                if (!TextUtils.isEmpty(recipe.imagePath) && File(recipe.imagePath).exists())
+                {
+                    binding.imageCollectionViewRecipeItem.addImage(BitmapFactory.decodeFile(recipe.imagePath))
+                }
             }
         }
 

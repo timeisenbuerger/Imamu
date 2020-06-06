@@ -93,7 +93,7 @@ class RecipeDetailFragment : Fragment()
         else
         {
             binding.imageRecipe.scaleType = ImageView.ScaleType.FIT_CENTER
-            binding.imageRecipe.setImageResource(R.drawable.ic_hot_tub)
+            binding.imageRecipe.setImageResource(R.drawable.ic_fastfood_grey)
         }
 
         if (!TextUtils.isEmpty(recipe.type))

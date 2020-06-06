@@ -87,7 +87,7 @@
             android:layout_marginStart="@dimen/default_recipe_padding"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="@dimen/default_recipe_padding"
-            android:text="@string/recipe_difficulty_text"
+            android:text="@string/difficulty"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/first_divider" />
@@ -136,7 +136,7 @@
                 android:layout_marginEnd="@dimen/default_recipe_margin"
                 android:layout_marginBottom="@dimen/default_recipe_margin"
                 android:layout_weight="1"
-                android:text="@string/recipe_preparation_time_text" />
+                android:text="@string/preparation_time" />
 
             <EditText
                 android:id="@+id/edit_text_preparation_time"
@@ -158,7 +158,7 @@
                 android:layout_marginBottom="@dimen/default_recipe_margin"
                 android:layout_weight="1"
                 tools:text="10 min"
-                android:text="@string/recipe_time_unit_text" />
+                android:text="@string/time_unit" />
         </LinearLayout>
 
         <TextView
@@ -194,7 +194,7 @@
                 android:layout_marginEnd="@dimen/default_recipe_margin"
                 android:layout_marginBottom="@dimen/default_recipe_margin"
                 android:layout_weight="1"
-                android:text="@string/recipe_baking_time_text" />
+                android:text="@string/baking_time" />
 
             <EditText
                 android:id="@+id/edit_text_baking_time"
@@ -216,7 +216,7 @@
                 android:layout_marginBottom="@dimen/default_recipe_margin"
                 android:layout_weight="1"
                 tools:text="10 min"
-                android:text="@string/recipe_time_unit_text" />
+                android:text="@string/time_unit" />
         </LinearLayout>
 
         <TextView
@@ -247,12 +247,12 @@
                 style="@style/caption_medium"
                 android:layout_width="145dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/default_recipe_margin"
+                android:layout_marginStart="@dimen/default_recipe_padding"
                 android:layout_marginTop="@dimen/default_recipe_margin"
                 android:layout_marginEnd="@dimen/default_recipe_margin"
                 android:layout_marginBottom="@dimen/default_recipe_margin"
                 android:layout_weight="1"
-                android:text="@string/recipe_rest_time_text" />
+                android:text="@string/rest_time" />
 
             <EditText
                 android:id="@+id/edit_text_rest_time"
@@ -274,7 +274,7 @@
                 android:layout_marginBottom="@dimen/default_recipe_margin"
                 android:layout_weight="1"
                 tools:text="10 min"
-                android:text="@string/recipe_time_unit_text" />
+                android:text="@string/time_unit" />
         </LinearLayout>
 
         <TextView
@@ -290,17 +290,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/layout_rest_time" />
 
-        <com.google.android.material.button.MaterialButton
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/button_continue"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
             android:layout_marginBottom="@dimen/default_recipe_margin"
-            android:text="@string/action_continue"
+            android:text="@string/action_continue_ingredients"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            app:backgroundTint="@color/colorPrimary"
+            app:iconTint="@color/white"
+            app:icon="@drawable/ic_list_white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            android:fontFamily="@font/roboto"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

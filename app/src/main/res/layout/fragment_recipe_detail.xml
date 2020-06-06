@@ -46,6 +46,7 @@
                         android:layout_height="300dp"
                         android:adjustViewBounds="true"
                         android:scaleType="centerCrop"
+                        android:background="@color/white"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -103,10 +104,10 @@
                         android:layout_height="85dp"
                         android:layout_marginStart="14dp"
                         android:layout_marginEnd="@dimen/default_recipe_margin"
-                        app:cpb_background_progressbar_color="#b6bbd8"
+                        app:cpb_background_progressbar_color="#B6BBD8"
                         app:cpb_background_progressbar_width="3dp"
                         app:cpb_progress_direction="to_right"
-                        app:cpb_progressbar_color="#3f51b5"
+                        app:cpb_progressbar_color="#33319f"
                         app:cpb_progressbar_width="4dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/circle_baking_time"
@@ -129,7 +130,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/default_recipe_padding"
-                        android:text="@string/preparation_time_text"
+                        android:text="@string/preparation"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@id/circle_preparation_time"
                         app:layout_constraintStart_toStartOf="@id/circle_preparation_time"
@@ -166,7 +167,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/default_recipe_padding"
-                        android:text="@string/baking_time_text"
+                        android:text="@string/baking_time"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@id/circle_baking_time"
                         app:layout_constraintStart_toStartOf="@id/circle_baking_time"
@@ -203,7 +204,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/default_recipe_padding"
-                        android:text="@string/rest_time_text"
+                        android:text="@string/rest_time"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@id/circle_rest_time"
                         app:layout_constraintStart_toStartOf="@id/circle_rest_time"
@@ -287,7 +288,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/default_recipe_margin"
                     android:layout_marginEnd="@dimen/default_recipe_margin"
-                    android:text="@string/recipe_ingredients_text" />
+                    android:text="@string/ingredients" />
 
                 <ListView
                     android:id="@+id/list_view_ingredients"
@@ -305,7 +306,7 @@
                     android:layout_marginStart="@dimen/default_recipe_margin"
                     android:layout_marginTop="@dimen/default_recipe_margin"
                     android:layout_marginEnd="@dimen/default_recipe_margin"
-                    android:text="@string/recipe_preparation_text"
+                    android:text="@string/preparation"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 

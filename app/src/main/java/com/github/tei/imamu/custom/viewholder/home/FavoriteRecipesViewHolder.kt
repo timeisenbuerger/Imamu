@@ -1,6 +1,5 @@
 package com.github.tei.imamu.custom.viewholder.home
 
-import android.graphics.Color
 import android.net.Uri
 import android.text.TextUtils
 import android.view.LayoutInflater
@@ -8,17 +7,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.github.tei.imamu.R
-import com.github.tei.imamu.custom.adapter.cookbook.ChooseRecipeAdapter
 import com.github.tei.imamu.custom.adapter.home.FavoriteRecipesAdapter
 import com.github.tei.imamu.data.database.entity.recipe.Recipe
-import com.github.tei.imamu.databinding.ListItemCookBookRecipeBinding
-import com.github.tei.imamu.databinding.ListItemFavoriteRecipeBinding
-import com.github.tei.imamu.databinding.ListItemFavoriteRecipesBinding
-import com.github.tei.imamu.viewmodel.cookbook.ChooseRecipeViewModel
+import com.github.tei.imamu.databinding.ListItemFavoriteRecipeDetailBinding
 import com.github.tei.imamu.viewmodel.home.FavoriteRecipesViewModel
 import java.io.File
 
-class FavoriteRecipesViewHolder private constructor(private val binding: ListItemFavoriteRecipesBinding) : RecyclerView.ViewHolder(binding.root)
+class FavoriteRecipesViewHolder private constructor(private val binding: ListItemFavoriteRecipeDetailBinding) : RecyclerView.ViewHolder(binding.root)
 {
     private lateinit var viewModel: FavoriteRecipesViewModel
     private lateinit var adapter: FavoriteRecipesAdapter
@@ -28,7 +23,7 @@ class FavoriteRecipesViewHolder private constructor(private val binding: ListIte
         fun from(parent: ViewGroup): FavoriteRecipesViewHolder
         {
             val layoutInflater = LayoutInflater.from(parent.context)
-            val binding = ListItemFavoriteRecipesBinding.inflate(layoutInflater, parent, false)
+            val binding = ListItemFavoriteRecipeDetailBinding.inflate(layoutInflater, parent, false)
 
             return FavoriteRecipesViewHolder(binding)
         }
@@ -59,7 +54,7 @@ class FavoriteRecipesViewHolder private constructor(private val binding: ListIte
         else
         {
             binding.imageViewRecipeItem.scaleType = ImageView.ScaleType.FIT_CENTER
-            binding.imageViewRecipeItem.setImageResource(R.drawable.ic_hot_tub)
+            binding.imageViewRecipeItem.setImageResource(R.drawable.ic_fastfood_grey)
         }
     }
 }

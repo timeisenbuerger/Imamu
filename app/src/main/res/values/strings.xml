@@ -2,11 +2,8 @@
     <string name="app_name">Imamu</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
 
-    <!--    Menu Texte-->
+    <!--    Menu Texts-->
     <string name="menu_home">Home</string>
     <string name="menu_recipe">Rezepte</string>
     <string name="menu_cookbook">Kochbücher</string>
@@ -15,89 +12,87 @@
     <string name="menu_recipe_suggestion">Rezept Vorschlag</string>
     <string name="menu_settings">Einstellungen</string>
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
-    <!--    Rezept hinzufügen/bearbeiten  -->
+    <!--    Actions  -->
     <string name="action_add_recipe">Rezept hinzufügen</string>
     <string name="action_add_ingredient">Zutat hinzufügen</string>
     <string name="action_back">Zurück</string>
     <string name="action_close">Schliessen</string>
-    <string name="action_continue">Weiter</string>
+    <string name="action_continue_times">Weiter zu Zeiten</string>
+    <string name="action_continue_ingredients">Weiter zu Zutaten</string>
+    <string name="action_continue_preparation">Weiter zur Zubereitung</string>
+    <string name="action_continue_features">Weiter zu Eigenschaften</string>
     <string name="action_save">Speichern</string>
     <string name="action_delete">Löschen</string>
     <string name="action_edit">Bearbeiten</string>
     <string name="action_create_shopping_list">Einkaufsliste erstellen</string>
-    <string name="image_view_meal_text">Bild des Gerichts</string>
+    <string name="action_add">Hinzufügen</string>
+    <string name="action_show_all">Alle anzeigen</string>
+    <string name="action_share">Teilen</string>
+    <string name="action_start_search">Suche starten</string>
+    <string name="action_go_to_detail">Detail</string>
+    <string name="action_search">Suchen</string>
+    <string name="action_create">Erstellen</string>
+    <string name="action_import">Importieren</string>
+
+    <!--    Hints  -->
     <string name="insert_recipe_title">Rezeptname eingeben</string>
-    <string name="insert_recipe_ingredients">Zutaten hinzufügen</string>
     <string name="insert_recipe_ingredient">Zutat hinzufügen</string>
+    <string name="insert_preparation_text">Zubereitung hinzufügen</string>
+    <string name="insert_cook_book_title">Kochbuchname eingeben</string>
+    <string name="insert_recipe_link">Rezeptlink eingeben</string>
+
+    <!--    Component Descriptions  -->
+    <string name="image_view_recipe_text">Bild des Gerichts</string>
     <string name="recipe_servings_text">Rezeptmenge</string>
     <string name="recipe_servings">Portionen</string>
+    <string name="recipe_title_text">Gib deinem Rezept einen Titel</string>
     <string name="recipe_servings_description">Wähle eine angemessene Anzahl an Portionen, die du mit diesem Rezept schaffen kannst</string>
     <string name="recipe_preparation_time_description">Wie viel Zeit verbringst du aktiv mit der Zubereitung des Gerichts?</string>
     <string name="recipe_baking_time_description">Wie lange muss das Gericht gebacken werden?</string>
     <string name="recipe_rest_time_description">Wie lange muss dein Gericht ruhen?</string>
-    <string name="insert_recipe_tags">Tags hinzufügen</string>
-    <string name="insert_recipe_preparation">Zubereitung hinzufügen</string>
-    <string name="recipe_title_text">Gib deinem Rezept einen Titel</string>
     <string name="recipe_description_step1">Für ein richtig gutes Rezept darf der Titel und ein Bild nicht fehlen – wähle bedacht.</string>
     <string name="recipe_description_step3">Welche Zutaten brauchst du für das Rezept?</string>
     <string name="recipe_description_step4">Formuliere eine Beschreibung, die erklärt, wie das Gericht zubereitet wird.</string>
     <string name="recipe_description_step5">Zum Abschluss füge deinem Rezept noch ein paar Eigenschaften hinzu.</string>
-    <string name="recipe_image_text">Rezeptfoto hinzufügen</string>
-    <string name="recipe_ingredient_text">Zutaten hinzufügen</string>
-    <string name="recipe_add_preparation_text">Beschreibung der Zubereitung hinzufügen</string>
-    <string name="recipe_ingredients_text">Zutaten:</string>
-    <string name="recipe_preparation_text">Zubereitung:</string>
-    <string name="sample_recipe_title">Beispiel Rezept</string>
-    <string name="sample_ingredients">2 Tassen Vollmilch \n1 Ei \n250 Gramm Butter \n120 Gramm brauner Zucker</string>
-    <string name="sample_preparation">1. Eier und Zucker mischen, solange bis sie cremig werden \n2. Butter hinzugeben \n4. Die Hälfte der Milch hinzugeben \n5. In einen Behälter geben und für 4 Stunden über Nacht in den Kühlschrank stellen</string>
-    <string name="recipe_difficulty_text">Schwierigkeit</string>
-    <string name="chip_difficulty_easy">Einfach</string>
-    <string name="chip_difficulty_normal">Mittel</string>
-    <string name="chip_difficulty_hard">Schwer</string>
-    <string name="recipe_preparation_time_text">Zubereitungszeit</string>
-    <string name="preparation_time_text">Zubereitung</string>
-    <string name="recipe_baking_time_text">Backzeit</string>
-    <string name="baking_time_text">Backzeit</string>
-    <string name="recipe_rest_time_text">Ruhezeit</string>
-    <string name="rest_time_text">Ruhezeit</string>
-    <string name="recipe_time_unit_text">min</string>
-    <string name="recipe_mood_text">Stimmung:</string>
-    <string name="recipe_type_hint_text">z.B. Hauptspeise</string>
-    <string name="recipe_kitchen_hint_text">z.B. Italienisch</string>
-    <string name="recipe_mood_hint_text">z.B. Wohlfühlen</string>
-    <string name="recipe_detail_sample_preparation_time">Zubereitung: 120 min</string>
-    <string name="recipe_detail_sample_baking_time">Backzeit: 120 min</string>
-    <string name="recipe_detail_sample_rest_time">Ruhezeit: 120 min</string>
-    <string name="recipe_ingredient_amount">Menge</string>
-    <string name="recipe_ingredient_unit">Einheit</string>
-    <string name="action_create_own_recipe">Erstellen</string>
-    <string name="action_import_recipe">Importieren</string>
-    <string name="insert_recipe_link">Rezeptlink eingeben</string>
-    <string name="sample_difficulty">Einfach</string>
-    <string name="sample_time">120 min</string>
-    <string name="sample_cook_book_title">Beispiel Kochbuch</string>
-    <string name="sample_recipe_count">2</string>
-    <string name="cook_book_title_text">Kochbuchname:</string>
-    <string name="insert_cook_book_title">Kochbuchname eingeben</string>
-    <string name="text_cook_book_recipes">Rezepte:</string>
-    <string name="action_go_to_detail">Detail</string>
-    <string name="action_search">Suchen</string>
-    <string name="sample_ingredient">Paprika</string>
+    <string name="add_recipe_image">Rezeptfoto hinzufügen</string>
+    <string name="add_recipe_ingredient">Zutaten hinzufügen</string>
+
+    <string name="ingredient">Zutat</string>
+    <string name="ingredients">Zutaten</string>
+    <string name="preparation">Zubereitung</string>
+    <string name="difficulty">Schwierigkeit</string>
+    <string name="difficulty_easy">Einfach</string>
+    <string name="difficulty_normal">Mittel</string>
+    <string name="difficulty_hard">Schwer</string>
+    <string name="preparation_time">Zubereitungszeit</string>
+    <string name="baking_time">Backzeit</string>
+    <string name="rest_time">Ruhezeit</string>
+    <string name="time_unit">min</string>
+    <string name="amount">Menge</string>
+    <string name="unit">Einheit</string>
+    <string name="cook_book_title">Kochbuchname</string>
+    <string name="recipes">Rezepte</string>
     <string name="type_of_recipe">Art des Gerichts</string>
-    <string name="recipe_nutrition">Ernährung:</string>
-    <string name="recipe_time">Gesamtzeit:</string>
-    <string name="start_search">Suche starten</string>
-    <string name="sample_ingredient_info">0 fehlende Zutaten</string>
-    <string name="sample_servings_number">2 Portionen</string>
+    <string name="recipe_nutrition">Ernährung</string>
+    <string name="recipe_time">Gesamtzeit</string>
+
     <string name="caption_favorites">Deine Favoriten</string>
     <string name="caption_last_viewed_recipes">Zuletzt geöffnete Rezepte</string>
     <string name="caption_last_viewed_cook_books">Zuletzt geöffnete Kochbücher</string>
-    <string name="caption_show_all">Alle anzeigen</string>
-    <string name="action_share">Teilen</string>
-    <string name="ingredient">Zutat</string>
-    <string name="action_add">Hinzufügen</string>
+
+
+    <!-- Sample Texts -->
+    <string name="sample_recipe_title">Beispiel Rezept</string>
+    <string name="sample_ingredients">2 Tassen Vollmilch \n1 Ei \n250 Gramm Butter \n120 Gramm brauner Zucker</string>
+    <string name="sample_preparation">1. Eier und Zucker mischen, solange bis sie cremig werden \n2. Butter hinzugeben \n4. Die Hälfte der Milch hinzugeben \n5. In einen Behälter geben und für 4 Stunden über Nacht in den Kühlschrank stellen</string>
+    <string name="sample_ingredient_info">0 fehlende Zutaten</string>
+    <string name="sample_servings_number">2 Portionen</string>
+    <string name="sample_cook_book_title">Beispiel Kochbuch</string>
+    <string name="sample_recipe_count">2</string>
+    <string name="sample_ingredient">Paprika</string>
+    <string name="sample_difficulty">Einfach</string>
+    <string name="sample_time">120 min</string>
+    <string name="sample_baking_time">Backzeit: 120 min</string>
 
     <string-array name="ingredient_units">
         <item>g</item>
@@ -108,5 +103,6 @@
         <item>EL</item>
         <item>Pck.</item>
         <item>Msp.</item>
+        <item>Stk.</item>
     </string-array>
 </resources>

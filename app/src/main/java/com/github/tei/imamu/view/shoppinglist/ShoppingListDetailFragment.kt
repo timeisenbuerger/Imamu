@@ -93,10 +93,17 @@ class ShoppingListDetailFragment : Fragment()
                     binding.editTextAmount.visibility = View.VISIBLE
                     binding.editTextUnit.visibility = View.VISIBLE
                     binding.editTextIngredient.visibility = View.GONE
+                    binding.layoutAddIngredient.visibility = View.GONE
+                    binding.fabAdd.visibility = View.VISIBLE
 
                     binding.fabCheck.setImageIcon(Icon.createWithResource(requireContext(), R.drawable.ic_arrow_next))
                 }
             }
+        }
+
+        binding.fabAdd.setOnClickListener {
+            binding.layoutAddIngredient.visibility = View.VISIBLE
+            binding.fabAdd.visibility = View.GONE
         }
     }
 

@@ -106,7 +106,7 @@
     <fragment
         android:id="@+id/nav_cookbook"
         android:name="com.github.tei.imamu.view.cookbook.CookBookListFragment"
-        tools:layout="@layout/fragment_cookbook_list">
+        tools:layout="@layout/fragment_cook_book_list">
         <action
             android:id="@+id/action_nav_cookbook_to_cookBookDetailFragment"
             app:destination="@id/cookBookDetailFragment"

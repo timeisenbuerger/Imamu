@@ -64,7 +64,7 @@ class ShoppingListViewHolder private constructor(private val binding: ListItemSh
         else
         {
             binding.imageViewShoppingList.scaleType = ImageView.ScaleType.FIT_CENTER
-            binding.imageViewShoppingList.setImageResource(R.drawable.ic_hot_tub)
+            binding.imageViewShoppingList.setImageResource(R.drawable.ic_fastfood_grey)
         }
     }
 

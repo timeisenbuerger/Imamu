@@ -5,13 +5,14 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card"
-        android:layout_width="185dp"
+        android:layout_width="match_parent"
         android:layout_height="145dp"
         android:layout_margin="@dimen/default_recipe_padding"
         android:clickable="true"
         android:focusable="true"
         app:cardBackgroundColor="@color/colorAccentLight"
         app:cardElevation="3dp"
+        app:cardCornerRadius="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -47,9 +47,11 @@
                     android:id="@+id/text_view_type_of_recipe"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/default_recipe_padding"
+                    android:layout_marginTop="@dimen/default_recipe_padding"
+                    android:layout_marginStart="@dimen/default_recipe_padding"
+                    android:layout_marginEnd="@dimen/default_recipe_padding"
                     android:text="@string/type_of_recipe"
-                    style="@style/caption_big" />
+                    style="@style/caption_small" />
 
                 <com.google.android.flexbox.FlexboxLayout
                     android:id="@+id/type_of_recipe"
@@ -63,10 +65,12 @@
 
                 <TextView
                     android:id="@+id/text_view_recipe_feature"
-                    style="@style/caption_big"
+                    style="@style/caption_small"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/default_recipe_padding"
+                    android:layout_marginTop="@dimen/default_recipe_padding"
+                    android:layout_marginStart="@dimen/default_recipe_padding"
+                    android:layout_marginEnd="@dimen/default_recipe_padding"
                     android:text="@string/recipe_nutrition" />
 
                 <com.google.android.flexbox.FlexboxLayout
@@ -81,11 +85,13 @@
 
                 <TextView
                     android:id="@+id/text_view_recipe_difficulty"
-                    style="@style/caption_big"
+                    style="@style/caption_small"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/default_recipe_padding"
-                    android:text="@string/recipe_difficulty_text"/>
+                    android:layout_marginTop="@dimen/default_recipe_padding"
+                    android:layout_marginStart="@dimen/default_recipe_padding"
+                    android:layout_marginEnd="@dimen/default_recipe_padding"
+                    android:text="@string/difficulty"/>
 
                 <com.google.android.flexbox.FlexboxLayout
                     android:id="@+id/recipe_difficulty"
@@ -99,10 +105,12 @@
 
                 <TextView
                     android:id="@+id/text_view_time"
-                    style="@style/caption_big"
+                    style="@style/caption_small"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/default_recipe_padding"
+                    android:layout_marginTop="@dimen/default_recipe_padding"
+                    android:layout_marginStart="@dimen/default_recipe_padding"
+                    android:layout_marginEnd="@dimen/default_recipe_padding"
                     android:text="@string/recipe_time"/>
 
                 <com.google.android.flexbox.FlexboxLayout
@@ -123,11 +131,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_recipe_margin"
-            android:textColor="@color/colorPrimaryDark"
-            android:text="@string/start_search"
-            app:backgroundTint="@color/colorAccent"
+            android:textColor="@color/white"
+            android:text="@string/action_start_search"
+            app:backgroundTint="@color/colorPrimary"
             app:icon="@drawable/ic_search_white"
-            app:iconTint="@color/colorPrimaryDark"
+            app:iconTint="@color/white"
             app:borderWidth="1dp"
             app:layout_constraintBottom_toBottomOf="@+id/scroll_view"
             app:layout_constraintEnd_toEndOf="parent"

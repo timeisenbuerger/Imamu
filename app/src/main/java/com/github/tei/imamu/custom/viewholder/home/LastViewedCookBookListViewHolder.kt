@@ -3,6 +3,7 @@ package com.github.tei.imamu.custom.viewholder.home
 import android.graphics.BitmapFactory
 import android.text.TextUtils
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.github.tei.imamu.R
@@ -45,17 +46,27 @@ class LastViewedCookBookListViewHolder private constructor(private val binding: 
 
     private fun setImage(item: CookBook)
     {
-        for (recipe in item.recipes)
+        if (item.recipes.size == 1)
         {
+            binding.cardBackground.visibility = View.GONE
+            binding.imageViewRecipeItem.visibility = View.VISIBLE
+
+            val recipe = item.recipes[0]
             if (!TextUtils.isEmpty(recipe.imagePath) && File(recipe.imagePath).exists())
             {
-                binding.cardBackground.addImage(BitmapFactory.decodeFile(recipe.imagePath))
+                binding.imageViewRecipeItem.setImageBitmap(BitmapFactory.decodeFile(recipe.imagePath))
             }
-            else
+        }
+        else
+        {
+            binding.cardBackground.visibility = View.VISIBLE
+            binding.imageViewRecipeItem.visibility = View.GONE
+
+            for (recipe in item.recipes)
             {
-                val bitmap = BitmapFactory.decodeResource(itemView.context.resources, R.drawable.ic_hot_tub)
-                bitmap?.let {
-                    binding.cardBackground.addImage(bitmap)
+                if (!TextUtils.isEmpty(recipe.imagePath) && File(recipe.imagePath).exists())
+                {
+                    binding.cardBackground.addImage(BitmapFactory.decodeFile(recipe.imagePath))
                 }
             }
         }

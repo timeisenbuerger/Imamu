@@ -25,26 +25,35 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <View
+                <com.google.android.material.card.MaterialCardView
                     android:id="@+id/description_background"
                     android:layout_width="match_parent"
                     android:layout_height="65dp"
-                    android:background="@color/peach"
+                    android:layout_margin="@dimen/default_recipe_padding"
+                    app:cardBackgroundColor="@color/peach"
+                    app:cardCornerRadius="12dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:id="@+id/text_view_ingredient_description"
-                    style="@style/caption_medium"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/recipe_description_step3"
-                    android:textAlignment="center"
-                    app:layout_constraintBottom_toBottomOf="@id/description_background"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/text_view_preparation_description"
+                            style="@style/caption_small"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/default_recipe_margin"
+                            android:text="@string/recipe_description_step3"
+                            android:textAlignment="textStart"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.card.MaterialCardView>
 
                 <TextView
                     android:id="@+id/text_view_ingredient_text"
@@ -54,12 +63,12 @@
                     android:layout_marginStart="@dimen/default_recipe_padding"
                     android:layout_marginTop="@dimen/default_recipe_margin"
                     android:layout_marginEnd="@dimen/default_recipe_padding"
-                    android:text="@string/recipe_ingredient_text"
+                    android:text="@string/add_recipe_ingredient"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/description_background" />
 
-                <ListView
+                <com.mlsdev.animatedrv.AnimatedRecyclerView
                     android:id="@+id/list_view_ingredients"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -67,13 +76,19 @@
                     android:layout_marginTop="@dimen/default_recipe_margin"
                     android:layout_marginEnd="@dimen/default_recipe_padding"
                     android:layout_marginBottom="@dimen/default_recipe_margin"
+                    app:animationDuration="600"
+                    app:layoutAnimation="@anim/layout_animation_from_bottom_scale"
+                    app:layoutManagerOrientation="vertical"
+                    app:layoutManagerReverse="false"
+                    app:layoutManagerType="linear"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/text_view_ingredient_text" />
+                    app:layout_constraintTop_toBottomOf="@id/text_view_ingredient_text"
+                    app:layout_constraintBottom_toTopOf="@id/button_add_ingredient"/>
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/button_add_ingredient"
-                    android:layout_width="300dp"
+                    android:layout_width="275dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/default_recipe_padding"
                     android:backgroundTint="@color/white"
@@ -91,17 +106,20 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
 
-        <com.google.android.material.button.MaterialButton
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/button_continue"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
             android:layout_marginBottom="@dimen/default_recipe_margin"
-            android:fontFamily="@font/roboto"
-            android:text="@string/action_continue"
+            android:text="@string/action_continue_preparation"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            app:backgroundTint="@color/colorPrimary"
+            app:iconTint="@color/white"
+            app:icon="@drawable/ic_text_white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            android:fontFamily="@font/roboto"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

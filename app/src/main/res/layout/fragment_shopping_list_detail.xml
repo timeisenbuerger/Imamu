@@ -29,6 +29,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:background="@color/gray"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent">
@@ -45,7 +46,7 @@
                 android:layout_marginEnd="@dimen/default_recipe_padding"
                 android:background="@drawable/ingredient_edit_text_border"
                 android:ems="10"
-                android:hint="@string/recipe_ingredient_amount"
+                android:hint="@string/amount"
                 android:paddingStart="@dimen/default_recipe_padding"
                 android:paddingEnd="@dimen/default_recipe_padding" />
 
@@ -60,7 +61,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/ingredient_edit_text_border"
                 android:ems="10"
-                android:hint="@string/recipe_ingredient_unit"
+                android:hint="@string/unit"
                 android:paddingStart="@dimen/default_recipe_padding"
                 android:paddingEnd="@dimen/default_recipe_padding" />
 
@@ -93,5 +94,17 @@
                 app:fabSize="mini"/>
 
         </LinearLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/default_recipe_margin"
+            android:layout_marginBottom="@dimen/default_recipe_margin"
+            app:backgroundTint="@color/orange_red"
+            android:src="@drawable/ic_add_white"
+            app:tint="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

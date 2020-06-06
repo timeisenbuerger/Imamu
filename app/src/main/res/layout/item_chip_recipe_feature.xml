@@ -12,7 +12,7 @@
     android:textAppearance="?android:attr/textAppearance"
     android:textColor="@color/white"
     app:checkedIcon="@drawable/ic_check"
-    app:chipBackgroundColor="@color/colorPrimaryLight"
+    app:chipBackgroundColor="@color/colorPrimary"
     app:chipStrokeColor="@color/colorPrimary"
     app:chipStrokeWidth="1dp"
-    tools:text="@string/recipe_detail_sample_baking_time" />
+    tools:text="@string/sample_baking_time" />

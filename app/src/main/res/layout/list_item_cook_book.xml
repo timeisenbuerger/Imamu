@@ -18,9 +18,13 @@
             android:id="@+id/card_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/default_recipe_padding"
+            android:layout_marginStart="@dimen/default_recipe_padding"
+            android:layout_marginEnd="@dimen/default_recipe_padding"
             android:clickable="true"
             android:focusable="true"
             android:checkable="true"
+            app:cardCornerRadius="12dp"
             app:checkedIcon="@drawable/ic_check"
             app:checkedIconTint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -31,6 +35,17 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/image_view_recipe_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:visibility="gone"/>
 
                 <pereira.agnaldo.previewimgcol.ImageCollectionView
                     android:id="@+id/image_collection_view_recipe_item"

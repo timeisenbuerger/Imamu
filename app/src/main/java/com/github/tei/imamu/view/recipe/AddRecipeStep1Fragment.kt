@@ -16,6 +16,7 @@ import androidx.navigation.fragment.findNavController
 import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
 import com.github.tei.imamu.databinding.FragmentAddRecipeStep1Binding
+import com.github.tei.imamu.util.RealPathUtil
 import com.github.tei.imamu.viewmodel.recipe.AddRecipeViewModel
 import org.koin.android.ext.android.inject
 
@@ -61,7 +62,6 @@ class AddRecipeStep1Fragment : Fragment()
     {
         binding.imageViewMeal.setOnClickListener {
             pickImageFromGallery()
-
         }
 
         binding.buttonContinue.setOnClickListener {
@@ -82,23 +82,14 @@ class AddRecipeStep1Fragment : Fragment()
     private fun pickImageFromGallery()
     {
         //Create an Intent with action as ACTION_PICK
-        val intent = Intent(Intent.ACTION_PICK)
+        val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
         // Sets the type as image/*. This ensures only components of type image are selected
-        intent.type = "image/*"
+        gallery.type = "image/*"
         //We pass an extra array with the accepted mime types. This will ensure only components with these MIME types as targeted.
         val mimeTypes = arrayOf("image/jpeg", "image/png")
-        intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
+        gallery.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
         // Launching the Intent
-        startActivityForResult(intent, GALLERY_REQUEST_CODE)
-    }
-
-    private fun getRealPathFromURI(contentUri: Uri?): String?
-    {
-        val proj = arrayOf(MediaStore.Images.Media.DATA)
-        val cursor: Cursor? = requireContext().contentResolver.query(contentUri!!, proj, null, null, null)
-        val columnIndex = cursor!!.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
-        cursor.moveToFirst()
-        return cursor.getString(columnIndex)
+        startActivityForResult(gallery, GALLERY_REQUEST_CODE)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?)
@@ -108,12 +99,13 @@ class AddRecipeStep1Fragment : Fragment()
         {
             GALLERY_REQUEST_CODE ->
             {
-                data?.let { uri ->
-                    val selectedImage: Uri = uri.data!!
+                data?.let {
+                    val uri = it.data
+                    val selectedImage: Uri = uri!!
                     binding.imageViewMeal.setImageURI(selectedImage)
 
                     binding.imageViewMeal.scaleType = ImageView.ScaleType.CENTER_CROP
-                    binding.viewModel!!.recipe.value!!.imagePath = getRealPathFromURI(uri.data)!!
+                    binding.viewModel!!.recipe.value!!.imagePath = RealPathUtil.getRealPath(requireContext(), uri)!!
                 }
             }
         }

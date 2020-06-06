@@ -22,9 +22,11 @@
         android:layout_height="300dp"
         android:onClick="@{() -> clickListener.onClick(recipe)}">
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_margin="@dimen/default_recipe_padding"
+            app:cardCornerRadius="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -51,7 +53,7 @@
                     android:layout_height="40dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
-                    android:background="@drawable/btn_detail_style"
+                    android:background="@drawable/rounded_corner"
                     android:src="@drawable/ic_share_black"
                     android:text="@string/action_go_to_detail"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -105,7 +107,7 @@
                     android:fontFamily="@font/roboto"
                     android:visibility="gone"
                     app:chipIcon="@drawable/ic_time_black"
-                    app:chipSurfaceColor="#8FFF"
+                    app:chipSurfaceColor="#BFFFFFFF"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -114,7 +116,7 @@
                     tools:visibility="visible" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

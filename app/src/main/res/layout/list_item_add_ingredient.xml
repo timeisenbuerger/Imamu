@@ -15,14 +15,13 @@
 
         <EditText
             android:id="@+id/edit_text_ingredient_amount"
-            android:layout_width="76dp"
+            android:layout_width="75dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/default_recipe_margin"
             android:layout_marginTop="@dimen/default_recipe_padding"
             android:layout_marginEnd="@dimen/default_recipe_margin"
             android:layout_weight="1"
             android:text="@={item.amount}"
-            android:hint="@string/recipe_ingredient_amount"
+            android:hint="@string/amount"
             style="@style/edit_text_decimal_style" />
 
         <AutoCompleteTextView
@@ -34,7 +33,7 @@
             android:layout_weight="1"
             android:completionThreshold="1"
             android:text="@={item.unit}"
-            android:hint="@string/recipe_ingredient_unit"
+            android:hint="@string/unit"
             android:textAlignment="center"
             android:textColor="@android:color/black"
             android:fontFamily="@font/roboto"/>
@@ -55,7 +54,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/default_recipe_margin"
-            android:layout_marginEnd="@dimen/default_recipe_margin"
             android:background="@color/white"
             app:srcCompat="@drawable/ic_clear_black" />
 

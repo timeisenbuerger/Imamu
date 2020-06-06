@@ -54,7 +54,7 @@ class ChooseRecipeViewHolder private constructor(private val binding: ListItemCo
         else
         {
             binding.imageViewRecipeItem.scaleType = ImageView.ScaleType.FIT_CENTER
-            binding.imageViewRecipeItem.setImageResource(R.drawable.ic_hot_tub)
+            binding.imageViewRecipeItem.setImageResource(R.drawable.ic_fastfood_grey)
         }
     }
 

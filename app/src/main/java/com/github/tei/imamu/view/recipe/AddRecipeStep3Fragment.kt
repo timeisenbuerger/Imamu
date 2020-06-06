@@ -9,7 +9,8 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
-import com.github.tei.imamu.custom.adapter.recipe.IngredientAddEditAdapter
+import com.github.tei.imamu.custom.adapter.recipe.IngredientAddEditListAdapter
+import com.github.tei.imamu.data.database.entity.Ingredient
 import com.github.tei.imamu.data.database.entity.recipe.RecipeIngredient
 import com.github.tei.imamu.databinding.FragmentAddRecipeStep3Binding
 import com.github.tei.imamu.util.setListViewHeightBasedOnChildren
@@ -21,7 +22,7 @@ class AddRecipeStep3Fragment : Fragment()
     private lateinit var binding: FragmentAddRecipeStep3Binding
     private val viewModel: AddRecipeViewModel by inject()
     private lateinit var application: Application
-    private lateinit var adapter: IngredientAddEditAdapter
+    private lateinit var adapter: IngredientAddEditListAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
@@ -55,9 +56,9 @@ class AddRecipeStep3Fragment : Fragment()
 
     private fun initComponents()
     {
-        adapter = IngredientAddEditAdapter(requireContext(), viewModel.recipe.value!!.recipeIngredients)
+        adapter = IngredientAddEditListAdapter(viewModel)
         binding.listViewIngredients.adapter = adapter
-        setListViewHeightBasedOnChildren(binding.listViewIngredients)
+        adapter.submitList(viewModel.recipe.value!!.recipeIngredients)
     }
 
     private fun initListener()
@@ -67,9 +68,10 @@ class AddRecipeStep3Fragment : Fragment()
         }
 
         binding.buttonAddIngredient.setOnClickListener {
-            adapter.add(RecipeIngredient())
+            val recipeIngredient = RecipeIngredient()
+            recipeIngredient.ingredient.target = Ingredient()
+            viewModel.recipe.value!!.recipeIngredients.add(recipeIngredient)
             adapter.notifyDataSetChanged()
-            setListViewHeightBasedOnChildren(binding.listViewIngredients)
         }
     }
 
