@@ -83,6 +83,8 @@ class RecipeListFragment : Fragment()
                 binding.textViewCreate.visibility = View.INVISIBLE
                 binding.textViewImport.visibility = View.INVISIBLE
 
+                binding.mainFab.setImageResource(R.drawable.ic_add_black)
+
                 isOpen = false
             }
             else
@@ -92,6 +94,8 @@ class RecipeListFragment : Fragment()
 
                 binding.textViewCreate.visibility = View.VISIBLE
                 binding.textViewImport.visibility = View.VISIBLE
+
+                binding.mainFab.setImageResource(R.drawable.ic_clear_black)
 
                 isOpen = true
             }

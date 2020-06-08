@@ -298,7 +298,7 @@
             android:text="@string/action_continue_ingredients"
             android:textAlignment="center"
             android:textColor="@color/white"
-            app:backgroundTint="@color/colorPrimary"
+            app:backgroundTint="@color/colorAccent"
             app:iconTint="@color/white"
             app:icon="@drawable/ic_list_white"
             app:layout_constraintBottom_toBottomOf="parent"

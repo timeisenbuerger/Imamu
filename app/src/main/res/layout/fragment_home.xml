@@ -61,15 +61,13 @@
                 app:layout_constraintStart_toEndOf="@id/text_view_caption_favorites"
                 app:layout_constraintTop_toBottomOf="@id/shortcuts" />
 
-            <com.mlsdev.animatedrv.AnimatedRecyclerView
+            <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/favorites_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/default_recipe_padding"
-                app:animationDuration="600"
-                app:layoutAnimation="@anim/layout_animation_from_scale"
-                app:layoutManagerOrientation="horizontal"
-                app:layoutManagerReverse="false"
+                android:paddingStart="30dp"
+                android:paddingEnd="60dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/text_view_caption_favorites"
@@ -88,15 +86,13 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/favorites_list" />
 
-            <com.mlsdev.animatedrv.AnimatedRecyclerView
+            <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/last_viewed_recipes_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/default_recipe_margin"
-                app:animationDuration="600"
-                app:layoutAnimation="@anim/layout_animation_from_scale"
-                app:layoutManagerOrientation="horizontal"
-                app:layoutManagerReverse="false"
+                android:paddingStart="30dp"
+                android:paddingEnd="60dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/text_view_caption_last_viewed_recipes"
@@ -115,15 +111,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/last_viewed_recipes_list" />
 
-            <com.mlsdev.animatedrv.AnimatedRecyclerView
+            <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/last_viewed_cook_books_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/default_recipe_margin"
-                app:animationDuration="600"
-                app:layoutAnimation="@anim/layout_animation_from_scale"
-                app:layoutManagerOrientation="horizontal"
-                app:layoutManagerReverse="false"
+                android:layout_marginBottom="@dimen/default_recipe_margin"
+                android:paddingStart="30dp"
+                android:paddingEnd="60dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/text_view_caption_last_viewed_cook_books"

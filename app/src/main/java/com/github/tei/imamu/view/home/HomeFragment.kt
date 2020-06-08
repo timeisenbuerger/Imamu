@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -12,6 +13,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.CompositePageTransformer
+import androidx.viewpager2.widget.MarginPageTransformer
+import androidx.viewpager2.widget.ViewPager2
 import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
 import com.github.tei.imamu.custom.adapter.home.FavoriteListAdapter
@@ -24,6 +28,7 @@ import com.github.tei.imamu.databinding.FragmentHomeBinding
 import com.github.tei.imamu.viewmodel.home.HomeViewModel
 import com.github.tei.imamu.wrapper.ShortcutWrapper
 import org.koin.android.ext.android.inject
+import kotlin.math.abs
 
 class HomeFragment : Fragment()
 {
@@ -74,32 +79,43 @@ class HomeFragment : Fragment()
 
         val managerShortcuts = GridLayoutManager(activity, 2)
         binding.shortcuts.layoutManager = managerShortcuts
-
-        val managerFavorites = LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
-        binding.favoritesList.layoutManager = managerFavorites
-
-        val managerLastViewedRecipes = LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
-        binding.lastViewedRecipesList.layoutManager = managerLastViewedRecipes
-
-        val managerLastViewedCookBook = LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
-        binding.lastViewedCookBooksList.layoutManager = managerLastViewedCookBook
     }
 
     private fun initComponents()
     {
         val shortcuts: List<ShortcutWrapper> = initShortcutData()
         shortcutAdapter.submitList(shortcuts)
+
+        initViewPager(binding.favoritesList)
+        initViewPager(binding.lastViewedRecipesList)
+        initViewPager(binding.lastViewedCookBooksList)
+    }
+
+    private fun initViewPager(viewPager: ViewPager2)
+    {
+        viewPager.clipToPadding = false
+        viewPager.clipChildren = false
+        viewPager.offscreenPageLimit = 3
+
+        val compositePageTransformer = CompositePageTransformer()
+        compositePageTransformer.addTransformer(MarginPageTransformer(40))
+        compositePageTransformer.addTransformer { page, position ->
+            val r = 1 - abs(position)
+            page.scaleY = (0.95f + r * 0.05f)
+        }
+
+        viewPager.setPageTransformer(compositePageTransformer)
     }
 
     private fun initObserver()
     {
         viewModel.navigateToShortcut.observe(viewLifecycleOwner, Observer {
             it?.let {
-                when(it.name)
+                when (it.name)
                 {
-                    "Rezepte" -> findNavController().navigate(HomeFragmentDirections.actionNavHomeToNavRecipeList())
-                    "Kochbücher" -> findNavController().navigate(HomeFragmentDirections.actionNavHomeToNavCookbook())
-                    "Einkaufslisten" -> findNavController().navigate(HomeFragmentDirections.actionNavHomeToNavShoppingList())
+                    "Rezepte"          -> findNavController().navigate(HomeFragmentDirections.actionNavHomeToNavRecipeList())
+                    "Kochbücher"       -> findNavController().navigate(HomeFragmentDirections.actionNavHomeToNavCookbook())
+                    "Einkaufslisten"   -> findNavController().navigate(HomeFragmentDirections.actionNavHomeToNavShoppingList())
                     "Rezept Vorschlag" -> findNavController().navigate(HomeFragmentDirections.actionNavHomeToNavRecipeSuggestion())
                 }
             }
@@ -107,8 +123,16 @@ class HomeFragment : Fragment()
 
         viewModel.favoriteRecipes.observe(viewLifecycleOwner, Observer {
             it?.let {
-                favoriteListAdapter.submitList(it)
-                binding.favoritesList.scheduleLayoutAnimation()
+                if (it.size == 0)
+                {
+                    setLayoutVisibility(View.GONE, binding.textViewCaptionLastViewedRecipes, binding.lastViewedRecipesList, null)
+                }
+                else
+                {
+                    setLayoutVisibility(View.VISIBLE, binding.textViewCaptionFavorites, binding.favoritesList, binding.textViewShowAllFavorites)
+                    favoriteListAdapter.submitList(it)
+                    binding.favoritesList.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
+                }
             }
         })
 
@@ -122,8 +146,16 @@ class HomeFragment : Fragment()
                     }
                 }
 
-                lastViewedRecipeListAdapter.submitList(recipes)
-                binding.lastViewedRecipesList.scheduleLayoutAnimation()
+                if (recipes.size == 0)
+                {
+                    setLayoutVisibility(View.GONE, binding.textViewCaptionLastViewedRecipes, binding.lastViewedRecipesList, null)
+                }
+                else
+                {
+                    setLayoutVisibility(View.VISIBLE, binding.textViewCaptionLastViewedRecipes, binding.lastViewedRecipesList, null)
+                    lastViewedRecipeListAdapter.submitList(recipes)
+                    binding.lastViewedRecipesList.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
+                }
             }
         })
 
@@ -137,8 +169,16 @@ class HomeFragment : Fragment()
                     }
                 }
 
-                lastViewedCookBookListAdapter.submitList(cookBooks)
-                binding.lastViewedCookBooksList.scheduleLayoutAnimation()
+                if (cookBooks.size == 0)
+                {
+                    setLayoutVisibility(View.GONE, binding.textViewCaptionLastViewedCookBooks, binding.lastViewedCookBooksList, null)
+                }
+                else
+                {
+                    setLayoutVisibility(View.VISIBLE, binding.textViewCaptionLastViewedCookBooks, binding.lastViewedCookBooksList, null)
+                    lastViewedCookBookListAdapter.submitList(cookBooks)
+                    binding.lastViewedRecipesList.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
+                }
             }
         })
 
@@ -171,6 +211,16 @@ class HomeFragment : Fragment()
         val shortcutShoppingList = ShortcutWrapper("Einkaufslisten", R.mipmap.shopping_list_colored)
         val shortcutRecipeFinder = ShortcutWrapper("Rezept Vorschlag", R.mipmap.recipe_finder_colored)
         return mutableListOf(shortcutRecipe, shortcutCookBook, shortcutShoppingList, shortcutRecipeFinder)
+    }
+
+    private fun setLayoutVisibility(visibility: Int, textView: View, viewPager: View, view: View?)
+    {
+        textView.visibility = visibility
+        viewPager.visibility = visibility
+
+        view?.let {
+            it.visibility = visibility
+        }
     }
 
     override fun onResume()

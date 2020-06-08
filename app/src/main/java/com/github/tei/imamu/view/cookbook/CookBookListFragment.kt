@@ -82,6 +82,8 @@ class CookBookListFragment : Fragment()
                 binding.textViewCreate.visibility = View.INVISIBLE
                 binding.textViewImport.visibility = View.INVISIBLE
 
+                binding.fabMain.setImageResource(R.drawable.ic_add_black)
+
                 isOpen = false
             }
             else
@@ -91,6 +93,8 @@ class CookBookListFragment : Fragment()
 
                 binding.textViewCreate.visibility = View.VISIBLE
                 binding.textViewImport.visibility = View.VISIBLE
+
+                binding.fabMain.setImageResource(R.drawable.ic_clear_black)
 
                 isOpen = true
             }

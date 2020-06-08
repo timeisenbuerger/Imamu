@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|end"
                 android:layout_margin="@dimen/fab_margin"
-                app:backgroundTint="@color/colorPrimary"
+                app:backgroundTint="@color/colorAccent"
                 app:tint="@color/white"
                 app:srcCompat="@drawable/ic_add_white" />
 
@@ -56,7 +56,7 @@
             android:focusable="true"
             android:visibility="invisible"
             app:fabSize="mini"
-            app:backgroundTint="@color/colorPrimary"
+            app:backgroundTint="@color/colorAccent"
             app:tint="@color/white"
             app:layout_constraintBottom_toTopOf="@+id/container_layout"
             app:layout_constraintEnd_toEndOf="parent"
@@ -75,7 +75,7 @@
             app:fabSize="mini"
             app:layout_constraintBottom_toTopOf="@+id/create_cook_book_fab"
             app:layout_constraintEnd_toEndOf="parent"
-            app:backgroundTint="@color/colorPrimary"
+            app:backgroundTint="@color/colorAccent"
             app:tint="@color/white"
             app:srcCompat="@drawable/ic_download_white"
             tools:visibility="visible"/>

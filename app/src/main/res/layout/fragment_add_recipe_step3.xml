@@ -114,7 +114,7 @@
             android:text="@string/action_continue_preparation"
             android:textAlignment="center"
             android:textColor="@color/white"
-            app:backgroundTint="@color/colorPrimary"
+            app:backgroundTint="@color/colorAccent"
             app:iconTint="@color/white"
             app:icon="@drawable/ic_text_white"
             app:layout_constraintBottom_toBottomOf="parent"

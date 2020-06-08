@@ -133,7 +133,7 @@
             android:layout_marginBottom="@dimen/default_recipe_margin"
             android:textColor="@color/white"
             android:text="@string/action_start_search"
-            app:backgroundTint="@color/colorPrimary"
+            app:backgroundTint="@color/colorAccent"
             app:icon="@drawable/ic_search_white"
             app:iconTint="@color/white"
             app:borderWidth="1dp"
