@@ -2,6 +2,7 @@ package com.github.tei.imamu.util
 
 import android.annotation.SuppressLint
 import android.content.ContentUris
+import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.net.Uri
@@ -10,6 +11,11 @@ import android.os.Environment
 import android.provider.DocumentsContract
 import android.provider.MediaStore
 import androidx.loader.content.CursorLoader
+import org.apache.commons.io.IOUtils
+import java.io.File
+import java.io.FileInputStream
+import java.io.FileOutputStream
+import java.net.URI
 
 class RealPathUtil
 {
@@ -33,6 +39,48 @@ class RealPathUtil
                     getRealPathFromURI_API19(context, fileUri)
                 }
             }
+        }
+
+        fun getImageContentUri(context: Context, file: File): Uri?
+        {
+            val filePath = file.absolutePath
+            val cursor: Cursor? = context.getContentResolver()
+                .query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, arrayOf(MediaStore.Images.Media._ID), MediaStore.Images.Media.DATA + "=? ", arrayOf(filePath), null)
+            return if (cursor != null && cursor.moveToFirst())
+            {
+                val id: Int = cursor.getInt(cursor.getColumnIndex(MediaStore.MediaColumns._ID))
+                val baseUri = Uri.parse("content://media/external/images/media")
+                Uri.withAppendedPath(baseUri, "" + id)
+            }
+            else
+            {
+                if (file.exists())
+                {
+                    val values = ContentValues()
+                    values.put(MediaStore.Images.Media.DATA, filePath)
+                    context.getContentResolver()
+                        .insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
+                }
+                else
+                {
+                    null
+                }
+            }
+        }
+
+        //TODO so werden dateien richtig geladen
+        fun getFileCopy(fileUri: Uri, context: Context) : File?
+        {
+            val parcelFileDescriptor = context.contentResolver.openFileDescriptor(fileUri, "r", null)
+
+            var file: File? = null;
+            parcelFileDescriptor?.let {
+                val inputStream = FileInputStream(parcelFileDescriptor.fileDescriptor)
+                file = File(context.cacheDir, File(URI(fileUri.toString())).name)
+                val outputStream = FileOutputStream(file)
+                IOUtils.copy(inputStream, outputStream)
+            }
+            return file;
         }
 
         @SuppressLint("NewApi")

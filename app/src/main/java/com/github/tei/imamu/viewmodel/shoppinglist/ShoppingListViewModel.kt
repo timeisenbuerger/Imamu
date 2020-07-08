@@ -4,10 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.github.tei.imamu.data.database.entity.shoppinglist.ShoppingList
+import com.github.tei.imamu.data.database.entity.shoppinglist.ShoppingListItem
 import com.github.tei.imamu.data.repository.ShoppingListRepository
 import io.objectbox.android.ObjectBoxLiveData
+import org.jsoup.internal.StringUtil
 import java.text.SimpleDateFormat
-import java.time.LocalDateTime
 import java.util.*
 
 class ShoppingListViewModel(private val shoppingListRepository: ShoppingListRepository) : ViewModel()
@@ -24,29 +25,18 @@ class ShoppingListViewModel(private val shoppingListRepository: ShoppingListRepo
     val navigateToDetail: LiveData<ShoppingList>
         get() = _navigateToDetail
 
-    fun addAllItemsList()
-    {
-        val allShoppingList = ShoppingList()
-        allShoppingList.name = "Alle"
-        for (shoppingList in shoppingLists.value!!)
-        {
-            allShoppingList.shoppingListItems.addAll(shoppingList.shoppingListItems)
-        }
-
-        shoppingLists.value!!.add(0, allShoppingList)
-        _shoppingLists = shoppingLists
-    }
+    private lateinit var allShoppingList: ShoppingList
 
     fun deleteShoppingLists(items: MutableList<ShoppingList>)
     {
-        if (items.contains(_shoppingLists.value!![0]))
+        if (items.contains(allShoppingList))
         {
-            items.remove(_shoppingLists.value!![0])
+            items.remove(allShoppingList)
         }
 
         for (item in items)
         {
-            _shoppingLists.value!![0].shoppingListItems.removeAll(item.shoppingListItems)
+            allShoppingList.shoppingListItems.removeAll(item.shoppingListItems)
         }
 
         _shoppingLists.value?.removeAll(items)
@@ -54,6 +44,12 @@ class ShoppingListViewModel(private val shoppingListRepository: ShoppingListRepo
         {
             shoppingListRepository.remove(item)
         }
+
+        if (_shoppingLists.value!!.size == 1 && _shoppingLists.value!![0] == allShoppingList)
+        {
+            _shoppingLists.value!!.remove(allShoppingList)
+        }
+
         onDeleteItems()
     }
 
@@ -88,5 +84,18 @@ class ShoppingListViewModel(private val shoppingListRepository: ShoppingListRepo
     fun onNavigateToDetailComplete()
     {
         _navigateToDetail.value = null
+    }
+
+    fun addAllItemsList()
+    {
+        allShoppingList = ShoppingList()
+        allShoppingList.name = "Alle"
+        for (shoppingList in shoppingLists.value!!)
+        {
+            allShoppingList.shoppingListItems.addAll(shoppingList.shoppingListItems)
+        }
+
+        shoppingLists.value!!.add(0, allShoppingList)
+        _shoppingLists = shoppingLists
     }
 }

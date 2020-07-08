@@ -5,10 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.github.tei.imamu.data.database.entity.shoppinglist.ShoppingList
 import com.github.tei.imamu.data.database.entity.shoppinglist.ShoppingListItem
+import com.github.tei.imamu.data.repository.IngredientRepository
 import com.github.tei.imamu.data.repository.ShoppingListItemRepository
 import com.github.tei.imamu.data.repository.ShoppingListRepository
 
-class ShoppingListDetailViewModel(private val shoppingListRepository: ShoppingListRepository, private val shoppingListItemRepository: ShoppingListItemRepository) : ViewModel()
+class ShoppingListDetailViewModel(private val shoppingListRepository: ShoppingListRepository, private val shoppingListItemRepository: ShoppingListItemRepository,val ingredientRepository: IngredientRepository) : ViewModel()
 {
     internal val shoppingList = MutableLiveData<ShoppingList>()
 

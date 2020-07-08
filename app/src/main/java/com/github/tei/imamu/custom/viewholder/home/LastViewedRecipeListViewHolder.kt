@@ -12,7 +12,9 @@ import com.github.tei.imamu.custom.adapter.home.LastViewedRecipeListAdapter
 import com.github.tei.imamu.custom.listener.RecipeListListener
 import com.github.tei.imamu.data.database.entity.recipe.Recipe
 import com.github.tei.imamu.databinding.ListItemLastViewedRecipeBinding
+import com.github.tei.imamu.util.RealPathUtil
 import com.github.tei.imamu.viewmodel.home.HomeViewModel
+import com.squareup.picasso.Picasso
 import java.io.File
 
 class LastViewedRecipeListViewHolder private constructor(private val binding: ListItemLastViewedRecipeBinding) : RecyclerView.ViewHolder(binding.root)

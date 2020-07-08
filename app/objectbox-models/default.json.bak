@@ -60,11 +60,6 @@
           "type": 9
         },
         {
-          "id": "14:8651693078277595375",
-          "name": "nutrition",
-          "type": 9
-        },
-        {
           "id": "15:3607269205505283310",
           "name": "totalTime",
           "type": 5,
@@ -77,7 +72,13 @@
           "flags": 4
         }
       ],
-      "relations": []
+      "relations": [
+        {
+          "id": "3:5259984313588450763",
+          "name": "recipeFeatures",
+          "targetId": "9:855972068626501447"
+        }
+      ]
     },
     {
       "id": "2:6168022746291461423",
@@ -145,7 +146,7 @@
     },
     {
       "id": "4:6648330953913765978",
-      "lastPropertyId": "6:7626136694395327217",
+      "lastPropertyId": "7:1573455952400738165",
       "name": "ShoppingListItem",
       "properties": [
         {
@@ -153,11 +154,6 @@
           "name": "id",
           "type": 6,
           "flags": 1
-        },
-        {
-          "id": "2:688709034361027382",
-          "name": "amount",
-          "type": 9
         },
         {
           "id": "3:4472669758983217866",
@@ -182,6 +178,14 @@
           "type": 11,
           "flags": 1548,
           "relationTarget": "ShoppingList"
+        },
+        {
+          "id": "7:1573455952400738165",
+          "name": "ingredientId",
+          "indexId": "7:7655137527083851617",
+          "type": 11,
+          "flags": 1548,
+          "relationTarget": "Ingredient"
         }
       ],
       "relations": []
@@ -273,11 +277,30 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "9:855972068626501447",
+      "lastPropertyId": "2:6197928674176350664",
+      "name": "RecipeFeature",
+      "properties": [
+        {
+          "id": "1:4843554320838037486",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:6197928674176350664",
+          "name": "name",
+          "type": 9
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "8:8132533005751163067",
-  "lastIndexId": "6:476494859806588187",
-  "lastRelationId": "2:4388833860576146167",
+  "lastEntityId": "9:855972068626501447",
+  "lastIndexId": "7:7655137527083851617",
+  "lastRelationId": "3:5259984313588450763",
   "lastSequenceId": "0:0",
   "modelVersion": 5,
   "modelVersionParserMinimum": 5,
@@ -290,7 +313,9 @@
     5614713038289382758,
     7211480856525954018,
     5296699260052294519,
-    1908275460111647085
+    1908275460111647085,
+    8651693078277595375,
+    688709034361027382
   ],
   "retiredRelationUids": [
     4388833860576146167

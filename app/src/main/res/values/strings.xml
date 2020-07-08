@@ -93,6 +93,10 @@
     <string name="sample_difficulty">Einfach</string>
     <string name="sample_time">120 min</string>
     <string name="sample_baking_time">Backzeit: 120 min</string>
+    <string name="title_section_import">Rezept Import</string>
+    <string name="title_import_with_images">Bilder importieren</string>
+    <string name="title_section_legal">Rechtliches</string>
+    <string name="title_open_source_libraries">Open Source Bibliotheken</string>
 
     <string-array name="ingredient_units">
         <item>g</item>

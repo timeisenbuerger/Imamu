@@ -297,5 +297,10 @@
             android:name="recipe"
             app:argType="com.github.tei.imamu.data.database.entity.recipe.Recipe" />
     </fragment>
+    <fragment
+        android:id="@+id/nav_settings"
+        android:name="com.github.tei.imamu.view.settings.BaseSettingsFragment"
+        android:label=""
+        tools:layout="@layout/fragment_settings"/>
 
 </navigation>

@@ -47,7 +47,7 @@ val viewModelModule = module {
     viewModel { ChooseRecipeViewModel(get(), get()) }
 
     viewModel { ShoppingListViewModel(get()) }
-    viewModel { ShoppingListDetailViewModel(get(), get()) }
+    viewModel { ShoppingListDetailViewModel(get(), get(), get()) }
 
     viewModel { RecipeFinderSearchViewModel(get(), get()) }
     viewModel { RecipeFinderResultListViewModel(get()) }

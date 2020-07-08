@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.github.tei.imamu.R
 import com.github.tei.imamu.custom.adapter.home.LastViewedCookBookListAdapter
 import com.github.tei.imamu.data.database.entity.cookbook.CookBook
 import com.github.tei.imamu.databinding.ListItemLastViewedCookBookBinding
@@ -59,6 +58,11 @@ class LastViewedCookBookListViewHolder private constructor(private val binding: 
         }
         else
         {
+            if (item.recipes.size == 2)
+            {
+                binding.cardBackground.maxImagePerRow = 1
+            }
+
             binding.cardBackground.visibility = View.VISIBLE
             binding.imageViewRecipeItem.visibility = View.GONE
 

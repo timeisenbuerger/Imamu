@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        android:title="@string/title_section_import">
+
+        <CheckBoxPreference
+            android:key="import_with_images"
+            android:title="@string/title_import_with_images"
+            android:defaultValue="false"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/title_section_legal">
+
+        <Preference android:title="@string/title_open_source_libraries" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

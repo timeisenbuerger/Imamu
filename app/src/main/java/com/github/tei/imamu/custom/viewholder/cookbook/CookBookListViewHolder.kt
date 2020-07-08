@@ -51,6 +51,11 @@ class CookBookListViewHolder private constructor(private val binding: ListItemCo
         }
         else
         {
+            if (item.recipes.size == 2)
+            {
+                binding.imageCollectionViewRecipeItem.maxImagePerRow = 1
+            }
+
             binding.imageCollectionViewRecipeItem.visibility = View.VISIBLE
             binding.imageViewRecipeItem.visibility = View.GONE
 

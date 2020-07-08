@@ -8,6 +8,7 @@ import com.github.tei.imamu.data.database.entity.recipe.LastViewedRecipe
 import com.github.tei.imamu.data.database.entity.recipe.Recipe
 import com.github.tei.imamu.data.database.entity.shoppinglist.ShoppingList
 import com.github.tei.imamu.data.database.entity.shoppinglist.ShoppingListItem
+import com.github.tei.imamu.data.repository.IngredientRepository
 import com.github.tei.imamu.data.repository.LastViewedRecipeRepository
 import com.github.tei.imamu.data.repository.RecipeRepository
 import com.github.tei.imamu.data.repository.ShoppingListRepository
@@ -31,7 +32,8 @@ class RecipeDetailViewModel(private val recipeRepository: RecipeRepository, priv
         var shoppingListItems = mutableListOf<ShoppingListItem>()
         for (ingredient in recipe.recipeIngredients)
         {
-            var shoppingListItem = ShoppingListItem(amount = ingredient.amount, unit = ingredient.unit, name = ingredient.ingredient.target.name)
+            var shoppingListItem = ShoppingListItem(amount = ingredient.amount, unit = ingredient.unit)
+            shoppingListItem.ingredient.target = ingredient.ingredient.target
             shoppingListItems.add(shoppingListItem)
         }
         shoppingList.shoppingListItems.addAll(shoppingListItems)

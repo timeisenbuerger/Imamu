@@ -1,5 +1,6 @@
 package com.github.tei.imamu.data.database.entity.shoppinglist
 
+import com.github.tei.imamu.data.database.entity.Ingredient
 import io.objectbox.annotation.Entity
 import io.objectbox.annotation.Id
 import io.objectbox.relation.ToOne
@@ -13,10 +14,9 @@ data class ShoppingListItem(
 
     var unit: String = "",
 
-    var name: String = "",
-
     var isChecked: Boolean = false
 )
 {
     lateinit var shoppingList: ToOne<ShoppingList>
+    lateinit var ingredient: ToOne<Ingredient>
 }

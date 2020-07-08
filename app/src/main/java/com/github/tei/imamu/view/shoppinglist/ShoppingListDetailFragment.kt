@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
 import com.github.tei.imamu.custom.adapter.shoppinglist.ShoppingListItemAdapter
+import com.github.tei.imamu.data.database.entity.Ingredient
 import com.github.tei.imamu.data.database.entity.shoppinglist.ShoppingListItem
 import com.github.tei.imamu.databinding.FragmentShoppingListDetailBinding
 import com.github.tei.imamu.util.KeyboardUtil
@@ -113,7 +114,9 @@ class ShoppingListDetailFragment : Fragment()
         val unit = binding.editTextUnit.text.toString()
         val ingredientName = binding.editTextIngredient.text.toString()
 
-        val shoppingListItem = ShoppingListItem(amount = amount, unit = unit, name = ingredientName)
+        var ingredient = viewModel.ingredientRepository.getIngredientForName(ingredientName)
+        val shoppingListItem = ShoppingListItem(amount = amount, unit = unit)
+        shoppingListItem.ingredient.target = ingredient
         viewModel.saveNewItem(shoppingListItem)
     }
 
