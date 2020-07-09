@@ -122,8 +122,20 @@ class CookBookListFragment : Fragment()
     {
         viewModel.cookBooks.observe(viewLifecycleOwner, Observer {
             it?.let {
-                listAdapter.allCookBooks = it
-                listAdapter.submitList(it)
+                if (it.size == 0)
+                {
+                    binding.emptyListPlaceholder.visibility = View.VISIBLE
+                    binding.cookbookList.visibility = View.GONE
+                }
+                else
+                {
+                    binding.emptyListPlaceholder.visibility = View.GONE
+                    binding.cookbookList.visibility = View.VISIBLE
+
+                    listAdapter.allCookBooks = it
+                    listAdapter.submitList(it)
+                    binding.cookbookList.startLayoutAnimation()
+                }
             }
         })
 

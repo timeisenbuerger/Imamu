@@ -80,6 +80,13 @@
     <string name="caption_last_viewed_recipes">Zuletzt geöffnete Rezepte</string>
     <string name="caption_last_viewed_cook_books">Zuletzt geöffnete Kochbücher</string>
 
+    <string name="caption_recipe_placeholder">Deine Rezeptsammlung ist leer</string>
+    <string name="text_recipe_placeholder">Mache den ersten Schritt zu deiner großartigen Rezeptsammlung.</string>
+    <string name="caption_cook_book_placeholder">Deine Kochbuchsammlung ist leer</string>
+    <string name="text_cook_book_placeholder">Erstelle dein erstes Kochbuch und füge deine Lieblingsrezepte hinzu.</string>
+    <string name="caption_shopping_list_placeholder">Keine Einkaufslisten vorhanden</string>
+    <string name="text_shopping_list_placeholder">Erstelle eine Einkaufsliste, um deine Einkäufe zu organisieren.</string>
+
 
     <!-- Sample Texts -->
     <string name="sample_recipe_title">Beispiel Rezept</string>
@@ -97,6 +104,7 @@
     <string name="title_import_with_images">Bilder importieren</string>
     <string name="title_section_legal">Rechtliches</string>
     <string name="title_open_source_libraries">Open Source Bibliotheken</string>
+
 
     <string-array name="ingredient_units">
         <item>g</item>

@@ -116,9 +116,20 @@ class RecipeListFragment : Fragment()
     {
         viewModel.recipes.observe(viewLifecycleOwner, Observer {
             it?.let {
-                listAdapter.allRecipes = it
-                listAdapter.submitList(it)
-                binding.recipeList.scheduleLayoutAnimation()
+                if (it.size == 0)
+                {
+                    binding.emptyListPlaceholder.visibility = View.VISIBLE
+                    binding.recipeList.visibility = View.GONE
+                }
+                else
+                {
+                    binding.emptyListPlaceholder.visibility = View.GONE
+                    binding.recipeList.visibility = View.VISIBLE
+
+                    listAdapter.allRecipes = it
+                    listAdapter.submitList(it)
+                    binding.recipeList.startLayoutAnimation()
+                }
             }
         })
 

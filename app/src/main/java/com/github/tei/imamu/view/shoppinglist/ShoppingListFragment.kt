@@ -51,8 +51,8 @@ class ShoppingListFragment : Fragment()
         //set adapters
         val manager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
         shoppingListAdapter = ShoppingListAdapter(viewModel)
-        binding.listParentRecipes.adapter = shoppingListAdapter
-        binding.listParentRecipes.layoutManager = manager
+        binding.listShoppingLists.adapter = shoppingListAdapter
+        binding.listShoppingLists.layoutManager = manager
     }
 
     private fun initObserver()
@@ -61,13 +61,21 @@ class ShoppingListFragment : Fragment()
             it?.let {
                 if (it.isNotEmpty())
                 {
+                    binding.listShoppingLists.visibility = View.VISIBLE
+                    binding.emptyListPlaceholder.visibility = View.GONE
+
                     if (it[0].name != "Alle")
                     {
                         viewModel.addAllItemsList()
                     }
 
                     shoppingListAdapter.submitList(it)
-                    binding.listParentRecipes.startLayoutAnimation()
+                    binding.listShoppingLists.startLayoutAnimation()
+                }
+                else
+                {
+                    binding.listShoppingLists.visibility = View.GONE
+                    binding.emptyListPlaceholder.visibility = View.VISIBLE
                 }
             }
         })
