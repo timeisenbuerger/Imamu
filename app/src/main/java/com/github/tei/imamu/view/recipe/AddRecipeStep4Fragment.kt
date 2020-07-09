@@ -11,7 +11,6 @@ import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
 import com.github.tei.imamu.databinding.FragmentAddRecipeStep4Binding
 import com.github.tei.imamu.viewmodel.recipe.AddRecipeViewModel
-import com.google.android.material.chip.Chip
 import org.koin.android.ext.android.inject
 
 class AddRecipeStep4Fragment : Fragment()
@@ -19,6 +18,7 @@ class AddRecipeStep4Fragment : Fragment()
     private lateinit var binding: FragmentAddRecipeStep4Binding
     private val viewModel: AddRecipeViewModel by inject()
     private lateinit var application: Application
+    private var isEdit = false;
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
@@ -44,7 +44,8 @@ class AddRecipeStep4Fragment : Fragment()
         //set viewModel in binding
         binding.viewModel = viewModel
 
-        viewModel.recipe.value = RecipeDetailFragmentArgs.fromBundle(requireArguments()).recipe
+        viewModel.recipe.value = AddRecipeStep4FragmentArgs.fromBundle(requireArguments()).recipe
+        isEdit = AddRecipeStep4FragmentArgs.fromBundle(requireArguments()).isEdit
     }
 
     private fun initListener()
@@ -67,7 +68,14 @@ class AddRecipeStep4Fragment : Fragment()
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater)
     {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.menu_close, menu)
+        if (isEdit)
+        {
+            inflater.inflate(R.menu.menu_save_close, menu)
+        }
+        else
+        {
+            inflater.inflate(R.menu.menu_close, menu)
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean
@@ -77,6 +85,11 @@ class AddRecipeStep4Fragment : Fragment()
             R.id.action_close ->
             {
                 findNavController().navigate(AddRecipeStep4FragmentDirections.actionAddRecipeStep4FragmentToNavRecipeList())
+            }
+            R.id.action_save  ->
+            {
+                viewModel.onSaveRecipe()
+                findNavController().navigate(AddRecipeStep4FragmentDirections.actionAddRecipeStep4FragmentToRecipeDetailFragment(viewModel.recipe.value!!))
             }
         }
         return super.onOptionsItemSelected(item)

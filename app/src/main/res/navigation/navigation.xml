@@ -71,7 +71,11 @@
         <action
             android:id="@+id/action_recipeDetailFragment_to_addRecipeStep1Fragment"
             app:destination="@id/addRecipeStep1Fragment"
-            app:popUpTo="@id/recipeDetailFragment" />
+            app:popUpTo="@id/recipeDetailFragment" >
+            <argument
+                android:name="isEdit"
+                android:defaultValue="true" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/importRecipeFragment"
@@ -232,6 +236,12 @@
         <argument
             android:name="recipe"
             app:argType="com.github.tei.imamu.data.database.entity.recipe.Recipe" />
+        <argument
+            android:name="isEdit"
+            app:argType="boolean" />
+        <action
+            android:id="@+id/action_addRecipeStep1Fragment_to_recipeDetailFragment"
+            app:destination="@id/recipeDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/addRecipeStep2Fragment"
@@ -248,6 +258,12 @@
         <argument
             android:name="recipe"
             app:argType="com.github.tei.imamu.data.database.entity.recipe.Recipe" />
+        <argument
+            android:name="isEdit"
+            app:argType="boolean" />
+        <action
+            android:id="@+id/action_addRecipeStep2Fragment_to_recipeDetailFragment"
+            app:destination="@id/recipeDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/addRecipeStep3Fragment"
@@ -264,6 +280,12 @@
         <argument
             android:name="recipe"
             app:argType="com.github.tei.imamu.data.database.entity.recipe.Recipe" />
+        <argument
+            android:name="isEdit"
+            app:argType="boolean" />
+        <action
+            android:id="@+id/action_addRecipeStep3Fragment_to_recipeDetailFragment"
+            app:destination="@id/recipeDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/addRecipeStep4Fragment"
@@ -280,6 +302,12 @@
         <argument
             android:name="recipe"
             app:argType="com.github.tei.imamu.data.database.entity.recipe.Recipe" />
+        <argument
+            android:name="isEdit"
+            app:argType="boolean" />
+        <action
+            android:id="@+id/action_addRecipeStep4Fragment_to_recipeDetailFragment"
+            app:destination="@id/recipeDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/addRecipeStep5Fragment"

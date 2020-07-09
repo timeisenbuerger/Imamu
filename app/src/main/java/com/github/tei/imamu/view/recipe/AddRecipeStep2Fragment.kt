@@ -19,6 +19,7 @@ class AddRecipeStep2Fragment : Fragment()
     private lateinit var binding: FragmentAddRecipeStep2Binding
     private val viewModel: AddRecipeViewModel by inject()
     private lateinit var application: Application
+    private var isEdit = false;
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
@@ -45,7 +46,8 @@ class AddRecipeStep2Fragment : Fragment()
         //set viewModel in binding
         binding.viewModel = viewModel
 
-        viewModel.recipe.value = RecipeDetailFragmentArgs.fromBundle(requireArguments()).recipe
+        viewModel.recipe.value = AddRecipeStep2FragmentArgs.fromBundle(requireArguments()).recipe
+        isEdit = AddRecipeStep2FragmentArgs.fromBundle(requireArguments()).isEdit
     }
 
     private fun initListener()
@@ -60,7 +62,7 @@ class AddRecipeStep2Fragment : Fragment()
     {
         viewModel.navigateToNextStep.observe(viewLifecycleOwner, Observer {
             it?.let {
-                findNavController().navigate(AddRecipeStep2FragmentDirections.actionAddRecipeStep2FragmentToAddRecipeStep3Fragment(it))
+                findNavController().navigate(AddRecipeStep2FragmentDirections.actionAddRecipeStep2FragmentToAddRecipeStep3Fragment(it, isEdit))
                 viewModel.onNavigateToNextStepComplete()
             }
         })
@@ -88,7 +90,7 @@ class AddRecipeStep2Fragment : Fragment()
 
     private fun updateRecipeDataFromUI()
     {
-        for(i in 0 until binding.chipGroupDifficulty.childCount)
+        for (i in 0 until binding.chipGroupDifficulty.childCount)
         {
             val chip = binding.chipGroupDifficulty.getChildAt(i) as Chip
             if (chip.isChecked)
@@ -102,7 +104,14 @@ class AddRecipeStep2Fragment : Fragment()
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater)
     {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.menu_close, menu)
+        if (isEdit)
+        {
+            inflater.inflate(R.menu.menu_save_close, menu)
+        }
+        else
+        {
+            inflater.inflate(R.menu.menu_close, menu)
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean
@@ -112,6 +121,12 @@ class AddRecipeStep2Fragment : Fragment()
             R.id.action_close ->
             {
                 findNavController().navigate(AddRecipeStep2FragmentDirections.actionAddRecipeStep2FragmentToNavRecipeList())
+            }
+            R.id.action_save  ->
+            {
+                updateRecipeDataFromUI()
+                viewModel.onSaveRecipe()
+                findNavController().navigate(AddRecipeStep2FragmentDirections.actionAddRecipeStep2FragmentToRecipeDetailFragment(viewModel.recipe.value!!))
             }
         }
         return super.onOptionsItemSelected(item)

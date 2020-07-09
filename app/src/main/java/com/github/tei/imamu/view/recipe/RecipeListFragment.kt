@@ -102,7 +102,7 @@ class RecipeListFragment : Fragment()
         }
 
         binding.createRecipeFab.setOnClickListener {
-            findNavController().navigate(RecipeListFragmentDirections.actionNavRecipeListToAddRecipeStep1Fragment(Recipe()))
+            findNavController().navigate(RecipeListFragmentDirections.actionNavRecipeListToAddRecipeStep1Fragment(Recipe(), false))
             isOpen = false
         }
 

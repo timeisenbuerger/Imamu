@@ -13,7 +13,6 @@ import com.github.tei.imamu.custom.adapter.recipe.IngredientAddEditListAdapter
 import com.github.tei.imamu.data.database.entity.Ingredient
 import com.github.tei.imamu.data.database.entity.recipe.RecipeIngredient
 import com.github.tei.imamu.databinding.FragmentAddRecipeStep3Binding
-import com.github.tei.imamu.util.setListViewHeightBasedOnChildren
 import com.github.tei.imamu.viewmodel.recipe.AddRecipeViewModel
 import org.koin.android.ext.android.inject
 
@@ -23,6 +22,7 @@ class AddRecipeStep3Fragment : Fragment()
     private val viewModel: AddRecipeViewModel by inject()
     private lateinit var application: Application
     private lateinit var adapter: IngredientAddEditListAdapter
+    private var isEdit = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
@@ -51,7 +51,8 @@ class AddRecipeStep3Fragment : Fragment()
         //set viewModel in binding
         binding.viewModel = viewModel
 
-        viewModel.recipe.value = RecipeDetailFragmentArgs.fromBundle(requireArguments()).recipe
+        viewModel.recipe.value = AddRecipeStep3FragmentArgs.fromBundle(requireArguments()).recipe
+        isEdit = AddRecipeStep3FragmentArgs.fromBundle(requireArguments()).isEdit
     }
 
     private fun initComponents()
@@ -79,7 +80,7 @@ class AddRecipeStep3Fragment : Fragment()
     {
         viewModel.navigateToNextStep.observe(viewLifecycleOwner, Observer {
             it?.let {
-                findNavController().navigate(AddRecipeStep3FragmentDirections.actionAddRecipeStep3FragmentToAddRecipeStep4Fragment(it))
+                findNavController().navigate(AddRecipeStep3FragmentDirections.actionAddRecipeStep3FragmentToAddRecipeStep4Fragment(it, isEdit))
                 viewModel.onNavigateToNextStepComplete()
             }
         })
@@ -88,7 +89,14 @@ class AddRecipeStep3Fragment : Fragment()
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater)
     {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.menu_close, menu)
+        if (isEdit)
+        {
+            inflater.inflate(R.menu.menu_save_close, menu)
+        }
+        else
+        {
+            inflater.inflate(R.menu.menu_close, menu)
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean
@@ -98,6 +106,11 @@ class AddRecipeStep3Fragment : Fragment()
             R.id.action_close ->
             {
                 findNavController().navigate(AddRecipeStep3FragmentDirections.actionAddRecipeStep3FragmentToNavRecipeList())
+            }
+            R.id.action_save  ->
+            {
+                viewModel.onSaveRecipe()
+                findNavController().navigate(AddRecipeStep3FragmentDirections.actionAddRecipeStep3FragmentToRecipeDetailFragment(viewModel.recipe.value!!))
             }
         }
         return super.onOptionsItemSelected(item)

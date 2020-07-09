@@ -3,7 +3,6 @@ package com.github.tei.imamu.view.recipe
 import android.app.Activity
 import android.app.Application
 import android.content.Intent
-import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -30,6 +29,7 @@ class AddRecipeStep1Fragment : Fragment()
     private lateinit var binding: FragmentAddRecipeStep1Binding
     private val viewModel: AddRecipeViewModel by inject()
     private lateinit var application: Application
+    private var isEdit = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
@@ -55,7 +55,8 @@ class AddRecipeStep1Fragment : Fragment()
         //set viewModel in binding
         binding.viewModel = viewModel
 
-        viewModel.recipe.value = RecipeDetailFragmentArgs.fromBundle(requireArguments()).recipe
+        viewModel.recipe.value = AddRecipeStep1FragmentArgs.fromBundle(requireArguments()).recipe
+        isEdit = AddRecipeStep1FragmentArgs.fromBundle(requireArguments()).isEdit
     }
 
     private fun initListener()
@@ -73,7 +74,7 @@ class AddRecipeStep1Fragment : Fragment()
     {
         viewModel.navigateToNextStep.observe(viewLifecycleOwner, Observer {
             it?.let {
-                findNavController().navigate(AddRecipeStep1FragmentDirections.actionAddRecipeStep1FragmentToAddRecipeStep2Fragment(it))
+                findNavController().navigate(AddRecipeStep1FragmentDirections.actionAddRecipeStep1FragmentToAddRecipeStep2Fragment(it, isEdit))
                 viewModel.onNavigateToNextStepComplete()
             }
         })
@@ -114,7 +115,14 @@ class AddRecipeStep1Fragment : Fragment()
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater)
     {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.menu_close, menu)
+        if (isEdit)
+        {
+            inflater.inflate(R.menu.menu_save_close, menu)
+        }
+        else
+        {
+            inflater.inflate(R.menu.menu_close, menu)
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean
@@ -124,6 +132,11 @@ class AddRecipeStep1Fragment : Fragment()
             R.id.action_close ->
             {
                 findNavController().navigate(AddRecipeStep1FragmentDirections.actionAddRecipeStep1FragmentToNavRecipeList())
+            }
+            R.id.action_save ->
+            {
+                viewModel.onSaveRecipe()
+                findNavController().navigate(AddRecipeStep1FragmentDirections.actionAddRecipeStep1FragmentToRecipeDetailFragment(viewModel.recipe.value!!))
             }
         }
         return super.onOptionsItemSelected(item)
