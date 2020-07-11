@@ -9,6 +9,10 @@
             type="com.github.tei.imamu.viewmodel.recipe.ImportRecipeViewModel" />
     </data>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -41,16 +45,6 @@
 
         </com.facebook.shimmer.ShimmerFrameLayout>
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@mipmap/import_background"
-            android:scaleType="centerCrop"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
-
         <EditText
             android:id="@+id/edit_text_recipe_link"
             style="@style/edit_text_string_style"
@@ -60,7 +54,6 @@
             android:hint="@string/insert_recipe_link"
             android:paddingStart="@dimen/default_recipe_padding"
             android:paddingEnd="@dimen/default_recipe_padding"
-            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.11"
@@ -82,5 +75,80 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.055" />
 
+        <TextView
+            android:id="@+id/text_view_chefkoch_recipe_preview"
+            style="@style/caption_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_recipe_padding"
+            android:layout_marginTop="@dimen/default_recipe_margin"
+            android:layout_marginEnd="@dimen/default_recipe_padding"
+            android:text="@string/caption_chefkoch_preview_recipes"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_text_recipe_link" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/chefkoch_recipe_preview_list"
+            android:layout_width="match_parent"
+            android:layout_height="355dp"
+            android:layout_marginTop="@dimen/default_recipe_padding"
+            android:paddingStart="30dp"
+            android:paddingEnd="60dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_view_chefkoch_recipe_preview"
+            tools:listitem="@layout/list_item_recipe_preview_item" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar_chefkoch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/chefkoch_recipe_preview_list"
+            app:layout_constraintTop_toTopOf="@id/chefkoch_recipe_preview_list"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/text_view_kitchenstories_recipe_preview"
+            style="@style/caption_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_recipe_padding"
+            android:layout_marginTop="@dimen/default_recipe_padding"
+            android:layout_marginEnd="@dimen/default_recipe_padding"
+            android:text="@string/caption_kitchenstories_preview_recipes"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chefkoch_recipe_preview_list" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/kitchenstories_recipe_preview_list"
+            android:layout_width="match_parent"
+            android:layout_height="355dp"
+            android:layout_marginTop="@dimen/default_recipe_padding"
+            android:layout_marginBottom="@dimen/default_recipe_margin"
+            android:paddingStart="30dp"
+            android:paddingEnd="60dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_view_kitchenstories_recipe_preview"
+            tools:listitem="@layout/list_item_recipe_preview_item" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar_kitchenstories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/kitchenstories_recipe_preview_list"
+            app:layout_constraintTop_toTopOf="@id/kitchenstories_recipe_preview_list"
+            android:visibility="gone"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 </layout>

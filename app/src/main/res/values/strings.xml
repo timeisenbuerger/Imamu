@@ -80,6 +80,9 @@
     <string name="caption_last_viewed_recipes">Zuletzt geöffnete Rezepte</string>
     <string name="caption_last_viewed_cook_books">Zuletzt geöffnete Kochbücher</string>
 
+    <string name="caption_chefkoch_preview_recipes">Vorschläge von Chefkoch</string>
+    <string name="caption_kitchenstories_preview_recipes">Vorschläge von Kitchen Stories</string>
+
     <string name="caption_recipe_placeholder">Deine Rezeptsammlung ist leer</string>
     <string name="text_recipe_placeholder">Mache den ersten Schritt zu deiner großartigen Rezeptsammlung.</string>
     <string name="caption_cook_book_placeholder">Deine Kochbuchsammlung ist leer</string>

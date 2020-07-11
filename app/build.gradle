@@ -79,7 +79,7 @@ dependencies {
     implementation "org.koin:koin-androidx-viewmodel:2.0.0-rc-2"
 
     //picasso
-    implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
     //test
     testImplementation 'junit:junit:4.12'
@@ -87,7 +87,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     // recipe api
-    implementation 'com.github.timeisenbuerger:RecipeExtractor:master-SNAPSHOT'
+    implementation 'com.github.timeisenbuerger:RecipeExtractor:d7c4df09a3'
 
     //Async Library
     implementation "org.jetbrains.anko:anko-common:0.10.8"

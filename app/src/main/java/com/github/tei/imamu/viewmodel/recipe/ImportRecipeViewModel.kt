@@ -8,10 +8,17 @@ import com.github.tei.imamu.data.database.entity.recipe.RecipeIngredient
 import com.github.tei.imamu.data.repository.IngredientRepository
 import com.github.tei.imamu.data.repository.RecipeRepository
 import de.tei.re.logic.ChefkochExtractor
+import de.tei.re.logic.ChefkochRotWExtractor
+import de.tei.re.logic.KitchenStoriesExtractor
+import de.tei.re.logic.KitchenStoriesRotWExtractor
+import de.tei.re.model.RotWTemplate
 
 class ImportRecipeViewModel(private val recipeRepository: RecipeRepository, private val ingredientRepository: IngredientRepository) : ViewModel()
 {
-    private var recipeExtractor: ChefkochExtractor
+    private var chefKochExtractor: ChefkochExtractor
+    private var kitchenStoriesExtractor: KitchenStoriesExtractor
+    private lateinit var chefKochRotWExtractor: ChefkochRotWExtractor
+    private lateinit var kitchenStoriesRotWExtractor: KitchenStoriesRotWExtractor
 
     private val _recipe = MutableLiveData<Recipe>()
     val recipe: LiveData<Recipe>
@@ -24,23 +31,44 @@ class ImportRecipeViewModel(private val recipeRepository: RecipeRepository, priv
     init
     {
         _recipe.value = Recipe()
-        recipeExtractor = ChefkochExtractor()
+        chefKochExtractor = ChefkochExtractor()
+        kitchenStoriesExtractor = KitchenStoriesExtractor()
     }
 
     fun startImport(url: String)
     {
-        recipeExtractor.changeRecipe(url)
-        createRecipe()
+        if (url.contains("chefkoch"))
+        {
+            chefKochExtractor.changeRecipe(url)
+            createChefkochRecipe()
+        }
+        else if (url.contains("kitchenstories"))
+        {
+            kitchenStoriesExtractor.changeRecipe(url);
+            createKitchenStoriesRecipe()
+        }
     }
 
-    private fun createRecipe()
+    fun retrieveChefKochRotW(): MutableList<RotWTemplate>
+    {
+        chefKochRotWExtractor = ChefkochRotWExtractor()
+        return chefKochRotWExtractor.recipesOfTheWeek
+    }
+
+    fun retrieveKitchenStoriesRotW(): MutableList<RotWTemplate>
+    {
+        kitchenStoriesRotWExtractor = KitchenStoriesRotWExtractor()
+        return kitchenStoriesRotWExtractor.recipesOfTheWeek
+    }
+
+    private fun createChefkochRecipe()
     {
         _recipe.value?.let { item ->
-            item.title = recipeExtractor.title
-            item.preparation = recipeExtractor.instruction
-            item.servingsNumber = recipeExtractor.portions
+            item.title = chefKochExtractor.title
+            item.preparation = chefKochExtractor.instruction
+            item.servingsNumber = chefKochExtractor.portions
 
-            for (ingredient: de.tei.re.model.RecipeIngredient in recipeExtractor.recipeIngredients)
+            for (ingredient: de.tei.re.model.RecipeIngredient in chefKochExtractor.recipeIngredients)
             {
                 var recipeIngredient = RecipeIngredient()
 
@@ -51,7 +79,7 @@ class ImportRecipeViewModel(private val recipeRepository: RecipeRepository, priv
                 item.recipeIngredients.add(recipeIngredient)
             }
 
-            for (tag in recipeExtractor.tags)
+            for (tag in chefKochExtractor.tags)
             {
                 when
                 {
@@ -86,6 +114,57 @@ class ImportRecipeViewModel(private val recipeRepository: RecipeRepository, priv
             item.totalTime = totalTime
 
             recipeRepository.save(item)
+        }
+    }
+
+    private fun createKitchenStoriesRecipe()
+    {
+        _recipe.value?.let {
+            it.title = kitchenStoriesExtractor.title
+            it.difficulty = kitchenStoriesExtractor.difficulty
+
+            for(i in 0 until  3)
+            {
+                when(i)
+                {
+                    0 -> it.preparationTime = kitchenStoriesExtractor.times[i].filter { time -> time.isDigit() }
+                    1 -> it.bakingTime = kitchenStoriesExtractor.times[i].filter { time -> time.isDigit() }
+                    2 -> it.restTime = kitchenStoriesExtractor.times[i].filter { time -> time.isDigit() }
+                }
+            }
+
+            it.servingsNumber = kitchenStoriesExtractor.portions
+
+            for (step in kitchenStoriesExtractor.steps)
+            {
+                it.preparation += step
+            }
+
+            for (ingredient: de.tei.re.model.RecipeIngredient in kitchenStoriesExtractor.recipeIngredients)
+            {
+                var recipeIngredient = RecipeIngredient()
+
+                recipeIngredient.amount = ingredient.amount
+                recipeIngredient.unit = ingredient.unit
+                recipeIngredient.ingredient.target = ingredientRepository.getIngredientForName(ingredient.name)
+
+                it.recipeIngredients.add(recipeIngredient)
+            }
+
+            var totalTime = 0
+            if (it.preparationTime.isNotEmpty())
+            {
+                totalTime += it.preparationTime.toInt()
+            }
+            if (it.bakingTime.isNotEmpty())
+            {
+                totalTime += it.bakingTime.toInt()
+            }
+            if (it.restTime.isNotEmpty())
+            {
+                totalTime += it.restTime.toInt()
+            }
+            it.totalTime = totalTime
         }
     }
 

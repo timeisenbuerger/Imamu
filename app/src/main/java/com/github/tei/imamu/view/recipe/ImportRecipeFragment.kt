@@ -15,25 +15,34 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.CompositePageTransformer
+import androidx.viewpager2.widget.MarginPageTransformer
+import androidx.viewpager2.widget.ViewPager2
 import com.github.tei.imamu.MainActivity
 import com.github.tei.imamu.R
+import com.github.tei.imamu.custom.adapter.recipe.PreviewRecipeListAdapter
 import com.github.tei.imamu.databinding.FragmentImportRecipeBinding
 import com.github.tei.imamu.viewmodel.recipe.ImportRecipeViewModel
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import org.koin.android.ext.android.inject
+import kotlin.math.abs
 
 class ImportRecipeFragment : Fragment()
 {
     private lateinit var binding: FragmentImportRecipeBinding
     private val viewModel: ImportRecipeViewModel by inject()
     private lateinit var application: Application
+    private lateinit var previewChefKochRecipeListAdapter: PreviewRecipeListAdapter
+    private lateinit var previewKitchenStoriesRecipeListAdapter: PreviewRecipeListAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
         (activity as MainActivity).supportActionBar?.title = "Rezept importieren"
 
         init(inflater, container)
+        initComponents()
         initObserver()
         initListener()
 
@@ -54,6 +63,20 @@ class ImportRecipeFragment : Fragment()
 
         //set viewModel in binding
         binding.viewModel = viewModel
+
+        previewChefKochRecipeListAdapter = PreviewRecipeListAdapter(viewModel, this)
+        binding.chefkochRecipePreviewList.adapter = previewChefKochRecipeListAdapter
+
+        previewKitchenStoriesRecipeListAdapter = PreviewRecipeListAdapter(viewModel, this)
+        binding.kitchenstoriesRecipePreviewList.adapter = previewKitchenStoriesRecipeListAdapter
+    }
+
+    private fun initComponents()
+    {
+        initViewPager(binding.chefkochRecipePreviewList)
+        initViewPager(binding.kitchenstoriesRecipePreviewList)
+
+        fillViewPager()
     }
 
     private fun initObserver()
@@ -67,21 +90,59 @@ class ImportRecipeFragment : Fragment()
     private fun initListener()
     {
         binding.buttonImportRecipe.setOnClickListener {
-            importRecipe()
+            importRecipe(binding.editTextRecipeLink.text.toString())
         }
     }
 
-    private fun importRecipe()
+    private fun initViewPager(viewPager: ViewPager2)
     {
-        if (!TextUtils.isEmpty(binding.editTextRecipeLink.text.toString()))
+        viewPager.clipToPadding = false
+        viewPager.clipChildren = false
+        viewPager.offscreenPageLimit = 3
+
+        val compositePageTransformer = CompositePageTransformer()
+        compositePageTransformer.addTransformer(MarginPageTransformer(40))
+        compositePageTransformer.addTransformer { page, position ->
+            val r = 1 - abs(position)
+            page.scaleY = (0.95f + r * 0.05f)
+        }
+
+        viewPager.setPageTransformer(compositePageTransformer)
+    }
+
+    private fun fillViewPager()
+    {
+        binding.progressBarChefkoch.visibility = View.VISIBLE
+        binding.progressBarKitchenstories.visibility = View.VISIBLE
+
+        doAsync {
+            val recipesOfTheWeek = viewModel.retrieveChefKochRotW()
+            uiThread {
+                binding.progressBarChefkoch.visibility = View.GONE
+
+                previewChefKochRecipeListAdapter.submitList(recipesOfTheWeek)
+                binding.chefkochRecipePreviewList.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
+            }
+        }
+
+        doAsync {
+            val recipesOfTheWeek = viewModel.retrieveKitchenStoriesRotW()
+            uiThread {
+                binding.progressBarKitchenstories.visibility = View.GONE
+
+                previewKitchenStoriesRecipeListAdapter.submitList(recipesOfTheWeek)
+                binding.kitchenstoriesRecipePreviewList.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
+            }
+        }
+    }
+
+    fun importRecipe(url: String)
+    {
+        if (!TextUtils.isEmpty(url))
         {
             if (isNetworkConnected())
             {
-                requireActivity().window.setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
-                binding.editTextRecipeLink.visibility = View.GONE
-                binding.buttonImportRecipe.visibility = View.GONE
-                binding.shimmerViewContainer.visibility = View.VISIBLE
-                binding.shimmerViewContainer.startShimmerAnimation()
+                disableInteractions()
 
                 doAsync {
                     viewModel.startImport(binding.editTextRecipeLink.text.toString())
@@ -107,6 +168,15 @@ class ImportRecipeFragment : Fragment()
         {
             binding.editTextRecipeLink.error = "Bitte gebe einen Rezeptlink ein."
         }
+    }
+
+    private fun disableInteractions()
+    {
+        requireActivity().window.setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+        binding.editTextRecipeLink.visibility = View.GONE
+        binding.buttonImportRecipe.visibility = View.GONE
+        binding.shimmerViewContainer.visibility = View.VISIBLE
+        binding.shimmerViewContainer.startShimmerAnimation()
     }
 
     private fun isNetworkConnected(): Boolean
