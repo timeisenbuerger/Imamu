@@ -145,7 +145,7 @@ class ImportRecipeFragment : Fragment()
                 disableInteractions()
 
                 doAsync {
-                    viewModel.startImport(binding.editTextRecipeLink.text.toString())
+                    viewModel.startImport(url)
 
                     uiThread {
                         binding.shimmerViewContainer.visibility = View.GONE

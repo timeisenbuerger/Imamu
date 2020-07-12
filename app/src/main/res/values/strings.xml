@@ -80,6 +80,7 @@
     <string name="caption_last_viewed_recipes">Zuletzt geöffnete Rezepte</string>
     <string name="caption_last_viewed_cook_books">Zuletzt geöffnete Kochbücher</string>
 
+    <string name="import_description">Hier kannst du Rezepte von Chefkoch und Kitchen Stories importieren. Dafür musst du den Link des gewünschten Rezepts in das vorgegebene Feld eingeben und den Download-Button klicken.</string>
     <string name="caption_chefkoch_preview_recipes">Vorschläge von Chefkoch</string>
     <string name="caption_kitchenstories_preview_recipes">Vorschläge von Kitchen Stories</string>
 
