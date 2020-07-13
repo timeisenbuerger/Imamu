@@ -33,7 +33,7 @@ class RecipeListFragment : Fragment()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
-        (activity as MainActivity).supportActionBar?.title = "Rezeptliste"
+        (activity as MainActivity).supportActionBar?.title = "Rezepte"
 
         init(inflater, container)
         initComponents()

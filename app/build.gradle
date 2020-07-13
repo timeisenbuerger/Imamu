@@ -120,7 +120,7 @@ dependencies {
 
     implementation 'androidx.viewpager2:viewpager2:1.1.0-alpha01'
 
-    implementation 'com.takisoft.fix:preference-v7:25.3.0.0'
+    implementation 'androidx.preference:preference-ktx:1.1.1'
 
     implementation 'com.squareup.picasso:picasso:2.71828'
 

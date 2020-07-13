@@ -1,17 +1,22 @@
 package com.github.tei.imamu.viewmodel.recipe
 
+import android.content.Context
+import android.graphics.BitmapFactory
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.preference.PreferenceManager
 import com.github.tei.imamu.data.database.entity.recipe.Recipe
 import com.github.tei.imamu.data.database.entity.recipe.RecipeIngredient
 import com.github.tei.imamu.data.repository.IngredientRepository
 import com.github.tei.imamu.data.repository.RecipeRepository
+import com.github.tei.imamu.util.ImageUtil
 import de.tei.re.logic.ChefkochExtractor
 import de.tei.re.logic.ChefkochRotWExtractor
 import de.tei.re.logic.KitchenStoriesExtractor
 import de.tei.re.logic.KitchenStoriesRotWExtractor
 import de.tei.re.model.RotWTemplate
+import java.net.URL
 
 class ImportRecipeViewModel(private val recipeRepository: RecipeRepository, private val ingredientRepository: IngredientRepository) : ViewModel()
 {
@@ -35,17 +40,20 @@ class ImportRecipeViewModel(private val recipeRepository: RecipeRepository, priv
         kitchenStoriesExtractor = KitchenStoriesExtractor()
     }
 
-    fun startImport(url: String)
+    fun startImport(url: String, context: Context)
     {
+        val defaultSharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+        val importImages = defaultSharedPreferences.getBoolean("pref_download_recipe_images", false)
+
         if (url.contains("chefkoch"))
         {
             chefKochExtractor.changeRecipe(url)
-            createChefkochRecipe()
+            createChefkochRecipe(importImages, context)
         }
         else if (url.contains("kitchenstories"))
         {
-            kitchenStoriesExtractor.changeRecipe(url);
-            createKitchenStoriesRecipe()
+            kitchenStoriesExtractor.changeRecipe(url)
+            createKitchenStoriesRecipe(importImages, context)
         }
     }
 
@@ -61,9 +69,18 @@ class ImportRecipeViewModel(private val recipeRepository: RecipeRepository, priv
         return kitchenStoriesRotWExtractor.recipesOfTheWeek
     }
 
-    private fun createChefkochRecipe()
+    private fun createChefkochRecipe(importImages: Boolean, context: Context)
     {
         _recipe.value?.let { item ->
+
+            if (importImages)
+            {
+                val inputStream = URL(chefKochExtractor.imageLink).openStream()
+                val imagePath = ImageUtil.saveImage(BitmapFactory.decodeStream(inputStream), context, Regex("[^A-Za-z0-9 ]").replace(chefKochExtractor.title, ""))
+
+                item.imagePath = imagePath;
+            }
+
             item.title = chefKochExtractor.title
             item.preparation = chefKochExtractor.instruction
             item.servingsNumber = chefKochExtractor.portions
@@ -117,15 +134,24 @@ class ImportRecipeViewModel(private val recipeRepository: RecipeRepository, priv
         }
     }
 
-    private fun createKitchenStoriesRecipe()
+    private fun createKitchenStoriesRecipe(importImages: Boolean, context: Context)
     {
         _recipe.value?.let {
+
+            if (importImages)
+            {
+                val inputStream = URL(chefKochExtractor.imageLink).openStream()
+                val imagePath = ImageUtil.saveImage(BitmapFactory.decodeStream(inputStream), context, Regex("[^A-Za-z0-9 ]").replace(kitchenStoriesExtractor.title, ""))
+
+                it.imagePath = imagePath;
+            }
+
             it.title = kitchenStoriesExtractor.title
             it.difficulty = kitchenStoriesExtractor.difficulty
 
-            for(i in 0 until  3)
+            for (i in 0 until 3)
             {
-                when(i)
+                when (i)
                 {
                     0 -> it.preparationTime = kitchenStoriesExtractor.times[i].filter { time -> time.isDigit() }
                     1 -> it.bakingTime = kitchenStoriesExtractor.times[i].filter { time -> time.isDigit() }

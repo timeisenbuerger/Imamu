@@ -145,7 +145,7 @@ class ImportRecipeFragment : Fragment()
                 disableInteractions()
 
                 doAsync {
-                    viewModel.startImport(url)
+                    viewModel.startImport(url, requireContext())
 
                     uiThread {
                         binding.shimmerViewContainer.visibility = View.GONE
@@ -173,8 +173,7 @@ class ImportRecipeFragment : Fragment()
     private fun disableInteractions()
     {
         requireActivity().window.setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
-        binding.editTextRecipeLink.visibility = View.GONE
-        binding.buttonImportRecipe.visibility = View.GONE
+        binding.mainLayout.visibility = View.GONE
         binding.shimmerViewContainer.visibility = View.VISIBLE
         binding.shimmerViewContainer.startShimmerAnimation()
     }

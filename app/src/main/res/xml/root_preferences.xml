@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="@string/import_settings_title">
+
+        <CheckBoxPreference
+            android:key="pref_download_recipe_images"
+            android:title="@string/download_images_title"
+            android:summary="@string/download_images_summary"
+            android:defaultValue="false"
+        />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/about_app_title">
+
+        <Preference
+            android:title="@string/app_version_title"
+            android:summary="@string/app_version_summary"/>
+
+        <Preference
+            android:title="@string/open_source_license_title"
+            android:summary="@string/open_source_license_summary"/>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
