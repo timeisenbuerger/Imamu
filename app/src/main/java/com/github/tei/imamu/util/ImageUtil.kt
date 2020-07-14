@@ -1,5 +1,6 @@
 package com.github.tei.imamu.util
 
+import android.content.ContentResolver
 import android.content.ContentValues
 import android.content.Context
 import android.graphics.Bitmap
@@ -7,6 +8,7 @@ import android.net.Uri
 import android.os.Environment
 import android.provider.MediaStore
 import androidx.core.net.toUri
+import io.objectbox.BoxStore
 import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream
@@ -67,6 +69,21 @@ class ImageUtil
             }
 
             return Environment.getExternalStorageDirectory().absolutePath + "/Pictures/RezeptFotos/" + name + ".png"
+        }
+
+        fun deleteImage(context: Context, file: File) : Boolean
+        {
+            val where = MediaStore.MediaColumns.DATA + "=?"
+            val selectionArgs = arrayOf(file.absolutePath)
+            val contentResolver: ContentResolver = context.contentResolver
+            val filesUri = MediaStore.Files.getContentUri("external")
+            contentResolver.delete(filesUri, where, selectionArgs)
+
+            if (file.exists())
+            {
+                contentResolver.delete(filesUri, where, selectionArgs)
+            }
+            return !file.exists()
         }
 
         private fun contentValues(name: String): ContentValues

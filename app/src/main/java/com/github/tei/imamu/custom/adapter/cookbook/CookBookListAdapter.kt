@@ -5,6 +5,7 @@ import android.text.TextUtils
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
+import androidx.appcompat.view.ActionMode
 import androidx.recyclerview.widget.ListAdapter
 import com.github.tei.imamu.custom.viewholder.cookbook.CookBookDiffCallback
 import com.github.tei.imamu.custom.viewholder.cookbook.CookBookListViewHolder
@@ -17,6 +18,7 @@ class CookBookListAdapter(val viewModel: CookBookListViewModel, val context: Con
     internal var multiSelect = false
     internal var selectedItems = mutableListOf<CookBook>()
     lateinit var allCookBooks: MutableList<CookBook>
+    internal var actionMode: ActionMode? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CookBookListViewHolder
     {

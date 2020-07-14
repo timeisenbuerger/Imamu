@@ -2,7 +2,6 @@ package com.github.tei.imamu.custom.viewholder.cookbook
 
 import android.content.Context
 import android.graphics.BitmapFactory
-import android.graphics.Color
 import android.text.TextUtils
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
@@ -96,6 +95,10 @@ class CookBookListViewHolder private constructor(private val binding: ListItemCo
                 adapter.selectedItems.add(item)
                 binding.cardView.isChecked = true
             }
+
+            adapter.actionMode?.let {
+                it.title = adapter.selectedItems.size.toString() + " selektiert"
+            }
         }
         else
         {
@@ -118,6 +121,10 @@ class CookBookListViewHolder private constructor(private val binding: ListItemCo
 
         override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean
         {
+            mode?.let {
+                adapter.actionMode = it
+            }
+
             adapter.multiSelect = true
             mode?.menuInflater?.inflate(R.menu.menu_action_delete, menu)
             return true

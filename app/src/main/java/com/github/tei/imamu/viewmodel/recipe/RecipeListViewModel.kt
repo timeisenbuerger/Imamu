@@ -1,13 +1,19 @@
 package com.github.tei.imamu.viewmodel.recipe
 
+import android.content.Context
+import android.text.TextUtils
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.github.tei.imamu.data.database.entity.recipe.LastViewedRecipe
 import com.github.tei.imamu.data.database.entity.recipe.Recipe
+import com.github.tei.imamu.data.repository.LastViewedRecipeRepository
 import com.github.tei.imamu.data.repository.RecipeRepository
+import com.github.tei.imamu.util.ImageUtil
 import io.objectbox.android.ObjectBoxLiveData
+import java.io.File
 
-class RecipeListViewModel(private val recipeRepository: RecipeRepository) : ViewModel()
+class RecipeListViewModel(private val recipeRepository: RecipeRepository, private val lastViewedRecipeRepository: LastViewedRecipeRepository) : ViewModel()
 {
     private var _recipes: ObjectBoxLiveData<Recipe> = recipeRepository.getAll()
     val recipes: ObjectBoxLiveData<Recipe>
@@ -26,10 +32,32 @@ class RecipeListViewModel(private val recipeRepository: RecipeRepository) : View
         _recipes = recipeRepository.getAll()
     }
 
-    fun deleteRecipes(recipes: List<Recipe>)
+    fun deleteRecipes(recipes: List<Recipe>, context: Context)
     {
+        val lastViewedRecipes = lastViewedRecipeRepository.getAllAsLazyList()
+
         for (recipe in recipes)
         {
+            var lastViewedRecipeToRemove: LastViewedRecipe? = null
+            for (lastViewedRecipe in lastViewedRecipes)
+            {
+                if (lastViewedRecipe.recipe.target == recipe)
+                {
+                    lastViewedRecipeToRemove = lastViewedRecipe
+                    break
+                }
+            }
+
+            lastViewedRecipeToRemove?.let {
+                lastViewedRecipeRepository.remove(it)
+            }
+
+            if (!TextUtils.isEmpty(recipe.imagePath) && recipe.imagePath.contains("RezeptFotos"))
+            {
+                val image = File(recipe.imagePath)
+                ImageUtil.deleteImage(context, image)
+            }
+
             recipeRepository.remove(recipe)
         }
     }

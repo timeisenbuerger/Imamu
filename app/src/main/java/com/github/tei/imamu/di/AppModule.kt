@@ -34,13 +34,13 @@ val viewModelModule = module {
     viewModel { HomeViewModel(get(), get(), get()) }
     viewModel { FavoriteRecipesViewModel(get()) }
 
-    viewModel { RecipeListViewModel(get()) }
+    viewModel { RecipeListViewModel(get(), get()) }
     viewModel { RecipeDetailViewModel(get(), get(), get()) }
     viewModel { ImportRecipeViewModel(get(), get()) }
     viewModel { AddRecipeViewModel(get(), get()) }
     viewModel { EditRecipeViewModel(get(), get()) }
 
-    viewModel { CookBookListViewModel(get(), get()) }
+    viewModel { CookBookListViewModel(get(), get(), get()) }
     viewModel { CookBookDetailViewModel(get(), get()) }
     viewModel { AddCookBookViewModel(get()) }
     viewModel { EditCookBookViewModel(get()) }

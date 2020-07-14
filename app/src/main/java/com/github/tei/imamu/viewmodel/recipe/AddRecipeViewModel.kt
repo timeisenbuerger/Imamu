@@ -7,6 +7,7 @@ import com.github.tei.imamu.data.database.entity.Ingredient
 import com.github.tei.imamu.data.database.entity.recipe.Recipe
 import com.github.tei.imamu.data.repository.IngredientRepository
 import com.github.tei.imamu.data.repository.RecipeRepository
+import io.objectbox.android.ObjectBoxLiveData
 
 class AddRecipeViewModel(private val recipeRepository: RecipeRepository, private val ingredientRepository: IngredientRepository) : ViewModel()
 {
@@ -19,6 +20,8 @@ class AddRecipeViewModel(private val recipeRepository: RecipeRepository, private
     private val _navigateToRecipeDetail = MutableLiveData<Recipe>()
     val navigateToRecipeDetail: LiveData<Recipe>
         get() = _navigateToRecipeDetail
+
+    val ingredients: ObjectBoxLiveData<Ingredient> = ingredientRepository.getAll()
 
     fun onSaveRecipe()
     {

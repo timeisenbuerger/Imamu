@@ -1,13 +1,14 @@
 package com.github.tei.imamu.custom.adapter.recipe
 
 import android.view.ViewGroup
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.ListAdapter
 import com.github.tei.imamu.custom.viewholder.recipe.IngredientAddEditListViewHolder
 import com.github.tei.imamu.custom.viewholder.recipe.IngredientDiffCallback
 import com.github.tei.imamu.data.database.entity.recipe.RecipeIngredient
 import com.github.tei.imamu.viewmodel.recipe.AddRecipeViewModel
 
-class IngredientAddEditListAdapter(private val viewModel: AddRecipeViewModel) : ListAdapter<RecipeIngredient, IngredientAddEditListViewHolder>(IngredientDiffCallback())
+class IngredientAddEditListAdapter(private val viewModel: AddRecipeViewModel, private val lifecycleOwner: LifecycleOwner) : ListAdapter<RecipeIngredient, IngredientAddEditListViewHolder>(IngredientDiffCallback())
 {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IngredientAddEditListViewHolder
     {
@@ -17,6 +18,6 @@ class IngredientAddEditListAdapter(private val viewModel: AddRecipeViewModel) : 
     override fun onBindViewHolder(holderList: IngredientAddEditListViewHolder, position: Int)
     {
         val item = getItem(position)
-        holderList.bind(item, this, viewModel)
+        holderList.bind(item, this, viewModel, lifecycleOwner)
     }
 }

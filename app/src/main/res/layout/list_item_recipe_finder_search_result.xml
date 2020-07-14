@@ -76,7 +76,7 @@
                     android:layout_marginStart="32dp"
                     android:layout_marginEnd="100dp"
                     android:layout_marginBottom="40dp"
-                    android:singleLine="false"
+                    android:singleLine="true"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1.0"

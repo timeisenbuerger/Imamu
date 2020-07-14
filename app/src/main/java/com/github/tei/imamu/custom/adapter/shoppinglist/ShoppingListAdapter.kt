@@ -1,6 +1,7 @@
 package com.github.tei.imamu.custom.adapter.shoppinglist
 
 import android.view.ViewGroup
+import androidx.appcompat.view.ActionMode
 import androidx.recyclerview.widget.ListAdapter
 import com.github.tei.imamu.custom.viewholder.shoppinglist.ShoppingListDiffCallback
 import com.github.tei.imamu.custom.viewholder.shoppinglist.ShoppingListViewHolder
@@ -11,6 +12,7 @@ class ShoppingListAdapter(val viewModel: ShoppingListViewModel) : ListAdapter<Sh
 {
     internal var multiSelect = false
     internal var selectedItems = mutableListOf<ShoppingList>()
+    internal var actionMode: ActionMode? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShoppingListViewHolder
     {

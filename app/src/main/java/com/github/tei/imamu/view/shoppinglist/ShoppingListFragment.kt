@@ -26,11 +26,11 @@ class ShoppingListFragment : Fragment()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
         init(inflater, container)
+        initListener()
         initObserver()
 
         (activity as MainActivity).supportActionBar?.title = "Einkaufslisten"
 
-        setHasOptionsMenu(true)
         return binding.root
     }
 
@@ -53,6 +53,11 @@ class ShoppingListFragment : Fragment()
         shoppingListAdapter = ShoppingListAdapter(viewModel)
         binding.listShoppingLists.adapter = shoppingListAdapter
         binding.listShoppingLists.layoutManager = manager
+    }
+
+    private fun initListener()
+    {
+        binding.fabAddShoppingList.setOnClickListener { viewModel.createNewShoppingList() }
     }
 
     private fun initObserver()
@@ -94,22 +99,5 @@ class ShoppingListFragment : Fragment()
                 viewModel.onNavigateToDetailComplete()
             }
         })
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater)
-    {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.menu_action_add, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean
-    {
-        when(item.itemId)
-        {
-            R.id.action_add -> {
-                viewModel.createNewShoppingList()
-            }
-        }
-        return super.onOptionsItemSelected(item)
     }
 }

@@ -175,7 +175,7 @@ class RecipeDetailFragment : Fragment()
                     progress = it
                 }
         }
-        if (!TextUtils.isEmpty(recipe.bakingTime))
+        if (!TextUtils.isEmpty(recipe.preparationTime))
         {
             binding.textViewCirclePreparationTime.text = recipe.preparationTime + " min"
         }

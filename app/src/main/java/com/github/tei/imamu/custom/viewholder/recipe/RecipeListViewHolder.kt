@@ -109,6 +109,10 @@ class RecipeListViewHolder private constructor(private val binding: ListItemReci
                 adapter.selectedItems.add(item)
                 binding.cardView.isChecked = true
             }
+
+            adapter.actionMode?.let {
+                it.title = adapter.selectedItems.size.toString() + " selektiert"
+            }
         }
         else
         {
@@ -122,7 +126,7 @@ class RecipeListViewHolder private constructor(private val binding: ListItemReci
         {
             if (item?.itemId == R.id.action_delete)
             {
-                viewModel.deleteRecipes(adapter.selectedItems)
+                viewModel.deleteRecipes(adapter.selectedItems, itemView.context)
                 viewModel.initRecipes()
                 mode?.finish()
             }
@@ -131,6 +135,7 @@ class RecipeListViewHolder private constructor(private val binding: ListItemReci
 
         override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean
         {
+            mode?.let { adapter.actionMode = it }
             adapter.multiSelect = true
             mode?.menuInflater?.inflate(R.menu.menu_action_delete, menu)
             return true

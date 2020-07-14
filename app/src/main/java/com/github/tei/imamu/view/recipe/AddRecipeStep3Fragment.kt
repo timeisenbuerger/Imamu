@@ -57,7 +57,7 @@ class AddRecipeStep3Fragment : Fragment()
 
     private fun initComponents()
     {
-        adapter = IngredientAddEditListAdapter(viewModel)
+        adapter = IngredientAddEditListAdapter(viewModel, viewLifecycleOwner)
         binding.listViewIngredients.adapter = adapter
         adapter.submitList(viewModel.recipe.value!!.recipeIngredients)
     }

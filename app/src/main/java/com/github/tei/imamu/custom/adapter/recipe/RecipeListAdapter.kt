@@ -4,6 +4,7 @@ import android.text.TextUtils
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
+import androidx.appcompat.view.ActionMode
 import androidx.recyclerview.widget.ListAdapter
 import com.github.tei.imamu.custom.viewholder.recipe.RecipeDiffCallback
 import com.github.tei.imamu.custom.viewholder.recipe.RecipeListViewHolder
@@ -16,6 +17,7 @@ class RecipeListAdapter(val viewModel: RecipeListViewModel) : ListAdapter<Recipe
     internal var multiSelect = false
     internal var selectedItems = mutableListOf<Recipe>()
     lateinit var allRecipes: MutableList<Recipe>
+    internal var actionMode: ActionMode? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeListViewHolder
     {
