@@ -21,6 +21,7 @@ import com.github.tei.imamu.databinding.FragmentRecipeDetailBinding
 import com.github.tei.imamu.util.setListViewHeightBasedOnChildren
 import com.github.tei.imamu.viewmodel.recipe.RecipeDetailViewModel
 import com.google.android.material.chip.Chip
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.android.inject
 import java.io.File
@@ -307,9 +308,13 @@ class RecipeDetailFragment : Fragment()
             R.id.action_edit         -> recipe?.let {
                 viewModel.onNavigateToEditRecipe()
             }
+
             R.id.action_shoppingList -> recipe?.let {
-                viewModel.createShoppingList(recipe)
-                Toast.makeText(requireContext(), "Aus den Zutaten wurde eine Einkaufsliste erstellt", Toast.LENGTH_LONG)
+                val shoppingList = viewModel.createShoppingList(recipe)
+                Snackbar.make(binding.root, "Einkaufsliste erstellt", Snackbar.LENGTH_LONG)
+                    .setAction("ANZEIGEN") {
+                        findNavController().navigate(RecipeDetailFragmentDirections.actionRecipeDetailFragmentToShoppingListDetailFragment(shoppingList))
+                    }
                     .show()
             }
         }

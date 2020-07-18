@@ -23,7 +23,7 @@ class RecipeDetailViewModel(private val recipeRepository: RecipeRepository, priv
     val navigateToEditRecipe: LiveData<Recipe>
         get() = _navigateToEditRecipe
 
-    fun createShoppingList(recipe: Recipe)
+    fun createShoppingList(recipe: Recipe) : ShoppingList
     {
         var shoppingList = ShoppingList()
         shoppingList.name = recipe.title
@@ -39,6 +39,8 @@ class RecipeDetailViewModel(private val recipeRepository: RecipeRepository, priv
         shoppingList.shoppingListItems.addAll(shoppingListItems)
 
         shoppingListRepository.save(shoppingList)
+
+        return shoppingList
     }
 
     fun updateRecipe()

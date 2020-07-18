@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/nav_home"
         android:name="com.github.tei.imamu.view.home.HomeFragment"
-        android:label=""
+        android:label="Startseite"
         tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_nav_home_to_recipeDetailFragment"
@@ -76,6 +76,10 @@
                 android:name="isEdit"
                 android:defaultValue="true" />
         </action>
+        <action
+            android:id="@+id/action_recipeDetailFragment_to_shoppingListDetailFragment"
+            app:destination="@id/shoppingListDetailFragment"
+            app:popUpTo="@id/recipeDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/importRecipeFragment"
@@ -100,7 +104,7 @@
     <fragment
         android:id="@+id/shoppingListDetailFragment"
         android:name="com.github.tei.imamu.view.shoppinglist.ShoppingListDetailFragment"
-        android:label=""
+        android:label="Einkaufsliste"
         tools:layout="@layout/fragment_shopping_list_detail">
         <argument
             android:name="shoppingList"

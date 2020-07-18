@@ -24,6 +24,7 @@ import com.github.tei.imamu.R
 import com.github.tei.imamu.custom.adapter.recipe.PreviewRecipeListAdapter
 import com.github.tei.imamu.databinding.FragmentImportRecipeBinding
 import com.github.tei.imamu.viewmodel.recipe.ImportRecipeViewModel
+import com.google.android.material.snackbar.Snackbar
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import org.koin.android.ext.android.inject
@@ -116,22 +117,52 @@ class ImportRecipeFragment : Fragment()
         binding.progressBarKitchenstories.visibility = View.VISIBLE
 
         doAsync {
-            val recipesOfTheWeek = viewModel.retrieveChefKochRotW()
-            uiThread {
-                binding.progressBarChefkoch.visibility = View.GONE
-
-                previewChefKochRecipeListAdapter.submitList(recipesOfTheWeek)
-                binding.chefkochRecipePreviewList.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
+            try
+            {
+                val recipesOfTheWeek = viewModel.retrieveChefKochRotW()
+                uiThread {
+                    previewChefKochRecipeListAdapter.submitList(recipesOfTheWeek)
+                    binding.chefkochRecipePreviewList.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
+                }
+            }
+            catch (e: Exception)
+            {
+                uiThread {
+                    Snackbar.make(binding.root, "Es ist ein Fehler aufgetreten.", Snackbar.LENGTH_LONG)
+                        .show()
+                }
+            }
+            finally
+            {
+                uiThread {
+                    binding.progressBarChefkoch.visibility = View.GONE
+                }
             }
         }
 
         doAsync {
-            val recipesOfTheWeek = viewModel.retrieveKitchenStoriesRotW()
-            uiThread {
-                binding.progressBarKitchenstories.visibility = View.GONE
+            try
+            {
+                val recipesOfTheWeek = viewModel.retrieveKitchenStoriesRotW()
+                uiThread {
+                    binding.progressBarKitchenstories.visibility = View.GONE
 
-                previewKitchenStoriesRecipeListAdapter.submitList(recipesOfTheWeek)
-                binding.kitchenstoriesRecipePreviewList.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
+                    previewKitchenStoriesRecipeListAdapter.submitList(recipesOfTheWeek)
+                    binding.kitchenstoriesRecipePreviewList.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
+                }
+            }
+            catch (e: Exception)
+            {
+                uiThread {
+                    Snackbar.make(binding.root, "Es ist ein Fehler aufgetreten.", Snackbar.LENGTH_LONG)
+                        .show()
+                }
+            }
+            finally
+            {
+                uiThread {
+                    binding.progressBarKitchenstories.visibility = View.GONE
+                }
             }
         }
     }
@@ -145,13 +176,24 @@ class ImportRecipeFragment : Fragment()
                 disableInteractions()
 
                 doAsync {
-                    viewModel.startImport(url, requireContext())
+                    try
+                    {
+                        viewModel.startImport(url, requireContext())
 
-                    uiThread {
+                        uiThread {
+                            viewModel.onNavigateToDetail()
+                        }
+                    }
+                    catch (e: Exception)
+                    {
+                        Snackbar.make(binding.root, "Es ist ein Fehler aufgetreten.", Snackbar.LENGTH_LONG)
+                            .show()
+                    }
+                    finally
+                    {
                         binding.shimmerViewContainer.visibility = View.GONE
                         binding.shimmerViewContainer.stopShimmerAnimation()
                         requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
-                        viewModel.onNavigateToDetail()
                     }
                 }
             }

@@ -29,6 +29,8 @@ class ShoppingListDetailFragment : Fragment()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
+        (activity as MainActivity).supportActionBar?.title = viewModel.shoppingList.value?.name
+
         init(inflater, container)
         initComponents()
         initObserver()
