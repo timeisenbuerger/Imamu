@@ -1,6 +1,5 @@
 package com.github.tei.imamu.custom.viewholder.shoppinglist
 
-import android.graphics.Color
 import android.net.Uri
 import android.text.TextUtils
 import android.view.LayoutInflater
@@ -79,14 +78,14 @@ class ShoppingListViewHolder private constructor(private val binding: ListItemSh
     {
         if (adapter.multiSelect)
         {
-            if (adapter.selectedItems.contains(item))
+            if (adapter.selectedItems.containsValue(item))
             {
-                adapter.selectedItems.remove(item)
+                adapter.selectedItems.remove(binding)
                 binding.cardView.isChecked = false
             }
             else
             {
-                adapter.selectedItems.add(item)
+                adapter.selectedItems.put(binding, item)
                 binding.cardView.isChecked = true
             }
 
@@ -106,7 +105,7 @@ class ShoppingListViewHolder private constructor(private val binding: ListItemSh
         {
             if (item?.itemId == R.id.action_delete)
             {
-                viewModel.deleteShoppingLists(adapter.selectedItems)
+                viewModel.deleteShoppingLists(adapter.selectedItems.values.toMutableList())
                 mode?.finish()
             }
             return true
@@ -130,7 +129,11 @@ class ShoppingListViewHolder private constructor(private val binding: ListItemSh
 
         override fun onDestroyActionMode(mode: ActionMode?)
         {
-            binding.cardView.isChecked = false
+            for (itemShoppingListBinding in adapter.selectedItems.keys)
+            {
+                itemShoppingListBinding.cardView.isChecked = false
+            }
+
             adapter.multiSelect = false
             adapter.selectedItems.clear()
             adapter.notifyDataSetChanged()

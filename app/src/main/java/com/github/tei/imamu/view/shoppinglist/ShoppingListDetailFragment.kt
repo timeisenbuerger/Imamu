@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -29,6 +30,7 @@ class ShoppingListDetailFragment : Fragment()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
         init(inflater, container)
+        initComponents()
         initObserver()
         initListener()
 
@@ -57,6 +59,12 @@ class ShoppingListDetailFragment : Fragment()
         binding.listViewShoppingListItems.adapter = shoppingListItemAdapter
     }
 
+    private fun initComponents()
+    {
+        val arrayAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, requireContext().resources.getStringArray(R.array.ingredient_units))
+        binding.editTextUnit.setAdapter(arrayAdapter)
+    }
+
     private fun initObserver()
     {
         viewModel.updateAfterDelete.observe(viewLifecycleOwner, Observer {
@@ -64,6 +72,13 @@ class ShoppingListDetailFragment : Fragment()
             {
                 shoppingListItemAdapter.notifyDataSetChanged()
                 viewModel.onDeleteItemsComplete()
+            }
+        })
+
+        viewModel.ingredients.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                val arrayAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, it)
+                binding.editTextIngredient.setAdapter(arrayAdapter)
             }
         })
     }

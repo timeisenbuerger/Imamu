@@ -185,7 +185,7 @@
     <fragment
         android:id="@+id/recipeFinderResultListFragment"
         android:name="com.github.tei.imamu.view.finder.RecipeFinderResultListFragment"
-        android:label=""
+        android:label="Suchergebnis"
         tools:layout="@layout/fragment_recipe_finder_result_list">
         <action
             android:id="@+id/action_recipeFinderResultListFragment_to_recipeDetailFragment"
@@ -198,7 +198,7 @@
     <fragment
         android:id="@+id/favoriteRecipesFragment"
         android:name="com.github.tei.imamu.view.home.FavoriteRecipesFragment"
-        android:label=""
+        android:label="Favoriten"
         tools:layout="@layout/fragment_favorite_recipes">
         <action
             android:id="@+id/action_favoriteRecipesFragment_to_recipeDetailFragment"
@@ -327,7 +327,8 @@
     </fragment>
     <fragment
         android:id="@+id/nav_settings"
-        android:name="com.github.tei.imamu.view.settings.BaseSettingsFragment"
-        android:label="" />
+        android:name="com.github.tei.imamu.view.settings.SettingsFragment"
+        android:label="Einstellungen">
+    </fragment>
 
 </navigation>

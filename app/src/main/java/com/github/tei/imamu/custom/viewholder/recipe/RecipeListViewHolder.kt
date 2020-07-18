@@ -99,14 +99,14 @@ class RecipeListViewHolder private constructor(private val binding: ListItemReci
     {
         if (adapter.multiSelect)
         {
-            if (adapter.selectedItems.contains(item))
+            if (adapter.selectedItems.containsValue(item))
             {
-                adapter.selectedItems.remove(item)
+                adapter.selectedItems.remove(binding)
                 binding.cardView.isChecked = false
             }
             else
             {
-                adapter.selectedItems.add(item)
+                adapter.selectedItems[binding] = item
                 binding.cardView.isChecked = true
             }
 
@@ -126,7 +126,7 @@ class RecipeListViewHolder private constructor(private val binding: ListItemReci
         {
             if (item?.itemId == R.id.action_delete)
             {
-                viewModel.deleteRecipes(adapter.selectedItems, itemView.context)
+                viewModel.deleteRecipes(adapter.selectedItems.values.toMutableList(), itemView.context)
                 viewModel.initRecipes()
                 mode?.finish()
             }
@@ -148,7 +148,10 @@ class RecipeListViewHolder private constructor(private val binding: ListItemReci
 
         override fun onDestroyActionMode(mode: ActionMode?)
         {
-            binding.cardView.isChecked = false
+            for (itemRecipeListBinding in adapter.selectedItems.keys)
+            {
+                itemRecipeListBinding.cardView.isChecked = false
+            }
             adapter.multiSelect = false
             adapter.selectedItems.clear()
         }

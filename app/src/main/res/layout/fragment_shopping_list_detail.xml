@@ -50,7 +50,7 @@
                 android:paddingStart="@dimen/default_recipe_padding"
                 android:paddingEnd="@dimen/default_recipe_padding" />
 
-            <EditText
+            <AutoCompleteTextView
                 android:id="@+id/editTextUnit"
                 style="@style/edit_text_string_style"
                 android:textAlignment="center"
@@ -59,13 +59,14 @@
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="4dp"
                 android:layout_weight="1"
+                android:completionThreshold="1"
                 android:background="@drawable/ingredient_edit_text_border"
                 android:ems="10"
                 android:hint="@string/unit"
                 android:paddingStart="@dimen/default_recipe_padding"
                 android:paddingEnd="@dimen/default_recipe_padding" />
 
-            <EditText
+            <AutoCompleteTextView
                 android:id="@+id/editTextIngredient"
                 style="@style/edit_text_string_style"
                 android:layout_width="0dp"
@@ -74,6 +75,7 @@
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="4dp"
                 android:layout_weight="1"
+                android:completionThreshold="1"
                 android:background="@drawable/ingredient_edit_text_border"
                 android:ems="10"
                 android:hint="@string/ingredient"

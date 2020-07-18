@@ -85,14 +85,14 @@ class CookBookListViewHolder private constructor(private val binding: ListItemCo
     {
         if (adapter.multiSelect)
         {
-            if (adapter.selectedItems.contains(item))
+            if (adapter.selectedItems.containsValue(item))
             {
-                adapter.selectedItems.remove(item)
+                adapter.selectedItems.remove(binding)
                 binding.cardView.isChecked = false
             }
             else
             {
-                adapter.selectedItems.add(item)
+                adapter.selectedItems.put(binding, item)
                 binding.cardView.isChecked = true
             }
 
@@ -112,7 +112,7 @@ class CookBookListViewHolder private constructor(private val binding: ListItemCo
         {
             if (item?.itemId == R.id.action_delete)
             {
-                viewModel.deleteCookBooks(adapter.selectedItems)
+                viewModel.deleteCookBooks(adapter.selectedItems.values.toMutableList())
                 viewModel.initCookBooks()
                 mode?.finish()
             }
@@ -137,7 +137,11 @@ class CookBookListViewHolder private constructor(private val binding: ListItemCo
 
         override fun onDestroyActionMode(mode: ActionMode?)
         {
-            binding.cardView.isChecked = false
+            for (listItemCookBook in adapter.selectedItems.keys)
+            {
+                listItemCookBook.cardView.isChecked = false
+            }
+
             adapter.multiSelect = false
             adapter.selectedItems.clear()
         }
