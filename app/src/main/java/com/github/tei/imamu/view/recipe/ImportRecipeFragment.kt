@@ -191,9 +191,11 @@ class ImportRecipeFragment : Fragment()
                     }
                     finally
                     {
-                        binding.shimmerViewContainer.visibility = View.GONE
-                        binding.shimmerViewContainer.stopShimmerAnimation()
-                        requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+                        uiThread {
+                            binding.shimmerViewContainer.visibility = View.GONE
+                            binding.shimmerViewContainer.stopShimmerAnimation()
+                            requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+                        }
                     }
                 }
             }

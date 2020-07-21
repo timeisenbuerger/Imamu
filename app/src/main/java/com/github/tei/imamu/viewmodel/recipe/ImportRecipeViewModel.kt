@@ -140,7 +140,7 @@ class ImportRecipeViewModel(private val recipeRepository: RecipeRepository, priv
 
             if (importImages)
             {
-                val inputStream = URL(chefKochExtractor.imageLink).openStream()
+                val inputStream = URL(kitchenStoriesExtractor.imageLink).openStream()
                 val imagePath = ImageUtil.saveImage(BitmapFactory.decodeStream(inputStream), context, Regex("[^A-Za-z0-9 ]").replace(kitchenStoriesExtractor.title, ""))
 
                 it.imagePath = imagePath;
