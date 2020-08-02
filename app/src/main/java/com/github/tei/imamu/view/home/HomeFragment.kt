@@ -125,7 +125,7 @@ class HomeFragment : Fragment()
             it?.let {
                 if (it.size == 0)
                 {
-                    setLayoutVisibility(View.GONE, binding.textViewCaptionLastViewedRecipes, binding.lastViewedRecipesList, null)
+                    setLayoutVisibility(View.GONE, binding.textViewCaptionFavorites, binding.favoritesList, binding.textViewShowAllFavorites)
                 }
                 else
                 {
