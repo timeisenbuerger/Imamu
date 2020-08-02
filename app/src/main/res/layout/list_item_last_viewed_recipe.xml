@@ -87,6 +87,8 @@
                 style="@style/caption_big"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingStart="@dimen/default_recipe_margin"
+                android:paddingEnd="@dimen/default_recipe_margin"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="16dp"

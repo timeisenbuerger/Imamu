@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="shoppingList"
+            type="com.github.tei.imamu.data.database.entity.shoppinglist.ShoppingList" />
+        <variable
+            name="viewModel"
+            type="com.github.tei.imamu.viewmodel.shoppinglist.ShoppingListDetailViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/edit_text_amount"
+            style="@style/edit_text_string_style"
+            android:layout_width="187.5dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:hint="@string/amount"
+            app:layout_constraintEnd_toStartOf="@id/auto_complete_unit"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <AutoCompleteTextView
+            android:id="@+id/auto_complete_unit"
+            style="@style/edit_text_string_style"
+            android:layout_width="187.5dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_recipe_padding"
+            android:layout_marginTop="@dimen/default_recipe_margin"
+            android:hint="@string/unit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/edit_text_amount"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <AutoCompleteTextView
+            android:id="@+id/auto_complete_ingredient"
+            style="@style/edit_text_string_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_recipe_padding"
+            android:layout_marginEnd="@dimen/default_recipe_padding"
+            android:layout_marginTop="@dimen/default_recipe_margin"
+            android:hint="@string/ingredient"
+            app:layout_constraintTop_toBottomOf="@id/edit_text_amount"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_add_ingredient"
+            android:layout_width="275dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_recipe_padding"
+            android:backgroundTint="@color/white"
+            android:fontFamily="@font/roboto"
+            android:text="@string/action_add_ingredient"
+            android:textColor="@color/colorPrimaryDark"
+            app:rippleColor="@color/colorPrimaryDark"
+            app:strokeColor="@color/colorPrimaryDark"
+            app:strokeWidth="1dp"
+            app:icon="@drawable/ic_add_white"
+            app:iconTint="@color/colorPrimaryDark"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/auto_complete_ingredient" />
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/fab_finish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_recipe_margin"
+            android:text="@string/action_finish"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            app:backgroundTint="@color/colorAccent"
+            app:iconTint="@color/white"
+            app:icon="@drawable/ic_check"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:fontFamily="@font/roboto"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

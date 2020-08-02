@@ -11,7 +11,7 @@ import com.github.tei.imamu.data.repository.ShoppingListItemRepository
 import com.github.tei.imamu.data.repository.ShoppingListRepository
 import io.objectbox.android.ObjectBoxLiveData
 
-class ShoppingListDetailViewModel(private val shoppingListRepository: ShoppingListRepository, private val shoppingListItemRepository: ShoppingListItemRepository,val ingredientRepository: IngredientRepository) : ViewModel()
+class ShoppingListDetailViewModel(private val shoppingListRepository: ShoppingListRepository, private val shoppingListItemRepository: ShoppingListItemRepository, val ingredientRepository: IngredientRepository) : ViewModel()
 {
     internal val shoppingList = MutableLiveData<ShoppingList>()
 
@@ -56,5 +56,6 @@ class ShoppingListDetailViewModel(private val shoppingListRepository: ShoppingLi
     {
         shoppingListItemRepository.save(shoppingListItem)
         shoppingList.value!!.shoppingListItems.add(shoppingListItem)
+        shoppingListRepository.save(shoppingList.value!!)
     }
 }

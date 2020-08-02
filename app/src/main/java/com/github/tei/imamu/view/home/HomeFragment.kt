@@ -116,7 +116,7 @@ class HomeFragment : Fragment()
                     "Rezepte"          -> findNavController().navigate(HomeFragmentDirections.actionNavHomeToNavRecipeList())
                     "Kochbücher"       -> findNavController().navigate(HomeFragmentDirections.actionNavHomeToNavCookbook())
                     "Einkaufslisten"   -> findNavController().navigate(HomeFragmentDirections.actionNavHomeToNavShoppingList())
-                    "Rezept Vorschlag" -> findNavController().navigate(HomeFragmentDirections.actionNavHomeToNavRecipeSuggestion())
+                    "Rezeptsuche"      -> findNavController().navigate(HomeFragmentDirections.actionNavHomeToNavRecipeSuggestion())
                 }
             }
         })
@@ -209,7 +209,7 @@ class HomeFragment : Fragment()
         val shortcutRecipe = ShortcutWrapper("Rezepte", R.mipmap.recipe_colored)
         val shortcutCookBook = ShortcutWrapper("Kochbücher", R.mipmap.cook_book_colored)
         val shortcutShoppingList = ShortcutWrapper("Einkaufslisten", R.mipmap.shopping_list_colored)
-        val shortcutRecipeFinder = ShortcutWrapper("Rezept Vorschlag", R.mipmap.recipe_finder_colored)
+        val shortcutRecipeFinder = ShortcutWrapper("Rezeptsuche", R.mipmap.recipe_finder_colored)
         return mutableListOf(shortcutRecipe, shortcutCookBook, shortcutShoppingList, shortcutRecipeFinder)
     }
 

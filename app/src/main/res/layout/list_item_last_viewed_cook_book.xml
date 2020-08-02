@@ -15,6 +15,7 @@
     </data>
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="@dimen/default_recipe_padding"
@@ -80,6 +81,8 @@
                 style="@style/caption_big"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingStart="@dimen/default_recipe_margin"
+                android:paddingEnd="@dimen/default_recipe_margin"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:singleLine="true"

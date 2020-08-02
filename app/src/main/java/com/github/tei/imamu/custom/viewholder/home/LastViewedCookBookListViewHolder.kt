@@ -38,9 +38,15 @@ class LastViewedCookBookListViewHolder private constructor(private val binding: 
 
         binding.chipRecipeCount.text = item.recipes.size.toString()
 
-        binding.transparentOverlay.setOnClickListener { viewModel.onCookBookClicked(item) }
-
         setImage(item)
+
+        binding.transparentOverlay.setOnClickListener {
+            viewModel.onCookBookClicked(item)
+        }
+
+        binding.cardBackground.setOnClickListener { viewModel.onCookBookClicked(item) }
+
+        binding.cardView.setOnClickListener { viewModel.onCookBookClicked(item) }
     }
 
     private fun setImage(item: CookBook)

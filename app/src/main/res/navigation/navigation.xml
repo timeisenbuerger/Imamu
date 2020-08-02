@@ -109,6 +109,10 @@
         <argument
             android:name="shoppingList"
             app:argType="com.github.tei.imamu.data.database.entity.shoppinglist.ShoppingList" />
+        <action
+            android:id="@+id/action_shoppingListDetailFragment_to_addIngredientToShoppingListFragment"
+            app:destination="@id/addIngredientToShoppingListFragment"
+            app:popUpTo="@id/shoppingListDetailFragment" />
     </fragment>
 
     <fragment
@@ -179,7 +183,7 @@
     <fragment
         android:id="@+id/nav_recipe_suggestion"
         android:name="com.github.tei.imamu.view.finder.RecipeFinderSearchFragment"
-        android:label=""
+        android:label="Rezeptsuche"
         tools:layout="@layout/fragment_recipe_finder_search">
         <action
             android:id="@+id/action_nav_recipe_suggestion_to_recipeFinderResultListFragment"
@@ -333,6 +337,19 @@
         android:id="@+id/nav_settings"
         android:name="com.github.tei.imamu.view.settings.SettingsFragment"
         android:label="Einstellungen">
+    </fragment>
+    <fragment
+        android:id="@+id/addIngredientToShoppingListFragment"
+        android:name="com.github.tei.imamu.view.shoppinglist.AddIngredientToShoppingListFragment"
+        android:label="Zutaten hinzufügen"
+        tools:layout="@layout/fragment_add_ingredient_to_shopping_list">
+        <action
+            android:id="@+id/action_addIngredientToShoppingListFragment_to_shoppingListDetailFragment"
+            app:destination="@id/shoppingListDetailFragment"
+            app:popUpTo="@id/nav_shopping_list" />
+        <argument
+            android:name="shoppingList"
+            app:argType="com.github.tei.imamu.data.database.entity.shoppinglist.ShoppingList" />
     </fragment>
 
 </navigation>

@@ -9,7 +9,7 @@
     <string name="menu_cookbook">Kochbücher</string>
     <string name="menu_search">Suche</string>
     <string name="menu_shopping_list">Einkaufslisten</string>
-    <string name="menu_recipe_suggestion">Rezept Vorschlag</string>
+    <string name="menu_recipe_suggestion">Rezeptsuche</string>
     <string name="menu_settings">Einstellungen</string>
 
     <!--    Actions  -->
@@ -33,6 +33,7 @@
     <string name="action_search">Suchen</string>
     <string name="action_create">Erstellen</string>
     <string name="action_import">Importieren</string>
+    <string name="action_finish">Fertig</string>
 
     <!--    Hints  -->
     <string name="insert_recipe_title">Rezeptname eingeben</string>
